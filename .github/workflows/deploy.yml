@@ -1,0 +1,66 @@
+# Baut die Website und veröffentlicht sie auf GitHub Pages.
+# Ergebnis: eine feste Adresse wie
+#   https://svenpoehls.github.io/OstseeDesign/
+name: Deploy auf GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+      - claude/ostseedesign-redesign-1lm4vb
+  # Erlaubt den manuellen Start über den "Actions"-Tab.
+  workflow_dispatch:
+
+# Rechte, die der Job zum Veröffentlichen auf Pages braucht.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Immer nur ein Deploy gleichzeitig.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code auschecken
+        uses: actions/checkout@v4
+
+      - name: Node einrichten
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Pages vorbereiten (aktiviert Pages bei Bedarf automatisch)
+        uses: actions/configure-pages@v5
+
+      - name: Abhängigkeiten installieren
+        run: npm ci
+
+      - name: Website bauen (statischer Export)
+        run: npm run build
+        env:
+          GITHUB_PAGES: "true"
+
+      - name: Jekyll deaktivieren (sonst wird der _next-Ordner ignoriert)
+        run: touch out/.nojekyll
+
+      - name: Ergebnis als Pages-Artefakt hochladen
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Auf GitHub Pages veröffentlichen
+        id: deployment
+        uses: actions/deploy-pages@v4

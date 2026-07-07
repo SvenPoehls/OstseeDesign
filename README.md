@@ -3,6 +3,11 @@
 Moderne, statische Marketing-Website für **Ostseedesign – Werbung & Textilien**
 in Eckernförde. Redesign der bisherigen WordPress-Seite.
 
+**🔗 Live-Vorschau:** https://svenpoehls.github.io/OstseeDesign/
+
+Jeder Push auf den Branch wird über GitHub Actions automatisch gebaut und dort
+veröffentlicht (siehe `.github/workflows/deploy.yml`).
+
 Gebaut mit **Next.js (App Router) + TypeScript + Tailwind CSS** – bewusst ohne
 Datenbank oder externe Dienste, damit die Seite schnell lädt und
 datenschutzfreundlich bleibt.

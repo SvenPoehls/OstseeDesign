@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  ZENTRALE DESIGN-TOKENS  ·  „Maritim clean"
+  ------------------------------------------
+  Die gesamte Farbwelt der Website hängt an diesen Variablen.
+  Möchtest du die Marke umfärben? Ändere hier die Werte – alle
+  Komponenten übernehmen es automatisch (über tailwind.config.ts).
+
+  Kontrast-Hinweis (Barrierefreiheit, WCAG AA):
+    • Weißer Text auf --petrol  ≈ 9.7:1  (sehr gut)
+    • Weißer Text auf --accent-strong ≈ 5.0:1 (AA für normalen Text)
+    • --ink auf --sand/weiß     ≈ 13:1  (sehr gut)
+    Deshalb: Buttons/Text mit Orange nutzen --accent-strong,
+    das helle --accent bleibt dekorativen, großen Flächen vorbehalten.
+*/
+:root {
+  /* Primär: Petrol / Ostseeblau */
+  --petrol: #0e4b5a;
+  --petrol-dark: #0a3846;
+  --petrol-soft: #e7eef0; /* sehr heller Petrol-Ton für Flächen */
+
+  /* Flächen: Sand / Off-White */
+  --sand: #f7f3ec;
+  --sand-dark: #efe8dc;
+
+  /* Akzent: warmes Orange */
+  --accent: #e8613c; /* hell, dekorativ, große Elemente */
+  --accent-strong: #be4a22; /* kontraststark – Text & Buttons (AA) */
+  --accent-soft: #fbe9e1; /* sehr heller Orange-Ton */
+
+  /* Text */
+  --ink: #14262c; /* Haupttext (auf hellem Grund) */
+  --ink-muted: #55686e; /* Nebentext */
+
+  /* Linien */
+  --line: #e2ddd3;
+
+  /* Basis */
+  --background: #ffffff;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Kompensiert den fixierten Header beim Sprung zu Anker-Sektionen. */
+  scroll-padding-top: 5.5rem;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--ink);
+  font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Deutlich sichtbare Fokus-Umrandung für Tastatur-Bedienung. */
+:focus-visible {
+  outline: 2px solid var(--accent-strong);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Nutzer mit „reduzierte Bewegung"-Einstellung: keine Animationen. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+@layer components {
+  /* Einheitlicher Inhaltsrahmen. */
+  .container-site {
+    @apply mx-auto w-full max-w-content px-5 sm:px-6 lg:px-8;
+  }
+
+  /* Kleiner Label-Text über Überschriften (Eyebrow). */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-accent-strong;
+  }
+
+  /* Primärer Call-to-Action: Petrol-Fläche, weißer Text (hoher Kontrast). */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-petrol px-6 py-3 text-base font-semibold text-white shadow-sm transition-colors hover:bg-petrol-dark;
+  }
+
+  /* Sekundärer CTA: heller Rahmen auf hellem Grund. */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-line bg-white px-6 py-3 text-base font-semibold text-petrol transition-colors hover:border-petrol hover:bg-petrol-soft;
+  }
+
+  /* Akzent-CTA (Orange) – für die stärkste Handlungsaufforderung. */
+  .btn-accent {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-accent-strong px-6 py-3 text-base font-semibold text-white shadow-sm transition-colors hover:bg-[#a53f1c];
+  }
+
+  /* Fließtext-Formatierung für die Rechtstexte (Impressum, Datenschutz). */
+  .legal-body {
+    @apply text-[15px] leading-relaxed text-ink;
+  }
+  .legal-body h2 {
+    @apply mt-10 font-display text-xl font-bold text-petrol;
+  }
+  .legal-body h3 {
+    @apply mt-6 font-display text-base font-bold text-ink;
+  }
+  .legal-body p {
+    @apply mt-3 text-ink-muted;
+  }
+  .legal-body ul {
+    @apply mt-3 list-disc space-y-1 pl-5 text-ink-muted;
+  }
+  .legal-body a {
+    @apply font-medium text-accent-strong underline underline-offset-2;
+  }
+  .legal-body strong {
+    @apply font-semibold text-ink;
+  }
+}

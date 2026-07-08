@@ -86,12 +86,11 @@ export const services: Service[] = [
   },
 ];
 
-// Navigation (Header). Service-Links springen zu den Sektionen der Startseite;
-// eigene Unterseiten folgen in einem späteren Ausbauschritt.
+// Navigation (Header, linke Seite). Anker springen zu den Sektionen der
+// Startseite; eigene Unterseiten folgen später.
 export const nav: { label: string; href: string; external?: boolean }[] = [
-  { label: "Werbetechnik", href: "/#leistungen" },
-  { label: "Textilveredelung", href: "/#leistungen" },
-  { label: "Drucksachen", href: "/#leistungen" },
+  { label: "Arbeiten", href: "/#arbeiten" },
+  { label: "Leistungen", href: "/#leistungen" },
   { label: "Textilshop", href: textilShopUrl, external: true },
   { label: "Kontakt", href: "/#kontakt" },
 ];
@@ -102,3 +101,121 @@ export const trustStats: { value: string; label: string }[] = [
   { value: "1", label: "Ansprechpartner – alles aus einer Hand" },
   { value: "∞", label: "Medien für Ihre Beschriftung" },
 ];
+
+// „Featured Work" – ausgewählte Arbeiten als Karten (Platzhalter-Bilder mit
+// Bildregie-Notiz). Später durch echte Referenzfotos ersetzen.
+export type Work = {
+  title: string;
+  category: string;
+  tag: string;
+  note: string; // Bildregie-Notiz für den Platzhalter
+};
+
+export const featuredWork: Work[] = [
+  {
+    title: "Fahrzeugbeschriftung",
+    category: "Fuhrpark",
+    tag: "Werbetechnik",
+    note: "Transporter mit frischer Voll- oder Teilbeschriftung, Halbprofil, Tageslicht.",
+  },
+  {
+    title: "Vereinsbekleidung",
+    category: "Textil",
+    tag: "Stickerei",
+    note: "Bestickte Poloshirts/Jacken mit Logo, saubere Detailaufnahme der Stickerei.",
+  },
+  {
+    title: "Firmenschild & Fassade",
+    category: "Objekt",
+    tag: "Werbetechnik",
+    note: "Beleuchtetes oder plattenförmiges Firmenschild an der Fassade, Frontalaufnahme.",
+  },
+  {
+    title: "Geschäftsausstattung",
+    category: "Print",
+    tag: "Drucksachen",
+    note: "Visitenkarten, Briefpapier und Stempel als stimmiges Flatlay von oben.",
+  },
+];
+
+// Statement „Wen wir unterstützen" (zentriertes Kursiv-Statement).
+export const whoWeServe = {
+  label: "Wen wir unterstützen",
+  parts: [
+    { text: "Wir machen ", italic: false },
+    { text: "Handwerksbetriebe, Vereine", italic: true },
+    { text: " und ", italic: false },
+    { text: "Unternehmen aus der Region", italic: true },
+    { text: " sichtbar – von der Idee bis zum fertigen Produkt, ", italic: false },
+    { text: "alles aus einer Hand", italic: true },
+    { text: ".", italic: false },
+  ],
+};
+
+// „Was wir machen" – Leistungen als Accordion mit Detail-Liste.
+export type Expertise = {
+  id: string;
+  title: string;
+  body: string;
+  includes: string[];
+};
+
+export const expertise: Expertise[] = [
+  {
+    id: "werbetechnik",
+    title: "Werbetechnik",
+    body: "Beschriftungen aller Art – auf nahezu jedem Medium. Wir beraten, gestalten und montieren, damit Ihre Marke im Straßenbild und am Objekt sichtbar wird.",
+    includes: [
+      "Fahrzeugbeschriftung & Vollfolierung",
+      "Schilder, Displays & Bauzäune",
+      "Fenster- & Schaufensterbeschriftung",
+      "Montage vor Ort",
+    ],
+  },
+  {
+    id: "textilveredelung",
+    title: "Textilveredelung",
+    body: "Hochwertige Veredelung für Arbeits- und Freizeitkleidung – langlebig und passgenau zu Ihrer Marke, in Profi-Qualität.",
+    includes: [
+      "Stickereien",
+      "Verschiedene Transfertechniken",
+      "Hochwertige Applikationen",
+      "Arbeits- & Freizeitkleidung",
+    ],
+  },
+  {
+    id: "drucksachen",
+    title: "Drucksachen",
+    body: "Der klassische Auftritt auf Papier – stimmig gestaltet und sauber gedruckt, ebenfalls alles aus einer Hand.",
+    includes: [
+      "Visitenkarten & Briefpapier",
+      "Flyer & Geschäftsdrucksachen",
+      "Stempel",
+    ],
+  },
+];
+
+// Testimonials (Slider). PLATZHALTER – vor Veröffentlichung durch echte,
+// freigegebene Kundenstimmen ersetzen.
+export type Testimonial = { quote: string; name: string };
+
+export const testimonials: Testimonial[] = [
+  {
+    quote:
+      "„Von der Fahrzeugflotte bis zur Arbeitskleidung – alles kam aus einer Hand und hat perfekt zusammengepasst. Unkompliziert, schnell und in top Qualität.“",
+    name: "Platzhalter-Kundenstimme · Handwerksbetrieb aus Eckernförde",
+  },
+  {
+    quote:
+      "„Persönliche Beratung, ehrliche Empfehlungen und ein Ergebnis, das genau sitzt. Man merkt die jahrzehntelange Erfahrung.“",
+    name: "Platzhalter-Kundenstimme · Verein aus der Region",
+  },
+  {
+    quote:
+      "„Kurze Wege, ein Ansprechpartner, verlässliche Termine. Genau so stellt man sich einen Werbepartner vor.“",
+    name: "Platzhalter-Kundenstimme · Unternehmen aus Schleswig-Holstein",
+  },
+];
+
+// Social-Links (Footer). Leer lassen, wenn (noch) nicht vorhanden.
+export const socials: { label: string; href: string }[] = [];

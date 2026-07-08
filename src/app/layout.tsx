@@ -1,20 +1,23 @@
 import type { Metadata } from "next";
-import { Inter, Sora } from "next/font/google";
+import { Fraunces, Montserrat } from "next/font/google";
 import "./globals.css";
 import { company } from "@/lib/site";
 
 // Schriften self-hosted via next/font (kein externer Aufruf beim Nutzer):
-//   Inter → Fließtext, Sora → Überschriften.
-const inter = Inter({
+//   Fraunces → elegante Serifen-Display (Headlines + kursive Betonungen),
+//   Montserrat → Fließtext & Labels.
+const fraunces = Fraunces({
   subsets: ["latin"],
-  variable: "--font-inter",
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-fraunces",
   display: "swap",
 });
 
-const sora = Sora({
+const montserrat = Montserrat({
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
-  variable: "--font-sora",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-montserrat",
   display: "swap",
 });
 
@@ -63,7 +66,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="de" className={`${inter.variable} ${sora.variable}`}>
+    <html lang="de" className={`${fraunces.variable} ${montserrat.variable}`}>
       <body>
         {/* Sprungmarke für Tastatur-/Screenreader-Nutzer (Barrierefreiheit). */}
         <a

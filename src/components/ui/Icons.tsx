@@ -125,6 +125,31 @@ export function CameraIcon({ className = base }: IconProps) {
   );
 }
 
+export function StarIcon({ className = "h-4 w-4" }: IconProps) {
+  return (
+    <svg className={className} viewBox="0 0 14 14" fill="currentColor" aria-hidden="true">
+      <path d="M7 0L8.55466 4.04959L12.6145 2.77686L10.496 6.54545L14 9.00826L9.80322 9.66116L10.1174 14L7 11.0496L3.88262 14L4.19678 9.66116L0 9.00826L3.49597 6.54545L1.3855 2.77686L5.44534 4.04959L7 0Z" />
+    </svg>
+  );
+}
+
+export function HalfSunIcon({ className = "h-4 w-8" }: IconProps) {
+  return (
+    <svg className={className} viewBox="0 0 33 17" fill="currentColor" aria-hidden="true">
+      <path d="M0 17C0 7.61427 7.39032 0 16.5 0C25.6097 0 33 7.61427 33 17" />
+    </svg>
+  );
+}
+
+export function PlusIcon({ className = "h-5 w-5" }: IconProps) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      strokeWidth={1.7} strokeLinecap="round" aria-hidden="true">
+      <path d="M12 5v14M5 12h14" />
+    </svg>
+  );
+}
+
 // Ordnet einer Service-Icon-Kennung die passende Komponente zu.
 export const serviceIcons = {
   signage: SignageIcon,

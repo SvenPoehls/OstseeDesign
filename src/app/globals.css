@@ -3,68 +3,49 @@
 @tailwind utilities;
 
 /*
-  ZENTRALE DESIGN-TOKENS  ·  „Maritim clean"
-  ------------------------------------------
-  Die gesamte Farbwelt der Website hängt an diesen Variablen.
-  Möchtest du die Marke umfärben? Ändere hier die Werte – alle
-  Komponenten übernehmen es automatisch (über tailwind.config.ts).
-
-  Kontrast-Hinweis (Barrierefreiheit, WCAG AA):
-    • Weißer Text auf --petrol  ≈ 9.7:1  (sehr gut)
-    • Weißer Text auf --accent-strong ≈ 5.0:1 (AA für normalen Text)
-    • --ink auf --sand/weiß     ≈ 13:1  (sehr gut)
-    Deshalb: Buttons/Text mit Orange nutzen --accent-strong,
-    das helle --accent bleibt dekorativen, großen Flächen vorbehalten.
+  ZENTRALE DESIGN-TOKENS  ·  „Editorial / Sunrise"
+  ------------------------------------------------
+  Optik-Vorlage: helles, warmes Layout mit großer Serifen-Headline,
+  Orange-Akzent und weichem Sonnen-Verlauf. Zum Umfärben nur hier die
+  Werte anpassen – alle Komponenten übernehmen es (über tailwind.config.ts).
 */
 :root {
-  /* Primär: Petrol / Ostseeblau */
-  --petrol: #0e4b5a;
-  --petrol-dark: #0a3846;
-  --petrol-soft: #e7eef0; /* sehr heller Petrol-Ton für Flächen */
-
-  /* Flächen: Sand / Off-White */
-  --sand: #f7f3ec;
-  --sand-dark: #efe8dc;
-
-  /* Akzent: warmes Orange */
-  --accent: #e8613c; /* hell, dekorativ, große Elemente */
-  --accent-strong: #be4a22; /* kontraststark – Text & Buttons (AA) */
-  --accent-soft: #fbe9e1; /* sehr heller Orange-Ton */
-
-  /* Text */
-  --ink: #14262c; /* Haupttext (auf hellem Grund) */
-  --ink-muted: #55686e; /* Nebentext */
-
-  /* Linien */
-  --line: #e2ddd3;
-
-  /* Basis */
-  --background: #ffffff;
+  --paper: #fdfff7; /* Grundfläche (warmes Off-White) */
+  --cream: #f6f1e4; /* etwas kräftigere Fläche/Karten */
+  --ink: #2c2c2c; /* Haupttext */
+  --ink-muted: #6a6a63; /* Nebentext */
+  --orange: #ff6102; /* Akzent (Buttons-Hover, Auswahl, Sonne) */
+  --peach: #f2b05f; /* weicher Sonnen-Ton (Hero-Kreis) */
+  --tan: #e7ddcd; /* gedeckte Pill-Fläche (Nav-Button) */
+  --line: rgba(44, 44, 44, 0.16); /* dezente Linien */
 }
 
 html {
   scroll-behavior: smooth;
-  /* Kompensiert den fixierten Header beim Sprung zu Anker-Sektionen. */
-  scroll-padding-top: 5.5rem;
+  scroll-padding-top: 6rem;
+  background-color: var(--paper);
 }
 
 body {
-  background-color: var(--background);
+  background-color: var(--paper);
   color: var(--ink);
-  font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+  font-family: var(--font-montserrat), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-/* Deutlich sichtbare Fokus-Umrandung für Tastatur-Bedienung. */
-:focus-visible {
-  outline: 2px solid var(--accent-strong);
-  outline-offset: 2px;
-  border-radius: 2px;
+/* Warme Text-Auswahl wie in der Vorlage. */
+::selection {
+  background: var(--orange);
+  color: #fee2b3;
 }
 
-/* Nutzer mit „reduzierte Bewegung"-Einstellung: keine Animationen. */
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -79,40 +60,45 @@ body {
 }
 
 @layer components {
-  /* Einheitlicher Inhaltsrahmen. */
   .container-site {
-    @apply mx-auto w-full max-w-content px-5 sm:px-6 lg:px-8;
+    @apply mx-auto w-full max-w-content px-5 sm:px-8 lg:px-10;
   }
 
-  /* Kleiner Label-Text über Überschriften (Eyebrow). */
-  .eyebrow {
-    @apply inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-accent-strong;
+  /* Kleines Label über/unter Trennlinien und Überschriften. */
+  .label {
+    @apply text-xs font-semibold uppercase tracking-label text-ink sm:text-sm;
   }
 
-  /* Primärer Call-to-Action: Petrol-Fläche, weißer Text (hoher Kontrast). */
-  .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-petrol px-6 py-3 text-base font-semibold text-white shadow-sm transition-colors hover:bg-petrol-dark;
+  /* Betonte Wörter in Headlines: kursive Serife. */
+  .em-italic {
+    @apply font-display italic;
+    font-weight: 400;
   }
 
-  /* Sekundärer CTA: heller Rahmen auf hellem Grund. */
-  .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-line bg-white px-6 py-3 text-base font-semibold text-petrol transition-colors hover:border-petrol hover:bg-petrol-soft;
+  /* Outline-Pill-Button (z. B. „Unsere Arbeiten"). */
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-ink bg-transparent px-6 py-3 text-xs font-semibold uppercase tracking-label text-ink transition-colors duration-300 hover:bg-ink hover:text-paper;
   }
 
-  /* Akzent-CTA (Orange) – für die stärkste Handlungsaufforderung. */
-  .btn-accent {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-accent-strong px-6 py-3 text-base font-semibold text-white shadow-sm transition-colors hover:bg-[#a53f1c];
+  /* Gedeckte Pill mit Fläche (z. B. Nav-Button / Telefon-CTA). */
+  .btn-solid {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-tan px-6 py-3 text-xs font-semibold uppercase tracking-label text-ink transition-colors duration-300 hover:bg-orange hover:text-paper;
   }
 
-  /* Fließtext-Formatierung für die Rechtstexte (Impressum, Datenschutz). */
+  /* Text-Link mit Pfeil (z. B. „Unsere Leistungen →"). */
+  .link-arrow {
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-label text-ink transition-colors duration-300 hover:text-orange;
+  }
+
+  /* Rechtstext-Formatierung (Impressum / Datenschutz). */
   .legal-body {
     @apply text-[15px] leading-relaxed text-ink;
   }
   .legal-body h2 {
-    @apply mt-10 font-display text-xl font-bold text-petrol;
+    @apply mt-10 font-display text-2xl font-semibold text-ink;
   }
   .legal-body h3 {
-    @apply mt-6 font-display text-base font-bold text-ink;
+    @apply mt-6 font-display text-lg font-semibold text-ink;
   }
   .legal-body p {
     @apply mt-3 text-ink-muted;
@@ -121,9 +107,63 @@ body {
     @apply mt-3 list-disc space-y-1 pl-5 text-ink-muted;
   }
   .legal-body a {
-    @apply font-medium text-accent-strong underline underline-offset-2;
+    @apply font-medium text-orange underline underline-offset-2;
   }
   .legal-body strong {
     @apply font-semibold text-ink;
+  }
+}
+
+/* Nav-Link mit „Punkt gleitet ein"-Hover (aus der Vorlage übernommen). */
+.nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.nav-link__dot {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 9999px;
+  background: var(--orange);
+  transform: translateX(-0.5rem) scale(0.5);
+  opacity: 0;
+  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    opacity 0.3s ease;
+}
+.nav-link__text {
+  display: inline-block;
+  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.1s;
+}
+.nav-link:hover .nav-link__dot {
+  transform: translateX(0) scale(1);
+  opacity: 1;
+}
+.nav-link:hover .nav-link__text {
+  transform: translateX(0.5rem);
+  transition-delay: 0s;
+}
+
+/* Sanftes Einblenden (Testimonial-Wechsel). */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.4rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Sanftes „Atmen" des Sonnen-Kreises im Hero (rein dekorativ). */
+@keyframes sun-breathe {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.08);
+    opacity: 1;
   }
 }

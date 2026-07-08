@@ -2,29 +2,32 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import CookieNotice from "@/components/layout/CookieNotice";
 import Hero from "@/components/sections/Hero";
-import Services from "@/components/sections/Services";
-import AllInOne from "@/components/sections/AllInOne";
-import Trust from "@/components/sections/Trust";
+import FeaturedWork from "@/components/sections/FeaturedWork";
+import WhoWeServe from "@/components/sections/WhoWeServe";
+import Expertise from "@/components/sections/Expertise";
+import Testimonials from "@/components/sections/Testimonials";
 import Contact from "@/components/sections/Contact";
+import FooterCta from "@/components/sections/FooterCta";
 import { company, services } from "@/lib/site";
 
-// Startseite. Reihenfolge der Sektionen bildet die Nutzerführung ab:
-// Botschaft → Leistungen → Nutzen → Vertrauen → Kontakt.
+// Startseite. Aufbau nach der Design-Vorlage:
+// Hero → Ausgewählte Arbeiten → Statement → Leistungen (Accordion) →
+// Stimmen → Kontakt → Abschluss-CTA → Footer.
 export default function HomePage() {
   return (
     <>
       <Header />
       <main id="hauptinhalt">
         <Hero />
-        <Services />
-        <AllInOne />
-        <Trust />
+        <FeaturedWork />
+        <WhoWeServe />
+        <Expertise />
+        <Testimonials />
         <Contact />
+        <FooterCta />
       </main>
       <Footer />
       <CookieNotice />
-      {/* Strukturierte Daten (Local Business) für Suchmaschinen –
-          verbessert die lokale Auffindbarkeit in Eckernförde. */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd()) }}

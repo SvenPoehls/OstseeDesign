@@ -1,93 +1,100 @@
 import Link from "next/link";
-import Logo from "@/components/ui/Logo";
-import { ExternalIcon, MailIcon, PhoneIcon, PinIcon } from "@/components/ui/Icons";
-import { company, textilShopUrl } from "@/lib/site";
+import { ExternalIcon } from "@/components/ui/Icons";
+import { company, nav, textilShopUrl } from "@/lib/site";
 
-// Fußbereich: Marke, Kurz-Kontakt, Rechtliches. Dunkles Petrol als
-// visueller Abschluss der Seite (weißer Text: Kontrast ~9.7:1).
+// Fußbereich analog zur Vorlage: Spalten (Website / Kontakt / Rechtliches),
+// darunter eine große Wortmarke und die Credits-Zeile.
 export default function Footer() {
-  const year = 2024; // Statisch gehalten – kein Client-Datum nötig.
-  return (
-    <footer className="bg-petrol-dark text-sand">
-      <div className="container-site grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_1fr]">
-        <div>
-          <Logo variant="light" />
-          <p className="mt-4 max-w-xs text-sm leading-relaxed text-sand/80">
-            {company.claim}. Werbetechnik, Textilveredelung und Drucksachen –
-            seit über {company.yearsExperience} Jahren alles aus einer Hand.
-          </p>
-        </div>
+  const year = 2024; // statisch – kein Client-Datum nötig
+  const sitemap = [{ label: "Startseite", href: "/" }, ...nav];
 
-        <div>
-          <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-white">
-            Kontakt
-          </h2>
-          <ul className="mt-4 space-y-3 text-sm text-sand/85">
-            <li className="flex items-start gap-2">
-              <PinIcon className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
-              <span>
+  return (
+    <footer className="bg-paper">
+      <div className="container-site pb-10 pt-16">
+        <div className="grid gap-10 border-t border-line pt-12 md:grid-cols-3">
+          {/* Website / Sitemap */}
+          <div>
+            <h2 className="text-xs font-semibold uppercase tracking-label text-ink">Website</h2>
+            <ul className="mt-5 space-y-3">
+              {sitemap.map((item) => (
+                <li key={item.label}>
+                  <Link
+                    href={item.href}
+                    target={"external" in item && item.external ? "_blank" : undefined}
+                    rel={"external" in item && item.external ? "noopener noreferrer" : undefined}
+                    className="inline-flex items-center gap-1 text-[15px] text-ink-muted transition-colors hover:text-orange"
+                  >
+                    {item.label}
+                    {"external" in item && item.external && <ExternalIcon className="h-3.5 w-3.5" />}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Kontakt */}
+          <div>
+            <h2 className="text-xs font-semibold uppercase tracking-label text-ink">Kontakt</h2>
+            <ul className="mt-5 space-y-3 text-[15px] text-ink-muted">
+              <li>
                 {company.street}
                 <br />
                 {company.zip} {company.city}
-              </span>
-            </li>
-            <li>
-              <a
-                href={`tel:${company.phoneHref}`}
-                className="inline-flex items-center gap-2 hover:text-white"
-              >
-                <PhoneIcon className="h-4 w-4 text-accent" />
-                {company.phoneDisplay}
-              </a>
-            </li>
-            <li>
-              <a
-                href={`mailto:${company.email}`}
-                className="inline-flex items-center gap-2 hover:text-white"
-              >
-                <MailIcon className="h-4 w-4 text-accent" />
-                {company.email}
-              </a>
-            </li>
-          </ul>
+              </li>
+              <li>
+                <a href={`tel:${company.phoneHref}`} className="transition-colors hover:text-orange">
+                  {company.phoneDisplay}
+                </a>
+              </li>
+              <li>
+                <a href={`mailto:${company.email}`} className="transition-colors hover:text-orange">
+                  {company.email}
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Rechtliches */}
+          <div>
+            <h2 className="text-xs font-semibold uppercase tracking-label text-ink">Rechtliches</h2>
+            <ul className="mt-5 space-y-3 text-[15px] text-ink-muted">
+              <li>
+                <Link href="/impressum" className="transition-colors hover:text-orange">
+                  Impressum
+                </Link>
+              </li>
+              <li>
+                <Link href="/datenschutz" className="transition-colors hover:text-orange">
+                  Datenschutzerklärung
+                </Link>
+              </li>
+              <li>
+                <a
+                  href={textilShopUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 transition-colors hover:text-orange"
+                >
+                  Textilshop
+                  <ExternalIcon className="h-3.5 w-3.5" />
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
 
-        <div>
-          <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-white">
-            Rechtliches
-          </h2>
-          <ul className="mt-4 space-y-3 text-sm text-sand/85">
-            <li>
-              <Link href="/impressum" className="hover:text-white">
-                Impressum
-              </Link>
-            </li>
-            <li>
-              <Link href="/datenschutz" className="hover:text-white">
-                Datenschutzerklärung
-              </Link>
-            </li>
-            <li>
-              <a
-                href={textilShopUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 hover:text-white"
-              >
-                Textilshop
-                <ExternalIcon className="h-3.5 w-3.5" />
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div className="border-t border-white/10">
-        <div className="container-site flex flex-col items-center justify-between gap-2 py-5 text-xs text-sand/60 sm:flex-row">
-          <p>
-            © {year} {company.fullName}
+        {/* Große Wortmarke */}
+        <div className="mt-14 select-none border-t border-line pt-10">
+          <p className="font-display text-[15vw] font-semibold uppercase leading-none tracking-[0.02em] text-ink lg:text-[11rem]">
+            Ostseedesign
           </p>
-          <p>{company.city} · {company.region}</p>
+        </div>
+
+        {/* Credits */}
+        <div className="mt-8 flex flex-col gap-2 text-xs font-semibold uppercase tracking-label text-ink-muted sm:flex-row sm:items-center sm:justify-between">
+          <span>{company.claim}</span>
+          <span>© {year} {company.fullName}</span>
+          <span>{company.city} · {company.region}</span>
         </div>
       </div>
     </footer>

@@ -1,78 +1,41 @@
 import Link from "next/link";
-import Placeholder from "@/components/ui/Placeholder";
-import { ArrowIcon, CheckIcon, PhoneIcon, PinIcon } from "@/components/ui/Icons";
+import { ArrowIcon } from "@/components/ui/Icons";
 import { company } from "@/lib/site";
 
-// Hero: Kernbotschaft + lokaler Bezug (Eckernförde) + zwei klare CTAs.
-// Enthält die einzige <h1> der Startseite (saubere Überschriften-Hierarchie).
+// Hero analog zur Vorlage: großer, zentrierter Serifen-Satz mit kursiven
+// Betonungen, dahinter ein weicher Sonnen-Kreis (statisch – bewusst NICHT
+// mausgesteuert), darunter zwei Buttons.
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-sand">
-      {/* Dezenter maritimer Verlauf im Hintergrund (Petrol-Hauch). */}
+    <section className="relative overflow-hidden">
+      {/* Sonnen-Kreis: weicher radialer Verlauf, mittig hinter dem Text.
+          Größe skaliert mit dem Viewport; „atmet" dezent (rein dekorativ). */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0"
+        className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[min(30rem,70vw)] w-[min(30rem,70vw)] rounded-full motion-safe:animate-[sun-breathe_9s_ease-in-out_infinite]"
         style={{
-          backgroundImage:
-            "radial-gradient(60rem 40rem at 85% -10%, rgba(14,75,90,0.10), transparent 70%)",
+          background:
+            "radial-gradient(circle at center, var(--peach) 0%, rgba(242,176,95,0.0) 70%)",
+          transform: "translate(-50%, -50%)",
         }}
       />
-      <div className="container-site relative grid items-center gap-12 py-16 md:py-24 lg:grid-cols-[1.05fr_0.95fr]">
-        <div>
-          <span className="eyebrow">
-            <PinIcon className="h-4 w-4" />
-            {company.city} · {company.region}
-          </span>
 
-          <h1 className="mt-5 font-display text-4xl font-extrabold leading-[1.08] tracking-tight text-petrol sm:text-5xl lg:text-6xl">
-            Ihr Werbepartner in&nbsp;{company.city}
-          </h1>
+      <div className="container-site flex min-h-[74vh] flex-col items-center justify-center py-24 text-center sm:py-28">
+        <h1 className="mx-auto max-w-[16ch] font-display text-4xl font-medium leading-[1.12] text-ink sm:text-5xl lg:text-6xl">
+          Ostseedesign ist Ihr Partner für{" "}
+          <span className="em-italic">Werbetechnik</span>,{" "}
+          <span className="em-italic">Textilveredelung</span> und{" "}
+          <span className="em-italic">Drucksachen</span> in {company.city}.
+        </h1>
 
-          <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-muted">
-            Werbetechnik, Textilveredelung und Drucksachen –{" "}
-            <strong className="font-semibold text-ink">alles aus einer Hand</strong>.
-            Seit über {company.yearsExperience} Jahren machen wir Ihre Marke
-            sichtbar, auf nahezu jedem Medium.
-          </p>
-
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a href={`tel:${company.phoneHref}`} className="btn-accent">
-              <PhoneIcon className="h-5 w-5" />
-              {company.phoneDisplay}
-            </a>
-            <Link href="/#kontakt" className="btn-secondary">
-              Kontakt aufnehmen
-              <ArrowIcon className="h-4 w-4" />
-            </Link>
-          </div>
-
-          {/* Kurze Vertrauens-Merkmale */}
-          <ul className="mt-9 flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium text-ink">
-            {["Alles aus einer Hand", "Über 30 Jahre Erfahrung", "Persönlich vor Ort"].map(
-              (item) => (
-                <li key={item} className="inline-flex items-center gap-2">
-                  <CheckIcon className="h-5 w-5 text-accent-strong" />
-                  {item}
-                </li>
-              )
-            )}
-          </ul>
-        </div>
-
-        <div className="relative">
-          <Placeholder
-            ratio="aspect-[4/5]"
-            note="Großformatiges Hero-Foto: frisch beschriftetes Kundenfahrzeug vor der Werkstatt in Eckernförde, Tageslicht, Halbprofil."
-          />
-          {/* Kleines Vertrauens-Badge, das leicht über das Bild ragt. */}
-          <div className="absolute -bottom-5 -left-4 hidden rounded-2xl bg-petrol px-5 py-4 text-white shadow-card sm:block">
-            <p className="font-display text-3xl font-extrabold leading-none">
-              {company.yearsExperience}+
-            </p>
-            <p className="mt-1 text-xs font-medium uppercase tracking-wider text-sand/85">
-              Jahre Erfahrung
-            </p>
-          </div>
+        <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
+          <Link href="/#arbeiten" className="btn-outline">
+            Unsere Arbeiten
+          </Link>
+          <Link href="/#leistungen" className="link-arrow">
+            Unsere Leistungen
+            <ArrowIcon className="h-4 w-4" />
+          </Link>
         </div>
       </div>
     </section>

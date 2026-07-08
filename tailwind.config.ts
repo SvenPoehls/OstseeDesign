@@ -28,11 +28,9 @@ const config: Config = {
         line: "var(--line)",
       },
       fontFamily: {
-        // Fließtext & Labels: Montserrat.
-        sans: ["var(--font-montserrat)", "system-ui", "sans-serif"],
-        // Überschriften/Display: Fraunces – elegante, hochkontrastige Serife
-        // mit ausdrucksstarker Kursive (für die betonten Wörter).
-        display: ["var(--font-fraunces)", "Georgia", "serif"],
+        // Quicksand für Fließtext UND Überschriften (abgerundete Sans).
+        sans: ["var(--font-quicksand)", "system-ui", "sans-serif"],
+        display: ["var(--font-quicksand)", "system-ui", "sans-serif"],
       },
       maxWidth: {
         content: "1240px",

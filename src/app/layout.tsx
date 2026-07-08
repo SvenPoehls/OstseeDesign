@@ -1,23 +1,16 @@
 import type { Metadata } from "next";
-import { Fraunces, Montserrat } from "next/font/google";
+import { Quicksand } from "next/font/google";
 import "./globals.css";
 import { company } from "@/lib/site";
 
-// Schriften self-hosted via next/font (kein externer Aufruf beim Nutzer):
-//   Fraunces → elegante Serifen-Display (Headlines + kursive Betonungen),
-//   Montserrat → Fließtext & Labels.
-const fraunces = Fraunces({
+// Schrift self-hosted via next/font (kein externer Aufruf beim Nutzer):
+//   Quicksand → für Headlines UND Fließtext (abgerundete, geometrische Sans).
+//   Hinweis: Quicksand hat keine echte Kursive – betonte Wörter werden vom
+//   Browser leicht schräg gestellt (synthetische Kursive).
+const quicksand = Quicksand({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
-  variable: "--font-fraunces",
-  display: "swap",
-});
-
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-montserrat",
+  variable: "--font-quicksand",
   display: "swap",
 });
 
@@ -66,7 +59,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="de" className={`${fraunces.variable} ${montserrat.variable}`}>
+    <html lang="de" className={quicksand.variable}>
       <body>
         {/* Sprungmarke für Tastatur-/Screenreader-Nutzer (Barrierefreiheit). */}
         <a

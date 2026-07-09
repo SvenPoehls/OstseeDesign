@@ -1,9 +1,9 @@
 import type { Config } from "tailwindcss";
 
 // Tailwind-Konfiguration.
-// Farbwelt & Schriften hängen an CSS-Variablen (siehe src/app/globals.css),
+// Farbwelt & Schrift hängen an CSS-Variablen (siehe src/app/globals.css),
 // damit sich die gesamte Optik zentral anpassen lässt.
-// Stil-Vorlage: helle, warme „Editorial"-Ästhetik (Creme/Orange, Serifen-Display).
+// Stil: clean & modern – Weiß/Anthrazit mit einem klaren Blau als Akzent.
 const config: Config = {
   content: [
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
@@ -13,31 +13,33 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Warmer Off-White-Hintergrund.
-        paper: "var(--paper)",
-        cream: "var(--cream)",
-        // Textfarben (nahezu Schwarz + warmes Grau).
+        paper: "var(--paper)", // Grundfläche (weiß)
+        surface: "var(--surface)", // dezent getönte Abschnitte
         ink: {
-          DEFAULT: "var(--ink)",
-          muted: "var(--ink-muted)",
+          DEFAULT: "var(--ink)", // Haupttext
+          muted: "var(--ink-muted)", // Nebentext
         },
-        // Kräftiger Akzent (Orange) + weicher Sonnen-Ton (Pfirsich) + Tan-Pill.
-        orange: "var(--orange)",
-        peach: "var(--peach)",
-        tan: "var(--tan)",
+        accent: {
+          DEFAULT: "var(--accent)",
+          dark: "var(--accent-dark)",
+          soft: "var(--accent-soft)",
+        },
         line: "var(--line)",
       },
       fontFamily: {
-        // Quicksand für Fließtext UND Überschriften (abgerundete Sans).
         sans: ["var(--font-quicksand)", "system-ui", "sans-serif"],
         display: ["var(--font-quicksand)", "system-ui", "sans-serif"],
       },
       maxWidth: {
-        content: "1240px",
-        prose: "62rem",
+        content: "1200px",
+        prose: "60rem",
       },
       letterSpacing: {
-        label: "0.16em",
+        label: "0.12em",
+      },
+      boxShadow: {
+        soft: "0 1px 2px rgba(23,26,31,0.04), 0 10px 30px -12px rgba(23,26,31,0.15)",
+        "soft-lg": "0 2px 4px rgba(23,26,31,0.05), 0 24px 48px -16px rgba(23,26,31,0.22)",
       },
     },
   },

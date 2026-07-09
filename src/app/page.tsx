@@ -1,30 +1,30 @@
+import TopBar from "@/components/layout/TopBar";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import CookieNotice from "@/components/layout/CookieNotice";
 import Hero from "@/components/sections/Hero";
-import FeaturedWork from "@/components/sections/FeaturedWork";
-import WhoWeServe from "@/components/sections/WhoWeServe";
-import Expertise from "@/components/sections/Expertise";
-import Testimonials from "@/components/sections/Testimonials";
-import Contact from "@/components/sections/Contact";
-import FooterCta from "@/components/sections/FooterCta";
+import Services from "@/components/sections/Services";
+import WhyChooseUs from "@/components/sections/WhyChooseUs";
+import FindUs from "@/components/sections/FindUs";
+import CtaBand from "@/components/sections/CtaBand";
+import Reviews from "@/components/sections/Reviews";
 import { company, services } from "@/lib/site";
 
-// Startseite. Aufbau nach der Design-Vorlage:
-// Hero → Ausgewählte Arbeiten → Statement → Leistungen (Accordion) →
-// Stimmen → Kontakt → Abschluss-CTA → Footer.
+// Startseite. Aufbau nach der Vorlage (hearandsay.org.au), in cleaner
+// moderner Optik: Info-Leiste → Header → Hero → Leistungen → Warum wir →
+// Standort → Kontakt-CTA → Kundenstimmen → Footer.
 export default function HomePage() {
   return (
     <>
+      <TopBar />
       <Header />
       <main id="hauptinhalt">
         <Hero />
-        <FeaturedWork />
-        <WhoWeServe />
-        <Expertise />
-        <Testimonials />
-        <Contact />
-        <FooterCta />
+        <Services />
+        <WhyChooseUs />
+        <FindUs />
+        <CtaBand />
+        <Reviews />
       </main>
       <Footer />
       <CookieNotice />

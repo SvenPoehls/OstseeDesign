@@ -1,13 +1,12 @@
 import { company } from "@/lib/site";
 
-// Wort-Marke als Serifen-Typo (Fraunces) – gesperrt und in Versalien,
-// analog zur zentrierten Wortmarke der Design-Vorlage.
+// Wortmarke – clean & modern: kräftiger Schriftzug mit Akzent-Punkt.
 export default function Logo({ className = "" }: { className?: string }) {
   return (
     <span
-      className={`font-display text-2xl font-semibold uppercase tracking-[0.14em] text-ink sm:text-[1.65rem] ${className}`}
+      className={`font-display text-xl font-bold tracking-tight text-ink sm:text-2xl ${className}`}
     >
-      Ostseedesign
+      Ostseedesign<span className="text-accent">.</span>
       <span className="sr-only"> – {company.fullName}</span>
     </span>
   );

@@ -89,8 +89,9 @@ export const services: Service[] = [
 // Navigation (Header, linke Seite). Anker springen zu den Sektionen der
 // Startseite; eigene Unterseiten folgen später.
 export const nav: { label: string; href: string; external?: boolean }[] = [
-  { label: "Arbeiten", href: "/#arbeiten" },
   { label: "Leistungen", href: "/#leistungen" },
+  { label: "Warum wir", href: "/#warum" },
+  { label: "Standort", href: "/#standort" },
   { label: "Textilshop", href: textilShopUrl, external: true },
   { label: "Kontakt", href: "/#kontakt" },
 ];
@@ -214,6 +215,68 @@ export const testimonials: Testimonial[] = [
     quote:
       "„Kurze Wege, ein Ansprechpartner, verlässliche Termine. Genau so stellt man sich einen Werbepartner vor.“",
     name: "Platzhalter-Kundenstimme · Unternehmen aus Schleswig-Holstein",
+  },
+];
+
+// „Warum Ostseedesign" – Vorteils-Kacheln mit Icon.
+export type Feature = {
+  title: string;
+  text: string;
+  icon: "clock" | "layers" | "pin" | "signage" | "check" | "shield";
+  wide?: boolean; // größere Kachel im Raster
+};
+
+export const whyChooseUs: Feature[] = [
+  {
+    title: "Über 30 Jahre Erfahrung",
+    text: "Seit mehr als drei Jahrzehnten fest in Eckernförde verwurzelt – wir kennen die Region und ihre Betriebe.",
+    icon: "clock",
+    wide: true,
+  },
+  {
+    title: "Alles aus einer Hand",
+    text: "Beratung, Gestaltung, Fertigung und Montage – ein Ansprechpartner für Ihren kompletten Auftritt.",
+    icon: "layers",
+  },
+  {
+    title: "Persönlich vor Ort",
+    text: "Kurze Wege, feste Ansprechpartner und Beratung von Mensch zu Mensch – kein anonymes Callcenter.",
+    icon: "pin",
+  },
+  {
+    title: "Fast jedes Medium",
+    text: "Von Fahrzeug über Schild und Fenster bis Textil und Papier – wir beschriften und veredeln nahezu alles.",
+    icon: "signage",
+  },
+  {
+    title: "Verlässliche Qualität",
+    text: "Saubere Ausführung, termintreu und langlebig – Arbeit, auf die man sich verlassen kann.",
+    icon: "check",
+  },
+];
+
+// Kundenstimmen erweitert um Bewertung (Sterne) – bleiben Platzhalter.
+export const reviews: { name: string; role: string; stars: number; quote: string }[] = [
+  {
+    name: "Platzhalter-Kunde",
+    role: "Handwerksbetrieb · Eckernförde",
+    stars: 5,
+    quote:
+      "Von der Fahrzeugflotte bis zur Arbeitskleidung – alles kam aus einer Hand und hat perfekt zusammengepasst. Unkompliziert, schnell und in top Qualität.",
+  },
+  {
+    name: "Platzhalter-Kundin",
+    role: "Verein · Region Eckernförde",
+    stars: 5,
+    quote:
+      "Persönliche Beratung, ehrliche Empfehlungen und ein Ergebnis, das genau sitzt. Man merkt die jahrzehntelange Erfahrung.",
+  },
+  {
+    name: "Platzhalter-Kunde",
+    role: "Unternehmen · Schleswig-Holstein",
+    stars: 5,
+    quote:
+      "Kurze Wege, ein Ansprechpartner, verlässliche Termine. Genau so stellt man sich einen Werbepartner vor.",
   },
 ];
 

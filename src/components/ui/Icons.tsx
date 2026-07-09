@@ -150,10 +150,40 @@ export function PlusIcon({ className = "h-5 w-5" }: IconProps) {
   );
 }
 
+export function LayersIcon({ className = base }: IconProps) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M12 3 3 8l9 5 9-5-9-5z" />
+      <path d="m3 12 9 5 9-5M3 16l9 5 9-5" />
+    </svg>
+  );
+}
+
+export function ShieldIcon({ className = base }: IconProps) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M12 3 5 6v5c0 4.5 3 8 7 10 4-2 7-5.5 7-10V6l-7-3z" />
+      <path d="m9 12 2 2 4-4" />
+    </svg>
+  );
+}
+
 // Ordnet einer Service-Icon-Kennung die passende Komponente zu.
 export const serviceIcons = {
   signage: SignageIcon,
   textile: TextileIcon,
   print: PrintIcon,
   shop: ShopIcon,
+} as const;
+
+// Icon-Zuordnung für die „Warum Ostseedesign"-Kacheln.
+export const featureIcons = {
+  clock: ClockIcon,
+  layers: LayersIcon,
+  pin: PinIcon,
+  signage: SignageIcon,
+  check: CheckIcon,
+  shield: ShieldIcon,
 } as const;

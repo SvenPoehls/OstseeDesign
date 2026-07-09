@@ -3,26 +3,25 @@
 @tailwind utilities;
 
 /*
-  ZENTRALE DESIGN-TOKENS  ·  „Editorial / Sunrise"
-  ------------------------------------------------
-  Optik-Vorlage: helles, warmes Layout mit großer Serifen-Headline,
-  Orange-Akzent und weichem Sonnen-Verlauf. Zum Umfärben nur hier die
-  Werte anpassen – alle Komponenten übernehmen es (über tailwind.config.ts).
+  ZENTRALE DESIGN-TOKENS  ·  „clean & modern"
+  -------------------------------------------
+  Weiß/Anthrazit mit einem klaren Blau als Akzent. Zum Umfärben nur hier
+  die Werte anpassen – alle Komponenten übernehmen es (über tailwind.config.ts).
 */
 :root {
-  --paper: #fdfff7; /* Grundfläche (warmes Off-White) */
-  --cream: #f6f1e4; /* etwas kräftigere Fläche/Karten */
-  --ink: #2c2c2c; /* Haupttext */
-  --ink-muted: #6a6a63; /* Nebentext */
-  --orange: #ff6102; /* Akzent (Buttons-Hover, Auswahl, Sonne) */
-  --peach: #f2b05f; /* weicher Sonnen-Ton (Hero-Kreis) */
-  --tan: #e7ddcd; /* gedeckte Pill-Fläche (Nav-Button) */
-  --line: rgba(44, 44, 44, 0.16); /* dezente Linien */
+  --paper: #ffffff; /* Grundfläche */
+  --surface: #f5f7fa; /* dezent getönte Abschnitte / Karten */
+  --ink: #171a1f; /* Haupttext */
+  --ink-muted: #5a6472; /* Nebentext */
+  --accent: #2563eb; /* Akzent (Buttons, Links, Hervorhebung) */
+  --accent-dark: #1d4ed8; /* Hover */
+  --accent-soft: #eaf0fe; /* sehr heller Akzent-Ton */
+  --line: #e6e8ee; /* dezente Linien/Rahmen */
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 6rem;
+  scroll-padding-top: 7rem;
   background-color: var(--paper);
 }
 
@@ -35,15 +34,15 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Warme Text-Auswahl wie in der Vorlage. */
 ::selection {
-  background: var(--orange);
-  color: #fee2b3;
+  background: var(--accent);
+  color: #ffffff;
 }
 
 :focus-visible {
-  outline: 2px solid var(--ink);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
+  border-radius: 4px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -54,40 +53,41 @@ body {
   *::before,
   *::after {
     animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
 }
 
 @layer components {
   .container-site {
-    @apply mx-auto w-full max-w-content px-5 sm:px-8 lg:px-10;
+    @apply mx-auto w-full max-w-content px-5 sm:px-6 lg:px-8;
   }
 
-  /* Kleines Label über/unter Trennlinien und Überschriften. */
   .label {
-    @apply text-xs font-semibold uppercase tracking-label text-ink sm:text-sm;
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-label text-accent;
   }
 
-  /* Betonte Wörter in Headlines: gleiche Schrift & Stärke wie der Rest –
-     Hervorhebung nur über die Akzentfarbe (keine Kursive, kein Stärkewechsel). */
-  .em-italic {
-    color: var(--orange);
+  /* Betonte Wörter: gleiche Schrift & Stärke, nur Akzentfarbe. */
+  .em {
+    color: var(--accent);
   }
 
-  /* Outline-Pill-Button (z. B. „Unsere Arbeiten"). */
-  .btn-outline {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-ink bg-transparent px-6 py-3 text-xs font-semibold uppercase tracking-label text-ink transition-colors duration-300 hover:bg-ink hover:text-paper;
+  /* Buttons – einheitliche, moderne Pillen. */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-accent-dark;
   }
-
-  /* Gedeckte Pill mit Fläche (z. B. Nav-Button / Telefon-CTA). */
-  .btn-solid {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-tan px-6 py-3 text-xs font-semibold uppercase tracking-label text-ink transition-colors duration-300 hover:bg-orange hover:text-paper;
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-line bg-paper px-6 py-3 text-sm font-semibold text-ink transition-colors duration-200 hover:bg-surface;
   }
-
-  /* Text-Link mit Pfeil (z. B. „Unsere Leistungen →"). */
+  .btn-onaccent {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-accent transition-colors duration-200 hover:bg-accent-soft;
+  }
   .link-arrow {
-    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-label text-ink transition-colors duration-300 hover:text-orange;
+    @apply inline-flex items-center gap-1.5 text-sm font-semibold text-accent transition-colors duration-200 hover:text-accent-dark;
+  }
+
+  /* Karte. */
+  .card {
+    @apply rounded-2xl border border-line bg-paper shadow-soft;
   }
 
   /* Rechtstext-Formatierung (Impressum / Datenschutz). */
@@ -107,63 +107,9 @@ body {
     @apply mt-3 list-disc space-y-1 pl-5 text-ink-muted;
   }
   .legal-body a {
-    @apply font-medium text-orange underline underline-offset-2;
+    @apply font-semibold text-accent underline underline-offset-2;
   }
   .legal-body strong {
     @apply font-semibold text-ink;
-  }
-}
-
-/* Nav-Link mit „Punkt gleitet ein"-Hover (aus der Vorlage übernommen). */
-.nav-link {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-}
-.nav-link__dot {
-  width: 0.4rem;
-  height: 0.4rem;
-  border-radius: 9999px;
-  background: var(--orange);
-  transform: translateX(-0.5rem) scale(0.5);
-  opacity: 0;
-  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-    opacity 0.3s ease;
-}
-.nav-link__text {
-  display: inline-block;
-  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.1s;
-}
-.nav-link:hover .nav-link__dot {
-  transform: translateX(0) scale(1);
-  opacity: 1;
-}
-.nav-link:hover .nav-link__text {
-  transform: translateX(0.5rem);
-  transition-delay: 0s;
-}
-
-/* Sanftes Einblenden (Testimonial-Wechsel). */
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(0.4rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Sanftes „Atmen" des Sonnen-Kreises im Hero (rein dekorativ). */
-@keyframes sun-breathe {
-  0%,
-  100% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 0.9;
-  }
-  50% {
-    transform: translate(-50%, -50%) scale(1.08);
-    opacity: 1;
   }
 }

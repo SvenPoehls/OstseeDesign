@@ -20,7 +20,7 @@ export default function Expertise() {
       <div className="container-site grid gap-12 pb-20 sm:pb-28 lg:grid-cols-[0.85fr_1.15fr]">
         {/* Intro */}
         <div className="lg:pr-8">
-          <h2 className="font-display text-4xl font-medium text-ink sm:text-5xl">
+          <h2 className="font-display text-4xl font-semibold text-ink sm:text-5xl">
             Leistungen
           </h2>
           <p className="mt-5 max-w-md text-[15px] leading-relaxed text-ink-muted">
@@ -46,7 +46,7 @@ export default function Expertise() {
                     aria-expanded={isOpen}
                     className="flex w-full items-center justify-between gap-4 py-6 text-left"
                   >
-                    <span className="font-display text-2xl font-medium text-ink sm:text-3xl">
+                    <span className="font-display text-2xl font-semibold text-ink sm:text-3xl">
                       {item.title}
                     </span>
                     <span
@@ -72,7 +72,7 @@ export default function Expertise() {
                         {item.includes.map((inc) => (
                           <li
                             key={inc}
-                            className="font-display text-lg font-medium text-ink"
+                            className="font-display text-lg font-semibold text-ink"
                           >
                             {inc}
                           </li>

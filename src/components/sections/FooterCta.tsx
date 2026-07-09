@@ -13,7 +13,7 @@ export default function FooterCta() {
       }}
     >
       <div className="container-site py-24 text-center sm:py-32">
-        <h2 className="mx-auto max-w-[18ch] font-display text-4xl font-medium leading-[1.1] text-ink sm:text-5xl lg:text-6xl">
+        <h2 className="mx-auto max-w-[18ch] font-display text-4xl font-semibold leading-[1.1] text-ink sm:text-5xl lg:text-6xl">
           Lassen Sie uns etwas <span className="em-italic">Großartiges</span> gestalten.
         </h2>
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">

@@ -11,7 +11,7 @@ export default function WhoWeServe() {
           <StarIcon className="h-4 w-4 text-ink" />
           <span className="label">{whoWeServe.label}</span>
         </div>
-        <h2 className="mx-auto max-w-[22ch] font-display text-3xl font-medium leading-[1.22] text-ink sm:text-4xl lg:text-[2.75rem]">
+        <h2 className="mx-auto max-w-[22ch] font-display text-3xl font-semibold leading-[1.22] text-ink sm:text-4xl lg:text-[2.75rem]">
           {whoWeServe.parts.map((part, i) =>
             part.italic ? (
               <span key={i} className="em-italic">

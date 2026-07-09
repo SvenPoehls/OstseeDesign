@@ -21,7 +21,7 @@ export default function Contact() {
         <div className="grid gap-10 lg:grid-cols-[1fr_1fr]">
           {/* Kontaktdaten + Öffnungszeiten */}
           <div>
-            <h2 className="max-w-[14ch] font-display text-4xl font-medium leading-[1.15] text-ink sm:text-5xl">
+            <h2 className="max-w-[14ch] font-display text-4xl font-semibold leading-[1.15] text-ink sm:text-5xl">
               Sprechen Sie uns <span className="em-italic">an</span>.
             </h2>
             <p className="mt-5 max-w-md text-[15px] leading-relaxed text-ink-muted">

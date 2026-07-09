@@ -47,23 +47,23 @@ export default function CookieNotice() {
       aria-labelledby="cookie-title"
       className="fixed inset-x-0 bottom-0 z-[60] px-4 pb-4"
     >
-      <div className="container-site rounded-2xl border border-line bg-white p-5 shadow-card sm:flex sm:items-center sm:gap-6 sm:p-6">
+      <div className="container-site rounded-2xl border border-line bg-paper p-5 shadow-[0_12px_32px_-12px_rgba(44,44,44,0.25)] sm:flex sm:items-center sm:gap-6 sm:p-6">
         <div className="flex-1">
-          <h2 id="cookie-title" className="font-display text-base font-bold text-petrol">
+          <h2 id="cookie-title" className="font-display text-base font-semibold text-ink">
             Datenschutz-Hinweis
           </h2>
           <p className="mt-1 text-sm leading-relaxed text-ink-muted">
             Diese Website verwendet ausschließlich technisch notwendige Daten
             und setzt keine Tracking- oder Marketing-Cookies ein. Mehr dazu in
             unserer{" "}
-            <Link href="/datenschutz" className="font-semibold text-accent-strong underline">
+            <Link href="/datenschutz" className="font-semibold text-orange underline">
               Datenschutzerklärung
             </Link>
             .
           </p>
         </div>
         <div className="mt-4 shrink-0 sm:mt-0">
-          <button type="button" onClick={accept} className="btn-primary w-full sm:w-auto">
+          <button type="button" onClick={accept} className="btn-solid w-full sm:w-auto">
             Verstanden
           </button>
         </div>

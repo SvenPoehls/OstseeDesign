@@ -23,7 +23,7 @@ export default function FeaturedWork() {
                   {work.tag}
                 </span>
               </div>
-              <h3 className="mt-2 flex items-center font-display text-2xl font-medium text-ink">
+              <h3 className="mt-2 flex items-center font-display text-2xl font-semibold text-ink">
                 <span
                   aria-hidden="true"
                   className="mr-0 inline-block h-2 w-2 scale-50 rounded-full bg-orange opacity-0 transition-all duration-500 group-hover:mr-2 group-hover:scale-100 group-hover:opacity-100"

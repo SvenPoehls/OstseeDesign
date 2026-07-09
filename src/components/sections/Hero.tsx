@@ -21,7 +21,7 @@ export default function Hero() {
       />
 
       <div className="container-site flex min-h-[74vh] flex-col items-center justify-center py-24 text-center sm:py-28">
-        <h1 className="mx-auto max-w-[16ch] font-display text-4xl font-medium leading-[1.12] text-ink sm:text-5xl lg:text-6xl">
+        <h1 className="mx-auto max-w-[16ch] font-display text-4xl font-semibold leading-[1.12] text-ink sm:text-5xl lg:text-6xl">
           Ostseedesign ist Ihr Partner für{" "}
           <span className="em-italic">Werbetechnik</span>,{" "}
           <span className="em-italic">Textilveredelung</span> und{" "}

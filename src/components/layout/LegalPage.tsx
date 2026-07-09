@@ -21,12 +21,12 @@ export default function LegalPage({
         <div className="container-site max-w-3xl py-14 md:py-20">
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent-strong"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-orange"
           >
             <ArrowIcon className="h-4 w-4 rotate-180" />
             Zur Startseite
           </Link>
-          <h1 className="mt-6 font-display text-3xl font-extrabold tracking-tight text-petrol sm:text-4xl">
+          <h1 className="mt-6 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
             {title}
           </h1>
           {intro && <p className="mt-4 text-lg leading-relaxed text-ink-muted">{intro}</p>}

@@ -23,7 +23,7 @@ export default function Testimonials() {
         <figure className="mx-auto max-w-prose text-center">
           <blockquote
             key={index}
-            className="font-display text-2xl font-medium italic leading-[1.3] text-ink sm:text-3xl lg:text-4xl motion-safe:animate-[fade-in_0.4s_ease]"
+            className="font-display text-2xl font-semibold leading-[1.3] text-ink sm:text-3xl lg:text-4xl motion-safe:animate-[fade-in_0.4s_ease]"
           >
             {current.quote}
           </blockquote>

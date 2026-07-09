@@ -69,10 +69,10 @@ body {
     @apply text-xs font-semibold uppercase tracking-label text-ink sm:text-sm;
   }
 
-  /* Betonte Wörter in Headlines: kursive Serife. */
+  /* Betonte Wörter in Headlines: gleiche Schrift & Stärke wie der Rest –
+     Hervorhebung nur über die Akzentfarbe (keine Kursive, kein Stärkewechsel). */
   .em-italic {
-    @apply font-display italic;
-    font-weight: 400;
+    color: var(--orange);
   }
 
   /* Outline-Pill-Button (z. B. „Unsere Arbeiten"). */

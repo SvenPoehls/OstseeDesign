@@ -5,8 +5,8 @@ import { company } from "@/lib/site";
 
 // Schrift self-hosted via next/font (kein externer Aufruf beim Nutzer):
 //   Quicksand → für Headlines UND Fließtext (abgerundete, geometrische Sans).
-//   Hinweis: Quicksand hat keine echte Kursive – betonte Wörter werden vom
-//   Browser leicht schräg gestellt (synthetische Kursive).
+//   Eine Schrift, eine Stärke pro Ebene – Hervorhebungen laufen über Farbe,
+//   nicht über Kursive oder wechselnde Strichstärken.
 const quicksand = Quicksand({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
@@ -64,7 +64,7 @@ export default function RootLayout({
         {/* Sprungmarke für Tastatur-/Screenreader-Nutzer (Barrierefreiheit). */}
         <a
           href="#hauptinhalt"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:rounded-full focus:bg-petrol focus:px-5 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:rounded-full focus:bg-ink focus:px-5 focus:py-2 focus:text-sm focus:font-semibold focus:text-paper"
         >
           Zum Inhalt springen
         </a>

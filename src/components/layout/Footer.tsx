@@ -11,7 +11,7 @@ export default function Footer() {
     <footer className="border-t border-line bg-paper">
       <div className="container-site grid gap-10 py-14 md:grid-cols-[1.5fr_1fr_1fr] md:py-16">
         <div>
-          <Logo />
+          <Logo tagline />
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-muted">
             {company.claim}. Werbetechnik, Textilveredelung und Drucksachen –
             seit über {company.yearsExperience} Jahren alles aus einer Hand.

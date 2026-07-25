@@ -3,19 +3,23 @@
 @tailwind utilities;
 
 /*
-  ZENTRALE DESIGN-TOKENS  ·  „clean & modern"
-  -------------------------------------------
-  Weiß/Anthrazit mit einem klaren Blau als Akzent. Zum Umfärben nur hier
-  die Werte anpassen – alle Komponenten übernehmen es (über tailwind.config.ts).
+  ZENTRALE DESIGN-TOKENS  ·  abgestimmt auf den Textilshop (ostseetextilien.de)
+  ---------------------------------------------------------------------------
+  Damit Website und Onlineshop wie aus einem Guss wirken, übernehmen wir die
+  Shop-Optik: Marineblau (#003087) als Akzent, Koralle (#FF5C39) als Signal-
+  farbe, Open Sans als Schrift und ruhige, einheitliche Rundungen.
+  Zum Umfärben nur hier die Werte anpassen – alle Komponenten übernehmen es.
 */
 :root {
   --paper: #ffffff; /* Grundfläche */
-  --surface: #f5f7fa; /* dezent getönte Abschnitte / Karten */
-  --ink: #171a1f; /* Haupttext */
+  --surface: #f2f4f7; /* dezent getönte Abschnitte / Karten */
+  --ink: #1a1d23; /* Haupttext */
   --ink-muted: #5a6472; /* Nebentext */
-  --accent: #2563eb; /* Akzent (Buttons, Links, Hervorhebung) */
-  --accent-dark: #1d4ed8; /* Hover */
-  --accent-soft: #eaf0fe; /* sehr heller Akzent-Ton */
+  --accent: #003087; /* Marineblau – Buttons, Links (wie im Shop) */
+  --accent-dark: #00246b; /* Hover */
+  --accent-soft: #e6ecf5; /* sehr heller Marineblau-Ton */
+  --pop: #ff5c39; /* Koralle – Signal-/Hervorhebungsfarbe (wie im Shop) */
+  --pop-dark: #e84c2c; /* Hover */
   --line: #e6e8ee; /* dezente Linien/Rahmen */
 }
 
@@ -28,7 +32,7 @@ html {
 body {
   background-color: var(--paper);
   color: var(--ink);
-  font-family: var(--font-quicksand), ui-sans-serif, system-ui, -apple-system,
+  font-family: var(--font-opensans), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -66,28 +70,28 @@ body {
     @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-label text-accent;
   }
 
-  /* Betonte Wörter: gleiche Schrift & Stärke, nur Akzentfarbe. */
+  /* Betonte Wörter: gleiche Schrift & Stärke, nur Signalfarbe (Koralle). */
   .em {
-    color: var(--accent);
+    color: var(--pop);
   }
 
-  /* Buttons – einheitliche, moderne Pillen. */
+  /* Buttons – ruhige, abgerundete Rechtecke wie die Kacheln im Shop. */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-accent-dark;
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3 text-sm font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-accent-dark;
   }
   .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-line bg-paper px-6 py-3 text-sm font-semibold text-ink transition-colors duration-200 hover:bg-surface;
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-paper px-6 py-3 text-sm font-semibold text-ink transition-colors duration-200 hover:bg-surface;
   }
   .btn-onaccent {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-accent transition-colors duration-200 hover:bg-accent-soft;
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-accent transition-colors duration-200 hover:bg-accent-soft;
   }
   .link-arrow {
     @apply inline-flex items-center gap-1.5 text-sm font-semibold text-accent transition-colors duration-200 hover:text-accent-dark;
   }
 
-  /* Karte. */
+  /* Karte – gleiche Rundung wie die Produktkacheln im Shop. */
   .card {
-    @apply rounded-2xl border border-line bg-paper shadow-soft;
+    @apply rounded-xl border border-line bg-paper shadow-soft;
   }
 
   /* Rechtstext-Formatierung (Impressum / Datenschutz). */

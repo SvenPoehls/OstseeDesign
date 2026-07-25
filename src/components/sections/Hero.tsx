@@ -13,7 +13,7 @@ export default function Hero() {
         className="pointer-events-none absolute inset-0"
         style={{
           backgroundImage:
-            "radial-gradient(48rem 32rem at 88% -10%, rgba(37,99,235,0.10), transparent 70%)",
+            "radial-gradient(48rem 32rem at 88% -10%, rgba(0,48,135,0.09), transparent 70%)",
         }}
       />
       <div className="container-site relative grid items-center gap-12 py-16 md:py-24 lg:grid-cols-[1.05fr_0.95fr]">
@@ -58,7 +58,7 @@ export default function Hero() {
             ratio="aspect-[4/5]"
             note="Großformatiges Hero-Foto: frisch beschriftetes Kundenfahrzeug vor der Werkstatt in Eckernförde, Tageslicht, Halbprofil."
           />
-          <div className="absolute -bottom-5 -left-4 hidden rounded-2xl bg-accent px-5 py-4 text-white shadow-soft-lg sm:block">
+          <div className="absolute -bottom-5 -left-4 hidden rounded-xl bg-accent px-5 py-4 text-white shadow-soft-lg sm:block">
             <p className="font-display text-3xl font-semibold leading-none">{company.yearsExperience}+</p>
             <p className="mt-1 text-xs font-medium uppercase tracking-wider text-white/85">Jahre Erfahrung</p>
           </div>

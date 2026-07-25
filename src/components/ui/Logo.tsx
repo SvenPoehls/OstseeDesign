@@ -1,7 +1,7 @@
 import { company } from "@/lib/site";
 
 // Wortmarke nach dem Original-Logo: „ostseedesign.de" (klein geschrieben,
-// runde geometrische Sans = Quicksand). ".de" etwas heller abgesetzt.
+// in Open Sans wie der Shop). „.de" etwas heller abgesetzt.
 // Mit `tagline` wird der Zusatz „Werbung und Textilien | 04351 – 470 590"
 // darunter gezeigt (für den Footer / die volle Logo-Sperrung).
 //

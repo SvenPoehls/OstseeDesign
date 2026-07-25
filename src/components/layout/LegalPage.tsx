@@ -21,7 +21,7 @@ export default function LegalPage({
         <div className="container-site max-w-3xl py-14 md:py-20">
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-orange"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent"
           >
             <ArrowIcon className="h-4 w-4 rotate-180" />
             Zur Startseite

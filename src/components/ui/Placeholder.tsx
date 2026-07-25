@@ -7,7 +7,7 @@ import { CameraIcon } from "@/components/ui/Icons";
 export default function Placeholder({
   note,
   ratio = "aspect-[4/3]",
-  frame = "rounded-2xl border border-line",
+  frame = "rounded-xl border border-line",
 }: {
   note: string;
   ratio?: string;
@@ -24,7 +24,7 @@ export default function Placeholder({
         className="absolute inset-0 opacity-70"
         style={{
           backgroundImage:
-            "repeating-linear-gradient(135deg, rgba(37,99,235,0.05) 0 2px, transparent 2px 16px)",
+            "repeating-linear-gradient(135deg, rgba(0,48,135,0.05) 0 2px, transparent 2px 16px)",
         }}
       />
       <div className="relative flex max-w-[16rem] flex-col items-center gap-2 px-6 text-center">

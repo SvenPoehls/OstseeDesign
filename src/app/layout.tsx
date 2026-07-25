@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
-import { Quicksand } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import { company } from "@/lib/site";
 
 // Schrift self-hosted via next/font (kein externer Aufruf beim Nutzer):
-//   Quicksand → für Headlines UND Fließtext (abgerundete, geometrische Sans).
-//   Eine Schrift, eine Stärke pro Ebene – Hervorhebungen laufen über Farbe,
-//   nicht über Kursive oder wechselnde Strichstärken.
-const quicksand = Quicksand({
+//   Open Sans → Headlines UND Fließtext. Bewusst gewählt, damit Website und
+//   der Textilshop (ostseetextilien.de) dieselbe, ruhige Sans nutzen.
+const openSans = Open_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-quicksand",
+  variable: "--font-opensans",
   display: "swap",
 });
 
@@ -59,7 +58,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="de" className={quicksand.variable}>
+    <html lang="de" className={openSans.variable}>
       <body>
         {/* Sprungmarke für Tastatur-/Screenreader-Nutzer (Barrierefreiheit). */}
         <a

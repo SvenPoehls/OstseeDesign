@@ -17,7 +17,7 @@ export default function Reviews() {
         <div className="mt-12 grid gap-6 md:grid-cols-3">
           {reviews.map((r, i) => (
             <figure key={i} className="flex flex-col card p-7">
-              <div className="flex gap-1 text-accent" aria-label={`${r.stars} von 5 Sternen`}>
+              <div className="flex gap-1 text-pop" aria-label={`${r.stars} von 5 Sternen`}>
                 {Array.from({ length: r.stars }).map((_, s) => (
                   <StarIcon key={s} className="h-4 w-4" />
                 ))}

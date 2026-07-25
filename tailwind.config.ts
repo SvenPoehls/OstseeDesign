@@ -3,7 +3,8 @@ import type { Config } from "tailwindcss";
 // Tailwind-Konfiguration.
 // Farbwelt & Schrift hängen an CSS-Variablen (siehe src/app/globals.css),
 // damit sich die gesamte Optik zentral anpassen lässt.
-// Stil: clean & modern – Weiß/Anthrazit mit einem klaren Blau als Akzent.
+// Stil abgestimmt auf den Textilshop (ostseetextilien.de): Open Sans,
+// Marineblau als Akzent, Koralle als Signalfarbe, ruhige Rundungen.
 const config: Config = {
   content: [
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
@@ -24,11 +25,15 @@ const config: Config = {
           dark: "var(--accent-dark)",
           soft: "var(--accent-soft)",
         },
+        pop: {
+          DEFAULT: "var(--pop)",
+          dark: "var(--pop-dark)",
+        },
         line: "var(--line)",
       },
       fontFamily: {
-        sans: ["var(--font-quicksand)", "system-ui", "sans-serif"],
-        display: ["var(--font-quicksand)", "system-ui", "sans-serif"],
+        sans: ["var(--font-opensans)", "system-ui", "sans-serif"],
+        display: ["var(--font-opensans)", "system-ui", "sans-serif"],
       },
       maxWidth: {
         content: "1200px",

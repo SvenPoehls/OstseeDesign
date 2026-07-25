@@ -37,7 +37,7 @@ export default function WhyChooseUs() {
           })}
 
           {/* Abschließende Akzent-Kachel mit CTA. */}
-          <div className="flex flex-col justify-between rounded-2xl bg-accent p-7 text-white shadow-soft">
+          <div className="flex flex-col justify-between rounded-xl bg-accent p-7 text-white shadow-soft">
             <div>
               <h3 className="font-display text-xl font-semibold">Klingt gut?</h3>
               <p className="mt-2 text-sm leading-relaxed text-white/85">

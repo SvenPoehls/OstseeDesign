@@ -26,7 +26,7 @@ export default function CtaBand() {
             </a>
             <a
               href={`mailto:${company.email}`}
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/40 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/40 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
             >
               <MailIcon className="h-4 w-4" />
               E-Mail schreiben
@@ -35,7 +35,7 @@ export default function CtaBand() {
         </div>
 
         {/* QR-Code-Bereich */}
-        <div className="flex items-center gap-4 rounded-2xl bg-white/10 p-5 backdrop-blur">
+        <div className="flex items-center gap-4 rounded-xl bg-white/10 p-5 backdrop-blur">
           <div
             className="flex h-28 w-28 shrink-0 flex-col items-center justify-center gap-1 rounded-xl border-2 border-dashed border-white/50 text-center text-white/80"
             role="img"

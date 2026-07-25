@@ -44,7 +44,7 @@ export default function FindUs() {
                 className="absolute inset-0"
                 style={{
                   backgroundImage:
-                    "linear-gradient(rgba(37,99,235,0.10) 1px, transparent 1px), linear-gradient(90deg, rgba(37,99,235,0.10) 1px, transparent 1px)",
+                    "linear-gradient(rgba(0,48,135,0.10) 1px, transparent 1px), linear-gradient(90deg, rgba(0,48,135,0.10) 1px, transparent 1px)",
                   backgroundSize: "30px 30px",
                 }}
               />

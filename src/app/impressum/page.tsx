@@ -9,9 +9,8 @@ export const metadata: Metadata = {
 };
 
 // Impressum nach § 5 DDG (Digitale-Dienste-Gesetz).
-// HINWEIS: Angaben, die nur der Betreiber kennt (Inhaber:in / vertretungs-
-// berechtigte Person, ggf. USt-IdNr., Kammer/Aufsichtsbehörde), sind unten
-// als [PLATZHALTER] markiert und vor Veröffentlichung zu ergänzen.
+// Betreiberangaben übernommen vom Textilshop (ostseetextilien.de):
+// Inhaberin Sara Fee Brandt, USt-IdNr. DE285883086, Steuernummer 2902202159.
 export default function ImpressumPage() {
   return (
     <LegalPage title="Impressum">
@@ -27,7 +26,7 @@ export default function ImpressumPage() {
       </p>
 
       <h2>Vertreten durch</h2>
-      <p>[PLATZHALTER: Inhaber:in / vertretungsberechtigte Person]</p>
+      <p>Inhaberin: Sara Fee Brandt</p>
 
       <h2>Kontakt</h2>
       <p>
@@ -42,12 +41,14 @@ export default function ImpressumPage() {
       <p>
         Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:
         <br />
-        [PLATZHALTER: USt-IdNr., falls vorhanden]
+        DE285883086
+        <br />
+        Steuernummer: 2902202159
       </p>
 
       <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
       <p>
-        [PLATZHALTER: Name der verantwortlichen Person]
+        Sara Fee Brandt
         <br />
         {company.street}, {company.zip} {company.city}
       </p>

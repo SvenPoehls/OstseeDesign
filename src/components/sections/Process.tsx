@@ -79,33 +79,31 @@ export default function Process() {
                 ref={(el) => {
                   itemRefs.current[i] = el;
                 }}
-                className="lg:flex lg:min-h-[75vh] lg:flex-col lg:justify-center"
+                className="lg:flex lg:min-h-[58vh] lg:flex-col lg:justify-center"
               >
                 <article
-                  className="edge p-6 transition-all duration-700 ease-out sm:p-8"
+                  className="edge p-5 transition-all duration-700 ease-out sm:p-6"
                   style={{
                     transform: shown[i] ? "translateY(0)" : "translateY(3rem)",
                     opacity: shown[i] ? 1 : 0,
                   }}
                 >
                   <div className="flex items-center gap-3">
-                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border-[1.5px] border-ink bg-pop text-sm font-bold text-ink">
+                    <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border-[1.5px] border-ink bg-pop text-xs font-bold text-ink">
                       {i + 1}
                     </span>
                     <span className="text-xs font-bold uppercase tracking-label text-accent">
                       {step.when}
                     </span>
                   </div>
-                  <h3 className="mt-4 font-display text-2xl font-extrabold tracking-tight text-ink sm:text-3xl">
+                  <h3 className="mt-3 font-display text-xl font-extrabold tracking-tight text-ink sm:text-2xl">
                     {step.title}
                   </h3>
-                  <p className="mt-3 text-[15px] leading-relaxed text-ink-muted sm:text-base">
-                    {step.body}
-                  </p>
-                  <ul className="mt-6 grid gap-2 text-[15px] text-ink sm:grid-cols-2">
+                  <p className="mt-2 text-sm leading-relaxed text-ink-muted">{step.body}</p>
+                  <ul className="mt-4 grid gap-1.5 text-sm text-ink sm:grid-cols-2">
                     {step.points.map((point) => (
-                      <li key={point} className="flex items-start gap-2.5">
-                        <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-pop" />
+                      <li key={point} className="flex items-start gap-2">
+                        <CheckIcon className="mt-0.5 h-3.5 w-3.5 shrink-0 text-pop" />
                         {point}
                       </li>
                     ))}
@@ -118,7 +116,10 @@ export default function Process() {
           {/* Bildspalte: bleibt beim Scrollen stehen und wechselt mit dem
               aktiven Schritt. Nur auf großen Bildschirmen sinnvoll. */}
           <div className="hidden lg:block">
-            <div className="sticky top-32">
+            {/* Der Kasten ist so hoch wie der Bildschirm und der Inhalt darin
+                mittig – dadurch steht das Bild beim Scrollen in der Mitte,
+                auf gleicher Höhe wie der jeweilige Schritt. */}
+            <div className="sticky top-0 flex h-screen flex-col justify-center">
               <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] border-[1.5px] border-ink bg-paper shadow-offset-lg">
                 {processSteps.map((step, i) => (
                   <div
@@ -161,7 +162,7 @@ export default function Process() {
                 ))}
               </div>
 
-              <Link href="/#kontakt" className="btn-pill mt-8">
+              <Link href="/#kontakt" className="btn-pill mt-8 self-start">
                 Jetzt Termin ausmachen
                 <ArrowIcon className="h-4 w-4" />
               </Link>

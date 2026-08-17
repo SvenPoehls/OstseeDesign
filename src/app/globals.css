@@ -62,34 +62,6 @@ body {
   }
 }
 
-/* Endlos-Laufband (Ticker). Der Inhalt wird im Markup zweimal ausgegeben,
-   deshalb genügt eine Verschiebung um 50 %. */
-@keyframes ticker-left {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-@keyframes ticker-right {
-  from {
-    transform: translateX(-50%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-
-.ticker-track {
-  display: flex;
-  width: max-content;
-  animation: ticker-left 32s linear infinite;
-}
-.ticker-track-rev {
-  animation-name: ticker-right;
-}
-
 @layer components {
   .container-site {
     @apply mx-auto w-full max-w-content px-5 sm:px-6 lg:px-8;

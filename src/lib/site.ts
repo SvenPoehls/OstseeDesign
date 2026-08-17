@@ -114,26 +114,6 @@ export const heroFan: string[] = [
   "Banner & Aufkleber",
 ];
 
-// ── „Kennen Sie das?" – Sätze, die als Laufband durchlaufen ──────────────
-export const painPoints: string[] = [
-  "Fünf Anbieter für Auto, Schilder, Shirts und Flyer",
-  "Jeder braucht die Daten in einem anderen Format",
-  "Das Logo sieht auf jedem Produkt anders aus",
-  "Niemand geht ans Telefon, wenn es eilig wird",
-  "Der Transporter steht seit Wochen unbeschriftet da",
-  "Die Arbeitskleidung kommt in der falschen Farbe",
-  "Angebote, die man ohne Rückfrage nicht versteht",
-  "Termine, die dreimal verschoben werden",
-];
-
-// Kurze Schlagwörter, die zwischen dem Laufband schweben.
-export const painChips: string[] = [
-  "Hin und her",
-  "Kein Ansprechpartner",
-  "Verschobene Termine",
-  "Uneinheitlicher Auftritt",
-];
-
 // ── „So läuft Ihr Auftrag" – Ablauf eines Projekts ───────────────────────
 export type ProcessStep = {
   id: string;

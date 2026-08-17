@@ -32,8 +32,8 @@ export default function Services() {
             const href = service.external ?? "/#kontakt";
             return (
               <article key={service.id} className="edge edge-lift flex flex-col overflow-hidden">
-                {/* Bildfläche – noch Platzhalter mit Bildregie-Notiz. */}
-                <div className="relative flex aspect-[16/9] items-center justify-center border-b-[1.5px] border-ink bg-surface">
+                {/* Bildfläche – noch Platzhalter mit kurzer Bildregie-Notiz. */}
+                <div className="relative flex aspect-[16/6] items-center justify-center border-b-[1.5px] border-ink bg-surface">
                   <div
                     aria-hidden="true"
                     className="absolute inset-0"
@@ -42,32 +42,27 @@ export default function Services() {
                         "repeating-linear-gradient(135deg, rgba(0,48,135,0.06) 0 2px, transparent 2px 16px)",
                     }}
                   />
-                  <span className="absolute left-4 top-4 rounded-full border-[1.5px] border-ink bg-paper px-3 py-1 text-xs font-bold text-ink">
+                  <span className="absolute left-4 top-4 rounded-full border-[1.5px] border-ink bg-paper px-2.5 py-0.5 text-[0.7rem] font-bold text-ink">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <div className="relative flex max-w-[18rem] flex-col items-center gap-2 px-6 text-center">
-                    <CameraIcon className="h-6 w-6 text-ink/25" />
-                    <span className="text-[0.7rem] font-bold uppercase tracking-label text-ink/40">
-                      Bildregie
-                    </span>
-                    <span className="text-sm text-ink-muted">
+                  <div className="relative flex max-w-[20rem] items-center gap-2 px-6 text-center">
+                    <CameraIcon className="h-5 w-5 shrink-0 text-ink/25" />
+                    <span className="text-xs text-ink-muted">
                       {notes[service.id] ?? service.teaser}
                     </span>
                   </div>
                 </div>
 
-                <div className="flex flex-1 flex-col p-7">
-                  <h3 className="font-display text-2xl font-extrabold tracking-tight text-ink">
+                <div className="flex flex-1 flex-col p-5 sm:p-6">
+                  <h3 className="font-display text-xl font-extrabold tracking-tight text-ink">
                     {service.title}
                   </h3>
-                  <p className="mt-2 text-[15px] leading-relaxed text-ink-muted">
-                    {service.teaser}
-                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-ink-muted">{service.teaser}</p>
 
-                  <ul className="mt-5 flex-1 space-y-2 text-[15px] text-ink">
+                  <ul className="mt-4 flex-1 space-y-1.5 text-sm text-ink">
                     {service.points.map((point) => (
-                      <li key={point} className="flex items-start gap-2.5">
-                        <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-pop" />
+                      <li key={point} className="flex items-start gap-2">
+                        <CheckIcon className="mt-0.5 h-3.5 w-3.5 shrink-0 text-pop" />
                         {point}
                       </li>
                     ))}
@@ -77,7 +72,7 @@ export default function Services() {
                     href={href}
                     target={isExternal ? "_blank" : undefined}
                     rel={isExternal ? "noopener noreferrer" : undefined}
-                    className="btn-pill-light mt-7 self-start"
+                    className="btn-pill-light mt-5 self-start"
                   >
                     {isExternal ? "Zum Textilshop" : "Anfrage stellen"}
                     {isExternal ? (

@@ -10,13 +10,15 @@ import { company, heroFan } from "@/lib/site";
 // fliegen in ihre Position: nach links, rechts, oben und unten.
 type Spot = { x: number; y: number; rot: number };
 
+// Drei Karten links, drei rechts – sie liegen als Bogen neben dem Kreis,
+// nicht unter ihm.
 const spotsWide: Spot[] = [
-  { x: 11, y: 29, rot: -12 },
-  { x: 16, y: 66, rot: 8 },
-  { x: 37, y: 79, rot: -6 },
-  { x: 89, y: 26, rot: 11 },
-  { x: 85, y: 64, rot: -8 },
-  { x: 63, y: 80, rot: 6 },
+  { x: 12, y: 26, rot: -12 },
+  { x: 8, y: 56, rot: 8 },
+  { x: 19, y: 80, rot: -7 },
+  { x: 88, y: 24, rot: 11 },
+  { x: 92, y: 54, rot: -8 },
+  { x: 81, y: 79, rot: 6 },
 ];
 
 const spotsNarrow: Spot[] = [

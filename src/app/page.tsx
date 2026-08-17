@@ -2,7 +2,6 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import CookieNotice from "@/components/layout/CookieNotice";
 import Hero from "@/components/sections/Hero";
-import PainPoints from "@/components/sections/PainPoints";
 import Services from "@/components/sections/Services";
 import Process from "@/components/sections/Process";
 import FindUs from "@/components/sections/FindUs";
@@ -11,7 +10,7 @@ import { company, services } from "@/lib/site";
 
 // Startseite. Aufbau nach der Vorlage (projectone.website), umgesetzt in
 // unseren Farben und mit unserer Schrift:
-// Kopfzeile → Hero mit Bilder-Fächer → „Kennen Sie das?" → Unsere Leistungen →
+// Kopfzeile → Hero mit fliegenden Bildern → Unsere Leistungen →
 // So läuft Ihr Auftrag → Standort → Kontakt → Fußzeile.
 export default function HomePage() {
   return (
@@ -19,7 +18,6 @@ export default function HomePage() {
       <Header />
       <main id="hauptinhalt">
         <Hero />
-        <PainPoints />
         <Services />
         <Process />
         <FindUs />

@@ -54,7 +54,7 @@ export default function Hero() {
   const boxHeight = narrow ? 52 : 50; // in rem
 
   return (
-    <section className="relative flex min-h-[52rem] items-start overflow-hidden bg-paper pb-16 pt-14 sm:min-h-[46rem] sm:pb-24 sm:pt-16 lg:min-h-[50rem]">
+    <section className="relative flex min-h-[52rem] items-start overflow-hidden bg-paper pb-20 pt-14 sm:min-h-[48rem] sm:pb-28 sm:pt-16 lg:min-h-[52rem]">
       {/* Grauer Kreis im Hintergrund – hebt sich dezent von Weiß ab.
           (Kein negativer z-index: sonst verschwindet er hinter dem weißen
           Abschnitts-Hintergrund.) */}

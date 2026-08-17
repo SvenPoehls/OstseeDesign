@@ -56,7 +56,7 @@ export default function Process() {
   }, []);
 
   return (
-    <section id="ablauf" className="scroll-mt-32 bg-surface py-20 sm:py-28">
+    <section id="ablauf" className="bg-surface py-20 sm:py-28">
       <div className="container-site">
         <div className="mx-auto max-w-2xl text-center">
           <span className="chip">So läuft Ihr Auftrag</span>
@@ -93,7 +93,7 @@ export default function Process() {
                       {i + 1}
                     </span>
                     <span className="text-xs font-bold uppercase tracking-label text-accent">
-                      {step.when}
+                      Schritt {i + 1}
                     </span>
                   </div>
                   <h3 className="mt-3 font-display text-xl font-extrabold tracking-tight text-ink sm:text-2xl">
@@ -119,7 +119,11 @@ export default function Process() {
             {/* Der Kasten ist so hoch wie der Bildschirm und der Inhalt darin
                 mittig – dadurch steht das Bild beim Scrollen in der Mitte,
                 auf gleicher Höhe wie der jeweilige Schritt. */}
-            <div className="sticky top-0 flex h-screen flex-col justify-center">
+            <div className="sticky top-0 flex h-screen items-center">
+              {/* Nur das Bild wird mittig ausgerichtet – Fortschritt und Button
+                  hängen darunter, damit das Bild exakt auf Höhe der Kachel
+                  links steht. */}
+              <div className="relative w-full">
               <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] border-[1.5px] border-ink bg-paper shadow-offset-lg">
                 {processSteps.map((step, i) => (
                   <div
@@ -136,9 +140,6 @@ export default function Process() {
                           "repeating-linear-gradient(135deg, rgba(0,48,135,0.07) 0 2px, transparent 2px 18px)",
                       }}
                     />
-                    <span className="relative rounded-full border-[1.5px] border-ink bg-pop px-4 py-1 text-sm font-bold text-ink">
-                      Schritt {i + 1}
-                    </span>
                     <CameraIcon className="relative h-8 w-8 text-ink/30" />
                     <p className="relative max-w-xs px-6 text-center font-display text-lg font-extrabold text-ink">
                       {step.title}
@@ -150,22 +151,25 @@ export default function Process() {
                 ))}
               </div>
 
-              {/* Fortschrittsanzeige unter dem Bild. */}
-              <div className="mt-6 flex items-center gap-2" aria-hidden="true">
-                {processSteps.map((step, i) => (
-                  <span
-                    key={step.id}
-                    className={`h-1.5 flex-1 rounded-full transition-colors duration-300 ${
-                      i <= active ? "bg-accent" : "bg-ink/15"
-                    }`}
-                  />
-                ))}
-              </div>
+                {/* Fortschrittsanzeige + Button hängen unter dem Bild. */}
+                <div className="absolute inset-x-0 top-full">
+                  <div className="mt-6 flex items-center gap-2" aria-hidden="true">
+                    {processSteps.map((step, i) => (
+                      <span
+                        key={step.id}
+                        className={`h-1.5 flex-1 rounded-full transition-colors duration-300 ${
+                          i <= active ? "bg-accent" : "bg-ink/15"
+                        }`}
+                      />
+                    ))}
+                  </div>
 
-              <Link href="/#kontakt" className="btn-pill mt-8 self-start">
-                Jetzt Termin ausmachen
-                <ArrowIcon className="h-4 w-4" />
-              </Link>
+                  <Link href="/#kontakt" className="btn-pill mt-8">
+                    Jetzt Termin ausmachen
+                    <ArrowIcon className="h-4 w-4" />
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -12,6 +12,19 @@ import { company, nav } from "@/lib/site";
 export default function Header() {
   const [open, setOpen] = useState(false);
 
+  // Onepage-Navigation: Liegt der Abschnitt auf der aktuellen Seite, wird
+  // direkt dorthin gescrollt (ohne Seitenwechsel). Auf Unterseiten wie
+  // Impressum bleibt der normale Link zur Startseite + Anker erhalten.
+  const jumpToSection = (event: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (!href.startsWith("/#")) return;
+    const target = document.getElementById(href.slice(2));
+    if (!target) return;
+    event.preventDefault();
+    setOpen(false);
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+    window.history.replaceState(null, "", `#${href.slice(2)}`);
+  };
+
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => {
@@ -43,6 +56,7 @@ export default function Header() {
                 href={item.href}
                 target={item.external ? "_blank" : undefined}
                 rel={item.external ? "noopener noreferrer" : undefined}
+                onClick={(e) => jumpToSection(e, item.href)}
                 className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold text-white/85 transition-colors hover:bg-white/10 hover:text-white"
               >
                 {item.label}
@@ -100,7 +114,10 @@ export default function Header() {
                   href={item.href}
                   target={item.external ? "_blank" : undefined}
                   rel={item.external ? "noopener noreferrer" : undefined}
-                  onClick={() => setOpen(false)}
+                  onClick={(e) => {
+                    setOpen(false);
+                    jumpToSection(e, item.href);
+                  }}
                   className="flex items-center justify-between border-b border-line py-4 text-base font-semibold text-ink last:border-0"
                 >
                   {item.label}

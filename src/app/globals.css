@@ -26,7 +26,10 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 7rem;
+  /* Abstand, den Sprungmarken oben frei lassen (Platz für die Kopfzeile).
+     Gilt für Anker-Links und scrollIntoView gleichermaßen – deshalb brauchen
+     die Abschnitte selbst kein zusätzliches scroll-mt. */
+  scroll-padding-top: 6rem;
   background-color: var(--paper);
 }
 

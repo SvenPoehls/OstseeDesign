@@ -20,7 +20,7 @@ export default function FindUs() {
   const mapEmbedUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat},${lon}`;
 
   return (
-    <section id="standort" className="scroll-mt-32 bg-paper pb-20 sm:pb-28">
+    <section id="standort" className="bg-paper pb-20 sm:pb-28">
       <div className="container-site">
         <div className="mx-auto max-w-2xl text-center">
           <span className="chip">Standort</span>

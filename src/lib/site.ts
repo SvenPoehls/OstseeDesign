@@ -117,7 +117,6 @@ export const heroFan: string[] = [
 // ── „So läuft Ihr Auftrag" – Ablauf eines Projekts ───────────────────────
 export type ProcessStep = {
   id: string;
-  when: string; // Zeit-Marke links an der Zeitleiste
   title: string;
   body: string;
   points: string[];
@@ -126,28 +125,24 @@ export type ProcessStep = {
 export const processSteps: ProcessStep[] = [
   {
     id: "gespraech",
-    when: "Tag 1",
     title: "Wir sprechen miteinander",
     body: "Am Telefon, per E-Mail oder bei uns in der Werkstatt: Sie erzählen, was Sie vorhaben – wir sagen ehrlich, was sinnvoll ist und was es kostet.",
     points: ["Kostenloses Erstgespräch", "Beratung zu Material & Technik", "Festes Angebot ohne Überraschungen"],
   },
   {
     id: "entwurf",
-    when: "Tag 2–4",
     title: "Sie bekommen den ersten Entwurf",
     body: "Wir setzen Ihre Idee in eine Gestaltung um und zeigen sie Ihnen als Ansicht – am Fahrzeug, am Schild oder auf dem Textil.",
     points: ["Entwurf am echten Objekt", "Ihr Logo sauber aufbereitet", "Vorschläge für Farben & Größen"],
   },
   {
     id: "feinschliff",
-    when: "Danach",
     title: "Wir feilen gemeinsam nach",
     body: "Änderungswünsche gehören dazu. Wir passen an, bis es sitzt – erst wenn Sie zufrieden sind, geht es in die Produktion.",
     points: ["Korrekturschleifen inklusive", "Ein fester Ansprechpartner", "Freigabe erst, wenn alles passt"],
   },
   {
     id: "umsetzung",
-    when: "Zum Termin",
     title: "Wir setzen um und montieren",
     body: "Produktion im eigenen Haus, Montage vor Ort. Sie bekommen einen festen Termin – und danach ein Ergebnis, das hält.",
     points: ["Fertigung in Eckernförde", "Montage vor Ort", "Nachbestellungen jederzeit möglich"],

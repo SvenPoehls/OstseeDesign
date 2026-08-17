@@ -58,20 +58,30 @@ export default function Process() {
   return (
     <section id="ablauf" className="bg-surface pb-20 pt-16 sm:pb-28 sm:pt-20">
       <div className="container-site">
-        <div className="mx-auto max-w-2xl text-center">
-          <span className="chip">So läuft Ihr Auftrag</span>
-          <h2 className="mt-5 font-display text-3xl font-extrabold leading-tight tracking-tight text-ink sm:text-4xl lg:text-5xl">
-            Vom ersten Gespräch bis zur <span className="em">Montage</span>.
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-ink-muted">
-            Kein Angebots-Dschungel, keine Wartespiele. Sie wissen jederzeit,
-            woran wir gerade arbeiten und was als Nächstes kommt.
-          </p>
+        {/* Überschrift bleibt auf großen Bildschirmen oben stehen, während man
+            durch die Schritte scrollt. Der eigene Hintergrund sorgt dafür, dass
+            die Kacheln sauber darunter durchlaufen. */}
+        <div className="lg:sticky lg:top-0 lg:z-20 lg:bg-surface lg:pb-5 lg:pt-28">
+          <div className="mx-auto max-w-2xl text-center">
+            <span className="chip">So läuft Ihr Auftrag</span>
+            <h2 className="mt-4 font-display text-3xl font-extrabold leading-tight tracking-tight text-ink sm:text-4xl">
+              Vom ersten Gespräch bis zur <span className="em">Montage</span>.
+            </h2>
+            <p className="mx-auto mt-3 max-w-xl text-base leading-relaxed text-ink-muted">
+              Kein Angebots-Dschungel, keine Wartespiele. Sie wissen jederzeit,
+              woran wir gerade arbeiten und was als Nächstes kommt.
+            </p>
+          </div>
         </div>
 
-        <div className="mt-6 grid gap-10 lg:mt-2 lg:grid-cols-2 lg:gap-16">
+        <div className="mt-6 grid gap-10 lg:mt-0 lg:grid-cols-2 lg:gap-16">
           {/* Textspalte: fliegt Schritt für Schritt von unten ein. */}
-          <ol className="space-y-10 lg:space-y-0">
+          {/* Der Vorsprung oben gleicht aus, wenn das Bild auf flachen
+              Bildschirmen nicht ganz auf halber Höhe stehen kann: Er verschiebt
+              die Kacheln um genau denselben Betrag nach unten, sodass Kachel-
+              und Bildmitte immer auf einer Linie liegen. Auf hohen Bildschirmen
+              ergibt die Rechnung null. */}
+          <ol className="space-y-10 lg:space-y-0 lg:pt-[calc(max(20.5rem,34vh)_+_16vh_-_50vh)]">
             {processSteps.map((step, i) => (
               <li
                 key={step.id}
@@ -79,11 +89,10 @@ export default function Process() {
                 ref={(el) => {
                   itemRefs.current[i] = el;
                 }}
-                // Jede Kachel steht am OBEREN Rand ihres Abschnitts – genau wie
-                // das Bild rechts, das beim Scrollen oben stehen bleibt.
-                // Dadurch stehen Kachel und Bild von Anfang an nebeneinander
-                // auf gleicher Höhe, und der ganze Block sitzt weit oben.
-                className="lg:flex lg:min-h-[85vh] lg:flex-col lg:justify-start"
+                // Jede Kachel steht mittig in ihrem Abschnitt. Weil das Bild
+                // rechts genau auf halber Bildschirmhöhe festgehalten wird,
+                // liegen Kachel und Bild dadurch auf einer Mittellinie.
+                className="lg:flex lg:min-h-[70vh] lg:flex-col lg:justify-center"
               >
                 <article
                   className="edge p-5 transition-all duration-700 ease-out sm:p-6"
@@ -120,12 +129,14 @@ export default function Process() {
           {/* Bildspalte: bleibt beim Scrollen stehen und wechselt mit dem
               aktiven Schritt. Nur auf großen Bildschirmen sinnvoll. */}
           <div className="hidden lg:block">
-            {/* Das Bild bleibt beim Scrollen oben stehen – auf derselben Höhe,
-                auf der auch die Kacheln links beginnen. Dadurch stehen beide
-                von der ersten Sekunde an nebeneinander. */}
-            <div className="sticky top-24">
+            {/* Das Bild wird unterhalb der Überschrift festgehalten. Der Wert
+                34vh sorgt dafür, dass seine MITTE auf halber Bildschirmhöhe
+                liegt – dort, wo auch die Kacheln links mittig stehen. Das
+                max(…) verhindert, dass es auf flachen Bildschirmen unter die
+                Überschrift rutscht. */}
+            <div className="sticky top-[max(20.5rem,34vh)] mt-10">
               <div className="relative w-full">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] border-[1.5px] border-ink bg-paper">
+              <div className="relative h-[32vh] overflow-hidden rounded-[2rem] border-[1.5px] border-ink bg-paper">
                 {processSteps.map((step, i) => (
                   <div
                     key={step.id}

@@ -111,6 +111,7 @@ export const heroFan: string[] = [
   "Firmenschild an der Fassade",
   "Schaufensterbeschriftung",
   "Visitenkarten & Drucksachen",
+  "Banner & Aufkleber",
 ];
 
 // ── „Kennen Sie das?" – Sätze, die als Laufband durchlaufen ──────────────

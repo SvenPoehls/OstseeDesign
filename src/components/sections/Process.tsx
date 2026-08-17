@@ -79,10 +79,11 @@ export default function Process() {
                 ref={(el) => {
                   itemRefs.current[i] = el;
                 }}
-                // Jeder Schritt bekommt genau eine Bildschirmhöhe und steht
-                // darin mittig. Dadurch liegt die Kachel immer exakt auf Höhe
-                // des Bildes rechts, das ebenfalls mittig stehen bleibt.
-                className="lg:flex lg:min-h-[68vh] lg:flex-col lg:justify-center"
+                // Jede Kachel steht am OBEREN Rand ihres Abschnitts – genau wie
+                // das Bild rechts, das beim Scrollen oben stehen bleibt.
+                // Dadurch stehen Kachel und Bild von Anfang an nebeneinander
+                // auf gleicher Höhe, und der ganze Block sitzt weit oben.
+                className="lg:flex lg:min-h-[85vh] lg:flex-col lg:justify-start"
               >
                 <article
                   className="edge p-5 transition-all duration-700 ease-out sm:p-6"
@@ -119,13 +120,10 @@ export default function Process() {
           {/* Bildspalte: bleibt beim Scrollen stehen und wechselt mit dem
               aktiven Schritt. Nur auf großen Bildschirmen sinnvoll. */}
           <div className="hidden lg:block">
-            {/* Der Kasten ist so hoch wie der Bildschirm und der Inhalt darin
-                mittig – dadurch steht das Bild beim Scrollen in der Mitte,
-                auf gleicher Höhe wie der jeweilige Schritt. */}
-            <div className="sticky top-0 flex h-screen items-center">
-              {/* Nur das Bild wird mittig ausgerichtet – Fortschritt und Button
-                  hängen darunter, damit das Bild exakt auf Höhe der Kachel
-                  links steht. */}
+            {/* Das Bild bleibt beim Scrollen oben stehen – auf derselben Höhe,
+                auf der auch die Kacheln links beginnen. Dadurch stehen beide
+                von der ersten Sekunde an nebeneinander. */}
+            <div className="sticky top-24">
               <div className="relative w-full">
               <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] border-[1.5px] border-ink bg-paper">
                 {processSteps.map((step, i) => (
@@ -154,8 +152,8 @@ export default function Process() {
                 ))}
               </div>
 
-                {/* Fortschrittsanzeige + Button hängen unter dem Bild. */}
-                <div className="absolute inset-x-0 top-full">
+                {/* Fortschrittsanzeige + Button stehen unter dem Bild. */}
+                <div>
                   <div className="mt-6 flex items-center gap-2" aria-hidden="true">
                     {processSteps.map((step, i) => (
                       <span

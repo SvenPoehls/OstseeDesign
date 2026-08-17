@@ -62,10 +62,13 @@ export default function Hero() {
           Abschnitts-Hintergrund.) */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 -top-16 h-[40rem] w-[40rem] -translate-x-1/2 rounded-full sm:-top-20 sm:h-[52rem] sm:w-[52rem] lg:-top-24 lg:h-[60rem] lg:w-[60rem]"
+        className="pointer-events-none absolute left-1/2 top-0 h-[34rem] w-[34rem] -translate-x-1/2 rounded-full sm:h-[42rem] sm:w-[42rem] lg:h-[48rem] lg:w-[48rem]"
         style={{
+          // Langer, weicher Auslauf nach außen. Die Fläche liegt komplett
+          // innerhalb des Kopfbereichs und ist an ihrem Rand durchsichtig –
+          // dadurch entsteht weder oben noch unten eine sichtbare Kante.
           background:
-            "radial-gradient(circle closest-side, var(--circle) 0 72%, rgba(228,231,236,0) 100%)",
+            "radial-gradient(circle closest-side, var(--circle) 0 50%, rgba(228,231,236,0.5) 76%, rgba(228,231,236,0) 100%)",
         }}
       />
 

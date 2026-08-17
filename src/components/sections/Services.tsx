@@ -1,10 +1,14 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowIcon, CameraIcon, CheckIcon, ExternalIcon } from "@/components/ui/Icons";
 import { services } from "@/lib/site";
 
 // „Unsere Leistungen" – alle vier Bereiche nebeneinander, damit man sie auf
 // einen Blick erfasst. Jede Kachel: schmale Bildfläche, Titel, drei Stichpunkte
-// und ein Link.
+// und ein Link. Beim Hereinscrollen fliegen die Kacheln nacheinander von unten
+// ein.
 const notes: Record<string, string> = {
   werbetechnik: "Fahrzeug mit frischer Beschriftung",
   textilveredelung: "Detail einer Stickerei",
@@ -13,6 +17,30 @@ const notes: Record<string, string> = {
 };
 
 export default function Services() {
+  // Sobald das Kachel-Raster ins Bild kommt, werden die Kacheln nacheinander
+  // eingeblendet – einmalig, danach bleiben sie stehen.
+  const [shown, setShown] = useState(false);
+  const gridRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const node = gridRef.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setShown(true);
+          observer.disconnect();
+        }
+      },
+      // Startet, sobald das Raster ein gutes Stück im Bild ist.
+      { rootMargin: "0px 0px -20% 0px", threshold: 0 }
+    );
+    observer.observe(node);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section id="leistungen" className="bg-paper pb-20 pt-16 sm:pb-28 sm:pt-24">
       <div className="container-site">
@@ -27,14 +55,24 @@ export default function Services() {
           </p>
         </div>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div ref={gridRef} className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((service, i) => {
             const isExternal = Boolean(service.external);
             const href = service.external ?? "/#kontakt";
             return (
-              <article key={service.id} className="edge edge-lift flex flex-col overflow-hidden">
+              <article
+                key={service.id}
+                className="edge edge-lift flex flex-col overflow-hidden transition-[transform,opacity] duration-700 ease-out"
+                style={{
+                  // Startpunkt: etwas tiefer und unsichtbar. Der Versatz je
+                  // Kachel lässt sie nacheinander hereinfliegen.
+                  transform: shown ? "translateY(0)" : "translateY(2.5rem)",
+                  opacity: shown ? 1 : 0,
+                  transitionDelay: `${i * 120}ms`,
+                }}
+              >
                 {/* Bildfläche – noch Platzhalter mit kurzer Bildregie-Notiz. */}
-                <div className="relative flex h-24 items-center justify-center border-b-[1.5px] border-ink bg-surface px-4 text-center">
+                <div className="relative flex h-24 items-center justify-center border-b-2 border-ink bg-surface px-4 text-center">
                   <div
                     aria-hidden="true"
                     className="absolute inset-0"
@@ -43,7 +81,7 @@ export default function Services() {
                         "repeating-linear-gradient(135deg, rgba(0,48,135,0.06) 0 2px, transparent 2px 16px)",
                     }}
                   />
-                  <span className="absolute left-3 top-3 rounded-full border-[1.5px] border-ink bg-paper px-2 py-0.5 text-[0.65rem] font-bold text-ink">
+                  <span className="absolute left-3 top-3 rounded-full border-2 border-ink bg-paper px-2 py-0.5 text-[0.65rem] font-bold text-ink">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <span className="relative flex items-center gap-2 text-[0.7rem] text-ink-muted">

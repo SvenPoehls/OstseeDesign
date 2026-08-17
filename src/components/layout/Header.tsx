@@ -35,7 +35,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 pt-3 sm:pt-4">
       <div className="container-site">
-        <div className="flex items-center justify-between gap-4 rounded-full border-[1.5px] border-ink bg-paper/95 px-4 py-2.5 backdrop-blur sm:px-5">
+        <div className="flex items-center justify-between gap-4 rounded-full border-2 border-ink bg-paper/95 px-4 py-2.5 backdrop-blur sm:px-5">
           <Link
             href="/"
             aria-label={`${company.name} – zur Startseite`}
@@ -82,7 +82,7 @@ export default function Header() {
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border-[1.5px] border-ink text-ink transition-colors hover:bg-surface lg:hidden"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border-2 border-ink text-ink transition-colors hover:bg-surface lg:hidden"
               aria-expanded={open}
               aria-controls="mobile-menu"
               aria-label={open ? "Menü schließen" : "Menü öffnen"}
@@ -105,7 +105,7 @@ export default function Header() {
         {open && (
           <div
             id="mobile-menu"
-            className="mt-3 overflow-hidden rounded-3xl border-[1.5px] border-ink bg-paper lg:hidden"
+            className="mt-3 overflow-hidden rounded-3xl border-2 border-ink bg-paper lg:hidden"
           >
             <nav aria-label="Mobile Navigation" className="flex flex-col px-5 py-2">
               {nav.map((item) => (

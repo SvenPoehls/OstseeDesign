@@ -102,7 +102,7 @@ export default function Process() {
                   }}
                 >
                   <div className="flex items-center gap-3">
-                    <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border-[1.5px] border-ink bg-pop text-xs font-bold text-ink">
+                    <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border-2 border-ink bg-pop text-xs font-bold text-ink">
                       {i + 1}
                     </span>
                     <span className="text-xs font-bold uppercase tracking-label text-accent">
@@ -140,7 +140,7 @@ export default function Process() {
                 stehen beide von der ersten Sekunde an nebeneinander. */}
             <div className="sticky top-[max(20.5rem,34vh)] mt-[calc(max(20.5rem,34vh)_-_15vh)]">
               <div className="relative w-full">
-              <div className="relative h-[32vh] overflow-hidden rounded-[2rem] border-[1.5px] border-ink bg-paper">
+              <div className="relative h-[32vh] overflow-hidden rounded-[2rem] border-2 border-ink bg-paper">
                 {processSteps.map((step, i) => (
                   <div
                     key={step.id}

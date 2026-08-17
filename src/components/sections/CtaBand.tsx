@@ -11,9 +11,9 @@ export default function CtaBand() {
   return (
     <section id="kontakt" className="bg-paper pb-20 sm:pb-28">
       <div className="container-site">
-        <div className="grid items-center gap-10 rounded-[2.5rem] border-[1.5px] border-ink bg-accent p-8 text-white sm:p-12 lg:grid-cols-[1.4fr_0.6fr]">
+        <div className="grid items-center gap-10 rounded-[2.5rem] border-2 border-ink bg-accent p-8 text-white sm:p-12 lg:grid-cols-[1.4fr_0.6fr]">
           <div>
-            <span className="inline-flex items-center gap-2 rounded-full border-[1.5px] border-white/30 px-4 py-1.5 text-xs font-bold uppercase tracking-label text-white/75">
+            <span className="inline-flex items-center gap-2 rounded-full border-2 border-white/30 px-4 py-1.5 text-xs font-bold uppercase tracking-label text-white/75">
               Kontakt
             </span>
             <h2 className="mt-5 font-display text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">
@@ -30,7 +30,7 @@ export default function CtaBand() {
               </a>
               <a
                 href={`mailto:${company.email}`}
-                className="inline-flex items-center justify-center gap-2 rounded-full border-[1.5px] border-white/50 px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-white/10"
+                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/50 px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-white/10"
               >
                 <MailIcon className="h-4 w-4" />
                 E-Mail schreiben

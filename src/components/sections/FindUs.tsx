@@ -11,11 +11,13 @@ export default function FindUs() {
   );
   const mapsUrl = `https://www.openstreetmap.org/search?query=${mapsQuery}`;
 
-  // Kleinen Kartenausschnitt (Bounding-Box) rund um den Standort berechnen und
-  // den Standort per Marker anzeigen.
+  // Kleinen Kartenausschnitt (Bounding-Box) rund um den Standort berechnen.
+  // Der Marker der Karte selbst ist die einzige Markierung – vorher gab es
+  // zusätzlich eine eigene Nadel, dadurch waren zwei Punkte an leicht
+  // verschiedenen Stellen zu sehen.
   const { lat, lon } = company.coords;
-  const dx = 0.0075; // Ost-West-Spanne
-  const dy = 0.004; // Nord-Süd-Spanne
+  const dx = 0.006; // Ost-West-Spanne (enger = näher herangezoomt = schärfer)
+  const dy = 0.0032; // Nord-Süd-Spanne
   const bbox = `${lon - dx},${lat - dy},${lon + dx},${lat + dy}`;
   const mapEmbedUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat},${lon}`;
 
@@ -44,31 +46,12 @@ export default function FindUs() {
                 referrerPolicy="no-referrer-when-downgrade"
                 className="h-80 w-full border-0"
               />
-              {/* Deutlich sichtbare Markierung genau in der Kartenmitte – dort
-                  liegt der Standort, weil der Kartenausschnitt symmetrisch um
-                  die Koordinaten herum berechnet wird. Der kleine OSM-Punkt
-                  allein geht auf der Karte unter. */}
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-full"
-              >
-                <svg className="h-11 w-11 drop-shadow" viewBox="0 0 24 24" aria-hidden="true">
-                  <path
-                    d="M12 23s8-7.2 8-13a8 8 0 1 0-16 0c0 5.8 8 13 8 13z"
-                    fill="var(--pop)"
-                    stroke="#ffffff"
-                    strokeWidth={1.6}
-                  />
-                  <circle cx="12" cy="10" r="3" fill="#ffffff" />
-                </svg>
-              </div>
-
               {/* Adresse + Route-Link über der Karte. */}
               <a
                 href={mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group absolute inset-x-4 bottom-4 flex items-center justify-between gap-4 rounded-full border-[1.5px] border-ink bg-paper px-5 py-3"
+                className="group absolute inset-x-4 bottom-4 flex items-center justify-between gap-4 rounded-full border-2 border-ink bg-paper px-5 py-3"
                 aria-label={`Route zu ${company.street}, ${company.zip} ${company.city} öffnen`}
               >
                 <span className="text-sm font-bold text-ink">
@@ -99,7 +82,7 @@ export default function FindUs() {
               ))}
             </dl>
 
-            <div className="mt-6 flex flex-col gap-3 border-t-[1.5px] border-ink/10 pt-6 sm:flex-row">
+            <div className="mt-6 flex flex-col gap-3 border-t-2 border-ink/10 pt-6 sm:flex-row">
               <a href={`tel:${company.phoneHref}`} className="btn-pill">
                 <PhoneIcon className="h-4 w-4" />
                 {company.phoneDisplay}

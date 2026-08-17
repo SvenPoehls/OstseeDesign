@@ -79,7 +79,7 @@ export default function Hero() {
           return (
             <figure
               key={note}
-              className="absolute w-24 overflow-hidden rounded-3xl border-[1.5px] border-ink bg-surface transition-all duration-[900ms] ease-out sm:w-36 lg:w-44"
+              className="absolute w-24 overflow-hidden rounded-3xl border-2 border-ink bg-surface transition-all duration-[900ms] ease-out sm:w-36 lg:w-44"
               style={{
                 left: `${spot.x}%`,
                 top: `${spot.y}%`,
@@ -103,7 +103,7 @@ export default function Hero() {
                 <CameraIcon className="absolute left-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 text-ink/25" />
                 {/* Auf dem Handy sind die Karten klein – dort bleibt die
                     Bildunterschrift nur für Screenreader vorhanden. */}
-                <figcaption className="sr-only sm:not-sr-only sm:relative sm:border-t-[1.5px] sm:border-ink sm:bg-paper sm:px-2.5 sm:py-1.5 sm:text-center sm:text-[0.68rem] sm:font-semibold sm:leading-tight sm:text-ink">
+                <figcaption className="sr-only sm:not-sr-only sm:relative sm:border-t-2 sm:border-ink sm:bg-paper sm:px-2.5 sm:py-1.5 sm:text-center sm:text-[0.68rem] sm:font-semibold sm:leading-tight sm:text-ink">
                   {note}
                 </figcaption>
               </div>

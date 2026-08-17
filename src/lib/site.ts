@@ -20,10 +20,11 @@ export const company = {
   faxDisplay: "04351 – 470 599",
   email: "info@ostseedesign.de",
   // Kartenposition (für die eingebettete Karte im Standort-Abschnitt).
-  // Rosseer Weg liegt im Nordwesten von Eckernförde (nahe B76). Wert ist eine
-  // Schätzung – exakt machen: in Google Maps/OSM auf die Adresse klicken, die
-  // beiden Zahlen (Breiten-/Längengrad) hier eintragen.
-  coords: { lat: 54.4842, lon: 9.813 },
+  // Liegt im Gewerbegebiet Grasholz im Nordwesten von Eckernförde, nördlich
+  // der B203. Wert ist aus der Karte abgeleitet und damit auf etwa 50 m genau.
+  // Exakt machen: in Google Maps mit der rechten Maustaste auf den Standort
+  // klicken – die beiden Zahlen oben im Menü hier eintragen.
+  coords: { lat: 54.4858, lon: 9.8126 },
 } as const;
 
 // Öffnungszeiten – als Liste, damit sie sauber tabellarisch darstellbar sind.

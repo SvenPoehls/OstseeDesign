@@ -35,8 +35,11 @@ jobs:
           node-version: 20
           cache: npm
 
-      - name: Pages vorbereiten (aktiviert Pages bei Bedarf automatisch)
-        uses: actions/configure-pages@v5
+      # Hinweis: Der frühere Schritt "actions/configure-pages" ist entfallen.
+      # Er diente nur dazu, GitHub Pages beim ersten Mal zu aktivieren – das ist
+      # erledigt (Quelle steht auf "GitHub Actions"). Er war außerdem eine
+      # Fehlerquelle: Am 17.08. ließ er sich bei GitHub nicht laden (429/500),
+      # dadurch brach der ganze Lauf ab, bevor überhaupt gebaut wurde.
 
       - name: Abhängigkeiten installieren
         run: npm ci

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Placeholder from "@/components/ui/Placeholder";
-import { ArrowIcon, ExternalIcon, serviceIcons } from "@/components/ui/Icons";
+import { ArrowIcon, ExternalIcon } from "@/components/ui/Icons";
 import { services } from "@/lib/site";
 
 // Leistungsüberblick als Karten mit Bild, Titel, Kurztext und Link –
@@ -29,17 +29,13 @@ export default function Services() {
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((service) => {
-            const Icon = serviceIcons[service.icon];
             const isExternal = Boolean(service.external);
             const href = service.external ?? "/#kontakt";
             return (
               <article key={service.id} className="group flex flex-col overflow-hidden card transition-shadow hover:shadow-soft-lg">
                 <Placeholder ratio="aspect-[16/11]" note={notes[service.id] ?? service.teaser} frame="border-b border-line" />
                 <div className="flex flex-1 flex-col p-6">
-                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-accent-soft text-accent">
-                    <Icon className="h-6 w-6" />
-                  </span>
-                  <h3 className="mt-4 font-display text-xl font-semibold text-ink">{service.title}</h3>
+                  <h3 className="font-display text-xl font-semibold text-ink">{service.title}</h3>
                   <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-muted">{service.teaser}</p>
                   <Link
                     href={href}

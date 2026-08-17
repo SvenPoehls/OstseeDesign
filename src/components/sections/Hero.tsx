@@ -1,29 +1,40 @@
 import Link from "next/link";
-import Placeholder from "@/components/ui/Placeholder";
 import { ArrowIcon, CheckIcon, PhoneIcon } from "@/components/ui/Icons";
 import { company } from "@/lib/site";
 
-// Hero analog zur Vorlage: links Botschaft + zwei Buttons, rechts ein
-// versetztes Bild mit kleinem Vertrauens-Badge. Clean & modern.
+// Hero: großes Hintergrund-Bild, das HINTER dem Text liegt. Solange kein
+// echtes Foto vorliegt, steht hier ein gestreifter Platzhalter (bewusst klar
+// als Platzhalter erkennbar). Später ersetzen: den gestreiften Hintergrund-
+// Block unten austauschen gegen
+//   <img src="/hero.jpg" alt="" className="absolute inset-0 h-full w-full object-cover" />
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-paper">
+    <section className="relative overflow-hidden bg-surface">
+      {/* Hintergrund-Platzhalter (gestreift) – liegt hinter dem Text. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0"
+        className="absolute inset-0"
         style={{
           backgroundImage:
-            "radial-gradient(48rem 32rem at 88% -10%, rgba(0,48,135,0.09), transparent 70%)",
+            "repeating-linear-gradient(135deg, rgba(0,48,135,0.07) 0 2px, transparent 2px 18px)",
         }}
       />
-      <div className="container-site relative grid items-center gap-12 py-16 md:py-24 lg:grid-cols-[1.05fr_0.95fr]">
-        <div>
-          <span className="label">
-            <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-            {company.city} · seit über {company.yearsExperience} Jahren
-          </span>
+      {/* Bildregie-Hinweis, damit der Platzhalter erkennbar bleibt. */}
+      <span
+        aria-hidden="true"
+        className="absolute right-4 top-4 rounded-md bg-white/70 px-2 py-1 text-[0.65rem] font-semibold uppercase tracking-label text-ink/45"
+      >
+        Bildregie: Hero-Foto
+      </span>
+      {/* Lesbarkeits-Overlay: von links hell, damit der Text klar bleibt. */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-gradient-to-r from-paper via-paper/85 to-paper/30"
+      />
 
-          <h1 className="mt-5 font-display text-4xl font-semibold leading-[1.1] tracking-tight text-ink sm:text-5xl lg:text-6xl">
+      <div className="container-site relative py-20 md:py-28 lg:py-32">
+        <div className="max-w-2xl">
+          <h1 className="font-display text-4xl font-semibold leading-[1.1] tracking-tight text-ink sm:text-5xl lg:text-6xl">
             Vertrauter Service, der Ihre Marke <span className="em">sichtbar</span> macht.
           </h1>
 
@@ -51,17 +62,6 @@ export default function Hero() {
               </li>
             ))}
           </ul>
-        </div>
-
-        <div className="relative">
-          <Placeholder
-            ratio="aspect-[4/5]"
-            note="Großformatiges Hero-Foto: frisch beschriftetes Kundenfahrzeug vor der Werkstatt in Eckernförde, Tageslicht, Halbprofil."
-          />
-          <div className="absolute -bottom-5 -left-4 hidden rounded-xl bg-accent px-5 py-4 text-white shadow-soft-lg sm:block">
-            <p className="font-display text-3xl font-semibold leading-none">{company.yearsExperience}+</p>
-            <p className="mt-1 text-xs font-medium uppercase tracking-wider text-white/85">Jahre Erfahrung</p>
-          </div>
         </div>
       </div>
     </section>

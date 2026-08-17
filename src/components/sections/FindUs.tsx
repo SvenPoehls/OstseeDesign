@@ -7,13 +7,23 @@ import {
 } from "@/components/ui/Icons";
 import { company, openingHours } from "@/lib/site";
 
-// „So finden Sie uns" – zwei Karten: Standort mit Karten-Vorschau (öffnet den
-// Kartendienst erst auf Klick, datenschutzfreundlich) und Öffnungszeiten/Kontakt.
+// „So finden Sie uns" – zwei Karten: eingebettete OpenStreetMap-Karte des
+// Standorts (datenschutzfreundlich, kein Google-Tracking) und
+// Öffnungszeiten/Kontakt. Hinweis: Die Karte lädt erst auf der veröffentlichten
+// Seite (im Sandbox-Vorschaubild ohne Internet bleibt der Kartenbereich leer).
 export default function FindUs() {
   const mapsQuery = encodeURIComponent(
     `${company.fullName}, ${company.street}, ${company.zip} ${company.city}`
   );
   const mapsUrl = `https://www.openstreetmap.org/search?query=${mapsQuery}`;
+
+  // Kleinen Kartenausschnitt (Bounding-Box) rund um den Standort berechnen und
+  // den Standort per Marker anzeigen.
+  const { lat, lon } = company.coords;
+  const dx = 0.0075; // Ost-West-Spanne
+  const dy = 0.004; // Nord-Süd-Spanne
+  const bbox = `${lon - dx},${lat - dy},${lon + dx},${lat + dy}`;
+  const mapEmbedUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat},${lon}`;
 
   return (
     <section id="standort" className="scroll-mt-28 bg-paper py-20 md:py-28">
@@ -30,31 +40,24 @@ export default function FindUs() {
         </div>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-2">
-          {/* Standort + Karte */}
+          {/* Standort + eingebettete Karte */}
           <div className="overflow-hidden card">
-            <a
-              href={mapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative flex min-h-[16rem] flex-col justify-end overflow-hidden bg-accent-soft p-6"
-              aria-label={`Standort ${company.street}, ${company.zip} ${company.city} in Karte öffnen`}
-            >
-              <div
-                aria-hidden="true"
-                className="absolute inset-0"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(rgba(0,48,135,0.10) 1px, transparent 1px), linear-gradient(90deg, rgba(0,48,135,0.10) 1px, transparent 1px)",
-                  backgroundSize: "30px 30px",
-                }}
+            <div className="relative">
+              <iframe
+                title={`Karte: Standort ${company.street}, ${company.zip} ${company.city}`}
+                src={mapEmbedUrl}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="h-72 w-full border-0"
               />
-              <div aria-hidden="true" className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-                <span className="relative flex h-4 w-4">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent/50" />
-                  <span className="relative inline-flex h-4 w-4 rounded-full border-2 border-white bg-accent" />
-                </span>
-              </div>
-              <div className="relative flex items-center justify-between rounded-xl bg-white/90 px-4 py-3 backdrop-blur">
+              {/* Adresse + Route-Link über der Karte. */}
+              <a
+                href={mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group absolute inset-x-4 bottom-4 flex items-center justify-between gap-4 rounded-xl bg-white/95 px-4 py-3 shadow-soft backdrop-blur"
+                aria-label={`Route zu ${company.street}, ${company.zip} ${company.city} öffnen`}
+              >
                 <span className="text-sm font-semibold text-ink">
                   {company.street}, {company.city}
                 </span>
@@ -62,8 +65,8 @@ export default function FindUs() {
                   Route
                   <ArrowIcon className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </span>
-              </div>
-            </a>
+              </a>
+            </div>
             <div className="flex items-start gap-3 p-6">
               <PinIcon className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
               <span className="text-[15px] text-ink">

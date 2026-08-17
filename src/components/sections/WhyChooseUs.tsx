@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowIcon, featureIcons } from "@/components/ui/Icons";
+import { ArrowIcon } from "@/components/ui/Icons";
 import { whyChooseUs } from "@/lib/site";
 
 // „Warum Ostseedesign" – Vorteils-Kacheln in einem Raster (eine breite
@@ -21,16 +21,12 @@ export default function WhyChooseUs() {
 
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {whyChooseUs.map((f) => {
-            const Icon = featureIcons[f.icon];
             return (
               <div
                 key={f.title}
                 className={`card p-7 ${f.wide ? "sm:col-span-2 lg:col-span-1 lg:row-span-1" : ""}`}
               >
-                <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent-soft text-accent">
-                  <Icon className="h-6 w-6" />
-                </span>
-                <h3 className="mt-5 font-display text-xl font-semibold text-ink">{f.title}</h3>
+                <h3 className="font-display text-xl font-semibold text-ink">{f.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-ink-muted">{f.text}</p>
               </div>
             );

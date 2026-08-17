@@ -19,6 +19,10 @@ export const company = {
   phoneHref: "+494351470590",
   faxDisplay: "04351 – 470 599",
   email: "info@ostseedesign.de",
+  // Kartenposition (für die eingebettete Karte im Standort-Abschnitt).
+  // Ungefährer Wert für Eckernförde – bei Bedarf feinjustieren: die genauen
+  // Koordinaten stehen z. B. bei OpenStreetMap in der Adresszeile (…?mlat=…&mlon=…).
+  coords: { lat: 54.4695, lon: 9.8285 },
 } as const;
 
 // Öffnungszeiten – als Liste, damit sie sauber tabellarisch darstellbar sind.

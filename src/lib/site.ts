@@ -20,9 +20,10 @@ export const company = {
   faxDisplay: "04351 – 470 599",
   email: "info@ostseedesign.de",
   // Kartenposition (für die eingebettete Karte im Standort-Abschnitt).
-  // Ungefährer Wert für Eckernförde – bei Bedarf feinjustieren: die genauen
-  // Koordinaten stehen z. B. bei OpenStreetMap in der Adresszeile (…?mlat=…&mlon=…).
-  coords: { lat: 54.4695, lon: 9.8285 },
+  // Rosseer Weg liegt im Nordwesten von Eckernförde (nahe B76). Wert ist eine
+  // Schätzung – exakt machen: in Google Maps/OSM auf die Adresse klicken, die
+  // beiden Zahlen (Breiten-/Längengrad) hier eintragen.
+  coords: { lat: 54.4842, lon: 9.813 },
 } as const;
 
 // Öffnungszeiten – als Liste, damit sie sauber tabellarisch darstellbar sind.

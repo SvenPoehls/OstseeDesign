@@ -79,7 +79,10 @@ export default function Process() {
                 ref={(el) => {
                   itemRefs.current[i] = el;
                 }}
-                className="lg:flex lg:min-h-[58vh] lg:flex-col lg:justify-center"
+                // Jeder Schritt bekommt genau eine Bildschirmhöhe und steht
+                // darin mittig. Dadurch liegt die Kachel immer exakt auf Höhe
+                // des Bildes rechts, das ebenfalls mittig stehen bleibt.
+                className="lg:flex lg:min-h-screen lg:flex-col lg:justify-center"
               >
                 <article
                   className="edge p-5 transition-all duration-700 ease-out sm:p-6"
@@ -124,7 +127,7 @@ export default function Process() {
                   hängen darunter, damit das Bild exakt auf Höhe der Kachel
                   links steht. */}
               <div className="relative w-full">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] border-[1.5px] border-ink bg-paper shadow-offset-lg">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] border-[1.5px] border-ink bg-paper">
                 {processSteps.map((step, i) => (
                   <div
                     key={step.id}

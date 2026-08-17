@@ -11,7 +11,7 @@ export default function CtaBand() {
   return (
     <section id="kontakt" className="bg-paper pb-20 sm:pb-28">
       <div className="container-site">
-        <div className="grid items-center gap-10 rounded-[2.5rem] border-[1.5px] border-ink bg-accent p-8 text-white shadow-offset sm:p-12 lg:grid-cols-[1.4fr_0.6fr]">
+        <div className="grid items-center gap-10 rounded-[2.5rem] border-[1.5px] border-ink bg-accent p-8 text-white sm:p-12 lg:grid-cols-[1.4fr_0.6fr]">
           <div>
             <span className="inline-flex items-center gap-2 rounded-full border-[1.5px] border-white/30 px-4 py-1.5 text-xs font-bold uppercase tracking-label text-white/75">
               Kontakt

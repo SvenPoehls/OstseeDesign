@@ -20,7 +20,7 @@ export default function FindUs() {
   const mapEmbedUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat},${lon}`;
 
   return (
-    <section id="standort" className="bg-paper pb-20 sm:pb-28">
+    <section id="standort" className="bg-paper pb-20 pt-20 sm:pb-28 sm:pt-28">
       <div className="container-site">
         <div className="mx-auto max-w-2xl text-center">
           <span className="chip">Standort</span>
@@ -44,12 +44,31 @@ export default function FindUs() {
                 referrerPolicy="no-referrer-when-downgrade"
                 className="h-80 w-full border-0"
               />
+              {/* Deutlich sichtbare Markierung genau in der Kartenmitte – dort
+                  liegt der Standort, weil der Kartenausschnitt symmetrisch um
+                  die Koordinaten herum berechnet wird. Der kleine OSM-Punkt
+                  allein geht auf der Karte unter. */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-full"
+              >
+                <svg className="h-11 w-11 drop-shadow" viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M12 23s8-7.2 8-13a8 8 0 1 0-16 0c0 5.8 8 13 8 13z"
+                    fill="var(--pop)"
+                    stroke="#ffffff"
+                    strokeWidth={1.6}
+                  />
+                  <circle cx="12" cy="10" r="3" fill="#ffffff" />
+                </svg>
+              </div>
+
               {/* Adresse + Route-Link über der Karte. */}
               <a
                 href={mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group absolute inset-x-4 bottom-4 flex items-center justify-between gap-4 rounded-full border-[1.5px] border-ink bg-paper px-5 py-3 shadow-offset-sm"
+                className="group absolute inset-x-4 bottom-4 flex items-center justify-between gap-4 rounded-full border-[1.5px] border-ink bg-paper px-5 py-3"
                 aria-label={`Route zu ${company.street}, ${company.zip} ${company.city} öffnen`}
               >
                 <span className="text-sm font-bold text-ink">

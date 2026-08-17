@@ -99,25 +99,25 @@ body {
   }
 
   /* ── Bausteine des neuen Layouts ───────────────────────────────────────
-     Kräftige Kontur + versetzter Schatten (kein Weichzeichner). Das gibt
-     Kacheln und Buttons den klaren, plakativen Look – in unseren Farben. */
+     Flache Optik: nur eine feine dunkle Kontur, bewusst ohne Schatten –
+     dadurch wirken Kacheln und Buttons ruhig statt „3D". */
   .edge {
-    @apply rounded-3xl border-[1.5px] border-ink bg-paper shadow-offset;
+    @apply rounded-3xl border-[1.5px] border-ink bg-paper;
   }
   .edge-lift {
-    @apply transition-all duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-offset-lg;
+    @apply transition-transform duration-200 hover:-translate-y-0.5;
   }
 
   /* Sehr runde Pillen-Buttons – bewusst runder als im Shop, damit sich der
      Kopfbereich abhebt. */
   .btn-pill {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border-[1.5px] border-ink bg-accent px-5 py-2.5 text-sm font-bold text-white shadow-offset-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-accent-dark;
+    @apply inline-flex items-center justify-center gap-2 rounded-full border-[1.5px] border-ink bg-accent px-5 py-2.5 text-sm font-bold text-white transition-colors duration-200 hover:bg-accent-dark;
   }
   .btn-pill-light {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border-[1.5px] border-ink bg-paper px-5 py-2.5 text-sm font-bold text-ink shadow-offset-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-surface;
+    @apply inline-flex items-center justify-center gap-2 rounded-full border-[1.5px] border-ink bg-paper px-5 py-2.5 text-sm font-bold text-ink transition-colors duration-200 hover:bg-surface;
   }
   .btn-pill-pop {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border-[1.5px] border-ink bg-pop px-5 py-2.5 text-sm font-bold text-ink shadow-offset-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-pop-dark;
+    @apply inline-flex items-center justify-center gap-2 rounded-full border-[1.5px] border-ink bg-pop px-5 py-2.5 text-sm font-bold text-ink transition-colors duration-200 hover:bg-pop-dark;
   }
 
   /* Kleine Text-Pille (Schlagwörter, Marken-Chips). */

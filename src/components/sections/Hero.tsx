@@ -60,7 +60,7 @@ export default function Hero() {
           Abschnitts-Hintergrund.) */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-8 h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-circle sm:h-[44rem] sm:w-[44rem] lg:h-[50rem] lg:w-[50rem]"
+        className="pointer-events-none absolute left-1/2 top-2 h-[30rem] w-[30rem] -translate-x-1/2 rounded-full bg-circle sm:h-[40rem] sm:w-[40rem] lg:h-[45rem] lg:w-[45rem]"
       />
 
       {/* Bildkarten. Noch Platzhalter – später je Karte ein echtes Foto. */}
@@ -70,7 +70,7 @@ export default function Hero() {
           return (
             <figure
               key={note}
-              className="absolute w-24 overflow-hidden rounded-3xl border-[1.5px] border-ink bg-surface shadow-offset transition-all duration-[900ms] ease-out sm:w-36 lg:w-44"
+              className="absolute w-24 overflow-hidden rounded-3xl border-[1.5px] border-ink bg-surface transition-all duration-[900ms] ease-out sm:w-36 lg:w-44"
               style={{
                 left: `${spot.x}%`,
                 top: `${spot.y}%`,

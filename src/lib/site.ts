@@ -94,8 +94,9 @@ export const services: Service[] = [
 // Navigation (Header). Anker springen zu den Sektionen der Startseite;
 // eigene Unterseiten folgen später.
 export const nav: { label: string; href: string; external?: boolean }[] = [
+  // „Leistungen" führt zum Leistungs-Abschnitt. Ein zweiter Punkt „Ablauf"
+  // stand vorher daneben – der ist entfallen, damit das Menü eindeutig bleibt.
   { label: "Leistungen", href: "/#leistungen" },
-  { label: "Ablauf", href: "/#ablauf" },
   { label: "Standort", href: "/#standort" },
   { label: "Textilshop", href: textilShopUrl, external: true },
   { label: "Kontakt", href: "/#kontakt" },

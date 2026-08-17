@@ -8,7 +8,7 @@
 export const company = {
   name: "Ostseedesign",
   fullName: "Ostseedesign – Werbung & Textilien",
-  claim: "Ihr Werbepartner in Eckernförde",
+  claim: "Werbetechnik und Textilveredelung in Eckernförde",
   yearsExperience: 30,
   street: "Rosseer Weg 22a",
   zip: "24340",
@@ -51,11 +51,11 @@ export const services: Service[] = [
     id: "werbetechnik",
     title: "Werbetechnik",
     teaser:
-      "Beschriftungen aller Art – auf nahezu jedem Medium. Von der Fahrzeugfolierung bis zum leuchtenden Firmenschild.",
+      "Wir bekleben fast alles: Transporter, Schaufenster, Bauzäune. Auch das Schild an der Hauswand kommt von uns.",
     points: [
-      "Fahrzeugbeschriftung & Vollfolierung",
-      "Schilder, Displays & Bauzäune",
-      "Fenster- & Schaufensterbeschriftung",
+      "Fahrzeuge, vom Aufkleber bis zur Vollfolierung",
+      "Schilder, Displays und Bauzaunbanner",
+      "Fenster und Schaufenster",
     ],
     icon: "signage",
   },
@@ -63,11 +63,11 @@ export const services: Service[] = [
     id: "textilveredelung",
     title: "Textilveredelung",
     teaser:
-      "Hochwertige Veredelung für Arbeits- und Freizeitkleidung – langlebig und passgenau zu Ihrer Marke.",
+      "Ihr Logo auf Arbeitsjacken, Poloshirts oder Vereinstrikots. Gestickt oder gedruckt, je nachdem, was länger halten muss.",
     points: [
-      "Stickereien in Profi-Qualität",
-      "Verschiedene Transfertechniken",
-      "Hochwertige Applikationen",
+      "Stickerei, auch auf Jacken und Mützen",
+      "Druck und Transfer für kleine Mengen",
+      "Aufnäher und Applikationen",
     ],
     icon: "textile",
   },
@@ -75,16 +75,16 @@ export const services: Service[] = [
     id: "drucksachen",
     title: "Drucksachen",
     teaser:
-      "Der klassische Auftritt auf Papier – stimmig gestaltet und sauber gedruckt, alles aus einer Hand.",
-    points: ["Visitenkarten & Briefpapier", "Flyer & Geschäftsdrucksachen", "Stempel"],
+      "Visitenkarten, Flyer, Briefpapier, Stempel. Gestaltet passend zu dem, was schon am Auto und am Schild steht.",
+    points: ["Visitenkarten und Briefpapier", "Flyer und Formulare", "Stempel"],
     icon: "print",
   },
   {
     id: "textilshop",
     title: "Textilshop",
     teaser:
-      "Stöbern Sie in unserem Online-Sortiment an Arbeits- und Freizeitkleidung – bequem im externen Shop.",
-    points: ["Große Auswahl an Textilien", "Direkt online bestellen", "Auf Wunsch veredelt"],
+      "Im Shop suchen Sie sich in Ruhe Kleidung aus. Was Sie bestellen, besticken wir auf Wunsch hier bei uns.",
+    points: ["Arbeits- und Freizeitkleidung", "Bestellung direkt im Shop", "Veredelung auf Wunsch"],
     icon: "shop",
     external: textilShopUrl,
   },
@@ -125,211 +125,27 @@ export type ProcessStep = {
 export const processSteps: ProcessStep[] = [
   {
     id: "gespraech",
-    title: "Wir sprechen miteinander",
-    body: "Am Telefon, per E-Mail oder bei uns in der Werkstatt: Sie erzählen, was Sie vorhaben – wir sagen ehrlich, was sinnvoll ist und was es kostet.",
-    points: ["Kostenloses Erstgespräch", "Beratung zu Material & Technik", "Festes Angebot ohne Überraschungen"],
+    title: "Erst mal reden",
+    body: "Rufen Sie an oder kommen Sie in der Werkstatt vorbei. Sie erzählen, was Sie vorhaben. Wir sagen Ihnen, was sich davon umsetzen lässt und was es kostet. Wenn eine Idee nicht funktioniert, sagen wir das auch.",
+    points: ["Das erste Gespräch kostet nichts", "Beratung zu Material und Technik", "Preis steht fest, bevor es losgeht"],
   },
   {
     id: "entwurf",
-    title: "Sie bekommen den ersten Entwurf",
-    body: "Wir setzen Ihre Idee in eine Gestaltung um und zeigen sie Ihnen als Ansicht – am Fahrzeug, am Schild oder auf dem Textil.",
-    points: ["Entwurf am echten Objekt", "Ihr Logo sauber aufbereitet", "Vorschläge für Farben & Größen"],
+    title: "Der erste Entwurf",
+    body: "Wir setzen Ihre Idee um und zeigen Ihnen vorher, wie das Ganze aussieht: auf dem Fahrzeug, auf dem Schild oder auf dem Shirt. Sie müssen sich also nichts vorstellen.",
+    points: ["Ansicht am echten Objekt", "Wir bereiten Ihr Logo auf", "Vorschläge für Farbe und Größe"],
   },
   {
     id: "feinschliff",
-    title: "Wir feilen gemeinsam nach",
-    body: "Änderungswünsche gehören dazu. Wir passen an, bis es sitzt – erst wenn Sie zufrieden sind, geht es in die Produktion.",
-    points: ["Korrekturschleifen inklusive", "Ein fester Ansprechpartner", "Freigabe erst, wenn alles passt"],
+    title: "Änderungen? Kein Problem",
+    body: "Der erste Entwurf sitzt selten schon perfekt. Sagen Sie einfach, was anders soll. In Produktion geht es erst, wenn Sie zufrieden sind.",
+    points: ["Korrekturen sind eingerechnet", "Immer derselbe Ansprechpartner", "Nichts läuft ohne Ihre Freigabe"],
   },
   {
     id: "umsetzung",
-    title: "Wir setzen um und montieren",
-    body: "Produktion im eigenen Haus, Montage vor Ort. Sie bekommen einen festen Termin – und danach ein Ergebnis, das hält.",
-    points: ["Fertigung in Eckernförde", "Montage vor Ort", "Nachbestellungen jederzeit möglich"],
-  },
-];
-
-// Vertrauens-Kennzahlen (30-Jahre-Block).
-export const trustStats: { value: string; label: string }[] = [
-  { value: "30+", label: "Jahre Erfahrung am Markt" },
-  { value: "1", label: "Ansprechpartner – alles aus einer Hand" },
-  { value: "∞", label: "Medien für Ihre Beschriftung" },
-];
-
-// „Featured Work" – ausgewählte Arbeiten als Karten (Platzhalter-Bilder mit
-// Bildregie-Notiz). Später durch echte Referenzfotos ersetzen.
-export type Work = {
-  title: string;
-  category: string;
-  tag: string;
-  note: string; // Bildregie-Notiz für den Platzhalter
-};
-
-export const featuredWork: Work[] = [
-  {
-    title: "Fahrzeugbeschriftung",
-    category: "Fuhrpark",
-    tag: "Werbetechnik",
-    note: "Transporter mit frischer Voll- oder Teilbeschriftung, Halbprofil, Tageslicht.",
-  },
-  {
-    title: "Vereinsbekleidung",
-    category: "Textil",
-    tag: "Stickerei",
-    note: "Bestickte Poloshirts/Jacken mit Logo, saubere Detailaufnahme der Stickerei.",
-  },
-  {
-    title: "Firmenschild & Fassade",
-    category: "Objekt",
-    tag: "Werbetechnik",
-    note: "Beleuchtetes oder plattenförmiges Firmenschild an der Fassade, Frontalaufnahme.",
-  },
-  {
-    title: "Geschäftsausstattung",
-    category: "Print",
-    tag: "Drucksachen",
-    note: "Visitenkarten, Briefpapier und Stempel als stimmiges Flatlay von oben.",
-  },
-];
-
-// Statement „Wen wir unterstützen" (zentriertes Kursiv-Statement).
-export const whoWeServe = {
-  label: "Wen wir unterstützen",
-  parts: [
-    { text: "Wir machen ", italic: false },
-    { text: "Handwerksbetriebe, Vereine", italic: true },
-    { text: " und ", italic: false },
-    { text: "Unternehmen aus der Region", italic: true },
-    { text: " sichtbar – von der Idee bis zum fertigen Produkt, ", italic: false },
-    { text: "alles aus einer Hand", italic: true },
-    { text: ".", italic: false },
-  ],
-};
-
-// „Was wir machen" – Leistungen als Accordion mit Detail-Liste.
-export type Expertise = {
-  id: string;
-  title: string;
-  body: string;
-  includes: string[];
-};
-
-export const expertise: Expertise[] = [
-  {
-    id: "werbetechnik",
-    title: "Werbetechnik",
-    body: "Beschriftungen aller Art – auf nahezu jedem Medium. Wir beraten, gestalten und montieren, damit Ihre Marke im Straßenbild und am Objekt sichtbar wird.",
-    includes: [
-      "Fahrzeugbeschriftung & Vollfolierung",
-      "Schilder, Displays & Bauzäune",
-      "Fenster- & Schaufensterbeschriftung",
-      "Montage vor Ort",
-    ],
-  },
-  {
-    id: "textilveredelung",
-    title: "Textilveredelung",
-    body: "Hochwertige Veredelung für Arbeits- und Freizeitkleidung – langlebig und passgenau zu Ihrer Marke, in Profi-Qualität.",
-    includes: [
-      "Stickereien",
-      "Verschiedene Transfertechniken",
-      "Hochwertige Applikationen",
-      "Arbeits- & Freizeitkleidung",
-    ],
-  },
-  {
-    id: "drucksachen",
-    title: "Drucksachen",
-    body: "Der klassische Auftritt auf Papier – stimmig gestaltet und sauber gedruckt, ebenfalls alles aus einer Hand.",
-    includes: [
-      "Visitenkarten & Briefpapier",
-      "Flyer & Geschäftsdrucksachen",
-      "Stempel",
-    ],
-  },
-];
-
-// Testimonials (Slider). PLATZHALTER – vor Veröffentlichung durch echte,
-// freigegebene Kundenstimmen ersetzen.
-export type Testimonial = { quote: string; name: string };
-
-export const testimonials: Testimonial[] = [
-  {
-    quote:
-      "„Von der Fahrzeugflotte bis zur Arbeitskleidung – alles kam aus einer Hand und hat perfekt zusammengepasst. Unkompliziert, schnell und in top Qualität.“",
-    name: "Platzhalter-Kundenstimme · Handwerksbetrieb aus Eckernförde",
-  },
-  {
-    quote:
-      "„Persönliche Beratung, ehrliche Empfehlungen und ein Ergebnis, das genau sitzt. Man merkt die jahrzehntelange Erfahrung.“",
-    name: "Platzhalter-Kundenstimme · Verein aus der Region",
-  },
-  {
-    quote:
-      "„Kurze Wege, ein Ansprechpartner, verlässliche Termine. Genau so stellt man sich einen Werbepartner vor.“",
-    name: "Platzhalter-Kundenstimme · Unternehmen aus Schleswig-Holstein",
-  },
-];
-
-// „Warum Ostseedesign" – Vorteils-Kacheln mit Icon.
-export type Feature = {
-  title: string;
-  text: string;
-  icon: "clock" | "layers" | "pin" | "signage" | "check" | "shield";
-  wide?: boolean; // größere Kachel im Raster
-};
-
-export const whyChooseUs: Feature[] = [
-  {
-    title: "Über 30 Jahre Erfahrung",
-    text: "Seit mehr als drei Jahrzehnten fest in Eckernförde verwurzelt – wir kennen die Region und ihre Betriebe.",
-    icon: "clock",
-    wide: true,
-  },
-  {
-    title: "Alles aus einer Hand",
-    text: "Beratung, Gestaltung, Fertigung und Montage – ein Ansprechpartner für Ihren kompletten Auftritt.",
-    icon: "layers",
-  },
-  {
-    title: "Persönlich vor Ort",
-    text: "Kurze Wege, feste Ansprechpartner und Beratung von Mensch zu Mensch – kein anonymes Callcenter.",
-    icon: "pin",
-  },
-  {
-    title: "Fast jedes Medium",
-    text: "Von Fahrzeug über Schild und Fenster bis Textil und Papier – wir beschriften und veredeln nahezu alles.",
-    icon: "signage",
-  },
-  {
-    title: "Verlässliche Qualität",
-    text: "Saubere Ausführung, termintreu und langlebig – Arbeit, auf die man sich verlassen kann.",
-    icon: "check",
-  },
-];
-
-// Kundenstimmen erweitert um Bewertung (Sterne) – bleiben Platzhalter.
-export const reviews: { name: string; role: string; stars: number; quote: string }[] = [
-  {
-    name: "Platzhalter-Kunde",
-    role: "Handwerksbetrieb · Eckernförde",
-    stars: 5,
-    quote:
-      "Von der Fahrzeugflotte bis zur Arbeitskleidung – alles kam aus einer Hand und hat perfekt zusammengepasst. Unkompliziert, schnell und in top Qualität.",
-  },
-  {
-    name: "Platzhalter-Kundin",
-    role: "Verein · Region Eckernförde",
-    stars: 5,
-    quote:
-      "Persönliche Beratung, ehrliche Empfehlungen und ein Ergebnis, das genau sitzt. Man merkt die jahrzehntelange Erfahrung.",
-  },
-  {
-    name: "Platzhalter-Kunde",
-    role: "Unternehmen · Schleswig-Holstein",
-    stars: 5,
-    quote:
-      "Kurze Wege, ein Ansprechpartner, verlässliche Termine. Genau so stellt man sich einen Werbepartner vor.",
+    title: "Wir setzen es um",
+    body: "Gefertigt wird bei uns in der Werkstatt, montiert wird bei Ihnen. Den Termin machen wir vorher aus, damit Ihr Fahrzeug nicht länger steht als nötig.",
+    points: ["Fertigung am Rosseer Weg", "Montage vor Ort", "Nachbestellen geht jederzeit"],
   },
 ];
 

@@ -114,16 +114,18 @@ export default function Hero() {
         <div className="mx-auto max-w-3xl text-center">
           <span className="chip">
             <span className="h-2 w-2 rounded-full bg-pop" aria-hidden="true" />
-            Seit über {company.yearsExperience} Jahren in {company.city}
+            {company.city}, {company.street}
           </span>
 
           <h1 className="mt-4 font-display text-4xl font-extrabold leading-[1.08] tracking-tight text-ink sm:mt-6 sm:text-5xl lg:text-6xl">
-            Ihr Auftritt – <span className="em">komplett übernommen.</span>
+            Ihr Logo aufs Auto, aufs Shirt oder{" "}
+            <span className="em">an die Wand.</span>
           </h1>
 
           <p className="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-ink-muted sm:mt-5">
-            Fahrzeug beschriftet, Kleidung bestickt, Schild montiert, Drucksachen
-            geliefert. Ein Ansprechpartner, ein Stil, ein Ergebnis.
+            Wir machen Werbetechnik und Textilveredelung, seit über{" "}
+            {company.yearsExperience} Jahren hier in {company.city}. Rufen Sie
+            an und erzählen Sie, was Sie vorhaben.
           </p>
 
           {/* Handy: Bilder stehen hier – also über den Schaltflächen. */}

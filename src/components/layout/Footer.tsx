@@ -1,30 +1,29 @@
 import Link from "next/link";
 import Logo from "@/components/ui/Logo";
-import { ExternalIcon, MailIcon, PhoneIcon, PinIcon } from "@/components/ui/Icons";
+import { ExternalIcon } from "@/components/ui/Icons";
 import { company, services, textilShopUrl } from "@/lib/site";
 
-// Großer Footer mit Marke, Kurzbeschreibung, Leistungs- und Kontaktspalten
-// sowie Rechtlichem – Aufbau analog zur Vorlage, clean & modern.
+// Fußzeile: bewusst flach gehalten. Marke links, daneben Leistungen und
+// Kontakt, unten eine schmale Zeile mit dem Rechtlichen.
 export default function Footer() {
   const year = 2024; // statisch – kein Client-Datum nötig
   return (
-    <footer className="border-t border-line bg-paper">
-      <div className="container-site grid gap-10 py-14 md:grid-cols-[1.5fr_1fr_1fr] md:py-16">
-        <div>
-          <Logo tagline />
-          <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-muted">
-            {company.claim}. Werbetechnik, Textilveredelung und Drucksachen –
-            seit über {company.yearsExperience} Jahren alles aus einer Hand.
+    <footer className="border-t border-line bg-paper text-sm">
+      <div className="container-site grid gap-8 py-10 sm:grid-cols-3 sm:gap-10 lg:grid-cols-[1.6fr_1fr_1.1fr]">
+        <div className="col-span-full sm:col-span-1">
+          <Logo />
+          <p className="mt-3 max-w-xs text-[0.8rem] leading-relaxed text-ink-muted">
+            Werbetechnik und Textilveredelung am {company.street} in{" "}
+            {company.city}. Den Betrieb gibt es seit über{" "}
+            {company.yearsExperience} Jahren.
           </p>
-          <a href={`tel:${company.phoneHref}`} className="btn-primary mt-6">
-            <PhoneIcon className="h-4 w-4" />
-            {company.phoneDisplay}
-          </a>
         </div>
 
         <div>
-          <h2 className="text-xs font-semibold uppercase tracking-label text-ink">Leistungen</h2>
-          <ul className="mt-5 space-y-3 text-sm">
+          <h2 className="text-[0.7rem] font-bold uppercase tracking-label text-ink">
+            Leistungen
+          </h2>
+          <ul className="mt-3 space-y-1.5 text-[0.8rem]">
             {services.map((s) => (
               <li key={s.id}>
                 <Link
@@ -34,7 +33,7 @@ export default function Footer() {
                   className="inline-flex items-center gap-1 text-ink-muted transition-colors hover:text-accent"
                 >
                   {s.title}
-                  {s.external && <ExternalIcon className="h-3.5 w-3.5" />}
+                  {s.external && <ExternalIcon className="h-3 w-3" />}
                 </Link>
               </li>
             ))}
@@ -42,25 +41,20 @@ export default function Footer() {
         </div>
 
         <div>
-          <h2 className="text-xs font-semibold uppercase tracking-label text-ink">Kontakt</h2>
-          <ul className="mt-5 space-y-3 text-sm text-ink-muted">
-            <li className="flex items-start gap-2">
-              <PinIcon className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
-              <span>
-                {company.street}
-                <br />
-                {company.zip} {company.city}
-              </span>
+          <h2 className="text-[0.7rem] font-bold uppercase tracking-label text-ink">
+            Kontakt
+          </h2>
+          <ul className="mt-3 space-y-1.5 text-[0.8rem] text-ink-muted">
+            <li>
+              {company.street}, {company.zip} {company.city}
             </li>
             <li>
-              <a href={`tel:${company.phoneHref}`} className="inline-flex items-center gap-2 hover:text-accent">
-                <PhoneIcon className="h-4 w-4 text-accent" />
+              <a href={`tel:${company.phoneHref}`} className="hover:text-accent">
                 {company.phoneDisplay}
               </a>
             </li>
             <li>
-              <a href={`mailto:${company.email}`} className="inline-flex items-center gap-2 hover:text-accent">
-                <MailIcon className="h-4 w-4 text-accent" />
+              <a href={`mailto:${company.email}`} className="hover:text-accent">
                 {company.email}
               </a>
             </li>
@@ -69,12 +63,23 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-line">
-        <div className="container-site flex flex-col items-center justify-between gap-3 py-6 text-xs text-ink-muted sm:flex-row">
-          <p>© {year} {company.fullName}</p>
-          <nav aria-label="Rechtliches" className="flex items-center gap-5">
-            <Link href="/impressum" className="hover:text-accent">Impressum</Link>
-            <Link href="/datenschutz" className="hover:text-accent">Datenschutzerklärung</Link>
-            <a href={textilShopUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 hover:text-accent">
+        <div className="container-site flex flex-wrap items-center justify-between gap-x-5 gap-y-2 py-4 text-[0.75rem] text-ink-muted">
+          <p>
+            © {year} {company.fullName}
+          </p>
+          <nav aria-label="Rechtliches" className="flex flex-wrap items-center gap-x-5 gap-y-2">
+            <Link href="/impressum" className="hover:text-accent">
+              Impressum
+            </Link>
+            <Link href="/datenschutz" className="hover:text-accent">
+              Datenschutz
+            </Link>
+            <a
+              href={textilShopUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 hover:text-accent"
+            >
               Textilshop
               <ExternalIcon className="h-3 w-3" />
             </a>

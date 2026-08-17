@@ -16,7 +16,7 @@ const openSans = Open_Sans({
 // SEO-Grundlagen: sprechender Titel mit lokalem Bezug, Beschreibung,
 // Open-Graph/Twitter-Karten und deutsche Sprache.
 const description =
-  "Ostseedesign in Eckernförde: Werbetechnik, Textilveredelung und Drucksachen – alles aus einer Hand. Ihr Werbepartner in Schleswig-Holstein seit über 30 Jahren.";
+  "Ostseedesign am Rosseer Weg in Eckernförde: Fahrzeuge beschriften, Kleidung besticken, Schilder und Drucksachen. Den Betrieb gibt es seit über 30 Jahren.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.ostseedesign.de"),

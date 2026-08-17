@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { CameraIcon } from "@/components/ui/Icons";
+import { CameraIcon, ExternalIcon } from "@/components/ui/Icons";
 import { services } from "@/lib/site";
 
 // „Unsere Leistungen" – vier Kacheln, bei denen das Bild im Vordergrund steht.
@@ -45,21 +45,35 @@ export default function Services() {
         <div className="mx-auto max-w-2xl text-center">
           <span className="chip">Unsere Leistungen</span>
           <h2 className="mt-5 font-display text-3xl font-extrabold leading-tight tracking-tight text-ink sm:text-4xl">
-            Vier Wege, <span className="em">sichtbar</span> zu werden.
+            Das machen <span className="em">wir</span>.
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-base leading-relaxed text-ink-muted">
-            Beratung, Gestaltung, Fertigung und Montage – alles im eigenen Haus
-            in Eckernförde.
+            Gestaltet und gefertigt wird bei uns in der Werkstatt. Montiert wird
+            da, wo es hingehört.
           </p>
         </div>
 
         {/* Auf dem Handy zwei Spalten, damit alle vier Bereiche zusammen auf
             einen Blick sichtbar sind. Ab Tablet wie gehabt. */}
         <div ref={gridRef} className="mt-8 grid grid-cols-2 gap-3 sm:mt-10 sm:gap-4 lg:grid-cols-4">
-          {services.map((service, i) => (
-            <article
+          {services.map((service, i) => {
+            // Der Textilshop liegt auf einer eigenen Seite – diese Kachel ist
+            // deshalb komplett anklickbar. Die übrigen sind reine Kacheln.
+            const Kachel = service.external ? "a" : "article";
+            return (
+            <Kachel
               key={service.id}
-              className="edge flex flex-col overflow-hidden transition-[transform,opacity] duration-700 ease-out"
+              {...(service.external
+                ? {
+                    href: service.external,
+                    target: "_blank",
+                    rel: "noopener noreferrer",
+                    "aria-label": `${service.title} – im neuen Fenster öffnen`,
+                  }
+                : {})}
+              className={`edge flex flex-col overflow-hidden transition-[transform,opacity] duration-700 ease-out ${
+                service.external ? "edge-lift cursor-pointer" : ""
+              }`}
               style={{
                 // Startpunkt: etwas tiefer und unsichtbar. Der Versatz je
                 // Kachel lässt sie nacheinander hereinfliegen.
@@ -92,12 +106,14 @@ export default function Services() {
 
               {/* Unterschrift: nur der Name des Bereichs. */}
               <div className="px-3 py-3 text-center sm:px-4 sm:py-4">
-                <h3 className="font-display text-base font-extrabold leading-snug tracking-tight text-ink sm:text-lg">
+                <h3 className="inline-flex items-center gap-1.5 font-display text-base font-extrabold leading-snug tracking-tight text-ink sm:text-lg">
                   {service.title}
+                  {service.external && <ExternalIcon className="h-3.5 w-3.5 text-accent" />}
                 </h3>
               </div>
-            </article>
-          ))}
+            </Kachel>
+            );
+          })}
         </div>
       </div>
     </section>

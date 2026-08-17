@@ -28,11 +28,11 @@ export default function FindUs() {
         <div className="mx-auto max-w-2xl text-center">
           <span className="chip">Standort</span>
           <h2 className="mt-5 font-display text-3xl font-extrabold leading-tight tracking-tight text-ink sm:text-4xl">
-            Persönlich vor Ort in {company.city}
+            Sie finden uns am {company.street}
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-ink-muted">
-            Schauen Sie vorbei oder rufen Sie an – wir beraten Sie gern
-            persönlich.
+            Rufen Sie am besten kurz an, bevor Sie herkommen. Dann hat auch
+            jemand Zeit für Sie.
           </p>
         </div>
 
@@ -79,7 +79,13 @@ export default function FindUs() {
               {openingHours.map((row) => (
                 <div key={row.days} className="flex items-center justify-between gap-4 py-4">
                   <dt className="text-ink">{row.days}</dt>
-                  <dd className={row.byAppointment ? "text-ink-muted" : "font-bold text-ink"}>
+                  {/* whitespace-nowrap: sonst rutscht das „Uhr" in eine
+                      eigene Zeile unter die Uhrzeit. */}
+                  <dd
+                    className={`whitespace-nowrap ${
+                      row.byAppointment ? "text-ink-muted" : "font-bold text-ink"
+                    }`}
+                  >
                     {row.time}
                   </dd>
                 </div>

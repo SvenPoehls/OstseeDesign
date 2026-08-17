@@ -17,11 +17,11 @@ export default function CtaBand() {
               Kontakt
             </span>
             <h2 className="mt-5 font-display text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">
-              Erzählen Sie uns, was Sie vorhaben.
+              Was haben Sie vor?
             </h2>
             <p className="mt-4 max-w-xl text-lg leading-relaxed text-white/80">
-              Ein kurzes Gespräch reicht, um herauszufinden, was zu Ihnen passt –
-              unverbindlich, ehrlich und ohne Fachchinesisch.
+              Ein Anruf reicht meistens schon. Sagen Sie kurz, worum es geht,
+              den Rest klären wir zusammen.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a href={`tel:${company.phoneHref}`} className="btn-pill-pop">

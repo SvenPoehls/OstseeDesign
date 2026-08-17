@@ -69,11 +69,11 @@ export default function Process() {
           <div className="mx-auto max-w-2xl text-center">
             <span className="chip">So läuft Ihr Auftrag</span>
             <h2 className="mt-4 font-display text-3xl font-extrabold leading-tight tracking-tight text-ink sm:text-4xl">
-              Vom ersten Gespräch bis zur <span className="em">Montage</span>.
+              So läuft das <span className="em">bei uns</span>.
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-base leading-relaxed text-ink-muted">
-              Kein Angebots-Dschungel, keine Wartespiele. Sie wissen jederzeit,
-              woran wir gerade arbeiten und was als Nächstes kommt.
+              Sie wissen immer, woran wir gerade sind. Und was es kostet, steht
+              vorher fest.
             </p>
           </div>
         </div>

@@ -79,21 +79,21 @@ export default function Header() {
               <PhoneIcon className="h-4 w-4" />
               {company.phoneDisplay}
             </a>
-            {/* Auf sehr schmalen Geräten nur das Hörer-Symbol – der Text
-                „Anrufen" würde die Zeile über die Bildschirmbreite schieben. */}
+            {/* Auf dem Handy nur das Hörer-Symbol: Mit dem Wort „Anrufen"
+                wurde die Zeile zu breit und das Menü-Symbol berührte den
+                Rand der Kopfzeile. */}
             <a
               href={`tel:${company.phoneHref}`}
-              className="btn-pill px-3.5 sm:hidden"
+              className="btn-pill h-10 w-10 shrink-0 p-0 sm:hidden"
               aria-label="Anrufen"
             >
-              <PhoneIcon className="h-4 w-4" />
-              <span className="max-[389px]:sr-only">Anrufen</span>
+              <PhoneIcon className="h-[1.15rem] w-[1.15rem]" />
             </a>
 
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border-2 border-ink text-ink transition-colors hover:bg-surface sm:h-11 sm:w-11 lg:hidden"
+              className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-ink text-ink transition-colors hover:bg-surface sm:h-11 sm:w-11 lg:hidden"
               aria-expanded={open}
               aria-controls="mobile-menu"
               aria-label={open ? "Menü schließen" : "Menü öffnen"}

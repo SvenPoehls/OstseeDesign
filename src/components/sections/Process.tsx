@@ -85,7 +85,7 @@ export default function Process() {
               die Kacheln um genau denselben Betrag nach unten, sodass Kachel-
               und Bildmitte immer auf einer Linie liegen. Auf hohen Bildschirmen
               ergibt die Rechnung null. */}
-          <ol className="space-y-6 sm:space-y-10 lg:space-y-0 lg:pt-[calc(max(20.5rem,34vh)_+_16vh_-_50vh)]">
+          <ol className="lg:space-y-0 lg:pt-[calc(max(20.5rem,34vh)_+_16vh_-_50vh)]">
             {processSteps.map((step, i) => (
               <li
                 key={step.id}
@@ -93,13 +93,15 @@ export default function Process() {
                 ref={(el) => {
                   itemRefs.current[i] = el;
                 }}
-                // Jede Kachel steht mittig in ihrem Abschnitt. Weil das Bild
-                // rechts genau auf halber Bildschirmhöhe festgehalten wird,
-                // liegen Kachel und Bild dadurch auf einer Mittellinie.
-                className="lg:flex lg:min-h-[70vh] lg:flex-col lg:justify-center"
+                // Handy/Tablet: Jede Karte bleibt oben stehen, die nächste
+                // schiebt sich beim Scrollen darüber (Stapel-Effekt).
+                // Ab lg: Kachel mittig im Abschnitt, damit sie mit dem Bild
+                // rechts auf einer Mittellinie liegt.
+                className="sticky top-24 pb-6 lg:static lg:flex lg:min-h-[70vh] lg:flex-col lg:justify-center lg:pb-0"
+                style={{ zIndex: i + 1 }}
               >
                 <article
-                  className="edge p-5 transition-all duration-700 ease-out sm:p-6"
+                  className="edge p-5 shadow-[0_-6px_20px_-12px_rgba(26,29,35,0.35)] transition-all duration-700 ease-out sm:p-6 lg:shadow-none"
                   style={{
                     transform: shown[i] ? "translateY(0)" : "translateY(3rem)",
                     opacity: shown[i] ? 1 : 0,

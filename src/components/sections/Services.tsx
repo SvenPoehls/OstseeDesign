@@ -55,7 +55,9 @@ export default function Services() {
           </p>
         </div>
 
-        <div ref={gridRef} className="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Auf dem Handy zwei Spalten, damit alle vier Bereiche zusammen auf
+            einen Blick sichtbar sind. Ab Tablet wie gehabt. */}
+        <div ref={gridRef} className="mt-8 grid grid-cols-2 gap-3 sm:mt-10 sm:gap-4 lg:grid-cols-4">
           {services.map((service, i) => {
             const isExternal = Boolean(service.external);
             const href = service.external ?? "/#kontakt";
@@ -71,8 +73,10 @@ export default function Services() {
                   transitionDelay: `${i * 120}ms`,
                 }}
               >
-                {/* Bildfläche – noch Platzhalter mit kurzer Bildregie-Notiz. */}
-                <div className="relative flex h-24 items-center justify-center border-b-2 border-ink bg-surface px-4 text-center">
+                {/* Bildfläche – noch Platzhalter mit kurzer Bildregie-Notiz.
+                    Auf dem Handy flacher, damit alle vier Kacheln zusammen
+                    aufs Bild passen. */}
+                <div className="relative flex h-16 items-center justify-center border-b-2 border-ink bg-surface px-3 text-center sm:h-24 sm:px-4">
                   <div
                     aria-hidden="true"
                     className="absolute inset-0"
@@ -81,21 +85,25 @@ export default function Services() {
                         "repeating-linear-gradient(135deg, rgba(0,48,135,0.06) 0 2px, transparent 2px 16px)",
                     }}
                   />
-                  <span className="absolute left-3 top-3 rounded-full border-2 border-ink bg-paper px-2 py-0.5 text-[0.65rem] font-bold text-ink">
+                  <span className="absolute left-2 top-2 rounded-full border-2 border-ink bg-paper px-1.5 py-0 text-[0.6rem] font-bold text-ink sm:left-3 sm:top-3 sm:px-2 sm:py-0.5 sm:text-[0.65rem]">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="relative flex items-center gap-2 text-[0.7rem] text-ink-muted">
+                  <span className="relative hidden items-center gap-2 text-[0.7rem] text-ink-muted sm:flex">
                     <CameraIcon className="h-4 w-4 shrink-0 text-ink/25" />
                     {notes[service.id] ?? service.title}
                   </span>
+                  <CameraIcon className="relative h-5 w-5 text-ink/25 sm:hidden" />
                 </div>
 
-                <div className="flex flex-1 flex-col p-5">
-                  <h3 className="font-display text-lg font-extrabold tracking-tight text-ink">
+                <div className="flex flex-1 flex-col p-4 sm:p-5">
+                  <h3 className="font-display text-base font-extrabold leading-snug tracking-tight text-ink sm:text-lg">
                     {service.title}
                   </h3>
 
-                  <ul className="mt-3 flex-1 space-y-1.5 text-sm leading-snug text-ink">
+                  {/* Die Stichpunkte würden zwei nebeneinanderstehende Kacheln
+                      auf dem Handy sehr hoch machen – dort bleiben sie
+                      ausgeblendet, ab Tablet sind sie wieder da. */}
+                  <ul className="mt-3 hidden flex-1 space-y-1.5 text-sm leading-snug text-ink sm:block">
                     {service.points.map((point) => (
                       <li key={point} className="flex items-start gap-2">
                         <CheckIcon className="mt-0.5 h-3.5 w-3.5 shrink-0 text-pop" />
@@ -108,7 +116,7 @@ export default function Services() {
                     href={href}
                     target={isExternal ? "_blank" : undefined}
                     rel={isExternal ? "noopener noreferrer" : undefined}
-                    className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-accent transition-colors hover:text-accent-dark"
+                    className="mt-3 inline-flex items-center gap-1.5 text-[0.8rem] font-bold text-accent transition-colors hover:text-accent-dark sm:mt-4 sm:text-sm"
                   >
                     {isExternal ? "Zum Textilshop" : "Anfrage stellen"}
                     {isExternal ? (

@@ -23,7 +23,7 @@ export default function FindUs() {
   ];
 
   return (
-    <section id="standort" className="bg-paper pb-20 pt-20 sm:pb-28 sm:pt-28">
+    <section id="standort" className="bg-paper pb-14 pt-14 sm:pb-28 sm:pt-28">
       <div className="container-site">
         <div className="mx-auto max-w-2xl text-center">
           <span className="chip">Standort</span>

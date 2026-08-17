@@ -17,12 +17,18 @@ export default function Header() {
   // Impressum bleibt der normale Link zur Startseite + Anker erhalten.
   const jumpToSection = (event: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (!href.startsWith("/#")) return;
-    const target = document.getElementById(href.slice(2));
-    if (!target) return;
+    const id = href.slice(2);
+    if (!document.getElementById(id)) return;
     event.preventDefault();
     setOpen(false);
-    target.scrollIntoView({ behavior: "smooth", block: "start" });
-    window.history.replaceState(null, "", `#${href.slice(2)}`);
+    // Erst scrollen, wenn das Klappmenü wirklich zu ist: Solange es offen ist,
+    // ist die Seite höher – dadurch würde der Sprung zu weit unten landen.
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+        window.history.replaceState(null, "", `#${id}`);
+      });
+    });
   };
 
   useEffect(() => {
@@ -35,7 +41,10 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 pt-3 sm:pt-4">
       <div className="container-site">
-        <div className="flex items-center justify-between gap-4 rounded-full border-2 border-ink bg-paper/95 px-4 py-2.5 backdrop-blur sm:px-5">
+        {/* Auf sehr schmalen Handys sind Abstände und Schaltflächen kleiner,
+            sonst passt die Zeile nicht in die Breite. Ab sm gilt wieder alles
+            wie bisher. */}
+        <div className="flex items-center justify-between gap-2 rounded-full border-2 border-ink bg-paper/95 px-3 py-2 backdrop-blur sm:gap-4 sm:px-5 sm:py-2.5">
           <Link
             href="/"
             aria-label={`${company.name} – zur Startseite`}
@@ -70,19 +79,21 @@ export default function Header() {
               <PhoneIcon className="h-4 w-4" />
               {company.phoneDisplay}
             </a>
+            {/* Auf sehr schmalen Geräten nur das Hörer-Symbol – der Text
+                „Anrufen" würde die Zeile über die Bildschirmbreite schieben. */}
             <a
               href={`tel:${company.phoneHref}`}
-              className="btn-pill px-4 sm:hidden"
+              className="btn-pill px-3.5 sm:hidden"
               aria-label="Anrufen"
             >
               <PhoneIcon className="h-4 w-4" />
-              Anrufen
+              <span className="max-[389px]:sr-only">Anrufen</span>
             </a>
 
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border-2 border-ink text-ink transition-colors hover:bg-surface lg:hidden"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border-2 border-ink text-ink transition-colors hover:bg-surface sm:h-11 sm:w-11 lg:hidden"
               aria-expanded={open}
               aria-controls="mobile-menu"
               aria-label={open ? "Menü schließen" : "Menü öffnen"}

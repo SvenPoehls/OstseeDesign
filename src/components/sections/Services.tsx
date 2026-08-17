@@ -42,7 +42,7 @@ export default function Services() {
   }, []);
 
   return (
-    <section id="leistungen" className="bg-paper pb-20 pt-16 sm:pb-28 sm:pt-24">
+    <section id="leistungen" className="bg-paper pb-14 pt-16 sm:pb-28 sm:pt-24">
       <div className="container-site">
         <div className="mx-auto max-w-2xl text-center">
           <span className="chip">Unsere Leistungen</span>
@@ -55,7 +55,7 @@ export default function Services() {
           </p>
         </div>
 
-        <div ref={gridRef} className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div ref={gridRef} className="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((service, i) => {
             const isExternal = Boolean(service.external);
             const href = service.external ?? "/#kontakt";

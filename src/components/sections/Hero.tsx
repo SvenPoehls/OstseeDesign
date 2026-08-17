@@ -21,13 +21,13 @@ const spotsWide: Spot[] = [
   { x: 81, y: 79, rot: 6 },
 ];
 
+// Auf dem Handy ist für sechs Karten kein Platz – dort liegen drei etwas
+// größere Karten in einer Reihe unter dem Text. So bleibt jede vollständig im
+// Bild und nichts überdeckt die Schaltflächen.
 const spotsNarrow: Spot[] = [
-  { x: 15, y: 78, rot: -13 },
-  { x: 43, y: 75, rot: 7 },
-  { x: 71, y: 79, rot: -6 },
-  { x: 88, y: 90, rot: 12 },
-  { x: 30, y: 92, rot: 6 },
-  { x: 59, y: 91, rot: -9 },
+  { x: 22, y: 87, rot: -10 },
+  { x: 50, y: 84, rot: 5 },
+  { x: 78, y: 87, rot: 9 },
 ];
 
 export default function Hero() {
@@ -50,11 +50,13 @@ export default function Hero() {
   }, []);
 
   const spots = narrow ? spotsNarrow : spotsWide;
+  // Auf dem Handy werden nur so viele Bilder gezeigt, wie Plätze da sind.
+  const cards = heroFan.slice(0, spots.length);
   // Ungefähre Höhe des Kopfbereichs – nur für die Flugrichtung nach oben/unten.
-  const boxHeight = narrow ? 52 : 50; // in rem
+  const boxHeight = narrow ? 48 : 50; // in rem
 
   return (
-    <section className="relative flex min-h-[52rem] items-start overflow-hidden bg-paper pb-20 pt-14 sm:min-h-[48rem] sm:pb-28 sm:pt-16 lg:min-h-[52rem]">
+    <section className="relative flex min-h-[48rem] items-start overflow-hidden bg-paper pb-14 pt-10 sm:min-h-[48rem] sm:pb-28 sm:pt-16 lg:min-h-[52rem]">
       {/* Grauer Kreis im Hintergrund. Statt einer harten Kante läuft er nach
           außen weich aus (Farbverlauf), damit er ruhig im Hintergrund liegt.
           Er sitzt bewusst etwas höher als der Text.
@@ -74,12 +76,12 @@ export default function Hero() {
 
       {/* Bildkarten. Noch Platzhalter – später je Karte ein echtes Foto. */}
       <div aria-hidden={false} className="pointer-events-none absolute inset-0">
-        {heroFan.map((note, i) => {
+        {cards.map((note, i) => {
           const spot = spots[i % spots.length];
           return (
             <figure
               key={note}
-              className="absolute w-24 overflow-hidden rounded-3xl border-2 border-ink bg-surface transition-all duration-[900ms] ease-out sm:w-36 lg:w-44"
+              className="absolute w-28 overflow-hidden rounded-3xl border-2 border-ink bg-surface transition-all duration-[900ms] ease-out sm:w-36 lg:w-44"
               style={{
                 left: `${spot.x}%`,
                 top: `${spot.y}%`,

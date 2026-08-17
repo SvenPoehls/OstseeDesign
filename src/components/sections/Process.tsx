@@ -14,49 +14,53 @@ export default function Process() {
   const itemRefs = useRef<(HTMLElement | null)[]>([]);
 
   useEffect(() => {
-    // Ein Schritt gilt als aktiv, sobald er das mittlere Bildschirmdrittel
-    // erreicht. Gleichzeitig wird er einmalig eingeblendet.
-    const observer = new IntersectionObserver(
+    const nodes = itemRefs.current.filter(Boolean) as HTMLElement[];
+
+    // 1. Einblenden: Sobald eine Kachel überhaupt ins Bild kommt, fliegt sie
+    //    ein. Bewusst großzügig – so bleibt auf dem Handy keine Kachel
+    //    unsichtbar, wenn jemand schnell scrollt oder direkt hierher springt.
+    const revealObserver = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          const i = Number((entry.target as HTMLElement).dataset.stepIndex);
           if (!entry.isIntersecting) continue;
-          setActive(i);
+          const i = Number((entry.target as HTMLElement).dataset.stepIndex);
           setShown((prev) => {
             if (prev[i]) return prev;
             const next = [...prev];
             next[i] = true;
             return next;
           });
+          revealObserver.unobserve(entry.target);
+        }
+      },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0 }
+    );
+
+    // 2. Aktiver Schritt: nur für das Bild rechts (großer Bildschirm). Hier
+    //    zählt das mittlere Bildschirmdrittel, damit das Bild passend wechselt.
+    const activeObserver = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          setActive(Number((entry.target as HTMLElement).dataset.stepIndex));
         }
       },
       { rootMargin: "-35% 0px -35% 0px", threshold: 0 }
     );
 
-    const nodes = itemRefs.current.filter(Boolean) as HTMLElement[];
-    nodes.forEach((node) => observer.observe(node));
-
-    // Sicherheitsnetz: Schritte, die schon beim Laden sichtbar sind, sofort
-    // einblenden (z. B. wenn jemand direkt zum Anker springt).
-    const timer = window.setTimeout(() => {
-      setShown((prev) => {
-        const next = [...prev];
-        nodes.forEach((node, i) => {
-          const box = node.getBoundingClientRect();
-          if (box.top < window.innerHeight) next[i] = true;
-        });
-        return next;
-      });
-    }, 200);
+    nodes.forEach((node) => {
+      revealObserver.observe(node);
+      activeObserver.observe(node);
+    });
 
     return () => {
-      observer.disconnect();
-      window.clearTimeout(timer);
+      revealObserver.disconnect();
+      activeObserver.disconnect();
     };
   }, []);
 
   return (
-    <section id="ablauf" className="bg-surface pb-20 pt-16 sm:pb-28 sm:pt-20">
+    <section id="ablauf" className="bg-surface pb-14 pt-16 sm:pb-28 sm:pt-20">
       <div className="container-site">
         {/* Überschrift bleibt auf großen Bildschirmen oben stehen, während man
             durch die Schritte scrollt. Der eigene Hintergrund sorgt dafür, dass
@@ -81,7 +85,7 @@ export default function Process() {
               die Kacheln um genau denselben Betrag nach unten, sodass Kachel-
               und Bildmitte immer auf einer Linie liegen. Auf hohen Bildschirmen
               ergibt die Rechnung null. */}
-          <ol className="space-y-10 lg:space-y-0 lg:pt-[calc(max(20.5rem,34vh)_+_16vh_-_50vh)]">
+          <ol className="space-y-6 sm:space-y-10 lg:space-y-0 lg:pt-[calc(max(20.5rem,34vh)_+_16vh_-_50vh)]">
             {processSteps.map((step, i) => (
               <li
                 key={step.id}

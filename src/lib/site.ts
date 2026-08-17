@@ -19,11 +19,9 @@ export const company = {
   phoneHref: "+494351470590",
   faxDisplay: "04351 – 470 599",
   email: "info@ostseedesign.de",
-  // Kartenposition (für die eingebettete Karte im Standort-Abschnitt).
-  // Liegt im Gewerbegebiet Grasholz im Nordwesten von Eckernförde, nördlich
-  // der B203. Wert ist aus der Karte abgeleitet und damit auf etwa 50 m genau.
-  // Exakt machen: in Google Maps mit der rechten Maustaste auf den Standort
-  // klicken – die beiden Zahlen oben im Menü hier eintragen.
+  // Kartenposition. Wird derzeit nicht angezeigt (die Karte im Standort-
+  // Abschnitt ist entfallen), bleibt aber hier stehen, falls später wieder
+  // eine Karte eingebaut werden soll.
   coords: { lat: 54.4858, lon: 9.8126 },
 } as const;
 

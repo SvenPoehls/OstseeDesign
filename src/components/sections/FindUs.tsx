@@ -1,25 +1,26 @@
-import { ArrowIcon, ClockIcon, MailIcon, PhoneIcon, PinIcon } from "@/components/ui/Icons";
+import { ClockIcon, MailIcon, PhoneIcon, PinIcon } from "@/components/ui/Icons";
 import { company, openingHours } from "@/lib/site";
 
-// „So finden Sie uns" – zwei Kacheln: eingebettete OpenStreetMap-Karte des
-// Standorts (datenschutzfreundlich, kein Google-Tracking) und
-// Öffnungszeiten/Kontakt. Hinweis: Die Karte lädt erst auf der veröffentlichten
-// Seite (im Sandbox-Vorschaubild ohne Internet bleibt der Kartenbereich leer).
+// „Standort" – links die Kontaktdaten frei stehend (ohne Kachel), rechts die
+// Öffnungszeiten als Kachel. Eine Karte gibt es hier bewusst nicht mehr.
 export default function FindUs() {
-  const mapsQuery = encodeURIComponent(
-    `${company.fullName}, ${company.street}, ${company.zip} ${company.city}`
-  );
-  const mapsUrl = `https://www.openstreetmap.org/search?query=${mapsQuery}`;
-
-  // Kleinen Kartenausschnitt (Bounding-Box) rund um den Standort berechnen.
-  // Der Marker der Karte selbst ist die einzige Markierung – vorher gab es
-  // zusätzlich eine eigene Nadel, dadurch waren zwei Punkte an leicht
-  // verschiedenen Stellen zu sehen.
-  const { lat, lon } = company.coords;
-  const dx = 0.006; // Ost-West-Spanne (enger = näher herangezoomt = schärfer)
-  const dy = 0.0032; // Nord-Süd-Spanne
-  const bbox = `${lon - dx},${lat - dy},${lon + dx},${lat + dy}`;
-  const mapEmbedUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat},${lon}`;
+  const contacts = [
+    {
+      icon: MailIcon,
+      label: company.email,
+      href: `mailto:${company.email}`,
+    },
+    {
+      icon: PhoneIcon,
+      label: company.phoneDisplay,
+      href: `tel:${company.phoneHref}`,
+      note: `Fax: ${company.faxDisplay}`,
+    },
+    {
+      icon: PinIcon,
+      label: `${company.street}, ${company.zip} ${company.city}`,
+    },
+  ];
 
   return (
     <section id="standort" className="bg-paper pb-20 pt-20 sm:pb-28 sm:pt-28">
@@ -35,45 +36,48 @@ export default function FindUs() {
           </p>
         </div>
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-2">
-          {/* Standort + eingebettete Karte */}
-          <div className="edge overflow-hidden">
-            <div className="relative">
-              <iframe
-                title={`Karte: Standort ${company.street}, ${company.zip} ${company.city}`}
-                src={mapEmbedUrl}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="h-80 w-full border-0"
-              />
-              {/* Adresse + Route-Link über der Karte. */}
-              <a
-                href={mapsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group absolute inset-x-4 bottom-4 flex items-center justify-between gap-4 rounded-full border-2 border-ink bg-paper px-5 py-3"
-                aria-label={`Route zu ${company.street}, ${company.zip} ${company.city} öffnen`}
-              >
-                <span className="text-sm font-bold text-ink">
-                  {company.street}, {company.city}
-                </span>
-                <span className="inline-flex items-center gap-1.5 text-sm font-bold text-accent">
-                  Route
-                  <ArrowIcon className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                </span>
-              </a>
-            </div>
+        <div className="mt-12 grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+          {/* Kontaktdaten – frei stehend, ohne Rahmen. */}
+          <div>
+            <h3 className="font-display text-2xl font-extrabold tracking-tight text-ink">
+              Direkt erreichbar
+            </h3>
+
+            <ul className="mt-8 space-y-6">
+              {contacts.map(({ icon: Icon, label, href, note }) => (
+                <li key={label} className="flex items-center gap-4">
+                  <span
+                    aria-hidden="true"
+                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-accent-soft text-accent"
+                  >
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <span className="text-[17px] text-ink">
+                    {href ? (
+                      <a href={href} className="transition-colors hover:text-accent">
+                        {label}
+                      </a>
+                    ) : (
+                      label
+                    )}
+                    {note && (
+                      <span className="mt-0.5 block text-sm text-ink-muted">{note}</span>
+                    )}
+                  </span>
+                </li>
+              ))}
+            </ul>
           </div>
 
-          {/* Öffnungszeiten + Kontakt */}
-          <div className="edge p-7 sm:p-8">
+          {/* Öffnungszeiten – bleibt als Kachel, Inhalt mittig. */}
+          <div className="edge flex flex-col justify-center p-7 sm:p-9">
             <h3 className="flex items-center gap-2 text-xs font-bold uppercase tracking-label text-accent">
               <ClockIcon className="h-4 w-4" />
               Öffnungszeiten
             </h3>
-            <dl className="mt-4 divide-y divide-line text-[15px]">
+            <dl className="mt-5 divide-y divide-line text-[15px]">
               {openingHours.map((row) => (
-                <div key={row.days} className="flex items-center justify-between gap-4 py-3">
+                <div key={row.days} className="flex items-center justify-between gap-4 py-4">
                   <dt className="text-ink">{row.days}</dt>
                   <dd className={row.byAppointment ? "text-ink-muted" : "font-bold text-ink"}>
                     {row.time}
@@ -81,25 +85,6 @@ export default function FindUs() {
                 </div>
               ))}
             </dl>
-
-            <div className="mt-6 flex flex-col gap-3 border-t-2 border-ink/10 pt-6 sm:flex-row">
-              <a href={`tel:${company.phoneHref}`} className="btn-pill">
-                <PhoneIcon className="h-4 w-4" />
-                {company.phoneDisplay}
-              </a>
-              <a href={`mailto:${company.email}`} className="btn-pill-light">
-                <MailIcon className="h-4 w-4" />
-                E-Mail
-              </a>
-            </div>
-            <p className="mt-4 flex items-start gap-2 text-sm text-ink-muted">
-              <PinIcon className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
-              <span>
-                {company.street}, {company.zip} {company.city}
-                <br />
-                Fax: {company.faxDisplay}
-              </span>
-            </p>
           </div>
         </div>
       </div>

@@ -1,14 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
-import { ArrowIcon, CameraIcon, CheckIcon, ExternalIcon } from "@/components/ui/Icons";
+import { CameraIcon } from "@/components/ui/Icons";
 import { services } from "@/lib/site";
 
-// „Unsere Leistungen" – alle vier Bereiche nebeneinander, damit man sie auf
-// einen Blick erfasst. Jede Kachel: schmale Bildfläche, Titel, drei Stichpunkte
-// und ein Link. Beim Hereinscrollen fliegen die Kacheln nacheinander von unten
-// ein.
+// „Unsere Leistungen" – vier Kacheln, bei denen das Bild im Vordergrund steht.
+// Darunter steht nur noch der Name als Unterschrift; Links gibt es hier
+// bewusst keine mehr. Beim Hereinscrollen fliegen die Kacheln von unten ein.
 const notes: Record<string, string> = {
   werbetechnik: "Fahrzeug mit frischer Beschriftung",
   textilveredelung: "Detail einer Stickerei",
@@ -58,77 +56,48 @@ export default function Services() {
         {/* Auf dem Handy zwei Spalten, damit alle vier Bereiche zusammen auf
             einen Blick sichtbar sind. Ab Tablet wie gehabt. */}
         <div ref={gridRef} className="mt-8 grid grid-cols-2 gap-3 sm:mt-10 sm:gap-4 lg:grid-cols-4">
-          {services.map((service, i) => {
-            const isExternal = Boolean(service.external);
-            const href = service.external ?? "/#kontakt";
-            return (
-              <article
-                key={service.id}
-                className="edge edge-lift flex flex-col overflow-hidden transition-[transform,opacity] duration-700 ease-out"
-                style={{
-                  // Startpunkt: etwas tiefer und unsichtbar. Der Versatz je
-                  // Kachel lässt sie nacheinander hereinfliegen.
-                  transform: shown ? "translateY(0)" : "translateY(2.5rem)",
-                  opacity: shown ? 1 : 0,
-                  transitionDelay: `${i * 120}ms`,
-                }}
-              >
-                {/* Bildfläche – noch Platzhalter mit kurzer Bildregie-Notiz.
-                    Auf dem Handy flacher, damit alle vier Kacheln zusammen
-                    aufs Bild passen. */}
-                <div className="relative flex h-16 items-center justify-center border-b-2 border-ink bg-surface px-3 text-center sm:h-24 sm:px-4">
-                  <div
-                    aria-hidden="true"
-                    className="absolute inset-0"
-                    style={{
-                      backgroundImage:
-                        "repeating-linear-gradient(135deg, rgba(0,48,135,0.06) 0 2px, transparent 2px 16px)",
-                    }}
-                  />
-                  <span className="absolute left-2 top-2 rounded-full border-2 border-ink bg-paper px-1.5 py-0 text-[0.6rem] font-bold text-ink sm:left-3 sm:top-3 sm:px-2 sm:py-0.5 sm:text-[0.65rem]">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="relative hidden items-center gap-2 text-[0.7rem] text-ink-muted sm:flex">
-                    <CameraIcon className="h-4 w-4 shrink-0 text-ink/25" />
+          {services.map((service, i) => (
+            <article
+              key={service.id}
+              className="edge flex flex-col overflow-hidden transition-[transform,opacity] duration-700 ease-out"
+              style={{
+                // Startpunkt: etwas tiefer und unsichtbar. Der Versatz je
+                // Kachel lässt sie nacheinander hereinfliegen.
+                transform: shown ? "translateY(0)" : "translateY(2.5rem)",
+                opacity: shown ? 1 : 0,
+                transitionDelay: `${i * 120}ms`,
+              }}
+            >
+              {/* Bildfläche – nimmt den größten Teil der Kachel ein.
+                  Noch Platzhalter mit kurzer Bildregie-Notiz. */}
+              <div className="relative flex aspect-[5/4] items-center justify-center border-b-2 border-ink bg-surface px-3 text-center sm:aspect-[4/5] sm:px-4">
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0"
+                  style={{
+                    backgroundImage:
+                      "repeating-linear-gradient(135deg, rgba(0,48,135,0.06) 0 2px, transparent 2px 16px)",
+                  }}
+                />
+                <span className="absolute left-2 top-2 rounded-full border-2 border-ink bg-paper px-1.5 py-0 text-[0.6rem] font-bold text-ink sm:left-3 sm:top-3 sm:px-2 sm:py-0.5 sm:text-[0.65rem]">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="relative flex flex-col items-center gap-2">
+                  <CameraIcon className="h-5 w-5 text-ink/25 sm:h-6 sm:w-6" />
+                  <span className="hidden text-[0.7rem] leading-snug text-ink-muted sm:block">
                     {notes[service.id] ?? service.title}
                   </span>
-                  <CameraIcon className="relative h-5 w-5 text-ink/25 sm:hidden" />
-                </div>
+                </span>
+              </div>
 
-                <div className="flex flex-1 flex-col p-4 sm:p-5">
-                  <h3 className="font-display text-base font-extrabold leading-snug tracking-tight text-ink sm:text-lg">
-                    {service.title}
-                  </h3>
-
-                  {/* Die Stichpunkte würden zwei nebeneinanderstehende Kacheln
-                      auf dem Handy sehr hoch machen – dort bleiben sie
-                      ausgeblendet, ab Tablet sind sie wieder da. */}
-                  <ul className="mt-3 hidden flex-1 space-y-1.5 text-sm leading-snug text-ink sm:block">
-                    {service.points.map((point) => (
-                      <li key={point} className="flex items-start gap-2">
-                        <CheckIcon className="mt-0.5 h-3.5 w-3.5 shrink-0 text-pop" />
-                        {point}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <Link
-                    href={href}
-                    target={isExternal ? "_blank" : undefined}
-                    rel={isExternal ? "noopener noreferrer" : undefined}
-                    className="mt-3 inline-flex items-center gap-1.5 text-[0.8rem] font-bold text-accent transition-colors hover:text-accent-dark sm:mt-4 sm:text-sm"
-                  >
-                    {isExternal ? "Zum Textilshop" : "Anfrage stellen"}
-                    {isExternal ? (
-                      <ExternalIcon className="h-3.5 w-3.5" />
-                    ) : (
-                      <ArrowIcon className="h-3.5 w-3.5" />
-                    )}
-                  </Link>
-                </div>
-              </article>
-            );
-          })}
+              {/* Unterschrift: nur der Name des Bereichs. */}
+              <div className="px-3 py-3 text-center sm:px-4 sm:py-4">
+                <h3 className="font-display text-base font-extrabold leading-snug tracking-tight text-ink sm:text-lg">
+                  {service.title}
+                </h3>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>

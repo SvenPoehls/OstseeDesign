@@ -1,30 +1,29 @@
-import TopBar from "@/components/layout/TopBar";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import CookieNotice from "@/components/layout/CookieNotice";
 import Hero from "@/components/sections/Hero";
+import PainPoints from "@/components/sections/PainPoints";
 import Services from "@/components/sections/Services";
-import WhyChooseUs from "@/components/sections/WhyChooseUs";
+import Process from "@/components/sections/Process";
 import FindUs from "@/components/sections/FindUs";
 import CtaBand from "@/components/sections/CtaBand";
-import Reviews from "@/components/sections/Reviews";
 import { company, services } from "@/lib/site";
 
-// Startseite. Aufbau nach der Vorlage (hearandsay.org.au), in cleaner
-// moderner Optik: Info-Leiste → Header → Hero → Leistungen → Warum wir →
-// Standort → Kontakt-CTA → Kundenstimmen → Footer.
+// Startseite. Aufbau nach der Vorlage (projectone.website), umgesetzt in
+// unseren Farben und mit unserer Schrift:
+// Kopfzeile → Hero mit Bilder-Fächer → „Kennen Sie das?" → Unsere Leistungen →
+// So läuft Ihr Auftrag → Standort → Kontakt → Fußzeile.
 export default function HomePage() {
   return (
     <>
-      <TopBar />
       <Header />
       <main id="hauptinhalt">
         <Hero />
+        <PainPoints />
         <Services />
-        <WhyChooseUs />
+        <Process />
         <FindUs />
         <CtaBand />
-        <Reviews />
       </main>
       <Footer />
       <CookieNotice />

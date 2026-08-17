@@ -30,6 +30,7 @@ const config: Config = {
           dark: "var(--pop-dark)",
         },
         line: "var(--line)",
+        circle: "var(--circle)", // grauer Hintergrundkreis im Kopfbereich
       },
       fontFamily: {
         sans: ["var(--font-opensans)", "system-ui", "sans-serif"],
@@ -45,6 +46,10 @@ const config: Config = {
       boxShadow: {
         soft: "0 1px 2px rgba(23,26,31,0.04), 0 10px 30px -12px rgba(23,26,31,0.15)",
         "soft-lg": "0 2px 4px rgba(23,26,31,0.05), 0 24px 48px -16px rgba(23,26,31,0.22)",
+        // Versetzter, harter Schatten (plakativer Look).
+        "offset-sm": "2px 2px 0 var(--ink)",
+        offset: "4px 4px 0 var(--ink)",
+        "offset-lg": "7px 7px 0 var(--ink)",
       },
     },
   },

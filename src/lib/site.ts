@@ -91,14 +91,86 @@ export const services: Service[] = [
   },
 ];
 
-// Navigation (Header, linke Seite). Anker springen zu den Sektionen der
-// Startseite; eigene Unterseiten folgen später.
+// Navigation (Header). Anker springen zu den Sektionen der Startseite;
+// eigene Unterseiten folgen später.
 export const nav: { label: string; href: string; external?: boolean }[] = [
   { label: "Leistungen", href: "/#leistungen" },
-  { label: "Warum wir", href: "/#warum" },
+  { label: "Ablauf", href: "/#ablauf" },
   { label: "Standort", href: "/#standort" },
   { label: "Textilshop", href: textilShopUrl, external: true },
   { label: "Kontakt", href: "/#kontakt" },
+];
+
+// ── Kopfbereich: Bilder, die sich beim Laden auffächern ──────────────────
+// Reihenfolge = Reihenfolge im Fächer (Mitte ist das dritte Bild).
+// Noch Platzhalter: Sobald echte Fotos vorliegen, in Hero.tsx statt der
+// gestreiften Fläche ein <img> mit diesem Text als Alt-Text ausgeben.
+export const heroFan: string[] = [
+  "Fahrzeugbeschriftung",
+  "Bestickte Arbeitskleidung",
+  "Firmenschild an der Fassade",
+  "Schaufensterbeschriftung",
+  "Visitenkarten & Drucksachen",
+];
+
+// ── „Kennen Sie das?" – Sätze, die als Laufband durchlaufen ──────────────
+export const painPoints: string[] = [
+  "Fünf Anbieter für Auto, Schilder, Shirts und Flyer",
+  "Jeder braucht die Daten in einem anderen Format",
+  "Das Logo sieht auf jedem Produkt anders aus",
+  "Niemand geht ans Telefon, wenn es eilig wird",
+  "Der Transporter steht seit Wochen unbeschriftet da",
+  "Die Arbeitskleidung kommt in der falschen Farbe",
+  "Angebote, die man ohne Rückfrage nicht versteht",
+  "Termine, die dreimal verschoben werden",
+];
+
+// Kurze Schlagwörter, die zwischen dem Laufband schweben.
+export const painChips: string[] = [
+  "Hin und her",
+  "Kein Ansprechpartner",
+  "Verschobene Termine",
+  "Uneinheitlicher Auftritt",
+];
+
+// ── „So läuft Ihr Auftrag" – Ablauf eines Projekts ───────────────────────
+export type ProcessStep = {
+  id: string;
+  when: string; // Zeit-Marke links an der Zeitleiste
+  title: string;
+  body: string;
+  points: string[];
+};
+
+export const processSteps: ProcessStep[] = [
+  {
+    id: "gespraech",
+    when: "Tag 1",
+    title: "Wir sprechen miteinander",
+    body: "Am Telefon, per E-Mail oder bei uns in der Werkstatt: Sie erzählen, was Sie vorhaben – wir sagen ehrlich, was sinnvoll ist und was es kostet.",
+    points: ["Kostenloses Erstgespräch", "Beratung zu Material & Technik", "Festes Angebot ohne Überraschungen"],
+  },
+  {
+    id: "entwurf",
+    when: "Tag 2–4",
+    title: "Sie bekommen den ersten Entwurf",
+    body: "Wir setzen Ihre Idee in eine Gestaltung um und zeigen sie Ihnen als Ansicht – am Fahrzeug, am Schild oder auf dem Textil.",
+    points: ["Entwurf am echten Objekt", "Ihr Logo sauber aufbereitet", "Vorschläge für Farben & Größen"],
+  },
+  {
+    id: "feinschliff",
+    when: "Danach",
+    title: "Wir feilen gemeinsam nach",
+    body: "Änderungswünsche gehören dazu. Wir passen an, bis es sitzt – erst wenn Sie zufrieden sind, geht es in die Produktion.",
+    points: ["Korrekturschleifen inklusive", "Ein fester Ansprechpartner", "Freigabe erst, wenn alles passt"],
+  },
+  {
+    id: "umsetzung",
+    when: "Zum Termin",
+    title: "Wir setzen um und montieren",
+    body: "Produktion im eigenen Haus, Montage vor Ort. Sie bekommen einen festen Termin – und danach ein Ergebnis, das hält.",
+    points: ["Fertigung in Eckernförde", "Montage vor Ort", "Nachbestellungen jederzeit möglich"],
+  },
 ];
 
 // Vertrauens-Kennzahlen (30-Jahre-Block).

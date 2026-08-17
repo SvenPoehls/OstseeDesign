@@ -134,7 +134,11 @@ export default function Process() {
                 liegt – dort, wo auch die Kacheln links mittig stehen. Das
                 max(…) verhindert, dass es auf flachen Bildschirmen unter die
                 Überschrift rutscht. */}
-            <div className="sticky top-[max(20.5rem,34vh)] mt-10">
+            {/* Der Vorsprung setzt das Bild schon beim Betreten des Abschnitts
+                auf dieselbe Mittellinie wie die erste Kachel (Kachelmitte =
+                halbe Abschnittshöhe, Bildmitte = halbe Bildhöhe). Dadurch
+                stehen beide von der ersten Sekunde an nebeneinander. */}
+            <div className="sticky top-[max(20.5rem,34vh)] mt-[calc(max(20.5rem,34vh)_-_15vh)]">
               <div className="relative w-full">
               <div className="relative h-[32vh] overflow-hidden rounded-[2rem] border-[1.5px] border-ink bg-paper">
                 {processSteps.map((step, i) => (

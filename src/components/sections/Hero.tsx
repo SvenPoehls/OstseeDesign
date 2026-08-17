@@ -55,12 +55,18 @@ export default function Hero() {
 
   return (
     <section className="relative flex min-h-[52rem] items-start overflow-hidden bg-paper pb-20 pt-14 sm:min-h-[48rem] sm:pb-28 sm:pt-16 lg:min-h-[52rem]">
-      {/* Grauer Kreis im Hintergrund – hebt sich dezent von Weiß ab.
+      {/* Grauer Kreis im Hintergrund. Statt einer harten Kante läuft er nach
+          außen weich aus (Farbverlauf), damit er ruhig im Hintergrund liegt.
+          Er sitzt bewusst etwas höher als der Text.
           (Kein negativer z-index: sonst verschwindet er hinter dem weißen
           Abschnitts-Hintergrund.) */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-2 h-[30rem] w-[30rem] -translate-x-1/2 rounded-full bg-circle sm:h-[40rem] sm:w-[40rem] lg:h-[45rem] lg:w-[45rem]"
+        className="pointer-events-none absolute left-1/2 -top-16 h-[40rem] w-[40rem] -translate-x-1/2 rounded-full sm:-top-20 sm:h-[52rem] sm:w-[52rem] lg:-top-24 lg:h-[60rem] lg:w-[60rem]"
+        style={{
+          background:
+            "radial-gradient(circle closest-side, var(--circle) 0 72%, rgba(228,231,236,0) 100%)",
+        }}
       />
 
       {/* Bildkarten. Noch Platzhalter – später je Karte ein echtes Foto. */}

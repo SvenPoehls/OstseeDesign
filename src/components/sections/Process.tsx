@@ -56,7 +56,7 @@ export default function Process() {
   }, []);
 
   return (
-    <section id="ablauf" className="bg-surface py-20 sm:py-28">
+    <section id="ablauf" className="bg-surface pb-20 pt-16 sm:pb-28 sm:pt-20">
       <div className="container-site">
         <div className="mx-auto max-w-2xl text-center">
           <span className="chip">So läuft Ihr Auftrag</span>
@@ -69,7 +69,7 @@ export default function Process() {
           </p>
         </div>
 
-        <div className="mt-14 grid gap-10 lg:grid-cols-2 lg:gap-16">
+        <div className="mt-6 grid gap-10 lg:mt-2 lg:grid-cols-2 lg:gap-16">
           {/* Textspalte: fliegt Schritt für Schritt von unten ein. */}
           <ol className="space-y-10 lg:space-y-0">
             {processSteps.map((step, i) => (
@@ -82,7 +82,7 @@ export default function Process() {
                 // Jeder Schritt bekommt genau eine Bildschirmhöhe und steht
                 // darin mittig. Dadurch liegt die Kachel immer exakt auf Höhe
                 // des Bildes rechts, das ebenfalls mittig stehen bleibt.
-                className="lg:flex lg:min-h-screen lg:flex-col lg:justify-center"
+                className="lg:flex lg:min-h-[68vh] lg:flex-col lg:justify-center"
               >
                 <article
                   className="edge p-5 transition-all duration-700 ease-out sm:p-6"

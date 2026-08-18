@@ -48,8 +48,9 @@ export default function Services() {
             Das machen <span className="em">wir</span>.
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-base leading-relaxed text-ink-muted">
-            Gestaltet und gefertigt wird bei uns in der Werkstatt. Montiert wird
-            da, wo es hingehört.
+            Den größten Teil macht die Textilveredelung aus. Dazu kommen
+            Fahrzeuge, Schilder und Drucksachen. Viele nehmen das zusammen,
+            damit am Ende alles gleich aussieht.
           </p>
         </div>
 

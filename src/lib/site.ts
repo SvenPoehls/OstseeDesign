@@ -48,6 +48,18 @@ export type Service = {
 
 export const services: Service[] = [
   {
+    id: "textilveredelung",
+    title: "Textilveredelung",
+    teaser:
+      "Unser größter Bereich. Ihr Logo auf Arbeitsjacken, Poloshirts oder Vereinstrikots. Gestickt oder per Transfer aufgebracht, je nachdem, was länger halten muss.",
+    points: [
+      "Stickerei, auch auf Jacken und Mützen",
+      "Verschiedene Transfertechniken",
+      "Aufnäher und Applikationen",
+    ],
+    icon: "textile",
+  },
+  {
     id: "werbetechnik",
     title: "Werbetechnik",
     teaser:
@@ -58,18 +70,6 @@ export const services: Service[] = [
       "Fenster und Schaufenster",
     ],
     icon: "signage",
-  },
-  {
-    id: "textilveredelung",
-    title: "Textilveredelung",
-    teaser:
-      "Ihr Logo auf Arbeitsjacken, Poloshirts oder Vereinstrikots. Gestickt oder gedruckt, je nachdem, was länger halten muss.",
-    points: [
-      "Stickerei, auch auf Jacken und Mützen",
-      "Druck und Transfer für kleine Mengen",
-      "Aufnäher und Applikationen",
-    ],
-    icon: "textile",
   },
   {
     id: "drucksachen",
@@ -106,8 +106,8 @@ export const nav: { label: string; href: string; external?: boolean }[] = [
 // Noch Platzhalter: Sobald echte Fotos vorliegen, in Hero.tsx statt der
 // gestreiften Fläche ein <img> mit diesem Text als Alt-Text ausgeben.
 export const heroFan: string[] = [
-  "Fahrzeugbeschriftung",
   "Bestickte Arbeitskleidung",
+  "Fahrzeugbeschriftung",
   "Firmenschild an der Fassade",
   "Schaufensterbeschriftung",
   "Visitenkarten & Drucksachen",
@@ -126,26 +126,26 @@ export const processSteps: ProcessStep[] = [
   {
     id: "gespraech",
     title: "Erst mal reden",
-    body: "Rufen Sie an oder kommen Sie in der Werkstatt vorbei. Sie erzählen, was Sie vorhaben. Wir sagen Ihnen, was sich davon umsetzen lässt und was es kostet. Wenn eine Idee nicht funktioniert, sagen wir das auch.",
-    points: ["Das erste Gespräch kostet nichts", "Beratung zu Material und Technik", "Preis steht fest, bevor es losgeht"],
+    body: "Rufen Sie an oder kommen Sie in der Werkstatt vorbei. Sie sagen, was Sie brauchen: bestickte Poloshirts fürs Team, ein Schild, ein beschriftetes Fahrzeug oder alles zusammen. Wir sagen Ihnen, was davon geht und was es kostet.",
+    points: ["Das erste Gespräch kostet nichts", "Wir sagen, welche Technik passt", "Preis steht fest, bevor es losgeht"],
   },
   {
     id: "entwurf",
     title: "Der erste Entwurf",
-    body: "Wir setzen Ihre Idee um und zeigen Ihnen vorher, wie das Ganze aussieht: auf dem Fahrzeug, auf dem Schild oder auf dem Shirt. Sie müssen sich also nichts vorstellen.",
-    points: ["Ansicht am echten Objekt", "Wir bereiten Ihr Logo auf", "Vorschläge für Farbe und Größe"],
+    body: "Wir bereiten Ihr Logo auf und zeigen Ihnen vorab, wie es aussieht: auf dem Shirt, auf dem Schild oder am Fahrzeug. Sie müssen sich also nichts vorstellen.",
+    points: ["Ansicht am jeweiligen Produkt", "Wir bereiten Ihr Logo auf", "Vorschläge zu Farbe, Größe und Platzierung"],
   },
   {
     id: "feinschliff",
     title: "Änderungen? Kein Problem",
-    body: "Der erste Entwurf sitzt selten schon perfekt. Sagen Sie einfach, was anders soll. In Produktion geht es erst, wenn Sie zufrieden sind.",
+    body: "Der erste Entwurf sitzt selten schon perfekt. Sagen Sie einfach, was anders soll: Logo größer, andere Farbe, Schriftzug woanders. Produziert wird erst, wenn Sie zufrieden sind.",
     points: ["Korrekturen sind eingerechnet", "Immer derselbe Ansprechpartner", "Nichts läuft ohne Ihre Freigabe"],
   },
   {
     id: "umsetzung",
     title: "Wir setzen es um",
-    body: "Gefertigt wird bei uns in der Werkstatt, montiert wird bei Ihnen. Den Termin machen wir vorher aus, damit Ihr Fahrzeug nicht länger steht als nötig.",
-    points: ["Fertigung am Rosseer Weg", "Montage vor Ort", "Nachbestellen geht jederzeit"],
+    body: "Gestickt, bedruckt, foliert oder gedruckt wird bei uns am Rosseer Weg. Textilien und Drucksachen holen Sie ab oder wir schicken sie Ihnen. Was angebracht werden muss, montieren wir vor Ort.",
+    points: ["Fertigung in der eigenen Werkstatt", "Abholung, Versand oder Montage", "Nachbestellen geht jederzeit"],
   },
 ];
 

@@ -72,8 +72,9 @@ export default function Process() {
               So läuft das <span className="em">bei uns</span>.
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-base leading-relaxed text-ink-muted">
-              Sie wissen immer, woran wir gerade sind. Und was es kostet, steht
-              vorher fest.
+              Ob zwanzig bestickte Poloshirts oder ein beschrifteter
+              Transporter: Der Weg ist derselbe. Sie wissen immer, woran wir
+              gerade sind, und was es kostet, steht vorher fest.
             </p>
           </div>
         </div>

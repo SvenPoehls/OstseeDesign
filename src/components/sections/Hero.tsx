@@ -118,14 +118,14 @@ export default function Hero() {
           </span>
 
           <h1 className="mt-4 font-display text-4xl font-extrabold leading-[1.08] tracking-tight text-ink sm:mt-6 sm:text-5xl lg:text-6xl">
-            Ihr Logo aufs Auto, aufs Shirt oder{" "}
+            Ihr Logo aufs Shirt, aufs Auto oder{" "}
             <span className="em">an die Wand.</span>
           </h1>
 
           <p className="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-ink-muted sm:mt-5">
-            Wir machen Werbetechnik und Textilveredelung, seit über{" "}
-            {company.yearsExperience} Jahren hier in {company.city}. Rufen Sie
-            an und erzählen Sie, was Sie vorhaben.
+            Wir besticken und bedrucken Kleidung, beschriften Fahrzeuge und
+            machen Schilder. Seit über {company.yearsExperience} Jahren hier in{" "}
+            {company.city}.
           </p>
 
           {/* Handy: Bilder stehen hier – also über den Schaltflächen. */}

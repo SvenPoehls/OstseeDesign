@@ -9,8 +9,18 @@ export const metadata: Metadata = {
 };
 
 // Impressum nach § 5 DDG (Digitale-Dienste-Gesetz).
-// Betreiberangaben übernommen vom Textilshop (ostseetextilien.de):
-// Inhaberin Sara Fee Brandt, USt-IdNr. DE285883086, Steuernummer 2902202159.
+// Betreiberangaben: Inhaberin Sara Fee Brandt, USt-IdNr. DE285883086.
+//
+// Bewusst NICHT auf der Seite:
+// • Steuernummer – gesetzlich nicht gefordert; veröffentlicht erleichtert sie
+//   nur Missbrauch. Pflicht ist allein die USt-IdNr.
+// • Link auf die EU-Plattform zur Online-Streitbeilegung (OS) – die Plattform
+//   wurde im Juli 2025 abgeschaltet. Ein Verweis darauf geht heute ins Leere.
+//
+// Noch zu prüfen (nur die Inhaberin kann das beantworten): Wenn eine
+// Mitgliedschaft in der Handwerkskammer besteht oder eine geschützte
+// Berufsbezeichnung geführt wird, müssen Kammer, Berufsbezeichnung und der
+// Staat der Verleihung ergänzt werden (§ 5 Abs. 1 Nr. 5 DDG).
 export default function ImpressumPage() {
   return (
     <LegalPage title="Impressum">
@@ -42,8 +52,6 @@ export default function ImpressumPage() {
         Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:
         <br />
         DE285883086
-        <br />
-        Steuernummer: 2902202159
       </p>
 
       <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
@@ -63,20 +71,11 @@ export default function ImpressumPage() {
         gelten die Impressums- und Datenschutzhinweise des jeweiligen Angebots.
       </p>
 
-      <h2>EU-Streitschlichtung</h2>
+      <h2>Verbraucherstreitbeilegung</h2>
       <p>
-        Die Europäische Kommission stellt eine Plattform zur
-        Online-Streitbeilegung (OS) bereit:{" "}
-        <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">
-          https://ec.europa.eu/consumers/odr/
-        </a>
-        . Unsere E-Mail-Adresse finden Sie oben im Impressum.
-      </p>
-
-      <h2>Verbraucherstreitbeilegung / Universalschlichtungsstelle</h2>
-      <p>
-        Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren
-        vor einer Verbraucherschlichtungsstelle teilzunehmen.
+        Wir sind nicht bereit und nicht verpflichtet, an einem
+        Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle
+        teilzunehmen (§ 36 Verbraucherstreitbeilegungsgesetz).
       </p>
 
       <h2>Haftung für Inhalte</h2>

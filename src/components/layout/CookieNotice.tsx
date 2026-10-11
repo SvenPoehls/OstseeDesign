@@ -47,7 +47,7 @@ export default function CookieNotice() {
       aria-labelledby="cookie-title"
       className="fixed inset-x-0 bottom-0 z-[60] px-4 pb-4"
     >
-      <div className="container-site rounded-xl border border-line bg-paper p-5 shadow-[0_12px_32px_-12px_rgba(44,44,44,0.25)] sm:flex sm:items-center sm:gap-6 sm:p-6">
+      <div className="container-site rounded-lg border border-line bg-paper p-5 shadow-[0_12px_32px_-12px_rgba(44,44,44,0.25)] sm:flex sm:items-center sm:gap-6 sm:p-6">
         <div className="flex-1">
           <h2 id="cookie-title" className="font-display text-base font-semibold text-ink">
             Datenschutz-Hinweis

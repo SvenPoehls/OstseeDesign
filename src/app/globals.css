@@ -71,6 +71,16 @@ body {
   }
 }
 
+/*
+  ECKEN-RUNDUNG
+  ---------------------------------------------------------------------------
+  Einheitlich knapp gehalten, damit alles sachlich wirkt:
+    Flächen (Kacheln, Karten, Kopfleiste) ............ rounded-lg  = 8 px
+    Bedienelemente (Schaltflächen, Symbolfelder) ..... rounded-md  = 6 px
+    Runde Elemente (Punkte, Nummernkreise) ........... rounded-full
+  Soll es noch eckiger werden, diese beiden Stufen eine Nummer kleiner
+  setzen (rounded-md bzw. rounded-sm).
+*/
 @layer components {
   .container-site {
     @apply mx-auto w-full max-w-content px-5 sm:px-6 lg:px-8;
@@ -85,23 +95,23 @@ body {
     color: var(--pop);
   }
 
-  /* Buttons – ruhige, abgerundete Rechtecke wie die Kacheln im Shop. */
+  /* Buttons – ruhige Rechtecke mit knapper Rundung. */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3 text-sm font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-accent-dark;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-accent-dark;
   }
   .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-paper px-6 py-3 text-sm font-semibold text-ink transition-colors duration-200 hover:bg-surface;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-line bg-paper px-6 py-3 text-sm font-semibold text-ink transition-colors duration-200 hover:bg-surface;
   }
   .btn-onaccent {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-accent transition-colors duration-200 hover:bg-accent-soft;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-semibold text-accent transition-colors duration-200 hover:bg-accent-soft;
   }
   .link-arrow {
     @apply inline-flex items-center gap-1.5 text-sm font-semibold text-accent transition-colors duration-200 hover:text-accent-dark;
   }
 
-  /* Karte – gleiche Rundung wie die Produktkacheln im Shop. */
+  /* Karte – gleiche Rundung wie die übrigen Flächen. */
   .card {
-    @apply rounded-xl border border-line bg-paper shadow-soft;
+    @apply rounded-lg border border-line bg-paper shadow-soft;
   }
 
   /* ── Bausteine des Layouts ────────────────────────────────────────────
@@ -109,7 +119,7 @@ body {
      Kontur, dazu ein sehr weicher Schatten. Das wirkt ruhiger und
      geschäftsmäßiger als die vorherige, plakative Variante. */
   .edge {
-    @apply rounded-2xl border border-line bg-paper shadow-soft;
+    @apply rounded-lg border border-line bg-paper shadow-soft;
   }
   .edge-lift {
     @apply transition-all duration-200 hover:-translate-y-0.5 hover:shadow-soft-lg;
@@ -117,16 +127,16 @@ body {
 
   /* Schaltflächen: ruhige Form, klare Fläche, keine dicke Kontur. */
   .btn-pill {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold tracking-tight text-white shadow-sm transition-colors duration-200 hover:bg-accent-dark;
+    @apply inline-flex items-center justify-center gap-2 rounded-md bg-accent px-5 py-2.5 text-sm font-semibold tracking-tight text-white shadow-sm transition-colors duration-200 hover:bg-accent-dark;
   }
   .btn-pill-light {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-line bg-paper px-5 py-2.5 text-sm font-semibold tracking-tight text-ink transition-colors duration-200 hover:bg-surface;
+    @apply inline-flex items-center justify-center gap-2 rounded-md border border-line bg-paper px-5 py-2.5 text-sm font-semibold tracking-tight text-ink transition-colors duration-200 hover:bg-surface;
   }
   /* Schaltfläche in der Signalfarbe. Solange die Signalfarbe ein mittleres
      Grau ist, braucht sie weiße Schrift. Wird später eine helle, kräftige
      Farbe daraus, hier auf `text-ink` zurückstellen. */
   .btn-pill-pop {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-pop px-5 py-2.5 text-sm font-semibold tracking-tight text-white shadow-sm transition-colors duration-200 hover:bg-pop-dark;
+    @apply inline-flex items-center justify-center gap-2 rounded-md bg-pop px-5 py-2.5 text-sm font-semibold tracking-tight text-white shadow-sm transition-colors duration-200 hover:bg-pop-dark;
   }
 
   /* Kleine Bereichs-Marke über den Überschriften: zurückhaltend, gesperrt

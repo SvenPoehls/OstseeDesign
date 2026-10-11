@@ -7,7 +7,7 @@ import { CameraIcon } from "@/components/ui/Icons";
 export default function Placeholder({
   note,
   ratio = "aspect-[4/3]",
-  frame = "rounded-xl border border-line",
+  frame = "rounded-lg border border-line",
 }: {
   note: string;
   ratio?: string;

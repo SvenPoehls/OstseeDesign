@@ -147,7 +147,7 @@ export default function Process() {
                 stehen beide von der ersten Sekunde an nebeneinander. */}
             <div className="sticky top-[max(20.5rem,34vh)] mt-[calc(max(20.5rem,34vh)_-_15vh)]">
               <div className="relative w-full">
-              <div className="relative h-[32vh] overflow-hidden rounded-2xl border border-line bg-paper shadow-soft">
+              <div className="relative h-[32vh] overflow-hidden rounded-lg border border-line bg-paper shadow-soft">
                 {processSteps.map((step, i) => (
                   <div
                     key={step.id}

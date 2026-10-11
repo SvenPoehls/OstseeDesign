@@ -80,14 +80,14 @@ export default function Hero() {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <Link
               href="/#kontakt"
-              className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-5 py-2.5 text-sm font-semibold tracking-tight text-ink shadow-sm transition-colors duration-200 hover:bg-white/90"
+              className="inline-flex items-center justify-center gap-2 rounded-md bg-white px-5 py-2.5 text-sm font-semibold tracking-tight text-ink shadow-sm transition-colors duration-200 hover:bg-white/90"
             >
               Projekt besprechen
               <ArrowIcon className="h-4 w-4" />
             </Link>
             <a
               href={`tel:${company.phoneHref}`}
-              className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/35 px-5 py-2.5 text-sm font-semibold tracking-tight text-white transition-colors duration-200 hover:bg-white/10"
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-white/35 px-5 py-2.5 text-sm font-semibold tracking-tight text-white transition-colors duration-200 hover:bg-white/10"
             >
               <PhoneIcon className="h-4 w-4" />
               {company.phoneDisplay}

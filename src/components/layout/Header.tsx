@@ -45,7 +45,7 @@ export default function Header() {
         {/* Auf sehr schmalen Handys sind Abstände und Schaltflächen kleiner,
             sonst passt die Zeile nicht in die Breite. Ab sm gilt wieder alles
             wie bisher. */}
-        <div className="flex items-center justify-between gap-2 rounded-xl border border-line bg-paper px-3 py-2 shadow-soft sm:gap-4 sm:px-5 sm:py-2.5">
+        <div className="flex items-center justify-between gap-2 rounded-lg border border-line bg-paper px-3 py-2 shadow-soft sm:gap-4 sm:px-5 sm:py-2.5">
           <Link
             href="/"
             aria-label={`${company.name} – zur Startseite`}
@@ -94,7 +94,7 @@ export default function Header() {
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
-              className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-line text-ink transition-colors hover:bg-surface sm:h-11 sm:w-11 lg:hidden"
+              className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-line text-ink transition-colors hover:bg-surface sm:h-11 sm:w-11 lg:hidden"
               aria-expanded={open}
               aria-controls="mobile-menu"
               aria-label={open ? "Menü schließen" : "Menü öffnen"}
@@ -117,7 +117,7 @@ export default function Header() {
         {open && (
           <div
             id="mobile-menu"
-            className="mt-3 overflow-hidden rounded-xl border border-line bg-paper shadow-soft lg:hidden"
+            className="mt-3 overflow-hidden rounded-lg border border-line bg-paper shadow-soft lg:hidden"
           >
             <nav aria-label="Mobile Navigation" className="flex flex-col px-5 py-2">
               {nav.map((item) => (

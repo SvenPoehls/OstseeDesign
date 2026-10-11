@@ -3,23 +3,29 @@
 @tailwind utilities;
 
 /*
-  ZENTRALE DESIGN-TOKENS  ·  abgestimmt auf den Textilshop (ostseetextilien.de)
+  ZENTRALE DESIGN-TOKENS
   ---------------------------------------------------------------------------
-  Damit Website und Onlineshop wie aus einem Guss wirken, übernehmen wir die
-  Shop-Optik: Marineblau (#003087) als Akzent, Koralle (#FF5C39) als Signal-
-  farbe, Open Sans als Schrift und ruhige, einheitliche Rundungen.
-  Zum Umfärben nur hier die Werte anpassen – alle Komponenten übernehmen es.
+  ACHTUNG, PLATZHALTER-FARBEN: Marineblau und Koralle sind vorerst raus. An
+  ihrer Stelle stehen neutrale Grautöne, bis die endgültige Farbwelt feststeht.
+  Zum Umfärben nur die beiden Blöcke unten anpassen, alles andere zieht nach:
+    --accent  = die kräftige Farbe (Schaltflächen, Links, Kontaktblock)
+    --pop     = die Signalfarbe (hervorgehobene Wörter, Häkchen, Punkte)
 */
 :root {
   --paper: #ffffff; /* Grundfläche */
   --surface: #f2f4f7; /* dezent getönte Abschnitte / Karten */
   --ink: #1a1d23; /* Haupttext */
   --ink-muted: #5a6472; /* Nebentext */
-  --accent: #003087; /* Marineblau – Buttons, Links (wie im Shop) */
-  --accent-dark: #00246b; /* Hover */
-  --accent-soft: #e6ecf5; /* sehr heller Marineblau-Ton */
-  --pop: #ff5c39; /* Koralle – Signal-/Hervorhebungsfarbe (wie im Shop) */
-  --pop-dark: #e84c2c; /* Hover */
+
+  /* PLATZHALTER statt Marineblau: dunkles, neutrales Graphit. */
+  --accent: #3f4651;
+  --accent-dark: #2d333c; /* Hover */
+  --accent-soft: #eceef1; /* sehr heller Ton derselben Familie */
+
+  /* PLATZHALTER statt Koralle: mittleres Grau, auf Weiß gut lesbar. */
+  --pop: #5f6672;
+  --pop-dark: #4b515b; /* Hover */
+
   --line: #e6e8ee; /* dezente Linien/Rahmen */
   --circle: #e4e7ec; /* gräulicher Hintergrundkreis im Kopfbereich */
 }
@@ -116,8 +122,11 @@ body {
   .btn-pill-light {
     @apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-ink bg-paper px-5 py-2.5 text-sm font-bold text-ink transition-colors duration-200 hover:bg-surface;
   }
+  /* Schaltfläche in der Signalfarbe. Solange die Signalfarbe ein mittleres
+     Grau ist, braucht sie weiße Schrift. Wird später eine helle, kräftige
+     Farbe daraus (z. B. wieder ein Orange), hier auf `text-ink` zurückstellen. */
   .btn-pill-pop {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-ink bg-pop px-5 py-2.5 text-sm font-bold text-ink transition-colors duration-200 hover:bg-pop-dark;
+    @apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-ink bg-pop px-5 py-2.5 text-sm font-bold text-white transition-colors duration-200 hover:bg-pop-dark;
   }
 
   /* Kleine Text-Pille (Schlagwörter, Marken-Chips). */

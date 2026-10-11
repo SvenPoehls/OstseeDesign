@@ -1,8 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <rect width="64" height="64" rx="14" fill="#003087"/>
-  <!-- Stilisierte Ostsee-Welle in Koralle (abgestimmt auf den Shop) -->
+  <!-- PLATZHALTER-FARBEN: neutrales Graphit und Grau, passend zu den
+       Design-Tokens in globals.css. Sobald die endgültigen Farben feststehen,
+       hier dieselben Werte eintragen wie dort bei --accent und --pop. -->
+  <rect width="64" height="64" rx="14" fill="#3f4651"/>
   <path d="M10 40c5 0 5-6 11-6s6 6 11 6 6-6 11-6 6 6 11 6" fill="none"
-        stroke="#ff5c39" stroke-width="5" stroke-linecap="round"/>
+        stroke="#9aa0aa" stroke-width="5" stroke-linecap="round"/>
   <path d="M10 26c5 0 5-6 11-6s6 6 11 6 6-6 11-6 6 6 11 6" fill="none"
         stroke="#ffffff" stroke-width="5" stroke-linecap="round" opacity="0.9"/>
 </svg>

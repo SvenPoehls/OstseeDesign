@@ -24,7 +24,7 @@ export default function Placeholder({
         className="absolute inset-0 opacity-70"
         style={{
           backgroundImage:
-            "repeating-linear-gradient(135deg, rgba(0,48,135,0.05) 0 2px, transparent 2px 16px)",
+            "repeating-linear-gradient(135deg, rgba(63,70,81,0.06) 0 2px, transparent 2px 16px)",
         }}
       />
       <div className="relative flex max-w-[16rem] flex-col items-center gap-2 px-6 text-center">

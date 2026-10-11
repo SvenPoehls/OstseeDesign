@@ -91,7 +91,7 @@ export default function Services() {
                   className="absolute inset-0"
                   style={{
                     backgroundImage:
-                      "repeating-linear-gradient(135deg, rgba(0,48,135,0.06) 0 2px, transparent 2px 16px)",
+                      "repeating-linear-gradient(135deg, rgba(63,70,81,0.07) 0 2px, transparent 2px 16px)",
                   }}
                 />
                 <span className="absolute left-2 top-2 rounded-full border-2 border-ink bg-paper px-1.5 py-0 text-[0.6rem] font-bold text-ink sm:left-3 sm:top-3 sm:px-2 sm:py-0.5 sm:text-[0.65rem]">

@@ -109,7 +109,7 @@ export default function Process() {
                   }}
                 >
                   <div className="flex items-center gap-3">
-                    <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border-2 border-ink bg-pop text-xs font-bold text-ink">
+                    <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border-2 border-ink bg-pop text-xs font-bold text-white">
                       {i + 1}
                     </span>
                     <span className="text-xs font-bold uppercase tracking-label text-accent">
@@ -160,7 +160,7 @@ export default function Process() {
                       className="absolute inset-0"
                       style={{
                         backgroundImage:
-                          "repeating-linear-gradient(135deg, rgba(0,48,135,0.07) 0 2px, transparent 2px 18px)",
+                          "repeating-linear-gradient(135deg, rgba(63,70,81,0.08) 0 2px, transparent 2px 18px)",
                       }}
                     />
                     <CameraIcon className="relative h-8 w-8 text-ink/30" />

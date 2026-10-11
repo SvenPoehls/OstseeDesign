@@ -20,7 +20,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <h2 className="text-[0.7rem] font-bold uppercase tracking-label text-ink">
+          <h2 className="text-[0.7rem] font-semibold uppercase tracking-label text-ink">
             Leistungen
           </h2>
           <ul className="mt-3 space-y-1.5 text-[0.8rem]">
@@ -41,7 +41,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <h2 className="text-[0.7rem] font-bold uppercase tracking-label text-ink">
+          <h2 className="text-[0.7rem] font-semibold uppercase tracking-label text-ink">
             Kontakt
           </h2>
           <ul className="mt-3 space-y-1.5 text-[0.8rem] text-ink-muted">

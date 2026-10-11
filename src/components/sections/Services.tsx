@@ -44,7 +44,7 @@ export default function Services() {
       <div className="container-site">
         <div className="mx-auto max-w-2xl text-center">
           <span className="chip">Unsere Leistungen</span>
-          <h2 className="mt-5 font-display text-3xl font-extrabold leading-tight tracking-tight text-ink sm:text-4xl">
+          <h2 className="mt-5 font-display text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl">
             Das machen <span className="em">wir</span>.
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-base leading-relaxed text-ink-muted">
@@ -85,7 +85,7 @@ export default function Services() {
             >
               {/* Bildfläche – nimmt den größten Teil der Kachel ein.
                   Noch Platzhalter mit kurzer Bildregie-Notiz. */}
-              <div className="relative flex aspect-[5/4] items-center justify-center border-b-2 border-ink bg-surface px-3 text-center sm:aspect-[4/5] sm:px-4">
+              <div className="relative flex aspect-[5/4] items-center justify-center border-b border-line bg-surface px-3 text-center sm:aspect-[4/5] sm:px-4">
                 <div
                   aria-hidden="true"
                   className="absolute inset-0"
@@ -94,7 +94,7 @@ export default function Services() {
                       "repeating-linear-gradient(135deg, rgba(63,70,81,0.07) 0 2px, transparent 2px 16px)",
                   }}
                 />
-                <span className="absolute left-2 top-2 rounded-full border-2 border-ink bg-paper px-1.5 py-0 text-[0.6rem] font-bold text-ink sm:left-3 sm:top-3 sm:px-2 sm:py-0.5 sm:text-[0.65rem]">
+                <span className="absolute left-2 top-2 rounded border border-line bg-paper px-1.5 py-0 text-[0.6rem] font-semibold tracking-label text-ink-muted sm:left-3 sm:top-3 sm:px-2 sm:py-0.5 sm:text-[0.65rem]">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <span className="relative flex flex-col items-center gap-2">
@@ -107,7 +107,7 @@ export default function Services() {
 
               {/* Unterschrift: nur der Name des Bereichs. */}
               <div className="px-3 py-3 text-center sm:px-4 sm:py-4">
-                <h3 className="inline-flex items-center gap-1.5 font-display text-base font-extrabold leading-snug tracking-tight text-ink sm:text-lg">
+                <h3 className="inline-flex items-center gap-1.5 font-display text-base font-semibold leading-snug tracking-tight text-ink sm:text-lg">
                   {service.title}
                   {service.external && <ExternalIcon className="h-3.5 w-3.5 text-accent" />}
                 </h3>

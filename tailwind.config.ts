@@ -33,8 +33,8 @@ const config: Config = {
         circle: "var(--circle)", // grauer Hintergrundkreis im Kopfbereich
       },
       fontFamily: {
-        sans: ["var(--font-opensans)", "system-ui", "sans-serif"],
-        display: ["var(--font-opensans)", "system-ui", "sans-serif"],
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        display: ["var(--font-serif)", "Georgia", "serif"],
       },
       maxWidth: {
         content: "1200px",

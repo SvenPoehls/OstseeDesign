@@ -15,6 +15,10 @@ const nextConfig = {
   // Ohne Server keine Bild-Optimierung zur Laufzeit.
   images: { unoptimized: true },
   ...(isPages ? { basePath: `/${repo}`, assetPrefix: `/${repo}/` } : {}),
+  // Denselben Vorsatz auch im Browser-Code verfügbar machen. Damit können
+  // eigene Bildpfade (src/lib/assets.ts) korrekt gesetzt werden – Next.js
+  // macht das nur für Dateien, die es selbst einbindet.
+  env: { NEXT_PUBLIC_BASE_PATH: isPages ? `/${repo}` : "" },
 };
 
 export default nextConfig;

@@ -42,7 +42,7 @@ html {
 body {
   background-color: var(--paper);
   color: var(--ink);
-  font-family: var(--font-opensans), ui-sans-serif, system-ui, -apple-system,
+  font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -104,34 +104,35 @@ body {
     @apply rounded-xl border border-line bg-paper shadow-soft;
   }
 
-  /* ── Bausteine des neuen Layouts ───────────────────────────────────────
-     Flache Optik: nur eine feine dunkle Kontur, bewusst ohne Schatten –
-     dadurch wirken Kacheln und Buttons ruhig statt „3D". */
+  /* ── Bausteine des Layouts ────────────────────────────────────────────
+     Zurückhaltend gehalten: feine helle Linie statt kräftiger schwarzer
+     Kontur, dazu ein sehr weicher Schatten. Das wirkt ruhiger und
+     geschäftsmäßiger als die vorherige, plakative Variante. */
   .edge {
-    @apply rounded-3xl border-2 border-ink bg-paper;
+    @apply rounded-2xl border border-line bg-paper shadow-soft;
   }
   .edge-lift {
-    @apply transition-transform duration-200 hover:-translate-y-0.5;
+    @apply transition-all duration-200 hover:-translate-y-0.5 hover:shadow-soft-lg;
   }
 
-  /* Sehr runde Pillen-Buttons – bewusst runder als im Shop, damit sich der
-     Kopfbereich abhebt. */
+  /* Schaltflächen: ruhige Form, klare Fläche, keine dicke Kontur. */
   .btn-pill {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-ink bg-accent px-5 py-2.5 text-sm font-bold text-white transition-colors duration-200 hover:bg-accent-dark;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold tracking-tight text-white shadow-sm transition-colors duration-200 hover:bg-accent-dark;
   }
   .btn-pill-light {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-ink bg-paper px-5 py-2.5 text-sm font-bold text-ink transition-colors duration-200 hover:bg-surface;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-line bg-paper px-5 py-2.5 text-sm font-semibold tracking-tight text-ink transition-colors duration-200 hover:bg-surface;
   }
   /* Schaltfläche in der Signalfarbe. Solange die Signalfarbe ein mittleres
      Grau ist, braucht sie weiße Schrift. Wird später eine helle, kräftige
-     Farbe daraus (z. B. wieder ein Orange), hier auf `text-ink` zurückstellen. */
+     Farbe daraus, hier auf `text-ink` zurückstellen. */
   .btn-pill-pop {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-ink bg-pop px-5 py-2.5 text-sm font-bold text-white transition-colors duration-200 hover:bg-pop-dark;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-pop px-5 py-2.5 text-sm font-semibold tracking-tight text-white shadow-sm transition-colors duration-200 hover:bg-pop-dark;
   }
 
-  /* Kleine Text-Pille (Schlagwörter, Marken-Chips). */
+  /* Kleine Bereichs-Marke über den Überschriften: zurückhaltend, gesperrt
+     geschrieben – wie eine Rubrik, nicht wie ein Aufkleber. */
   .chip {
-    @apply inline-flex items-center gap-2 rounded-full border-2 border-ink bg-paper px-4 py-1.5 text-sm font-semibold text-ink;
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-label text-ink-muted;
   }
 
   /* Rechtstext-Formatierung (Impressum / Datenschutz). */

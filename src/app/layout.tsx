@@ -1,15 +1,31 @@
 import type { Metadata } from "next";
-import { Open_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { company } from "@/lib/site";
 
-// Schrift self-hosted via next/font (kein externer Aufruf beim Nutzer):
-//   Open Sans → Headlines UND Fließtext. Bewusst gewählt, damit Website und
-//   der Textilshop (ostseetextilien.de) dieselbe, ruhige Sans nutzen.
-const openSans = Open_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-opensans",
+// Schriften liegen als Dateien im Projekt (src/app/fonts) und werden mit der
+// Seite ausgeliefert. Kein Aufruf bei Google – weder beim Besucher noch beim
+// Bauen. Das ist datenschutzfreundlich und macht den Bau unabhängig.
+//   Source Serif 4 → Überschriften. Eine Serifenschrift wirkt ruhiger und
+//                    seriöser als die vorherige fette Sans.
+//   Inter          → Fließtext, Navigation, Schaltflächen.
+const serif = localFont({
+  src: [
+    { path: "./fonts/sourceserif-600.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/sourceserif-700.woff2", weight: "700", style: "normal" },
+  ],
+  variable: "--font-serif",
+  display: "swap",
+});
+
+const inter = localFont({
+  src: [
+    { path: "./fonts/inter-400.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/inter-500.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/inter-600.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/inter-700.woff2", weight: "700", style: "normal" },
+  ],
+  variable: "--font-sans",
   display: "swap",
 });
 
@@ -58,7 +74,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="de" className={openSans.variable}>
+    <html lang="de" className={`${inter.variable} ${serif.variable}`}>
       <body>
         {/* Sprungmarke für Tastatur-/Screenreader-Nutzer (Barrierefreiheit). */}
         <a

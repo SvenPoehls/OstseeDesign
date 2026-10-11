@@ -68,7 +68,7 @@ export default function Process() {
         <div className="lg:sticky lg:top-0 lg:z-20 lg:bg-surface lg:pb-5 lg:pt-28">
           <div className="mx-auto max-w-2xl text-center">
             <span className="chip">So läuft Ihr Auftrag</span>
-            <h2 className="mt-4 font-display text-3xl font-extrabold leading-tight tracking-tight text-ink sm:text-4xl">
+            <h2 className="mt-4 font-display text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl">
               So läuft das <span className="em">bei uns</span>.
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-base leading-relaxed text-ink-muted">
@@ -109,14 +109,14 @@ export default function Process() {
                   }}
                 >
                   <div className="flex items-center gap-3">
-                    <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border-2 border-ink bg-pop text-xs font-bold text-white">
+                    <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-accent text-xs font-semibold text-white">
                       {i + 1}
                     </span>
-                    <span className="text-xs font-bold uppercase tracking-label text-accent">
+                    <span className="text-xs font-semibold uppercase tracking-label text-ink-muted">
                       Schritt {i + 1}
                     </span>
                   </div>
-                  <h3 className="mt-3 font-display text-xl font-extrabold tracking-tight text-ink sm:text-2xl">
+                  <h3 className="mt-3 font-display text-xl font-semibold tracking-tight text-ink sm:text-2xl">
                     {step.title}
                   </h3>
                   <p className="mt-2 text-sm leading-relaxed text-ink-muted">{step.body}</p>
@@ -147,7 +147,7 @@ export default function Process() {
                 stehen beide von der ersten Sekunde an nebeneinander. */}
             <div className="sticky top-[max(20.5rem,34vh)] mt-[calc(max(20.5rem,34vh)_-_15vh)]">
               <div className="relative w-full">
-              <div className="relative h-[32vh] overflow-hidden rounded-[2rem] border-2 border-ink bg-paper">
+              <div className="relative h-[32vh] overflow-hidden rounded-2xl border border-line bg-paper shadow-soft">
                 {processSteps.map((step, i) => (
                   <div
                     key={step.id}
@@ -164,10 +164,10 @@ export default function Process() {
                       }}
                     />
                     <CameraIcon className="relative h-8 w-8 text-ink/30" />
-                    <p className="relative max-w-xs px-6 text-center font-display text-lg font-extrabold text-ink">
+                    <p className="relative max-w-xs px-6 text-center font-display text-lg font-semibold text-ink">
                       {step.title}
                     </p>
-                    <span className="relative text-[0.7rem] font-bold uppercase tracking-label text-ink/40">
+                    <span className="relative text-[0.7rem] font-semibold uppercase tracking-label text-ink/40">
                       Bildregie – Platzhalter
                     </span>
                   </div>

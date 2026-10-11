@@ -27,7 +27,7 @@ export default function FindUs() {
       <div className="container-site">
         <div className="mx-auto max-w-2xl text-center">
           <span className="chip">Standort</span>
-          <h2 className="mt-5 font-display text-3xl font-extrabold leading-tight tracking-tight text-ink sm:text-4xl">
+          <h2 className="mt-5 font-display text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl">
             Sie finden uns am {company.street}
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-ink-muted">
@@ -39,7 +39,7 @@ export default function FindUs() {
         <div className="mt-12 grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           {/* Kontaktdaten – frei stehend, ohne Rahmen. */}
           <div>
-            <h3 className="font-display text-2xl font-extrabold tracking-tight text-ink">
+            <h3 className="font-display text-2xl font-semibold tracking-tight text-ink">
               Direkt erreichbar
             </h3>
 
@@ -48,7 +48,7 @@ export default function FindUs() {
                 <li key={label} className="flex items-center gap-4">
                   <span
                     aria-hidden="true"
-                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-accent-soft text-accent"
+                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-accent-soft text-accent"
                   >
                     <Icon className="h-5 w-5" />
                   </span>
@@ -71,7 +71,7 @@ export default function FindUs() {
 
           {/* Öffnungszeiten – bleibt als Kachel, Inhalt mittig. */}
           <div className="edge flex flex-col justify-center p-7 sm:p-9">
-            <h3 className="flex items-center gap-2 text-xs font-bold uppercase tracking-label text-accent">
+            <h3 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-label text-ink-muted">
               <ClockIcon className="h-4 w-4" />
               Öffnungszeiten
             </h3>
@@ -83,7 +83,7 @@ export default function FindUs() {
                       eigene Zeile unter die Uhrzeit. */}
                   <dd
                     className={`whitespace-nowrap ${
-                      row.byAppointment ? "text-ink-muted" : "font-bold text-ink"
+                      row.byAppointment ? "text-ink-muted" : "font-semibold text-ink"
                     }`}
                   >
                     {row.time}

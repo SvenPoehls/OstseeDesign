@@ -6,8 +6,9 @@ import Logo from "@/components/ui/Logo";
 import { ArrowIcon, ExternalIcon, PhoneIcon } from "@/components/ui/Icons";
 import { company, nav } from "@/lib/site";
 
-// Kopfzeile: Logo links, Navigation als dunkle Pille in der Mitte, Anruf-Button
-// rechts. Alles betont rund, damit sich der Kopf klar vom Inhalt abhebt.
+// Kopfzeile: Logo links, Navigation in der Mitte, Anruf-Schaltfläche rechts.
+// Ruhige, leicht abgerundete Leiste mit feiner Linie – zurückhaltender und
+// geschäftsmäßiger als die frühere runde Pille mit dicker schwarzer Kontur.
 // Auf dem Smartphone klappt das Menü unter der Leiste aus.
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -44,7 +45,7 @@ export default function Header() {
         {/* Auf sehr schmalen Handys sind Abstände und Schaltflächen kleiner,
             sonst passt die Zeile nicht in die Breite. Ab sm gilt wieder alles
             wie bisher. */}
-        <div className="flex items-center justify-between gap-2 rounded-full border-2 border-ink bg-paper/95 px-3 py-2 backdrop-blur sm:gap-4 sm:px-5 sm:py-2.5">
+        <div className="flex items-center justify-between gap-2 rounded-xl border border-line bg-paper px-3 py-2 shadow-soft sm:gap-4 sm:px-5 sm:py-2.5">
           <Link
             href="/"
             aria-label={`${company.name} – zur Startseite`}
@@ -54,10 +55,10 @@ export default function Header() {
             <Logo />
           </Link>
 
-          {/* Navigation als dunkle Pille – mittig ausgerichtet. */}
+          {/* Navigation: schlichte Textlinks, mittig ausgerichtet. */}
           <nav
             aria-label="Hauptnavigation"
-            className="hidden items-center gap-1 rounded-full bg-ink px-2 py-1.5 lg:flex"
+            className="hidden items-center gap-1 lg:flex"
           >
             {nav.map((item) => (
               <Link
@@ -66,7 +67,7 @@ export default function Header() {
                 target={item.external ? "_blank" : undefined}
                 rel={item.external ? "noopener noreferrer" : undefined}
                 onClick={(e) => jumpToSection(e, item.href)}
-                className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold text-white/85 transition-colors hover:bg-white/10 hover:text-white"
+                className="inline-flex items-center gap-1.5 rounded-md px-3.5 py-2 text-sm font-medium text-ink-muted transition-colors hover:bg-surface hover:text-ink"
               >
                 {item.label}
                 {item.external && <ExternalIcon className="h-3.5 w-3.5" />}
@@ -93,7 +94,7 @@ export default function Header() {
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
-              className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-ink text-ink transition-colors hover:bg-surface sm:h-11 sm:w-11 lg:hidden"
+              className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-line text-ink transition-colors hover:bg-surface sm:h-11 sm:w-11 lg:hidden"
               aria-expanded={open}
               aria-controls="mobile-menu"
               aria-label={open ? "Menü schließen" : "Menü öffnen"}
@@ -116,7 +117,7 @@ export default function Header() {
         {open && (
           <div
             id="mobile-menu"
-            className="mt-3 overflow-hidden rounded-3xl border-2 border-ink bg-paper lg:hidden"
+            className="mt-3 overflow-hidden rounded-xl border border-line bg-paper shadow-soft lg:hidden"
           >
             <nav aria-label="Mobile Navigation" className="flex flex-col px-5 py-2">
               {nav.map((item) => (

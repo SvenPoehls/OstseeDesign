@@ -1,9 +1,8 @@
 import { company } from "@/lib/site";
 
-// Wortmarke nach dem Original-Logo: „ostseedesign.de" (klein geschrieben,
-// in der Überschriften-Schrift). „.de" etwas heller abgesetzt.
-// Mit `tagline` wird der Zusatz „Werbung und Textilien | 04351 – 470 590"
-// darunter gezeigt (für den Footer / die volle Logo-Sperrung).
+// Wortmarke nach dem Original-Logo: „ostseedesign.de", klein geschrieben.
+// Gesetzt in der Überschriften-Schrift, eng und schmal laufend – derselbe
+// Charakter wie ein geklebter oder gefräster Schriftzug auf einem Schild.
 //
 // Liegt später die echte Logo-Datei vor, kann diese Komponente durch
 //   <img src="/logo.svg" alt="ostseedesign.de – Werbung und Textilien" />
@@ -17,13 +16,12 @@ export default function Logo({
 }) {
   return (
     <span className={`inline-flex flex-col leading-none ${className}`}>
-      <span className="font-display text-xl font-bold lowercase tracking-tight text-ink sm:text-2xl">
-        ostseedesign<span className="text-ink-muted">.de</span>
+      <span className="display text-[1.35rem] lowercase sm:text-[1.55rem]">
+        ostseedesign<span className="text-ink-soft">.de</span>
       </span>
       {tagline && (
-        <span className="mt-1.5 text-[0.7rem] font-medium text-ink-muted">
-          Werbung und Textilien{" "}
-          <span className="mx-1 text-line">|</span> {company.phoneDisplay}
+        <span className="mt-2.5 text-[0.7rem] uppercase tracking-label text-ink-soft">
+          Werbung und Textilien · {company.city}
         </span>
       )}
       <span className="sr-only">{company.fullName}</span>

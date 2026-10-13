@@ -17,20 +17,26 @@ export default function LegalPage({
   return (
     <>
       <Header />
-      <main id="hauptinhalt" className="bg-white">
-        <div className="container-site max-w-3xl py-14 md:py-20">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent"
-          >
-            <ArrowIcon className="h-4 w-4 rotate-180" />
-            Zur Startseite
-          </Link>
-          <h1 className="mt-6 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
-            {title}
-          </h1>
-          {intro && <p className="mt-4 text-lg leading-relaxed text-ink-muted">{intro}</p>}
-          <div className="legal-body mt-10">{children}</div>
+      <main id="hauptinhalt" className="bg-paper">
+        <div className="wrap py-14 md:py-20">
+          <div className="max-w-3xl">
+            <Link
+              href="/"
+              className="ul-link inline-flex items-center gap-1.5 text-[0.8rem] font-semibold uppercase tracking-label"
+            >
+              <ArrowIcon className="h-4 w-4 rotate-180" />
+              Zur Startseite
+            </Link>
+            <h1 className="display mt-8 text-[clamp(2.2rem,7vw,3.6rem)]">
+              {title}
+            </h1>
+            {intro && (
+              <p className="mt-5 max-w-reading text-[1.05rem] leading-relaxed text-ink-soft">
+                {intro}
+              </p>
+            )}
+            <div className="legal-body mt-10">{children}</div>
+          </div>
         </div>
       </main>
       <Footer />

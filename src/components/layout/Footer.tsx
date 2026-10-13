@@ -3,34 +3,35 @@ import Logo from "@/components/ui/Logo";
 import { ExternalIcon } from "@/components/ui/Icons";
 import { company, services, textilShopUrl } from "@/lib/site";
 
-// Fußzeile: bewusst flach gehalten. Marke links, daneben Leistungen und
-// Kontakt, unten eine schmale Zeile mit dem Rechtlichen.
+// Fußzeile als Impressum-Zeile eines Druckbogens: Marke links, daneben zwei
+// schmale Spalten, unten eine Zeile mit dem Rechtlichen. Flach, keine Kästen.
 export default function Footer() {
-  const year = 2024; // statisch – kein Client-Datum nötig
+  const year = 2026; // statisch – kein Client-Datum nötig
+
   return (
-    <footer className="border-t border-line bg-paper text-sm">
-      <div className="container-site grid gap-8 py-10 sm:grid-cols-3 sm:gap-10 lg:grid-cols-[1.6fr_1fr_1.1fr]">
-        <div className="col-span-full sm:col-span-1">
-          <Logo />
-          <p className="mt-3 max-w-xs text-[0.8rem] leading-relaxed text-ink-muted">
+    <footer className="bg-paper">
+      <div className="wrap grid12 gap-y-10 py-14">
+        <div className="col-span-4 lg:col-span-5">
+          <Logo tagline />
+          <p className="mt-6 max-w-reading text-[0.9rem] leading-relaxed text-ink-soft">
             Werbetechnik und Textilveredelung am {company.street} in{" "}
             {company.city}. Den Betrieb gibt es seit über{" "}
             {company.yearsExperience} Jahren.
           </p>
         </div>
 
-        <div>
-          <h2 className="text-[0.7rem] font-semibold uppercase tracking-label text-ink">
+        <div className="col-span-2 lg:col-span-3 lg:col-start-7">
+          <h2 className="border-t border-ink pt-3 text-[0.7rem] font-semibold uppercase tracking-label">
             Leistungen
           </h2>
-          <ul className="mt-3 space-y-1.5 text-[0.8rem]">
+          <ul className="mt-3 space-y-2 text-[0.9rem] text-ink-soft">
             {services.map((s) => (
               <li key={s.id}>
                 <Link
                   href={s.external ?? "/#leistungen"}
                   target={s.external ? "_blank" : undefined}
                   rel={s.external ? "noopener noreferrer" : undefined}
-                  className="inline-flex items-center gap-1 text-ink-muted transition-colors hover:text-accent"
+                  className="ul-link inline-flex items-center gap-1.5"
                 >
                   {s.title}
                   {s.external && <ExternalIcon className="h-3 w-3" />}
@@ -40,21 +41,23 @@ export default function Footer() {
           </ul>
         </div>
 
-        <div>
-          <h2 className="text-[0.7rem] font-semibold uppercase tracking-label text-ink">
+        <div className="col-span-2 lg:col-span-3 lg:col-start-10">
+          <h2 className="border-t border-ink pt-3 text-[0.7rem] font-semibold uppercase tracking-label">
             Kontakt
           </h2>
-          <ul className="mt-3 space-y-1.5 text-[0.8rem] text-ink-muted">
+          <ul className="mt-3 space-y-2 text-[0.9rem] text-ink-soft">
             <li>
-              {company.street}, {company.zip} {company.city}
+              {company.street}
+              <br />
+              {company.zip} {company.city}
             </li>
             <li>
-              <a href={`tel:${company.phoneHref}`} className="hover:text-accent">
+              <a href={`tel:${company.phoneHref}`} className="ul-link">
                 {company.phoneDisplay}
               </a>
             </li>
             <li>
-              <a href={`mailto:${company.email}`} className="hover:text-accent">
+              <a href={`mailto:${company.email}`} className="ul-link">
                 {company.email}
               </a>
             </li>
@@ -62,23 +65,26 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-line">
-        <div className="container-site flex flex-wrap items-center justify-between gap-x-5 gap-y-2 py-4 text-[0.75rem] text-ink-muted">
+      <div className="wrap">
+        <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t border-ink py-5 text-[0.78rem] text-ink-soft">
           <p>
             © {year} {company.fullName}
           </p>
-          <nav aria-label="Rechtliches" className="flex flex-wrap items-center gap-x-5 gap-y-2">
-            <Link href="/impressum" className="hover:text-accent">
+          <nav
+            aria-label="Rechtliches"
+            className="flex flex-wrap items-center gap-x-6 gap-y-2"
+          >
+            <Link href="/impressum" className="ul-link">
               Impressum
             </Link>
-            <Link href="/datenschutz" className="hover:text-accent">
+            <Link href="/datenschutz" className="ul-link">
               Datenschutz
             </Link>
             <a
               href={textilShopUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 hover:text-accent"
+              className="ul-link inline-flex items-center gap-1.5"
             >
               Textilshop
               <ExternalIcon className="h-3 w-3" />

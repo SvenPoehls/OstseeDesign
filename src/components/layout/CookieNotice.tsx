@@ -45,28 +45,29 @@ export default function CookieNotice() {
       role="dialog"
       aria-modal="false"
       aria-labelledby="cookie-title"
-      className="fixed inset-x-0 bottom-0 z-[60] px-4 pb-4"
+      className="fixed inset-x-0 bottom-0 z-[60] border-t border-ink bg-ink text-paper"
     >
-      <div className="container-site rounded-lg border border-line bg-paper p-5 shadow-[0_12px_32px_-12px_rgba(44,44,44,0.25)] sm:flex sm:items-center sm:gap-6 sm:p-6">
+      <div className="wrap flex flex-col gap-4 py-4 sm:flex-row sm:items-center sm:gap-8">
         <div className="flex-1">
-          <h2 id="cookie-title" className="font-display text-base font-semibold text-ink">
+          <h2
+            id="cookie-title"
+            className="text-[0.7rem] uppercase tracking-label text-paper/60"
+          >
             Datenschutz-Hinweis
           </h2>
-          <p className="mt-1 text-sm leading-relaxed text-ink-muted">
+          <p className="mt-1 text-[0.9rem] leading-relaxed text-paper/85">
             Diese Website verwendet ausschließlich technisch notwendige Daten
             und setzt keine Tracking- oder Marketing-Cookies ein. Mehr dazu in
             unserer{" "}
-            <Link href="/datenschutz" className="font-semibold text-accent underline">
+            <Link href="/datenschutz" className="font-semibold underline underline-offset-4">
               Datenschutzerklärung
             </Link>
             .
           </p>
         </div>
-        <div className="mt-4 shrink-0 sm:mt-0">
-          <button type="button" onClick={accept} className="btn-primary w-full sm:w-auto">
-            Verstanden
-          </button>
-        </div>
+        <button type="button" onClick={accept} className="btn-paper shrink-0">
+          Verstanden
+        </button>
       </div>
     </div>
   );

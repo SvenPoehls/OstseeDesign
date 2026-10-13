@@ -8,6 +8,9 @@ in Eckernförde. Redesign der bisherigen WordPress-Seite.
 Jeder Push auf den Branch wird über GitHub Actions automatisch gebaut und dort
 veröffentlicht (siehe `.github/workflows/deploy.yml`).
 
+Die gestalterischen Entscheidungen stehen in **[DESIGN.md](DESIGN.md)** –
+bitte dort nachlesen, bevor am Aussehen etwas geändert wird.
+
 Gebaut mit **Next.js (App Router) + TypeScript + Tailwind CSS** – bewusst ohne
 Datenbank oder externe Dienste, damit die Seite schnell lädt und
 datenschutzfreundlich bleibt.
@@ -28,14 +31,14 @@ src/
 ├── app/
 │   ├── layout.tsx        # Grundgerüst, Schriften (self-hosted), SEO-Metadaten
 │   ├── page.tsx          # Startseite (setzt die Sektionen zusammen) + JSON-LD
-│   ├── globals.css       # ZENTRALE DESIGN-TOKENS (Farben, Buttons)
+│   ├── globals.css       # ZENTRALE DESIGN-TOKENS (Farben, Schrift, Bausteine)
 │   ├── icon.svg          # Favicon
 │   ├── impressum/        # Pflichtseite
 │   └── datenschutz/      # Pflichtseite (DSGVO)
 ├── components/
 │   ├── layout/           # Header, Footer, Cookie-Hinweis, Legal-Gerüst
-│   ├── sections/         # Hero, Services, AllInOne, Trust, Contact
-│   └── ui/               # Logo, Platzhalter, Icons
+│   ├── sections/         # Hero, Services, Process, FindUs, CtaBand
+│   └── ui/               # Logo, Icons
 └── lib/
     └── site.ts           # ZENTRALE INHALTE / FIRMENDATEN (Adresse, Zeiten …)
 ```

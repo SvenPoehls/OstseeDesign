@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <!-- PLATZHALTER-FARBEN: neutrales Graphit und Grau, passend zu den
-       Design-Tokens in globals.css. Sobald die endgültigen Farben feststehen,
-       hier dieselben Werte eintragen wie dort bei --accent und --pop. -->
-  <rect width="64" height="64" rx="14" fill="#3f4651"/>
-  <path d="M10 40c5 0 5-6 11-6s6 6 11 6 6-6 11-6 6 6 11 6" fill="none"
-        stroke="#9aa0aa" stroke-width="5" stroke-linecap="round"/>
-  <path d="M10 26c5 0 5-6 11-6s6 6 11 6 6-6 11-6 6 6 11 6" fill="none"
-        stroke="#ffffff" stroke-width="5" stroke-linecap="round" opacity="0.9"/>
+  <!-- Favicon in den Farben der Seite: Tinte und Papier.
+       Eckig, ohne Rundung – wie alles andere auch.
+       Die beiden Wellen stehen für die Ostsee im Namen. -->
+  <rect width="64" height="64" fill="#14130f"/>
+  <path d="M8 40c5 0 5-6 12-6s7 6 12 6 7-6 12-6 7 6 12 6" fill="none"
+        stroke="#f2efe7" stroke-width="5" stroke-opacity="0.45"/>
+  <path d="M8 26c5 0 5-6 12-6s7 6 12 6 7-6 12-6 7 6 12 6" fill="none"
+        stroke="#f2efe7" stroke-width="5"/>
 </svg>

@@ -1,98 +1,127 @@
-// Kopfbereich: heller Text auf einem dunkel abgetönten Hintergrundbild.
-//
-// Aufbau von hinten nach vorn:
-//   1. Hintergrundbild (Platzhalter public/hero.svg, formatfüllend)
-//   2. dunkler Schleier – macht die weiße Schrift auf jedem Foto lesbar und
-//      läuft unten in Weiß aus, damit der Übergang zum nächsten Abschnitt
-//      sauber ist
-//   3. der weiche Lichtkreis wie bisher, nur hell statt grau
-//   4. Text, Schlagzeile und die beiden Schaltflächen
-//
-// ECHTES FOTO EINSETZEN: Datei als "hero.jpg" in den Ordner public legen und
-// in der Zeile `hintergrundBild` unten "/hero.svg" durch "/hero.jpg" ersetzen.
-// Mehr ist nicht nötig – der Schleier sorgt dafür, dass die Schrift lesbar
-// bleibt, egal wie hell oder dunkel das Foto ist.
-//
-// HINWEIS: Die sechs Bildkarten, die früher links und rechts neben dem Kreis
-// lagen, sind entfernt. Ihre Bildunterschriften stehen noch als `heroFan` in
-// src/lib/site.ts, falls sie später wieder gebraucht werden.
 import Link from "next/link";
-import { ArrowIcon, PhoneIcon } from "@/components/ui/Icons";
+import { ArrowIcon } from "@/components/ui/Icons";
 import { asset } from "@/lib/assets";
-import { company } from "@/lib/site";
+import { company, openingHours } from "@/lib/site";
 
-const hintergrundBild = "/hero.svg";
+// Kopfbereich – aufgebaut wie ein Druckbogen:
+//
+//   Zeile 1   große Schlagzeile links, kleine Datenspalte rechts
+//   Zeile 2   breites Bildband über die ganze Seitenbreite
+//   Zeile 3   schwarzes Laufband mit den vier Bereichen
+//
+// Nichts ist zentriert, nichts hat runde Ecken. Das letzte Wort der
+// Schlagzeile steht als Kontur („ausgestanzt") – eine Anspielung auf
+// Folienschrift, bevor sie verklebt wird.
+//
+// ECHTES FOTO EINSETZEN: Datei als „hero.jpg" in den Ordner public legen und
+// unten in der Zeile `bildDatei` den Namen ändern. Mehr ist nicht nötig.
+const bildDatei = "/hero.svg";
+
+// Das Laufband wiederholt dieselbe Liste zweimal – dadurch läuft es nahtlos.
+const laufband = [
+  "Fahrzeugbeschriftung",
+  "Stickerei",
+  "Schilder & Banner",
+  "Textildruck",
+  "Schaufenster",
+  "Drucksachen",
+];
 
 export default function Hero() {
   return (
-    <section className="relative -mt-[4.375rem] flex min-h-[30rem] items-center overflow-hidden bg-ink pb-14 pt-[7.5rem] sm:-mt-[4.875rem] sm:min-h-[34rem] sm:pb-20 sm:pt-[9rem] lg:min-h-[38rem]">
-      {/* 1 – Hintergrundbild */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${asset(hintergrundBild)})` }}
-      />
+    <section className="relative overflow-hidden bg-paper">
+      {/* Feine senkrechte Rasterlinien – wie der Raster eines Zeichenbogens. */}
+      <div aria-hidden="true" className="guides pointer-events-none absolute inset-0" />
 
-      {/* 2 – Dunkler Schleier. Bewusst mit festen Farbwerten (nicht mit
-          Tailwind-Transparenz), damit der Verlauf unten exakt in die weiße
-          Fläche des nächsten Abschnitts übergeht. */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(to bottom, rgba(20,23,28,0.80) 0%, rgba(20,23,28,0.72) 45%, rgba(20,23,28,0.86) 88%, rgba(26,29,35,1) 100%)",
-        }}
-      />
+      <div className="wrap relative">
+        <div className="grid12 pt-10 sm:pt-14 lg:pt-16">
+          {/* ── Schlagzeile ─────────────────────────────────────────── */}
+          <div className="col-span-4 lg:col-span-8">
+            <p className="flex items-center gap-3 text-[0.72rem] uppercase tracking-label text-ink-soft">
+              <span aria-hidden="true" className="h-px w-10 bg-ink" />
+              {company.city} · {company.street}
+            </p>
 
-      {/* 3 – Weicher Lichtschein hinter der Schlagzeile. */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[30rem] w-[30rem] -translate-x-1/2 -translate-y-1/2 rounded-full sm:h-[38rem] sm:w-[38rem] lg:h-[46rem] lg:w-[46rem]"
-        style={{
-          background:
-            "radial-gradient(circle closest-side, rgba(255,255,255,0.14) 0 45%, rgba(255,255,255,0.05) 74%, rgba(255,255,255,0) 100%)",
-        }}
-      />
+            <h1 className="display mt-6 text-[clamp(2.7rem,9.2vw,6.4rem)] leading-[1.02] sm:leading-[0.94]">
+              Ihr Logo aufs Shirt,
+              <br />
+              aufs Auto oder
+              <br />
+              <span className="cutout">an die Wand</span>.
+            </h1>
 
-      {/* 4 – Inhalt */}
-      <div className="container-site relative z-10">
-        <div className="mx-auto max-w-3xl text-center">
-          <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-label text-white/60">
-            <span
-              className="h-1.5 w-1.5 rounded-full bg-white/60"
-              aria-hidden="true"
-            />
-            {company.city}, {company.street}
-          </span>
+            <p className="mt-7 max-w-reading text-[1.05rem] leading-relaxed text-ink-soft">
+              Wir besticken und bedrucken Kleidung, beschriften Fahrzeuge und
+              machen Schilder. Alles in einer Werkstatt, seit über{" "}
+              {company.yearsExperience} Jahren.
+            </p>
 
-          <h1 className="mt-5 font-display text-4xl font-semibold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl">
-            Ihr Logo aufs Shirt, aufs Auto oder{" "}
-            <span className="text-white/55">an die Wand.</span>
-          </h1>
-
-          <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-white/75 sm:mt-6">
-            Wir besticken und bedrucken Kleidung, beschriften Fahrzeuge und
-            machen Schilder. Seit über {company.yearsExperience} Jahren hier in{" "}
-            {company.city}.
-          </p>
-
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <Link
-              href="/#kontakt"
-              className="inline-flex items-center justify-center gap-2 rounded-md bg-white px-5 py-2.5 text-sm font-semibold tracking-tight text-ink shadow-sm transition-colors duration-200 hover:bg-white/90"
-            >
-              Projekt besprechen
-              <ArrowIcon className="h-4 w-4" />
-            </Link>
-            <a
-              href={`tel:${company.phoneHref}`}
-              className="inline-flex items-center justify-center gap-2 rounded-md border border-white/35 px-5 py-2.5 text-sm font-semibold tracking-tight text-white transition-colors duration-200 hover:bg-white/10"
-            >
-              <PhoneIcon className="h-4 w-4" />
-              {company.phoneDisplay}
-            </a>
+            <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-4">
+              <Link href="/#kontakt" className="btn-ink">
+                Projekt besprechen
+                <ArrowIcon className="h-4 w-4" />
+              </Link>
+              <a
+                href={`tel:${company.phoneHref}`}
+                className="display-lite ul-link text-[1.45rem] text-ink"
+              >
+                {company.phoneDisplay}
+              </a>
+            </div>
           </div>
+
+          {/* ── Datenspalte ─────────────────────────────────────────────
+              Steht rechts oben wie ein Vermerk auf dem Bogen. Auf dem Handy
+              rutscht sie unter die Schlagzeile. */}
+          <aside className="col-span-4 mt-10 self-end lg:col-span-3 lg:col-start-10 lg:mt-0 lg:pb-2">
+            <span className="stamp">Seit über {company.yearsExperience} Jahren</span>
+
+            <dl className="mt-7 border-t border-ink pt-3 text-[0.9rem]">
+              {openingHours.map((row) => (
+                <div
+                  key={row.days}
+                  className="flex items-baseline justify-between gap-3 border-b border-rule py-2.5 last:border-0"
+                >
+                  <dt className="text-ink-soft">{row.days}</dt>
+                  <dd className="whitespace-nowrap font-semibold">{row.time}</dd>
+                </div>
+              ))}
+            </dl>
+            <p className="mt-3 text-[0.8rem] leading-relaxed text-ink-soft">
+              Vorher kurz anrufen lohnt sich – dann hat auch jemand Zeit.
+            </p>
+          </aside>
+        </div>
+
+        {/* ── Bildband ─────────────────────────────────────────────────
+            Liegt flach über die ganze Breite, wie ein aufgeklebtes Foto. */}
+        <figure className="plate mt-12 h-[34vh] min-h-[13rem] border border-ink sm:mt-16 sm:h-[42vh] lg:h-[46vh]">
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${asset(bildDatei)})` }}
+          />
+          <figcaption className="absolute bottom-0 left-0 bg-ink px-3 py-1.5 text-[0.65rem] uppercase tracking-label text-paper">
+            Platzhalter · hier kommt ein Foto aus der Werkstatt hin
+          </figcaption>
+        </figure>
+      </div>
+
+      {/* ── Laufband ───────────────────────────────────────────────────
+          Eine Laufschrift – genau das, was der Betrieb selbst baut. */}
+      <div className="mt-12 overflow-hidden border-y border-ink bg-ink py-3 sm:mt-16">
+        <div className="marquee flex w-max items-center gap-10 whitespace-nowrap pr-10">
+          {[...laufband, ...laufband].map((wort, i) => (
+            <span
+              key={i}
+              className="display-lite flex items-center gap-10 text-[1.1rem] uppercase text-paper"
+            >
+              {wort}
+              <span aria-hidden="true" className="text-paper/40">
+                ✳
+              </span>
+            </span>
+          ))}
         </div>
       </div>
     </section>

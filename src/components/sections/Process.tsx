@@ -2,12 +2,18 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowIcon, CameraIcon, CheckIcon } from "@/components/ui/Icons";
+import { ArrowIcon } from "@/components/ui/Icons";
 import { processSteps } from "@/lib/site";
 
-// „So läuft Ihr Auftrag" – die Schritte scrollen als Text nach oben und fliegen
-// dabei von unten ein. Das Bild rechts bleibt stehen (sticky) und wechselt
-// passend zum Schritt, der gerade in der Bildschirmmitte steht.
+// „So läuft das" – die vier Schritte laufen links nach oben, rechts bleibt
+// eine Bildfläche stehen (sticky) und wechselt mit dem Schritt, der gerade
+// in der Bildschirmmitte steht.
+//
+// Auf dem Handy schieben sich die Schritte als Blätter übereinander: jedes
+// bleibt kurz oben stehen, das nächste legt sich darüber.
+//
+// Gestaltung: keine Kästen mit Schatten, sondern Linien und große Ziffern –
+// wie Positionen auf einem Auftragszettel.
 export default function Process() {
   const [active, setActive] = useState(0);
   const [shown, setShown] = useState<boolean[]>(() => processSteps.map(() => false));
@@ -16,9 +22,7 @@ export default function Process() {
   useEffect(() => {
     const nodes = itemRefs.current.filter(Boolean) as HTMLElement[];
 
-    // 1. Einblenden: Sobald eine Kachel überhaupt ins Bild kommt, fliegt sie
-    //    ein. Bewusst großzügig – so bleibt auf dem Handy keine Kachel
-    //    unsichtbar, wenn jemand schnell scrollt oder direkt hierher springt.
+    // 1. Einblenden: Sobald ein Schritt ins Bild kommt, fährt er herein.
     const revealObserver = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -36,8 +40,8 @@ export default function Process() {
       { rootMargin: "0px 0px -8% 0px", threshold: 0 }
     );
 
-    // 2. Aktiver Schritt: nur für das Bild rechts (großer Bildschirm). Hier
-    //    zählt das mittlere Bildschirmdrittel, damit das Bild passend wechselt.
+    // 2. Aktiver Schritt: steuert nur die Bildfläche rechts. Es zählt das
+    //    mittlere Bildschirmdrittel.
     const activeObserver = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -60,18 +64,19 @@ export default function Process() {
   }, []);
 
   return (
-    <section id="ablauf" className="bg-surface pb-14 pt-16 sm:pb-28 sm:pt-20">
-      <div className="container-site">
-        {/* Überschrift bleibt auf großen Bildschirmen oben stehen, während man
-            durch die Schritte scrollt. Der eigene Hintergrund sorgt dafür, dass
-            die Kacheln sauber darunter durchlaufen. */}
-        <div className="lg:sticky lg:top-0 lg:z-20 lg:bg-surface lg:pb-5 lg:pt-28">
-          <div className="mx-auto max-w-2xl text-center">
-            <span className="chip">So läuft Ihr Auftrag</span>
-            <h2 className="mt-4 font-display text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl">
-              So läuft das <span className="em">bei uns</span>.
+    <section id="ablauf" className="bg-paper-deep pb-16 pt-16 sm:pb-24 sm:pt-20">
+      <div className="wrap">
+        {/* Kapitelkopf. Bleibt auf großen Bildschirmen oben stehen, während
+            man durch die Schritte scrollt. */}
+        <div className="lg:sticky lg:top-0 lg:z-20 lg:bg-paper-deep lg:pb-6 lg:pt-24">
+          <div className="grid12 border-t border-ink pt-4">
+            <p className="col-span-4 text-[0.72rem] font-semibold uppercase tracking-label text-ink-soft lg:col-span-1">
+              02
+            </p>
+            <h2 className="display col-span-4 mt-2 text-[clamp(2.1rem,6.5vw,3.6rem)] lg:col-span-6 lg:mt-0">
+              So läuft das
             </h2>
-            <p className="mx-auto mt-3 max-w-xl text-base leading-relaxed text-ink-muted">
+            <p className="col-span-4 mt-5 text-ink-soft lg:col-span-4 lg:col-start-9 lg:mt-0">
               Ob zwanzig bestickte Poloshirts oder ein beschrifteter
               Transporter: Der Weg ist derselbe. Sie wissen immer, woran wir
               gerade sind, und was es kostet, steht vorher fest.
@@ -79,14 +84,9 @@ export default function Process() {
           </div>
         </div>
 
-        <div className="mt-6 grid gap-10 lg:mt-0 lg:grid-cols-2 lg:gap-16">
-          {/* Textspalte: fliegt Schritt für Schritt von unten ein. */}
-          {/* Der Vorsprung oben gleicht aus, wenn das Bild auf flachen
-              Bildschirmen nicht ganz auf halber Höhe stehen kann: Er verschiebt
-              die Kacheln um genau denselben Betrag nach unten, sodass Kachel-
-              und Bildmitte immer auf einer Linie liegen. Auf hohen Bildschirmen
-              ergibt die Rechnung null. */}
-          <ol className="lg:space-y-0 lg:pt-[calc(max(20.5rem,34vh)_+_16vh_-_50vh)]">
+        <div className="mt-8 grid gap-10 lg:mt-0 lg:grid-cols-12 lg:gap-8">
+          {/* ── Schritte ─────────────────────────────────────────────── */}
+          <ol className="lg:col-span-6">
             {processSteps.map((step, i) => (
               <li
                 key={step.id}
@@ -94,36 +94,40 @@ export default function Process() {
                 ref={(el) => {
                   itemRefs.current[i] = el;
                 }}
-                // Handy/Tablet: Jede Karte bleibt oben stehen, die nächste
-                // schiebt sich beim Scrollen darüber (Stapel-Effekt).
-                // Ab lg: Kachel mittig im Abschnitt, damit sie mit dem Bild
-                // rechts auf einer Mittellinie liegt.
-                className="sticky top-24 pb-6 lg:static lg:flex lg:min-h-[70vh] lg:flex-col lg:justify-center lg:pb-0"
+                className="sticky top-[4.25rem] sm:top-[4.75rem] lg:static lg:flex lg:min-h-[70vh] lg:flex-col lg:justify-center"
                 style={{ zIndex: i + 1 }}
               >
                 <article
-                  className="edge p-5 shadow-[0_-6px_20px_-12px_rgba(26,29,35,0.35)] transition-all duration-700 ease-out sm:p-6 lg:shadow-none"
+                  className="border-t border-ink bg-paper-deep pb-7 pt-5 transition-all duration-700 ease-werk lg:bg-transparent"
                   style={{
-                    transform: shown[i] ? "translateY(0)" : "translateY(3rem)",
+                    transform: shown[i] ? "translateY(0)" : "translateY(2rem)",
                     opacity: shown[i] ? 1 : 0,
                   }}
                 >
-                  <div className="flex items-center gap-3">
-                    <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-accent text-xs font-semibold text-white">
-                      {i + 1}
+                  <div className="flex items-baseline gap-5">
+                    {/* Große Ziffer, nur als Kontur – wie eine Schablone. */}
+                    <span className="display cutout shrink-0 text-[2.6rem] leading-none sm:text-[3.4rem]">
+                      {String(i + 1).padStart(2, "0")}
                     </span>
-                    <span className="text-xs font-semibold uppercase tracking-label text-ink-muted">
-                      Schritt {i + 1}
-                    </span>
+                    <h3 className="display text-[clamp(1.5rem,4.2vw,2.5rem)]">
+                      {step.title}
+                    </h3>
                   </div>
-                  <h3 className="mt-3 font-display text-xl font-semibold tracking-tight text-ink sm:text-2xl">
-                    {step.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-muted">{step.body}</p>
-                  <ul className="mt-4 grid gap-1.5 text-sm text-ink sm:grid-cols-2">
+
+                  <p className="mt-4 max-w-reading text-ink-soft sm:ml-[4.6rem]">
+                    {step.body}
+                  </p>
+
+                  <ul className="mt-5 sm:ml-[4.6rem]">
                     {step.points.map((point) => (
-                      <li key={point} className="flex items-start gap-2">
-                        <CheckIcon className="mt-0.5 h-3.5 w-3.5 shrink-0 text-pop" />
+                      <li
+                        key={point}
+                        className="flex items-baseline gap-3 border-t border-rule py-2 text-[0.9rem]"
+                      >
+                        <span
+                          aria-hidden="true"
+                          className="h-px w-5 shrink-0 translate-y-[-0.3rem] bg-ink"
+                        />
                         {point}
                       </li>
                     ))}
@@ -133,74 +137,60 @@ export default function Process() {
             ))}
           </ol>
 
-          {/* Bildspalte: bleibt beim Scrollen stehen und wechselt mit dem
-              aktiven Schritt. Nur auf großen Bildschirmen sinnvoll. */}
-          <div className="hidden lg:block">
-            {/* Das Bild wird unterhalb der Überschrift festgehalten. Der Wert
-                34vh sorgt dafür, dass seine MITTE auf halber Bildschirmhöhe
-                liegt – dort, wo auch die Kacheln links mittig stehen. Das
-                max(…) verhindert, dass es auf flachen Bildschirmen unter die
-                Überschrift rutscht. */}
-            {/* Der Vorsprung setzt das Bild schon beim Betreten des Abschnitts
-                auf dieselbe Mittellinie wie die erste Kachel (Kachelmitte =
-                halbe Abschnittshöhe, Bildmitte = halbe Bildhöhe). Dadurch
-                stehen beide von der ersten Sekunde an nebeneinander. */}
-            <div className="sticky top-[max(20.5rem,34vh)] mt-[calc(max(20.5rem,34vh)_-_15vh)]">
-              <div className="relative w-full">
-              <div className="relative h-[32vh] overflow-hidden rounded-lg border border-line bg-paper shadow-soft">
+          {/* ── Bildfläche ─────────────────────────────────────────────
+              Bleibt stehen und wechselt mit dem aktiven Schritt. Nur auf
+              großen Bildschirmen sinnvoll. */}
+          <div className="hidden lg:col-span-5 lg:col-start-8 lg:block">
+            {/* Der Abstand oben (19vh) setzt die Bildmitte genau auf die
+                Mitte des ersten Schritts: Jeder Schritt ist 70vh hoch, seine
+                Mitte liegt also bei 35vh; das Bild ist 32vh hoch, seine Mitte
+                bei 16vh. 35 − 16 = 19vh. Danach bleibt das Bild stehen. */}
+            <div className="sticky top-[max(17.5rem,32vh)] mt-[19vh]">
+              <figure className="plate relative h-[32vh] border border-ink">
                 {processSteps.map((step, i) => (
-                  <div
+                  <figcaption
                     key={step.id}
                     aria-hidden={i !== active}
-                    className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-surface transition-opacity duration-500"
+                    className="absolute inset-0 flex flex-col justify-end p-5 transition-opacity duration-500"
                     style={{ opacity: i === active ? 1 : 0 }}
                   >
-                    <div
-                      aria-hidden="true"
-                      className="absolute inset-0"
-                      style={{
-                        backgroundImage:
-                          "repeating-linear-gradient(135deg, rgba(63,70,81,0.08) 0 2px, transparent 2px 18px)",
-                      }}
-                    />
-                    <CameraIcon className="relative h-8 w-8 text-ink/30" />
-                    <p className="relative max-w-xs px-6 text-center font-display text-lg font-semibold text-ink">
-                      {step.title}
-                    </p>
-                    <span className="relative text-[0.7rem] font-semibold uppercase tracking-label text-ink/40">
-                      Bildregie – Platzhalter
+                    <span className="text-[0.65rem] uppercase tracking-label text-ink-soft">
+                      Bild {String(i + 1).padStart(2, "0")} · Platzhalter
                     </span>
-                  </div>
+                    <span className="display mt-1 text-[1.6rem]">{step.title}</span>
+                  </figcaption>
                 ))}
+              </figure>
+
+              {/* Fortschritt: Zahl und Balken, mehr braucht es nicht. */}
+              <div className="mt-5 flex items-center gap-4">
+                <span className="display-lite text-[0.95rem] tabular-nums">
+                  {String(active + 1).padStart(2, "0")} / {String(processSteps.length).padStart(2, "0")}
+                </span>
+                <span className="relative h-px flex-1 bg-ink/20" aria-hidden="true">
+                  <span
+                    className="absolute inset-y-0 left-0 bg-ink transition-[width] duration-500 ease-werk"
+                    style={{
+                      width: `${((active + 1) / processSteps.length) * 100}%`,
+                      height: "2px",
+                      top: "-1px",
+                    }}
+                  />
+                </span>
               </div>
 
-                {/* Fortschrittsanzeige + Button stehen unter dem Bild. */}
-                <div>
-                  <div className="mt-6 flex items-center gap-2" aria-hidden="true">
-                    {processSteps.map((step, i) => (
-                      <span
-                        key={step.id}
-                        className={`h-1.5 flex-1 rounded-full transition-colors duration-300 ${
-                          i <= active ? "bg-accent" : "bg-ink/15"
-                        }`}
-                      />
-                    ))}
-                  </div>
-
-                  <Link href="/#kontakt" className="btn-pill mt-8">
-                    Jetzt Termin ausmachen
-                    <ArrowIcon className="h-4 w-4" />
-                  </Link>
-                </div>
-              </div>
+              <Link href="/#kontakt" className="btn-line mt-7">
+                Termin ausmachen
+                <ArrowIcon className="h-4 w-4" />
+              </Link>
             </div>
           </div>
         </div>
 
-        {/* Auf kleinen Bildschirmen steht der Button unter den Schritten. */}
-        <div className="mt-12 flex justify-center lg:hidden">
-          <Link href="/#kontakt" className="btn-pill">
-            Jetzt Termin ausmachen
+        {/* Auf kleinen Bildschirmen steht der Knopf unter den Schritten. */}
+        <div className="mt-10 border-t border-ink pt-8 lg:hidden">
+          <Link href="/#kontakt" className="btn-ink w-full">
+            Termin ausmachen
             <ArrowIcon className="h-4 w-4" />
           </Link>
         </div>

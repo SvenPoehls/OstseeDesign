@@ -1,64 +1,79 @@
-import { MailIcon, PhoneIcon } from "@/components/ui/Icons";
 import { company } from "@/lib/site";
 
-// Kontakt-Block (Anker #kontakt): ruhige, flächige Karte in der Hauptfarbe
-// mit Platz für einen QR-Code.
+// Kontaktband (Anker #kontakt): eine schwarze Fläche über die volle Breite.
+// Statt zweier Schaltflächen steht hier das, worauf es ankommt – die
+// Telefonnummer, groß genug zum Abtippen vom Sofa aus.
 //
-// QR-CODE EINFÜGEN: Sobald dein QR-Code-Bild vorliegt, lege es unter
-// public/qr-code.png ab und ersetze den Platzhalter unten durch:
-//   <img src="/qr-code.png" alt="QR-Code zum Kontakt" className="h-28 w-28 rounded-lg bg-white p-2" />
+// QR-CODE EINFÜGEN: Bild als public/qr-code.png ablegen und den Platzhalter
+// unten ersetzen durch:
+//   <img src={asset("/qr-code.png")} alt="QR-Code zum Kontakt"
+//        className="h-24 w-24 bg-paper p-2" />
+// (asset kommt aus @/lib/assets und setzt den richtigen Pfad.)
 export default function CtaBand() {
   return (
-    <section id="kontakt" className="bg-paper pb-14 sm:pb-28">
-      <div className="container-site">
-        <div className="grid items-center gap-10 rounded-lg bg-accent p-6 text-white shadow-soft-lg sm:p-12 lg:grid-cols-[1.4fr_0.6fr]">
-          <div>
-            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-label text-white/70">
-              Kontakt
-            </span>
-            <h2 className="mt-5 font-display text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
-              Was haben Sie vor?
-            </h2>
-            <p className="mt-4 max-w-xl text-lg leading-relaxed text-white/80">
-              Ein Anruf reicht meistens schon. Sagen Sie kurz, worum es geht,
-              den Rest klären wir zusammen.
+    <section
+      id="kontakt"
+      className="relative overflow-hidden border-y border-ink bg-ink text-paper"
+    >
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-[0.18]"
+        style={{
+          backgroundImage:
+            "repeating-linear-gradient(to right, rgba(242,239,231,0.5) 0 1px, transparent 1px calc(100% / 6))",
+        }}
+      />
+
+      <div className="wrap relative py-16 sm:py-24">
+        <div className="grid12 border-t border-paper/50 pt-4">
+          <p className="col-span-4 text-[0.72rem] font-semibold uppercase tracking-label text-paper/60 lg:col-span-1">
+            04
+          </p>
+          <h2 className="display col-span-4 mt-2 text-[clamp(2.1rem,6.5vw,3.6rem)] lg:col-span-6 lg:mt-0">
+            Was haben Sie vor?
+          </h2>
+          <p className="col-span-4 mt-5 text-paper/70 lg:col-span-4 lg:col-start-9 lg:mt-0">
+            Ein Anruf reicht meistens schon. Sagen Sie kurz, worum es geht –
+            den Rest klären wir zusammen.
+          </p>
+        </div>
+
+        <div className="grid12 mt-12 items-end gap-y-10 sm:mt-16">
+          <div className="col-span-4 lg:col-span-8">
+            <p className="text-[0.72rem] uppercase tracking-label text-paper/60">
+              Einfach anrufen
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              {/* Auf der dunklen Karte ist Weiß die klarste Hauptschaltfläche –
-                  die graue Signalfarbe würde sich zu wenig abheben. */}
-              <a
-                href={`tel:${company.phoneHref}`}
-                className="inline-flex items-center justify-center gap-2 rounded-md bg-white px-5 py-2.5 text-sm font-semibold tracking-tight text-ink shadow-sm transition-colors duration-200 hover:bg-white/90"
-              >
-                <PhoneIcon className="h-4 w-4" />
-                {company.phoneDisplay}
-              </a>
-              <a
-                href={`mailto:${company.email}`}
-                className="inline-flex items-center justify-center gap-2 rounded-md border border-white/40 px-5 py-2.5 text-sm font-semibold tracking-tight text-white transition-colors hover:bg-white/10"
-              >
-                <MailIcon className="h-4 w-4" />
-                E-Mail schreiben
-              </a>
-            </div>
+            <a
+              href={`tel:${company.phoneHref}`}
+              className="display mt-3 block text-[clamp(2.4rem,9vw,5.4rem)] text-paper"
+            >
+              {company.phoneDisplay}
+            </a>
+            <a
+              href={`mailto:${company.email}`}
+              className="ul-link mt-6 inline-block text-[1.05rem] text-paper/85"
+            >
+              {company.email}
+            </a>
           </div>
 
-          {/* QR-Code-Bereich */}
-          <div className="flex items-center gap-4 rounded-lg bg-white/10 p-5">
-            <div
-              className="flex h-24 w-24 shrink-0 flex-col items-center justify-center gap-1 rounded-md border border-dashed border-white/50 text-center text-white/80"
-              role="img"
-              aria-label="Platzhalter für QR-Code"
-            >
-              <span className="text-2xl leading-none">▦</span>
-              <span className="text-[0.6rem] font-semibold uppercase tracking-wider">QR-Code</span>
+          {/* QR-Code – noch Platzhalter. */}
+          <div className="col-span-4 lg:col-span-3 lg:col-start-10">
+            <div className="flex items-start gap-4">
+              <div
+                className="flex h-24 w-24 shrink-0 items-center justify-center border border-dashed border-paper/50 text-center text-[0.6rem] uppercase tracking-label text-paper/60"
+                role="img"
+                aria-label="Platzhalter für QR-Code"
+              >
+                QR-Code
+              </div>
+              <p className="text-[0.85rem] leading-relaxed text-paper/70">
+                Scannen und direkt Kontakt aufnehmen.
+                <span className="mt-1 block text-paper/45">
+                  (Code wird hier eingesetzt)
+                </span>
+              </p>
             </div>
-            <p className="text-sm leading-relaxed text-white/85">
-              Scannen &amp; direkt Kontakt aufnehmen.
-              <span className="mt-1 block text-xs text-white/60">
-                (QR-Code wird hier eingesetzt)
-              </span>
-            </p>
           </div>
         </div>
       </div>

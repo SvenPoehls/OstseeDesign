@@ -6,25 +6,31 @@ import { company } from "@/lib/site";
 // Schriften liegen als Dateien im Projekt (src/app/fonts) und werden mit der
 // Seite ausgeliefert. Kein Aufruf bei Google – weder beim Besucher noch beim
 // Bauen. Das ist datenschutzfreundlich und macht den Bau unabhängig.
-//   Source Serif 4 → Überschriften. Eine Serifenschrift wirkt ruhiger und
-//                    seriöser als die vorherige fette Sans.
-//   Inter          → Fließtext, Navigation, Schaltflächen.
-const serif = localFont({
+//
+//   Bricolage Grotesque → Überschriften. Eine eigenwillige, kantige Grotesk
+//        mit Breiten-Achse: damit lassen sich Schlagzeilen schmal und
+//        plakativ setzen, wie ein Schriftzug auf einem Schild.
+//   Hanken Grotesk → Fließtext. Bewusst NICHT Inter: Inter ist die
+//        Standardschrift fast aller Baukästen und sieht entsprechend
+//        nach Standard aus.
+//
+// Beides sind variable Schriften – eine Datei deckt alle Stärken ab.
+const display = localFont({
   src: [
-    { path: "./fonts/sourceserif-600.woff2", weight: "600", style: "normal" },
-    { path: "./fonts/sourceserif-700.woff2", weight: "700", style: "normal" },
+    { path: "./fonts/bricolage-latin.woff2", style: "normal" },
+    { path: "./fonts/bricolage-latin-ext.woff2", style: "normal" },
   ],
-  variable: "--font-serif",
+  weight: "400 800",
+  variable: "--font-display",
   display: "swap",
 });
 
-const inter = localFont({
+const sans = localFont({
   src: [
-    { path: "./fonts/inter-400.woff2", weight: "400", style: "normal" },
-    { path: "./fonts/inter-500.woff2", weight: "500", style: "normal" },
-    { path: "./fonts/inter-600.woff2", weight: "600", style: "normal" },
-    { path: "./fonts/inter-700.woff2", weight: "700", style: "normal" },
+    { path: "./fonts/hanken-latin.woff2", style: "normal" },
+    { path: "./fonts/hanken-latin-ext.woff2", style: "normal" },
   ],
+  weight: "400 800",
   variable: "--font-sans",
   display: "swap",
 });
@@ -74,7 +80,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="de" className={`${inter.variable} ${serif.variable}`}>
+    <html lang="de" className={`${sans.variable} ${display.variable}`}>
       <body>
         {/* Sprungmarke für Tastatur-/Screenreader-Nutzer (Barrierefreiheit). */}
         <a

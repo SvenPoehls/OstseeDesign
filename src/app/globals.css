@@ -3,60 +3,83 @@
 @tailwind utilities;
 
 /*
-  ZENTRALE DESIGN-TOKENS
-  ---------------------------------------------------------------------------
-  ACHTUNG, PLATZHALTER-FARBEN: Marineblau und Koralle sind vorerst raus. An
-  ihrer Stelle stehen neutrale Grautöne, bis die endgültige Farbwelt feststeht.
-  Zum Umfärben nur die beiden Blöcke unten anpassen, alles andere zieht nach:
-    --accent  = die kräftige Farbe (Schaltflächen, Links, Kontaktblock)
-    --pop     = die Signalfarbe (hervorgehobene Wörter, Häkchen, Punkte)
+  ═══════════════════════════════════════════════════════════════════════════
+  GESTALTUNG: „WERKSTATT-DRUCKBOGEN"
+  ═══════════════════════════════════════════════════════════════════════════
+  Leitbild: Die Seite soll aussehen wie etwas, das in dieser Werkstatt
+  entstanden ist – ein Druckbogen, ein Musterblatt, ein Schild. Deshalb:
+
+    • warmes Papier statt reinem Weiß, Tinte statt Grau
+    • große, eigenwillige Schrift (Bricolage Grotesque) – kein Standard
+    • Haarlinien und Flächen statt Kästchen mit Schatten
+    • alles linksbündig an einem festen Raster, keine zentrierten Blöcke
+    • eckig: keine abgerundeten Ecken (siehe tailwind.config.ts)
+    • eine feine Papierkörnung über der ganzen Seite
+
+  FARBEN sind weiterhin PLATZHALTER: bewusst nur Papier und Tinte, keine
+  Buntfarbe. Soll später eine Hausfarbe dazukommen, bekommt sie --mark.
 */
 :root {
-  --paper: #ffffff; /* Grundfläche */
-  --surface: #f2f4f7; /* dezent getönte Abschnitte / Karten */
-  --ink: #1a1d23; /* Haupttext */
-  --ink-muted: #5a6472; /* Nebentext */
-
-  /* PLATZHALTER statt Marineblau: dunkles, neutrales Graphit. */
-  --accent: #3f4651;
-  --accent-dark: #2d333c; /* Hover */
-  --accent-soft: #eceef1; /* sehr heller Ton derselben Familie */
-
-  /* PLATZHALTER statt Koralle: mittleres Grau, auf Weiß gut lesbar. */
-  --pop: #5f6672;
-  --pop-dark: #4b515b; /* Hover */
-
-  --line: #e6e8ee; /* dezente Linien/Rahmen */
-  --circle: #e4e7ec; /* gräulicher Hintergrundkreis im Kopfbereich */
+  --paper: #f2efe7; /* warmes Papier */
+  --paper-deep: #e6e1d4; /* zweite Papierfläche */
+  --ink: #14130f; /* Tinte, fast schwarz */
+  --ink-soft: #57524a; /* Nebentext */
+  --rule: rgba(20, 19, 15, 0.16); /* Haarlinie = Tinte mit wenig Deckkraft */
+  --mark: #14130f; /* Platzhalter für die spätere Hausfarbe */
 }
 
 html {
   scroll-behavior: smooth;
-  /* Abstand, den Sprungmarken oben frei lassen (Platz für die Kopfzeile).
-     Gilt für Anker-Links und scrollIntoView gleichermaßen – deshalb brauchen
-     die Abschnitte selbst kein zusätzliches scroll-mt. */
-  scroll-padding-top: 6rem;
+  /* Platz, den Sprungmarken oben frei lassen (Höhe der Kopfzeile). */
+  scroll-padding-top: 5.5rem;
   background-color: var(--paper);
 }
 
 body {
   background-color: var(--paper);
   color: var(--ink);
-  font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system,
-    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: var(--font-sans), system-ui, -apple-system, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
+}
+
+/* Papierkörnung über der gesamten Seite. Sehr fein – man sieht sie kaum
+   bewusst, aber die Fläche wirkt dadurch weniger „digital glatt". */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.4;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.22'/%3E%3C/svg%3E");
 }
 
 ::selection {
-  background: var(--accent);
-  color: #ffffff;
+  background: var(--ink);
+  color: var(--paper);
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-  border-radius: 4px;
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+/* Laufband im Kopfbereich. Der Inhalt steht zweimal hintereinander, die
+   Bewegung um die halbe Breite läuft dadurch nahtlos weiter. */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee {
+  animation: marquee 42s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -67,104 +90,147 @@ body {
   *::before,
   *::after {
     animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
 }
 
-/*
-  ECKEN-RUNDUNG
-  ---------------------------------------------------------------------------
-  Einheitlich knapp gehalten, damit alles sachlich wirkt:
-    Flächen (Kacheln, Karten, Kopfleiste) ............ rounded-lg  = 8 px
-    Bedienelemente (Schaltflächen, Symbolfelder) ..... rounded-md  = 6 px
-    Runde Elemente (Punkte, Nummernkreise) ........... rounded-full
-  Soll es noch eckiger werden, diese beiden Stufen eine Nummer kleiner
-  setzen (rounded-md bzw. rounded-sm).
-*/
 @layer components {
-  .container-site {
-    @apply mx-auto w-full max-w-content px-5 sm:px-6 lg:px-8;
+  /* ── Raster ──────────────────────────────────────────────────────────
+     Ein Innenmaß für alles. Die Seitenränder sind absichtlich schmal:
+     Inhalt soll bis fast an den Rand laufen, wie auf einem Plakat. */
+  .wrap {
+    @apply mx-auto w-full max-w-content px-5 sm:px-8 lg:px-10;
   }
 
-  .label {
-    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-label text-accent;
+  /* Zwölfspaltiges Raster für die großen Abschnitte. */
+  .grid12 {
+    @apply grid grid-cols-4 gap-x-5 sm:gap-x-6 lg:grid-cols-12 lg:gap-x-8;
   }
 
-  /* Betonte Wörter: gleiche Schrift & Stärke, nur Signalfarbe (Koralle). */
-  .em {
-    color: var(--pop);
+  /* ── Schrift ─────────────────────────────────────────────────────────
+     Überschriften laufen leicht schmal (Breiten-Achse der Schrift) und
+     sehr eng – das gibt den plakativen, schildhaften Eindruck. */
+  .display {
+    font-family: var(--font-display), Impact, sans-serif;
+    font-stretch: 88%;
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 0.92;
+  }
+  .display-lite {
+    font-family: var(--font-display), Impact, sans-serif;
+    font-stretch: 92%;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
   }
 
-  /* Buttons – ruhige Rechtecke mit knapper Rundung. */
-  .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-accent-dark;
+  /* Ausgestanztes Wort: nur Kontur, wie eine Folienschrift vor dem
+     Verkleben. Wird in der Schlagzeile für genau ein Wort benutzt. */
+  .cutout {
+    color: transparent;
+    /* Auf dem Handy dünner, sonst berühren sich die Umrisse. */
+    -webkit-text-stroke: 1.5px var(--ink);
   }
-  .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-line bg-paper px-6 py-3 text-sm font-semibold text-ink transition-colors duration-200 hover:bg-surface;
+  @media (min-width: 640px) {
+    .cutout {
+      -webkit-text-stroke-width: 2px;
+    }
   }
-  .btn-onaccent {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-semibold text-accent transition-colors duration-200 hover:bg-accent-soft;
-  }
-  .link-arrow {
-    @apply inline-flex items-center gap-1.5 text-sm font-semibold text-accent transition-colors duration-200 hover:text-accent-dark;
-  }
-
-  /* Karte – gleiche Rundung wie die übrigen Flächen. */
-  .card {
-    @apply rounded-lg border border-line bg-paper shadow-soft;
-  }
-
-  /* ── Bausteine des Layouts ────────────────────────────────────────────
-     Zurückhaltend gehalten: feine helle Linie statt kräftiger schwarzer
-     Kontur, dazu ein sehr weicher Schatten. Das wirkt ruhiger und
-     geschäftsmäßiger als die vorherige, plakative Variante. */
-  .edge {
-    @apply rounded-lg border border-line bg-paper shadow-soft;
-  }
-  .edge-lift {
-    @apply transition-all duration-200 hover:-translate-y-0.5 hover:shadow-soft-lg;
+  @supports not (-webkit-text-stroke: 1px black) {
+    .cutout {
+      color: var(--ink-soft);
+    }
   }
 
-  /* Schaltflächen: ruhige Form, klare Fläche, keine dicke Kontur. */
-  .btn-pill {
-    @apply inline-flex items-center justify-center gap-2 rounded-md bg-accent px-5 py-2.5 text-sm font-semibold tracking-tight text-white shadow-sm transition-colors duration-200 hover:bg-accent-dark;
+  /* ── Marken & Linien ─────────────────────────────────────────────────
+     Kapitelmarke: Nummer, Name, dann eine Linie bis zum Rand. */
+  .chapter {
+    @apply flex items-center gap-4 border-t border-ink pt-3 text-[0.72rem] font-semibold uppercase tracking-label;
   }
-  .btn-pill-light {
-    @apply inline-flex items-center justify-center gap-2 rounded-md border border-line bg-paper px-5 py-2.5 text-sm font-semibold tracking-tight text-ink transition-colors duration-200 hover:bg-surface;
-  }
-  /* Schaltfläche in der Signalfarbe. Solange die Signalfarbe ein mittleres
-     Grau ist, braucht sie weiße Schrift. Wird später eine helle, kräftige
-     Farbe daraus, hier auf `text-ink` zurückstellen. */
-  .btn-pill-pop {
-    @apply inline-flex items-center justify-center gap-2 rounded-md bg-pop px-5 py-2.5 text-sm font-semibold tracking-tight text-white shadow-sm transition-colors duration-200 hover:bg-pop-dark;
+  .hair {
+    @apply border-t border-rule;
   }
 
-  /* Kleine Bereichs-Marke über den Überschriften: zurückhaltend, gesperrt
-     geschrieben – wie eine Rubrik, nicht wie ein Aufkleber. */
-  .chip {
-    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-label text-ink-muted;
+  /* ── Schaltflächen ───────────────────────────────────────────────────
+     Eckig, flächig, ohne Schatten. */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2.5 px-6 py-3.5 text-[0.95rem] font-semibold leading-none transition-colors duration-200 ease-werk;
+  }
+  .btn-ink {
+    @apply btn bg-ink text-paper hover:bg-ink-soft;
+  }
+  .btn-line {
+    @apply btn border border-ink text-ink hover:bg-ink hover:text-paper;
+  }
+  .btn-paper {
+    @apply btn bg-paper text-ink hover:bg-paper-deep;
+  }
+  .btn-paper-line {
+    @apply btn border border-paper/50 text-paper hover:bg-paper hover:text-ink;
   }
 
-  /* Rechtstext-Formatierung (Impressum / Datenschutz). */
+  /* Textlink mit mitwachsender Unterstreichung. */
+  .ul-link {
+    @apply relative inline-block transition-colors duration-200;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 100% 1px;
+    transition: background-size 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .ul-link:hover {
+    background-size: 100% 3px;
+  }
+
+  /* ── Flächen ─────────────────────────────────────────────────────────
+     Bildplatzhalter: getöntes Papier mit Diagonalschraffur. */
+  .plate {
+    @apply relative overflow-hidden bg-paper-deep;
+    background-image: repeating-linear-gradient(
+      -45deg,
+      rgba(20, 19, 15, 0.055) 0 1px,
+      transparent 1px 14px
+    );
+  }
+
+  /* Senkrechte Rasterlinien als Hintergrund – nur dort einsetzen, wo die
+     Seite „technisch" wirken soll (Kopfbereich, Kontaktband). */
+  .guides {
+    background-image: repeating-linear-gradient(
+      to right,
+      var(--rule) 0 1px,
+      transparent 1px calc(100% / 6)
+    );
+  }
+
+  /* Aufgeklebter Stempel: leicht schief, wie von Hand angesetzt. */
+  .stamp {
+    @apply inline-block border border-ink px-3 py-1.5 text-[0.7rem] font-semibold uppercase tracking-label;
+    transform: rotate(-3deg);
+  }
+
+  /* ── Rechtstexte (Impressum / Datenschutz) ──────────────────────────── */
   .legal-body {
-    @apply text-[15px] leading-relaxed text-ink;
+    @apply text-[1rem] leading-relaxed text-ink;
   }
   .legal-body h2 {
-    @apply mt-10 font-display text-2xl font-semibold text-ink;
+    @apply mt-12 border-t border-ink pt-3 font-display text-xl font-bold uppercase tracking-tight text-ink;
   }
   .legal-body h3 {
-    @apply mt-6 font-display text-lg font-semibold text-ink;
+    @apply mt-7 font-sans text-base font-bold text-ink;
   }
   .legal-body p {
-    @apply mt-3 text-ink-muted;
+    @apply mt-3 max-w-reading text-ink-soft;
   }
   .legal-body ul {
-    @apply mt-3 list-disc space-y-1 pl-5 text-ink-muted;
+    @apply mt-3 max-w-reading list-disc space-y-1 pl-5 text-ink-soft;
   }
   .legal-body a {
-    @apply font-semibold text-accent underline underline-offset-2;
+    @apply font-semibold text-ink underline underline-offset-4;
   }
   .legal-body strong {
-    @apply font-semibold text-ink;
+    @apply font-bold text-ink;
   }
 }

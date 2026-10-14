@@ -101,9 +101,6 @@ export default function Hero() {
             className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: `url(${asset(bildDatei)})` }}
           />
-          <figcaption className="absolute bottom-0 left-0 bg-ink px-3 py-1.5 text-[0.65rem] uppercase tracking-label text-paper">
-            Platzhalter · hier kommt ein Foto aus der Werkstatt hin
-          </figcaption>
         </figure>
       </div>
 

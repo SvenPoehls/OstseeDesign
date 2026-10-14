@@ -21,9 +21,10 @@ export default function Header() {
     event: React.MouseEvent<HTMLAnchorElement>,
     href: string
   ) => {
-    if (!href.startsWith("/#")) return;
-    const id = href.slice(2);
-    if (!document.getElementById(id)) return;
+    // Liegt der Abschnitt auf der aktuellen Seite? Dann hier scrollen,
+    // statt die Seite neu zu laden. Sonst normal dem Link folgen.
+    const id = href.split("#")[1];
+    if (!id || !document.getElementById(id)) return;
     event.preventDefault();
     setOpen(false);
     // Erst scrollen, wenn das Menü wirklich zu ist: Solange es offen ist,

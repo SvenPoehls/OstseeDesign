@@ -35,6 +35,44 @@ const sans = localFont({
   display: "swap",
 });
 
+// ── Schriften der beiden anderen Entwürfe ───────────────────────────────
+// Sie stehen hier mit bereit, werden vom Browser aber nur geladen, wenn die
+// jeweilige Seite sie auch benutzt.
+//   Fraunces      → Entwurf 2 „Vitrine": Serifenschrift mit eigenwilligen
+//                   Formen, wirkt im Dunkeln edel statt technisch.
+//   Archivo       → Entwurf 2, Fließtext.
+//   JetBrains Mono → Entwurf 3 „Laufzettel": Schreibmaschinen-Anmutung,
+//                   alle Zeichen gleich breit – daher sauber in Tabellen.
+const fraunces = localFont({
+  src: [
+    { path: "./fonts/fraunces-latin.woff2", style: "normal" },
+    { path: "./fonts/fraunces-latin-ext.woff2", style: "normal" },
+  ],
+  weight: "300 900",
+  variable: "--font-fraunces",
+  display: "swap",
+});
+
+const archivo = localFont({
+  src: [
+    { path: "./fonts/archivo-latin.woff2", style: "normal" },
+    { path: "./fonts/archivo-latin-ext.woff2", style: "normal" },
+  ],
+  weight: "400 700",
+  variable: "--font-archivo",
+  display: "swap",
+});
+
+const mono = localFont({
+  src: [
+    { path: "./fonts/jetbrains-latin.woff2", style: "normal" },
+    { path: "./fonts/jetbrains-latin-ext.woff2", style: "normal" },
+  ],
+  weight: "400 700",
+  variable: "--font-mono",
+  display: "swap",
+});
+
 // SEO-Grundlagen: sprechender Titel mit lokalem Bezug, Beschreibung,
 // Open-Graph/Twitter-Karten und deutsche Sprache.
 const description =
@@ -80,7 +118,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="de" className={`${sans.variable} ${display.variable}`}>
+    <html
+      lang="de"
+      className={`${sans.variable} ${display.variable} ${fraunces.variable} ${archivo.variable} ${mono.variable}`}
+    >
       <body>
         {/* Sprungmarke für Tastatur-/Screenreader-Nutzer (Barrierefreiheit). */}
         <a

@@ -24,13 +24,30 @@ npm run build    # Produktions-Build
 npm run start    # Build lokal starten
 ```
 
+## Drei Entwürfe
+
+Die Startseite zeigt zurzeit drei Gestaltungsvorschläge zur Auswahl. Details
+und Begründungen: **[DESIGN.md](DESIGN.md)**.
+
+Die Vorschaubilder der Auswahlkacheln werden erzeugt mit:
+
+```bash
+npm run build
+cd out && python3 -m http.server 8099   # in einem zweiten Terminal
+node scripts/vorschau.js                # braucht playwright
+npm run build                           # Bilder mit ausliefern
+```
+
 ## Struktur
 
 ```
 src/
 ├── app/
 │   ├── layout.tsx        # Grundgerüst, Schriften (self-hosted), SEO-Metadaten
-│   ├── page.tsx          # Startseite (setzt die Sektionen zusammen) + JSON-LD
+│   ├── page.tsx          # Auswahlseite: drei Entwürfe nebeneinander
+│   ├── entwurf-1/        # Entwurf 1 „Werkstatt-Druckbogen" (+ JSON-LD)
+│   ├── entwurf-2/        # Entwurf 2 „Vitrine" (eigenständig, eine Datei)
+│   ├── entwurf-3/        # Entwurf 3 „Laufzettel" (eigenständig, eine Datei)
 │   ├── globals.css       # ZENTRALE DESIGN-TOKENS (Farben, Schrift, Bausteine)
 │   ├── icon.svg          # Favicon
 │   ├── impressum/        # Pflichtseite

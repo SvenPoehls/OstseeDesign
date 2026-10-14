@@ -95,10 +95,10 @@ export const services: Service[] = [
 export const nav: { label: string; href: string; external?: boolean }[] = [
   // „Leistungen" führt zum Leistungs-Abschnitt. Ein zweiter Punkt „Ablauf"
   // stand vorher daneben – der ist entfallen, damit das Menü eindeutig bleibt.
-  { label: "Leistungen", href: "/#leistungen" },
-  { label: "Standort", href: "/#standort" },
+  { label: "Leistungen", href: "/entwurf-1#leistungen" },
+  { label: "Standort", href: "/entwurf-1#standort" },
   { label: "Textilshop", href: textilShopUrl, external: true },
-  { label: "Kontakt", href: "/#kontakt" },
+  { label: "Kontakt", href: "/entwurf-1#kontakt" },
 ];
 
 // ── Kopfbereich: Bilder, die sich beim Laden auffächern ──────────────────

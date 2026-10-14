@@ -12,6 +12,10 @@ const nextConfig = {
   // die GitHub Pages (oder jeder simple Webspace) direkt ausliefern kann –
   // kein Server nötig.
   output: "export",
+  // Jede Seite bekommt einen eigenen Ordner mit index.html
+  // (/entwurf-2/index.html statt /entwurf-2.html). So findet JEDER einfache
+  // Webspace die Unterseiten, auch beim direkten Aufruf oder Neuladen.
+  trailingSlash: true,
   // Ohne Server keine Bild-Optimierung zur Laufzeit.
   images: { unoptimized: true },
   ...(isPages ? { basePath: `/${repo}`, assetPrefix: `/${repo}/` } : {}),

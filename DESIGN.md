@@ -1,4 +1,32 @@
-# Gestaltung der Website — „Werkstatt-Druckbogen"
+# Gestaltung der Website
+
+## Drei Entwürfe zur Auswahl
+
+Die Startseite (`/`) ist zurzeit eine **Auswahlseite**: Sie zeigt drei
+Gestaltungen nebeneinander, jede liegt auf einer eigenen Unterseite.
+
+| | Adresse | Leitsatz | Schrift | Grundton |
+| --- | --- | --- | --- | --- |
+| **1 Werkstatt-Druckbogen** | `/entwurf-1` | wie ein Druckbogen aus der eigenen Werkstatt | Bricolage Grotesque + Hanken Grotesk | warmes Papier |
+| **2 Vitrine** | `/entwurf-2` | wie ein beleuchtetes Schaufenster bei Nacht | Fraunces + Archivo | fast Schwarz |
+| **3 Laufzettel** | `/entwurf-3` | wie der Auftragszettel am Brett | JetBrains Mono | kühles Grauweiß |
+
+Inhalt und Texte sind in allen drei Entwürfen gleich, und alle drei kommen
+ohne Buntfarbe aus – so vergleicht man wirklich nur die Gestaltung.
+Die Begründungen stehen jeweils oben in der Datei des Entwurfs
+(`src/app/entwurf-2/page.tsx`, `src/app/entwurf-3/page.tsx`).
+
+**Vorschaubilder** der Kacheln: `public/vorschau-1.jpg` … `-3.jpg`.
+Neu erzeugen mit `node scripts/vorschau.js` (siehe Kopf der Datei).
+
+**Wenn ein Entwurf gewählt ist:** Seine Seite wird zur Startseite, die beiden
+anderen Ordner werden gelöscht, und `VariantBar` fliegt raus (eine Zeile je
+Seite). Danach gilt für die gewählte Richtung das, was unten steht – aktuell
+beschreibt der Rest dieser Datei **Entwurf 1**.
+
+---
+
+# Entwurf 1 — „Werkstatt-Druckbogen"
 
 Diese Datei hält fest, **warum die Seite so aussieht, wie sie aussieht**. Wer
 später etwas ändert (auch ein KI-Werkzeug), sollte sich daran halten – sonst

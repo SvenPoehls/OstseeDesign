@@ -35,12 +35,12 @@ const entwuerfe = [
     nr: "02",
     href: "/entwurf-2",
     bild: "/vorschau-2.jpg",
-    name: "Atelier",
-    satz: "Soll sich lesen wie eine Zeitschrift über Handwerk.",
+    name: "Weißraum",
+    satz: "Soll so ruhig sein wie ein aufgeräumter Werkstatttisch.",
     merkmale: [
-      "Leinenpapier, Tiefgrün und Rost, Serifenschrift",
-      "Nur zwei Bilder – gegliedert wird mit Farbflächen",
-      "Versetzte Spalten und Seitenzahlen – gebaut wie ein Heft",
+      "Sehr wenig Text: jeder Punkt eine Zeile",
+      "Eine moderne Schrift in zwei Stärken, eher klein gesetzt",
+      "Viel Platz, ein Bild, eine ruhige grüne Fläche am Ende",
     ],
   },
   {

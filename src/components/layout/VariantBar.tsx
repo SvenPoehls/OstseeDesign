@@ -11,7 +11,7 @@ import Link from "next/link";
 // Seite entfernen (eine Zeile), dann ist davon nichts mehr zu sehen.
 export const entwuerfe = [
   { nr: 1, href: "/entwurf-1", name: "Werkstatt-Druckbogen" },
-  { nr: 2, href: "/entwurf-2", name: "Atelier" },
+  { nr: 2, href: "/entwurf-2", name: "Weißraum" },
   { nr: 3, href: "/entwurf-3", name: "Farbfächer" },
 ] as const;
 

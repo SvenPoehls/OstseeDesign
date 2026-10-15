@@ -38,21 +38,10 @@ const sans = localFont({
 // ── Schriften der beiden anderen Entwürfe ───────────────────────────────
 // Sie stehen hier mit bereit, werden vom Browser aber nur geladen, wenn die
 // jeweilige Seite sie auch benutzt.
-//   Fraunces      → Entwurf 2 „Vitrine": Serifenschrift mit eigenwilligen
-//                   Formen, wirkt im Dunkeln edel statt technisch.
-//   Archivo       → Entwurf 2, Fließtext.
+//   Archivo       → Entwurf 2 „Weißraum": ruhige, moderne Grotesk,
+//                   hier als einzige Schrift des Entwurfs.
 //   JetBrains Mono → Entwurf 3 „Laufzettel": Schreibmaschinen-Anmutung,
 //                   alle Zeichen gleich breit – daher sauber in Tabellen.
-const fraunces = localFont({
-  src: [
-    { path: "./fonts/fraunces-latin.woff2", style: "normal" },
-    { path: "./fonts/fraunces-latin-ext.woff2", style: "normal" },
-  ],
-  weight: "300 900",
-  variable: "--font-fraunces",
-  display: "swap",
-});
-
 const archivo = localFont({
   src: [
     { path: "./fonts/archivo-latin.woff2", style: "normal" },
@@ -132,7 +121,7 @@ export default function RootLayout({
   return (
     <html
       lang="de"
-      className={`${sans.variable} ${display.variable} ${fraunces.variable} ${archivo.variable} ${schibsted.variable} ${mono.variable}`}
+      className={`${sans.variable} ${display.variable} ${archivo.variable} ${schibsted.variable} ${mono.variable}`}
     >
       <body>
         {/* Sprungmarke für Tastatur-/Screenreader-Nutzer (Barrierefreiheit). */}

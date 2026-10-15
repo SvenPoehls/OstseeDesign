@@ -50,7 +50,6 @@ const config: Config = {
         // Hanken Grotesk: ruhige Leseschrift, bewusst NICHT Inter.
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
         // Schriften der beiden anderen Entwürfe (siehe src/app/layout.tsx).
-        fraunces: ["var(--font-fraunces)", "Georgia", "serif"],
         archivo: ["var(--font-archivo)", "system-ui", "sans-serif"],
         schibsted: ["var(--font-schibsted)", "system-ui", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "monospace"],

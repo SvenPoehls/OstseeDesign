@@ -41,6 +41,7 @@ const config: Config = {
         mark: {
           DEFAULT: "var(--mark)",
           dark: "var(--mark-dark)",
+          soft: "var(--mark-soft)", // dünn gedruckte Fläche
         },
       },
       fontFamily: {

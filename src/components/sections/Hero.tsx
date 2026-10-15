@@ -57,7 +57,7 @@ export default function Hero() {
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-4">
-              <Link href="/#kontakt" className="btn-ink">
+              <Link href="/#kontakt" className="btn-mark">
                 Projekt besprechen
                 <ArrowIcon className="h-4 w-4" />
               </Link>
@@ -78,7 +78,7 @@ export default function Hero() {
               Seit über {company.yearsExperience} Jahren
             </span>
 
-            <dl className="mt-7 border-t border-ink pt-3 text-[0.9rem]">
+            <dl className="mt-7 border-t border-mark pt-3 text-[0.9rem]">
               {openingHours.map((row) => (
                 <div
                   key={row.days}

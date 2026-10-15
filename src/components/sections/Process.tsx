@@ -64,11 +64,11 @@ export default function Process() {
   }, []);
 
   return (
-    <section id="ablauf" className="bg-paper-deep pb-16 pt-16 sm:pb-24 sm:pt-20">
+    <section id="ablauf" className="bg-mark-soft pb-16 pt-16 sm:pb-24 sm:pt-20">
       <div className="wrap">
         {/* Kapitelkopf. Bleibt auf großen Bildschirmen oben stehen, während
             man durch die Schritte scrollt. */}
-        <div className="lg:sticky lg:top-0 lg:z-20 lg:bg-paper-deep lg:pb-6 lg:pt-24">
+        <div className="lg:sticky lg:top-0 lg:z-20 lg:bg-mark-soft lg:pb-6 lg:pt-24">
           <div className="grid12 border-t border-ink pt-4">
             <p className="col-span-4 text-[0.72rem] font-semibold uppercase tracking-label text-mark lg:col-span-1">
               02
@@ -98,7 +98,7 @@ export default function Process() {
                 style={{ zIndex: i + 1 }}
               >
                 <article
-                  className="border-t border-ink bg-paper-deep pb-7 pt-5 transition-all duration-700 ease-werk lg:bg-transparent"
+                  className="border-t border-mark bg-mark-soft pb-7 pt-5 transition-all duration-700 ease-werk lg:bg-transparent"
                   style={{
                     transform: shown[i] ? "translateY(0)" : "translateY(2rem)",
                     opacity: shown[i] ? 1 : 0,
@@ -126,7 +126,7 @@ export default function Process() {
                       >
                         <span
                           aria-hidden="true"
-                          className="h-px w-5 shrink-0 translate-y-[-0.3rem] bg-ink"
+                          className="h-px w-5 shrink-0 translate-y-[-0.3rem] bg-mark"
                         />
                         {point}
                       </li>
@@ -167,9 +167,9 @@ export default function Process() {
                 <span className="display-lite text-[0.95rem] tabular-nums">
                   {String(active + 1).padStart(2, "0")} / {String(processSteps.length).padStart(2, "0")}
                 </span>
-                <span className="relative h-px flex-1 bg-ink/20" aria-hidden="true">
+                <span className="relative h-px flex-1 bg-mark/25" aria-hidden="true">
                   <span
-                    className="absolute inset-y-0 left-0 bg-ink transition-[width] duration-500 ease-werk"
+                    className="absolute inset-y-0 left-0 bg-mark transition-[width] duration-500 ease-werk"
                     style={{
                       width: `${((active + 1) / processSteps.length) * 100}%`,
                       height: "2px",
@@ -179,7 +179,7 @@ export default function Process() {
                 </span>
               </div>
 
-              <Link href="/#kontakt" className="btn-line mt-7">
+              <Link href="/#kontakt" className="btn-mark mt-7">
                 Termin ausmachen
                 <ArrowIcon className="h-4 w-4" />
               </Link>
@@ -189,7 +189,7 @@ export default function Process() {
 
         {/* Auf kleinen Bildschirmen steht der Knopf unter den Schritten. */}
         <div className="mt-10 border-t border-ink pt-8 lg:hidden">
-          <Link href="/#kontakt" className="btn-ink w-full">
+          <Link href="/#kontakt" className="btn-mark w-full">
             Termin ausmachen
             <ArrowIcon className="h-4 w-4" />
           </Link>

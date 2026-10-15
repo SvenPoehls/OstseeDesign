@@ -30,7 +30,7 @@ export default function FindUs() {
         <div className="grid12 mt-12 gap-y-12 sm:mt-16">
           {/* Anschrift, groß gesetzt wie ein Schild an der Wand. */}
           <div className="col-span-4 lg:col-span-6">
-            <p className="text-[0.72rem] uppercase tracking-label text-ink-soft">
+            <p className="text-[0.72rem] uppercase tracking-label text-mark">
               Werkstatt &amp; Laden
             </p>
             {/* Anschrift wie ein Schild: zweizeilig, die Stadt etwas leiser. */}
@@ -71,7 +71,7 @@ export default function FindUs() {
               ))}
             </dl>
 
-            <p className="mt-10 text-[0.72rem] uppercase tracking-label text-ink-soft">
+            <p className="mt-10 text-[0.72rem] uppercase tracking-label text-mark">
               Öffnungszeiten
             </p>
             <dl className="mt-3 border-t border-ink">

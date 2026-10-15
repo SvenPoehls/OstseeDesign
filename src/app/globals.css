@@ -33,6 +33,8 @@
      diese beiden Werte ändern – alles andere zieht nach. */
   --mark: #c8341f;
   --mark-dark: #a52a17;
+  /* Dieselbe Farbe dünn gedruckt – als Fläche für ganze Abschnitte. */
+  --mark-soft: #f7e5e0;
 }
 
 html {
@@ -176,6 +178,9 @@ body::after {
   }
   .btn-ink {
     @apply btn bg-ink text-paper hover:bg-ink-soft;
+  }
+  .btn-mark {
+    @apply btn bg-mark text-paper hover:bg-mark-dark;
   }
   .btn-line {
     @apply btn border border-ink text-ink hover:bg-ink hover:text-paper;

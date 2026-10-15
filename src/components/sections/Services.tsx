@@ -106,7 +106,7 @@ export default function Services() {
                       "aria-label": `${service.title} – Shop im neuen Fenster öffnen`,
                     }
                   : {})}
-                className={`group grid12 items-center border-t border-rule py-8 transition-[transform,opacity] duration-700 ease-werk first:border-ink sm:py-9 lg:py-12 ${
+                className={`group grid12 items-center border-t border-rule py-8 transition-[transform,opacity] duration-700 ease-werk first:border-mark sm:py-9 lg:py-12 ${
                   service.external ? "cursor-pointer" : ""
                 }`}
                 style={{
@@ -145,7 +145,7 @@ export default function Services() {
                   <ul className="mt-4 hidden flex-wrap gap-x-5 gap-y-1 text-[0.85rem] text-ink-soft lg:flex">
                     {service.points.map((point) => (
                       <li key={point} className="flex items-center gap-2">
-                        <span aria-hidden="true" className="h-px w-4 bg-ink/40" />
+                        <span aria-hidden="true" className="h-px w-4 bg-mark" />
                         {point}
                       </li>
                     ))}

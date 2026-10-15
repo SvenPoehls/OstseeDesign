@@ -38,8 +38,8 @@ const entwuerfe = [
     name: "Atelier",
     satz: "Soll sich lesen wie eine Zeitschrift über Handwerk.",
     merkmale: [
-      "Leinenpapier und Tiefgrün, Serifenschrift",
-      "Bildstrecken, Initial, Randnotizen, Zitat auf grünem Band",
+      "Leinenpapier, Tiefgrün und Rost, Serifenschrift",
+      "Nur zwei Bilder – gegliedert wird mit Farbflächen",
       "Versetzte Spalten und Seitenzahlen – gebaut wie ein Heft",
     ],
   },

@@ -37,6 +37,12 @@ const LEINEN = "#efe7da";
 const TINTE = "#1c1a16";
 const GRUEN = "#2c4a3b";
 const LEISE = "#6b6256";
+// Zweite Akzentfarbe: gebranntes Rotbraun. Grün führt, Rost setzt die
+// Zahlen und kleinen Marken – zusammen wirkt das Heft farbiger, ohne bunt
+// zu werden.
+const ROST = "#b4572e";
+const ROST_HELL = "#f3e3d6";
+const GRUEN_HELL = "#e3e8e1";
 const FLAECHE = "#e3d9c7";
 
 const notes: Record<string, string> = {
@@ -193,24 +199,6 @@ export default function Entwurf2Page() {
             </div>
           </section>
 
-          {/* ── Bildstrecke über die volle Breite ─────────────────────── */}
-          <section className="mt-12">
-            <div className="grid gap-5 sm:grid-cols-12">
-              <Bild
-                note="Detail einer Stickerei"
-                className="h-44 sm:col-span-4 sm:h-56"
-              />
-              <Bild
-                note="Blick in die Werkstatt"
-                className="h-44 sm:col-span-5 sm:h-56"
-              />
-              <Bild
-                note="Folienzuschnitt"
-                className="h-44 sm:col-span-3 sm:h-56"
-              />
-            </div>
-          </section>
-
           <Seitenzahl nr={1} />
 
           {/* ── Leistungen: versetztes Doppelraster ───────────────────── */}
@@ -225,20 +213,24 @@ export default function Entwurf2Page() {
               </p>
             </div>
 
-            <div className="mt-10 grid gap-x-10 gap-y-12 sm:grid-cols-2">
+            {/* Ein einziges breites Bild für den ganzen Abschnitt. */}
+            <Bild
+              note="Blick in die Werkstatt"
+              className="mt-8 h-52 sm:h-72"
+            />
+
+            <div className="mt-10 grid gap-x-12 gap-y-10 sm:grid-cols-2">
               {services.map((service, i) => (
                 <article
                   key={service.id}
-                  /* Die rechte Spalte beginnt tiefer – wie im Heft. */
-                  className={i % 2 === 1 ? "sm:mt-16" : undefined}
+                  className="border-t pt-5"
+                  style={{ borderColor: i % 2 === 0 ? ROST : GRUEN }}
                 >
-                  <Bild
-                    note={notes[service.id]}
-                    className={i % 2 === 0 ? "h-60 sm:h-72" : "h-56 sm:h-64"}
-                  />
-
-                  <div className="mt-5 flex items-baseline gap-4">
-                    <span className="font-fraunces text-[1.2rem]" style={{ color: GRUEN }}>
+                  <div className="flex items-baseline gap-4">
+                    <span
+                      className="font-fraunces text-[1.6rem] leading-none"
+                      style={{ color: i % 2 === 0 ? ROST : GRUEN }}
+                    >
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <h3 className="font-fraunces text-[clamp(1.5rem,3vw,2.1rem)] leading-tight">
@@ -253,7 +245,7 @@ export default function Entwurf2Page() {
                     <span
                       aria-hidden="true"
                       className="mt-2.5 h-px w-8 shrink-0"
-                      style={{ backgroundColor: GRUEN }}
+                      style={{ backgroundColor: i % 2 === 0 ? ROST : GRUEN }}
                     />
                     <ul className="space-y-1 text-[0.88rem] italic" style={{ color: LEISE }}>
                       {service.points.map((point) => (
@@ -278,7 +270,7 @@ export default function Entwurf2Page() {
             </div>
           </section>
 
-            <Seitenzahl nr={2} />
+          <Seitenzahl nr={2} />
           </div>
 
         {/* ── Zitat auf grünem Band, volle Breite ─────────────────────── */}
@@ -299,6 +291,12 @@ export default function Entwurf2Page() {
           <div className="mx-auto w-full max-w-[1180px] px-6 sm:px-10">
           {/* ── Ablauf in vier Zeitungsspalten ────────────────────────── */}
           <section id="ablauf" className="scroll-mt-16 pt-14">
+            {/* Farbige Fläche statt Bild: der Abschnitt hebt sich ab, ohne
+                dass ein weiteres Foto nötig wäre. */}
+            <div
+              className="px-6 py-10 sm:px-10 sm:py-14"
+              style={{ backgroundColor: ROST_HELL }}
+            >
             <div className="flex flex-wrap items-end justify-between gap-6 border-b pb-4"
                  style={{ borderColor: "rgba(28,26,22,0.25)" }}>
               <h2 className="font-fraunces text-[clamp(1.8rem,4vw,2.8rem)] leading-tight">
@@ -314,7 +312,7 @@ export default function Entwurf2Page() {
                 <li key={step.id}>
                   <p
                     className="font-fraunces text-[2.6rem] leading-none"
-                    style={{ color: GRUEN }}
+                    style={{ color: ROST }}
                   >
                     {String(i + 1).padStart(2, "0")}
                   </p>
@@ -333,6 +331,7 @@ export default function Entwurf2Page() {
                 </li>
               ))}
             </ol>
+            </div>
           </section>
 
           <Seitenzahl nr={3} />
@@ -351,10 +350,6 @@ export default function Entwurf2Page() {
 
             <div className="mt-10 grid gap-10 lg:grid-cols-12">
               <div className="lg:col-span-6">
-                <Bild note="Die Werkstatt von außen" className="h-64 sm:h-80" />
-              </div>
-
-              <div className="lg:col-span-6">
                 <p className="font-fraunces text-[clamp(1.8rem,4vw,2.8rem)] leading-[1.15]">
                   {company.street}
                   <br />
@@ -366,7 +361,16 @@ export default function Entwurf2Page() {
                   Fahrzeuge fahren auf den Hof.
                 </p>
 
-                <dl className="mt-8 border-t" style={{ borderColor: TINTE }}>
+              </div>
+
+              <div
+                className="px-6 py-8 sm:px-8 lg:col-span-5 lg:col-start-8"
+                style={{ backgroundColor: GRUEN_HELL }}
+              >
+                <p className="text-[0.72rem] uppercase tracking-[0.3em]" style={{ color: GRUEN }}>
+                  Öffnungszeiten
+                </p>
+                <dl className="mt-5 border-t" style={{ borderColor: TINTE }}>
                   {openingHours.map((row) => (
                     <div
                       key={row.days}

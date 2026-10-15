@@ -39,8 +39,8 @@ const entwuerfe = [
     satz: "Soll sich lesen wie eine Zeitschrift über Handwerk.",
     merkmale: [
       "Leinenpapier und Tiefgrün, Serifenschrift",
-      "Bögen als Bildform, Initial, Randnotizen, ein Zitat",
-      "Seitenzahlen am Fuß – die Seite ist als Heft gebaut",
+      "Bildstrecken, Initial, Randnotizen, Zitat auf grünem Band",
+      "Versetzte Spalten und Seitenzahlen – gebaut wie ein Heft",
     ],
   },
   {

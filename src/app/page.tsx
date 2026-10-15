@@ -38,9 +38,9 @@ const entwuerfe = [
     name: "Weißraum",
     satz: "Soll so ruhig sein wie ein aufgeräumter Werkstatttisch.",
     merkmale: [
+      "Zweigeteilt: links bleibt alles stehen, rechts läuft der Inhalt",
       "Sehr wenig Text: jeder Punkt eine Zeile",
-      "Eine moderne Schrift in zwei Stärken, eher klein gesetzt",
-      "Viel Platz, ein Bild, eine ruhige grüne Fläche am Ende",
+      "Eine moderne Schrift, viel Platz, ein Bild, eine grüne Fläche",
     ],
   },
   {

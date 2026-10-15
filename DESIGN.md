@@ -8,7 +8,7 @@ Gestaltungen nebeneinander, jede liegt auf einer eigenen Unterseite.
 | | Adresse | Leitsatz | Schrift | Farbe | Form |
 | --- | --- | --- | --- | --- | --- |
 | **1 Werkstatt-Druckbogen** | `/entwurf-1` | wie ein Druckbogen aus der eigenen Werkstatt | Bricolage Grotesque + Hanken Grotesk | Papier, Tinte, **Zinnoberrot** – auch als ganze Fläche | kantig, 0 px |
-| **2 Weißraum** | `/entwurf-2` | so ruhig wie ein aufgeräumter Werkstatttisch | Archivo, zwei Stärken | sehr helles Weiß, **gedecktes Grün** als einziger Akzent | Rechtecke, keine Rundung |
+| **2 Weißraum** | `/entwurf-2` | so ruhig wie ein aufgeräumter Werkstatttisch | Archivo, zwei Stärken | sehr helles Weiß, **gedecktes Grün** als einziger Akzent | zweigeteilt: feste Spalte links |
 | **3 Farbfächer** | `/entwurf-3` | wie der Farbfächer an der Werkstattwand | Schibsted Grotesk | Weiß + **vier Werkstattfarben** | rund, 32 px und Kreise |
 
 Jeder Entwurf hat außerdem **eigene Bausteine**, die es in den anderen nicht
@@ -17,7 +17,7 @@ gibt – daran erkennt man sie auch ohne Farbe:
 | | nur hier |
 | --- | --- |
 | **1** | Laufband wie eine Laufschrift · Konturschrift („ausgestanzt") · Stempel · sichtbare Rasterlinien · Papierkörnung · Schritte, die beim Scrollen stehen bleiben |
-| **2** | radikal wenig Text (jeder Punkt eine Zeile) · nur EINE Schrift in zwei Stärken, klein gesetzt · sehr große Abstände · nur ein Bild auf der ganzen Seite · eine einzige Farbfläche ganz am Ende |
+| **2** | **zweigeteiltes Gerüst**: links eine feste Spalte, die beim Scrollen stehen bleibt (Name, Inhaltsverzeichnis, Telefonnummer, Adresse), rechts läuft der Inhalt · radikal wenig Text (jeder Punkt eine Zeile) · nur EINE Schrift in zwei Stärken · nur ein Bild · eine einzige Farbfläche am Ende |
 | **3** | Farbfächer-Reihe · Kreise, die sich übereinander **mischen** (wie Druckfarben) · Faden mit farbigen Punkten · Pillen statt Listen |
 
 Inhalt und Texte sind überall gleich – verglichen wird nur die Gestaltung.

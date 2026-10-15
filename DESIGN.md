@@ -5,22 +5,26 @@
 Die Startseite (`/`) ist zurzeit eine **Auswahlseite**: Sie zeigt drei
 Gestaltungen nebeneinander, jede liegt auf einer eigenen Unterseite.
 
-| | Adresse | Leitsatz | Schrift | Grundton |
-| --- | --- | --- | --- | --- |
-| **1 Werkstatt-Druckbogen** | `/entwurf-1` | wie ein Druckbogen aus der eigenen Werkstatt | Bricolage Grotesque + Hanken Grotesk | warmes Papier |
-| **2 Vitrine** | `/entwurf-2` | wie ein helles Schaufenster am Vormittag | Fraunces + Archivo | helles Grauweiß |
-| **3 Stapel** | `/entwurf-3` | wie frisch gefaltete Shirts im Regal | Schibsted Grotesk | helles Grau, weiße Flächen |
+| | Adresse | Leitsatz | Schrift | Farbe | Form |
+| --- | --- | --- | --- | --- | --- |
+| **1 Werkstatt-Druckbogen** | `/entwurf-1` | wie ein Druckbogen aus der eigenen Werkstatt | Bricolage Grotesque + Hanken Grotesk | Papier, Tinte, **Zinnoberrot** (Zweifarbendruck) | kantig, 0 px |
+| **2 Atelier** | `/entwurf-2` | wie eine Zeitschrift über Handwerk | Fraunces + Archivo | Leinen, Tinte, **Tiefgrün** | Bögen oben, sonst gerade |
+| **3 Farbfächer** | `/entwurf-3` | wie der Farbfächer an der Werkstattwand | Schibsted Grotesk | Weiß + **vier Werkstattfarben** | rund, 32 px und Kreise |
 
-Inhalt und Texte sind in allen drei Entwürfen gleich, alle drei sind hell und
-kommen ohne Buntfarbe aus – so vergleicht man wirklich nur die Gestaltung.
+Jeder Entwurf hat außerdem **eigene Bausteine**, die es in den anderen nicht
+gibt – daran erkennt man sie auch ohne Farbe:
 
-Zu den runden Ecken in Entwurf 3: Die gelten **nicht** allgemein als Merkmal
-von Baukasten-Seiten. Verräterisch ist nur, wenn überall derselbe
-Standardwert sitzt, ohne dass jemand entschieden hat. In Entwurf 3 sind sie
-Thema und folgen einer festen Staffelung (Flächen 28 px, Bilder 20 px,
-Knöpfe rund) – das ist eine Entscheidung, keine Voreinstellung.
-Die Begründungen stehen jeweils oben in der Datei des Entwurfs
-(`src/app/entwurf-2/page.tsx`, `src/app/entwurf-3/page.tsx`).
+| | nur hier |
+| --- | --- |
+| **1** | Laufband wie eine Laufschrift · Konturschrift („ausgestanzt") · Stempel · sichtbare Rasterlinien · Papierkörnung · Schritte, die beim Scrollen stehen bleiben |
+| **2** | Initial am Absatzanfang · Randnotizen · Zitat quer über die Spalte · zweispaltiger Fließtext · Seitenzahlen · zwei überlappende Bögen |
+| **3** | Farbfächer-Reihe · Kreise, die sich übereinander **mischen** (wie Druckfarben) · Faden mit farbigen Punkten · Pillen statt Listen |
+
+Inhalt und Texte sind überall gleich – verglichen wird nur die Gestaltung.
+Alle drei sind hell; die Farbe kommt aus Flächen, nicht aus dunklen
+Hintergründen. Die Farbwerte sind Platzhalter und stehen je Entwurf an einer
+Stelle (Entwurf 1 in `globals.css` unter `--mark`, Entwurf 2 und 3 oben in
+der jeweiligen Seitendatei).
 
 **Vorschaubilder** der Kacheln: `public/vorschau-1.jpg` … `-3.jpg`.
 Neu erzeugen mit `node scripts/vorschau.js` (siehe Kopf der Datei).

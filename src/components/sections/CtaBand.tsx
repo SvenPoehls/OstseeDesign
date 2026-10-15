@@ -13,7 +13,7 @@ export default function CtaBand() {
   return (
     <section
       id="kontakt"
-      className="relative overflow-hidden border-y border-ink bg-ink text-paper"
+      className="relative overflow-hidden border-y border-mark bg-mark text-paper"
     >
       <div
         aria-hidden="true"
@@ -26,7 +26,7 @@ export default function CtaBand() {
 
       <div className="wrap relative py-16 sm:py-24">
         <div className="grid12 border-t border-paper/50 pt-4">
-          <p className="col-span-4 text-[0.72rem] font-semibold uppercase tracking-label text-paper/60 lg:col-span-1">
+          <p className="col-span-4 text-[0.72rem] font-semibold uppercase tracking-label text-paper/70 lg:col-span-1">
             04
           </p>
           <h2 className="display col-span-4 mt-2 text-[clamp(2.1rem,6.5vw,3.6rem)] lg:col-span-6 lg:mt-0">

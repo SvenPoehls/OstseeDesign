@@ -11,8 +11,8 @@ import Link from "next/link";
 // Seite entfernen (eine Zeile), dann ist davon nichts mehr zu sehen.
 export const entwuerfe = [
   { nr: 1, href: "/entwurf-1", name: "Werkstatt-Druckbogen" },
-  { nr: 2, href: "/entwurf-2", name: "Vitrine" },
-  { nr: 3, href: "/entwurf-3", name: "Stapel" },
+  { nr: 2, href: "/entwurf-2", name: "Atelier" },
+  { nr: 3, href: "/entwurf-3", name: "Farbfächer" },
 ] as const;
 
 export default function VariantBar({ current }: { current: 1 | 2 | 3 }) {

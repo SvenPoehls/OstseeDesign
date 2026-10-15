@@ -38,7 +38,7 @@ export default function Hero() {
           {/* ── Schlagzeile ─────────────────────────────────────────── */}
           <div className="col-span-4 lg:col-span-8">
             <p className="flex items-center gap-3 text-[0.72rem] uppercase tracking-label text-ink-soft">
-              <span aria-hidden="true" className="h-px w-10 bg-ink" />
+              <span aria-hidden="true" className="h-px w-10 bg-mark" />
               {company.city} · {company.street}
             </p>
 
@@ -47,7 +47,7 @@ export default function Hero() {
               <br />
               aufs Auto oder
               <br />
-              <span className="cutout">an die Wand</span>.
+              <span className="cutout cutout-mark">an die Wand</span>.
             </h1>
 
             <p className="mt-7 max-w-reading text-[1.05rem] leading-relaxed text-ink-soft">
@@ -74,7 +74,9 @@ export default function Hero() {
               Steht rechts oben wie ein Vermerk auf dem Bogen. Auf dem Handy
               rutscht sie unter die Schlagzeile. */}
           <aside className="col-span-4 mt-10 self-end lg:col-span-3 lg:col-start-10 lg:mt-0 lg:pb-2">
-            <span className="stamp">Seit über {company.yearsExperience} Jahren</span>
+            <span className="stamp border-mark text-mark">
+              Seit über {company.yearsExperience} Jahren
+            </span>
 
             <dl className="mt-7 border-t border-ink pt-3 text-[0.9rem]">
               {openingHours.map((row) => (
@@ -106,7 +108,7 @@ export default function Hero() {
 
       {/* ── Laufband ───────────────────────────────────────────────────
           Eine Laufschrift – genau das, was der Betrieb selbst baut. */}
-      <div className="mt-12 overflow-hidden border-y border-ink bg-ink py-3 sm:mt-16">
+      <div className="mt-12 overflow-hidden border-y border-mark bg-mark py-3 sm:mt-16">
         <div className="marquee flex w-max items-center gap-10 whitespace-nowrap pr-10">
           {[...laufband, ...laufband].map((wort, i) => (
             <span

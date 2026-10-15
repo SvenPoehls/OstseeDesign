@@ -4,37 +4,46 @@ import VariantBar from "@/components/layout/VariantBar";
 import { company, openingHours, processSteps, services, textilShopUrl } from "@/lib/site";
 
 // ════════════════════════════════════════════════════════════════════════
-// ENTWURF 3 — „STAPEL"
+// ENTWURF 3 — „FARBFÄCHER"
 // ════════════════════════════════════════════════════════════════════════
-// Leitsatz: Die Seite soll aussehen wie frisch gefaltete Shirts im Regal –
-// weiche Kanten, klare Stapel, Luft dazwischen.
+// Leitsatz: Die Seite soll aussehen wie der Farbfächer, der in jeder
+// Werkstatt an der Wand hängt – Garnfarben, Folienfarben, Druckfarben.
 //
-// Entscheidungen (bewusst anders als Entwurf 1 und 2):
-//   Schrift      Schibsted Grotesk. Freundlich und etwas rundlich, dabei
-//                klar – passt zur weichen Form. Bewusst nicht Inter oder
-//                Poppins, die in jedem Baukasten stecken.
-//   Farbe        helles, leicht kühles Grau als Grund, weiße Flächen
-//                darauf. Weiterhin ohne Buntfarbe, damit die drei Entwürfe
-//                vergleichbar bleiben.
-//   Form         RUNDE ECKEN, und zwar nach einer festen Staffelung:
-//                   Flächen  28 px · Bilder 20 px · Knöpfe/Marken  rund
-//                Sie sind hier nicht Standard, sondern Thema: gefalteter
-//                Stoff hat keine scharfen Kanten.
-//   Raster       Flächen unterschiedlicher Größe. Die Textilveredelung ist
-//                der größte Bereich und bekommt auch die größte Fläche –
-//                kein Raster aus vier gleichen Kacheln.
-//   Bewegung     genau ein Effekt: Flächen heben sich beim Überfahren
-//                leicht an. Sonst nichts.
-//   Besonderheit die „Lasche" am oberen Rand jeder Leistungsfläche – wie
-//                das Etikett, das oben aus einem gefalteten Shirt schaut.
+// Was es NUR in diesem Entwurf gibt (damit er sich klar von 1 und 2 löst):
+//   • bunt: jeder Bereich hat eine eigene Farbe, wie ein Farbmuster
+//   • echte Transparenz: Kreise liegen übereinander und MISCHEN sich
+//     (mix-blend-multiply) – genau das passiert beim Drucken auch
+//   • runde Formen überall: Kreise, Pillen, weiche Flächen
+//   • eine Farbfächer-Reihe direkt unter dem Auftakt
+//   • Ablauf als Faden mit farbigen Punkten
+//   • verspielt statt streng: nichts steht auf einer Linie
 //
-// Die Texte sind dieselben wie in den anderen Entwürfen – verglichen werden
-// soll die Gestaltung, nicht der Inhalt.
+// Entscheidungen:
+//   Schrift   Schibsted Grotesk, freundlich und rund. Nicht Inter.
+//   Farbe     Weiß als Grund, vier kräftige Farben als Muster.
+//             Bewusst hell – die Farbe kommt aus den Flächen, nicht aus
+//             einem dunklen Hintergrund.
+//   Form      RUND: Flächen 32 px, Bilder 24 px, Knöpfe und Marken ganz
+//             rund. Hier ist die Rundung das Thema, keine Voreinstellung.
+//   Bewegung  Flächen heben sich beim Überfahren leicht an. Mehr nicht.
+//
+// FARBEN TAUSCHEN: nur die Liste `farben` unten ändern.
 export const metadata: Metadata = {
-  title: "Entwurf 3 · Stapel",
+  title: "Entwurf 3 · Farbfächer",
   description:
-    "Entwurf 3 für ostseedesign.de: weiche Formen, runde Ecken, helle Flächen auf Grau.",
+    "Entwurf 3 für ostseedesign.de: bunte Farbmuster, runde Formen, übereinanderliegende Transparenzen.",
 };
+
+// Die vier Werkstattfarben. Reihenfolge = Reihenfolge der Leistungen.
+const farben = [
+  { ton: "#ff7a30", name: "Zinnober" },
+  { ton: "#0e7c86", name: "Petrol" },
+  { ton: "#ffc63d", name: "Ocker" },
+  { ton: "#e4557e", name: "Magenta" },
+];
+
+const TINTE = "#17161a";
+const LEISE = "#605c66";
 
 const notes: Record<string, string> = {
   textilveredelung: "Stickmaschine, Nahaufnahme vom Garn",
@@ -43,25 +52,25 @@ const notes: Record<string, string> = {
   textilshop: "Stapel veredelter Arbeitskleidung",
 };
 
-// Größe im Raster: der erste Bereich ist der größte im Betrieb.
-const breiten = [
-  "lg:col-span-7",
-  "lg:col-span-5",
-  "lg:col-span-5",
-  "lg:col-span-7",
-];
-
-// Bildfläche: hellgraues Feld mit weicher Ecke und Bildregie-Notiz.
-function Bild({ note, className = "" }: { note: string; className?: string }) {
+// Bildfläche: runde Ecken, in der Farbe des Bereichs eingefärbt.
+function Bild({
+  note,
+  ton,
+  className = "",
+}: {
+  note: string;
+  ton: string;
+  className?: string;
+}) {
   return (
     <figure
-      className={`relative overflow-hidden rounded-[20px] bg-[#e4e6e7] ${className}`}
+      className={`relative overflow-hidden rounded-[24px] ${className}`}
       style={{
-        backgroundImage:
-          "repeating-linear-gradient(-45deg, rgba(22,24,26,0.045) 0 1px, transparent 1px 15px)",
+        backgroundColor: `${ton}1f`,
+        backgroundImage: `repeating-linear-gradient(-45deg, ${ton}26 0 1px, transparent 1px 15px)`,
       }}
     >
-      <figcaption className="absolute bottom-3 left-3 rounded-full bg-white/80 px-3 py-1 text-[0.7rem] text-[#6a6e72]">
+      <figcaption className="absolute bottom-3 left-3 rounded-full bg-white/85 px-3 py-1 text-[0.72rem] text-[#605c66]">
         {note}
       </figcaption>
     </figure>
@@ -71,161 +80,179 @@ function Bild({ note, className = "" }: { note: string; className?: string }) {
 export default function Entwurf3Page() {
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: "html,body{background:#e3e5e5;}" }} />
+      <style dangerouslySetInnerHTML={{ __html: "html,body{background:#ffffff;}" }} />
       <VariantBar current={3} />
 
-      <div className="min-h-screen bg-[#e3e5e5] font-schibsted text-[#16181a] antialiased">
-        {/* ── Kopfzeile als schwebende Pille ───────────────────────────
-            Rund, weiß, mit Abstand zum Rand – sie liegt auf der Seite,
-            statt sie oben abzuschneiden. */}
-        <header className="sticky top-0 z-40 px-4 pt-4 sm:px-6 sm:pt-6">
-          <div className="mx-auto flex w-full max-w-[1240px] items-center justify-between gap-4 rounded-full bg-white/95 py-2.5 pl-6 pr-2.5 backdrop-blur">
+      <div className="min-h-screen bg-white font-schibsted antialiased" style={{ color: TINTE }}>
+        {/* ── Kopfzeile als schwebende Pille ──────────────────────────── */}
+        <header className="sticky top-0 z-40 px-4 pt-4 sm:px-6">
+          <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between gap-4 rounded-full bg-white/85 py-2.5 pl-6 pr-2.5 shadow-[0_1px_0_rgba(23,22,26,0.08)] backdrop-blur">
             <Link href="/entwurf-3" className="text-[1.15rem] font-extrabold tracking-[-0.03em]">
               ostseedesign
             </Link>
-            <nav className="hidden items-center gap-7 text-[0.92rem] font-medium text-[#6a6e72] lg:flex">
-              <a href="#leistungen" className="transition-colors hover:text-[#16181a]">
+            <nav className="hidden items-center gap-7 text-[0.92rem] font-medium lg:flex" style={{ color: LEISE }}>
+              <a href="#leistungen" className="hover:text-[#17161a]">
                 Leistungen
               </a>
-              <a href="#ablauf" className="transition-colors hover:text-[#16181a]">
+              <a href="#ablauf" className="hover:text-[#17161a]">
                 Ablauf
               </a>
-              <a href="#standort" className="transition-colors hover:text-[#16181a]">
+              <a href="#standort" className="hover:text-[#17161a]">
                 Standort
               </a>
               <a
                 href={textilShopUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="transition-colors hover:text-[#16181a]"
+                className="hover:text-[#17161a]"
               >
                 Textilshop ↗
               </a>
             </nav>
             <a
               href={`tel:${company.phoneHref}`}
-              className="rounded-full bg-[#16181a] px-5 py-2.5 text-[0.9rem] font-semibold text-white transition-colors hover:bg-[#33383c]"
+              className="rounded-full px-5 py-2.5 text-[0.9rem] font-bold text-white transition-opacity hover:opacity-85"
+              style={{ backgroundColor: farben[0].ton }}
             >
               {company.phoneDisplay}
             </a>
           </div>
-
         </header>
 
-        <main id="hauptinhalt" className="mx-auto w-full max-w-[1240px] px-4 pb-6 pt-6 sm:px-6">
-          {/* Auf dem Handy wird die Navigation zu einer Reihe runder Marken,
-              die man seitwärts schieben kann – kein Klappmenü nötig. */}
-          <div className="mb-5 flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] lg:hidden [&::-webkit-scrollbar]:hidden">
-            {[
-              ["Leistungen", "#leistungen"],
-              ["Ablauf", "#ablauf"],
-              ["Standort", "#standort"],
-              ["Kontakt", "#kontakt"],
-              ["Textilshop ↗", textilShopUrl],
-            ].map(([label, href]) => (
-              <a
-                key={label}
-                href={href}
-                {...(href.startsWith("http")
-                  ? { target: "_blank", rel: "noopener noreferrer" }
-                  : {})}
-                className="shrink-0 rounded-full bg-white px-4 py-2 text-[0.85rem] font-medium text-[#5b6064]"
+        <main id="hauptinhalt" className="mx-auto w-full max-w-[1200px] px-4 sm:px-6">
+          {/* ── Auftakt ────────────────────────────────────────────────
+              Hinter der Schlagzeile liegen drei Kreise übereinander. Sie
+              sind halb durchsichtig und mischen sich dort, wo sie sich
+              überlappen – wie Druckfarben auf Papier. */}
+          <section className="relative overflow-hidden pb-6 pt-10 sm:pt-16">
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+              <span
+                className="absolute -left-16 top-0 h-72 w-72 rounded-full opacity-70 mix-blend-multiply sm:h-[26rem] sm:w-[26rem]"
+                style={{ backgroundColor: `${farben[2].ton}66` }}
+              />
+              <span
+                className="absolute left-32 top-16 h-64 w-64 rounded-full opacity-70 mix-blend-multiply sm:h-[22rem] sm:w-[22rem]"
+                style={{ backgroundColor: `${farben[0].ton}59` }}
+              />
+              <span
+                className="absolute left-[38%] top-[-3rem] hidden h-[26rem] w-[26rem] rounded-full opacity-60 mix-blend-multiply lg:block"
+                style={{ backgroundColor: `${farben[1].ton}4d` }}
+              />
+            </div>
+
+            <div className="relative max-w-[46rem]">
+              <span
+                className="inline-flex items-center gap-2 rounded-full bg-white/80 px-4 py-1.5 text-[0.85rem] font-semibold backdrop-blur"
+                style={{ color: LEISE }}
               >
-                {label}
-              </a>
-            ))}
-          </div>
-          {/* ── Auftakt ─────────────────────────────────────────────── */}
-          <section className="grid gap-5 lg:grid-cols-12">
-            <div className="rounded-[28px] bg-white p-7 sm:p-10 lg:col-span-7 lg:p-14">
-              <span className="inline-flex items-center gap-2 rounded-full bg-[#f1f2f2] px-4 py-1.5 text-[0.82rem] font-medium text-[#6a6e72]">
                 {company.city} · seit über {company.yearsExperience} Jahren
               </span>
-              <h1 className="mt-7 text-[clamp(2.1rem,5vw,3.5rem)] font-extrabold leading-[1.08] tracking-[-0.035em]">
+              <h1 className="mt-6 text-[clamp(2.3rem,6vw,4.2rem)] font-extrabold leading-[1.04] tracking-[-0.04em]">
                 Ihr Logo aufs Shirt, aufs Auto oder an die Wand.
               </h1>
-              <p className="mt-6 max-w-[34rem] text-[1.05rem] leading-relaxed text-[#5b6064]">
+              <p className="mt-6 max-w-[34rem] text-[1.08rem] leading-relaxed" style={{ color: LEISE }}>
                 Wir besticken und bedrucken Kleidung, beschriften Fahrzeuge und
                 machen Schilder. Alles in einer Werkstatt.
               </p>
-              <div className="mt-9 flex flex-wrap items-center gap-3">
+              <div className="mt-8 flex flex-wrap items-center gap-3">
                 <a
                   href="#kontakt"
-                  className="rounded-full bg-[#16181a] px-7 py-3.5 text-[0.95rem] font-semibold text-white transition-colors hover:bg-[#33383c]"
+                  className="rounded-full px-7 py-4 text-[1rem] font-bold text-white transition-transform duration-300 hover:-translate-y-0.5"
+                  style={{ backgroundColor: TINTE }}
                 >
                   Projekt besprechen
                 </a>
                 <a
                   href={`tel:${company.phoneHref}`}
-                  className="rounded-full border border-[#16181a]/15 px-7 py-3.5 text-[0.95rem] font-semibold transition-colors hover:bg-[#f1f2f2]"
+                  className="rounded-full bg-white/80 px-7 py-4 text-[1rem] font-bold backdrop-blur transition-transform duration-300 hover:-translate-y-0.5"
+                  style={{ boxShadow: "inset 0 0 0 1.5px rgba(23,22,26,0.15)" }}
                 >
                   Anrufen
                 </a>
               </div>
             </div>
-
-            <Bild
-              note="Werkstatt am Rosseer Weg"
-              className="h-[34vh] min-h-[15rem] lg:col-span-5 lg:h-auto"
-            />
           </section>
 
-          {/* Drei kurze Marken unter dem Auftakt – flach, ohne Kasten. */}
-          <div className="mt-5 grid gap-5 sm:grid-cols-3">
-            {[
-              ["Eigene Stickerei", "Garn statt Aufdruck, hält länger"],
-              ["Eigene Folierung", "Vom Aufkleber bis zur Vollfolierung"],
-              ["Alles aus einer Hand", "Damit am Ende alles gleich aussieht"],
-            ].map(([titel, text]) => (
-              <div key={titel} className="rounded-[28px] bg-white px-7 py-6">
-                <p className="font-bold tracking-[-0.02em]">{titel}</p>
-                <p className="mt-1.5 text-[0.95rem] text-[#6a6e72]">{text}</p>
-              </div>
+          {/* ── Farbfächer ──────────────────────────────────────────────
+              Vier Muster nebeneinander, wie die Karte an der Wand. */}
+          <section className="mt-10 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+            {services.map((service, i) => (
+              <a
+                key={service.id}
+                href={service.external ?? `#${service.id}`}
+                {...(service.external
+                  ? { target: "_blank", rel: "noopener noreferrer" }
+                  : {})}
+                className="group rounded-[28px] p-5 transition-transform duration-300 hover:-translate-y-1 sm:p-6"
+                style={{ backgroundColor: `${farben[i].ton}1f` }}
+              >
+                <span
+                  className="block h-12 w-12 rounded-full sm:h-14 sm:w-14"
+                  style={{ backgroundColor: farben[i].ton }}
+                />
+                <p className="mt-4 text-[1.05rem] font-extrabold tracking-[-0.02em]">
+                  {service.title}
+                </p>
+                <p className="mt-1 text-[0.82rem]" style={{ color: LEISE }}>
+                  Farbe {String(i + 1).padStart(2, "0")} · {farben[i].name}
+                </p>
+              </a>
             ))}
-          </div>
+          </section>
 
-          {/* ── Leistungen ──────────────────────────────────────────── */}
-          <section id="leistungen" className="mt-14 scroll-mt-28 sm:mt-20">
-            <div className="px-2 sm:px-4">
-              <p className="text-[0.85rem] font-semibold text-[#6a6e72]">Leistungen</p>
-              <h2 className="mt-2 max-w-[22rem] text-[clamp(1.7rem,3.6vw,2.6rem)] font-extrabold leading-tight tracking-[-0.035em]">
-                Vier Bereiche, eine Werkstatt
+          {/* ── Leistungen ──────────────────────────────────────────────
+              Jeder Bereich bekommt seine Farbe und eine eigene Fläche.
+              Die erste ist die größte – das ist auch der größte Bereich. */}
+          <section id="leistungen" className="mt-16 scroll-mt-28 sm:mt-24">
+            <div className="max-w-[30rem]">
+              <p className="text-[0.88rem] font-bold" style={{ color: farben[1].ton }}>
+                Leistungen
+              </p>
+              <h2 className="mt-2 text-[clamp(1.8rem,4vw,2.8rem)] font-extrabold leading-tight tracking-[-0.04em]">
+                Vier Farben, eine Werkstatt
               </h2>
             </div>
 
-            <div className="mt-6 grid gap-5 lg:grid-cols-12">
+            <div className="mt-8 grid gap-4 sm:gap-5 lg:grid-cols-12">
               {services.map((service, i) => {
+                const gross = i === 0 || i === 3;
                 const Flaeche = service.external ? "a" : "article";
                 return (
-                  <div key={service.id} className={`relative ${breiten[i]}`}>
-                    {/* Lasche: schaut oben aus der Fläche heraus wie das
-                        Etikett an einem gefalteten Shirt. */}
-                    <div
+                  <Flaeche
+                    key={service.id}
+                    id={service.id}
+                    {...(service.external
+                      ? { href: service.external, target: "_blank", rel: "noopener noreferrer" }
+                      : {})}
+                    className={`group relative overflow-hidden rounded-[32px] p-7 transition-transform duration-300 hover:-translate-y-1 sm:p-9 ${
+                      gross ? "lg:col-span-7" : "lg:col-span-5"
+                    }`}
+                    style={{ backgroundColor: `${farben[i].ton}1a` }}
+                  >
+                    {/* Großer Kreis in der Ecke, halb durchsichtig. */}
+                    <span
                       aria-hidden="true"
-                      className="mx-10 h-3 rounded-t-[14px] bg-[#dcdedf]"
+                      className="pointer-events-none absolute -right-10 -top-10 h-44 w-44 rounded-full opacity-60 mix-blend-multiply transition-transform duration-500 group-hover:scale-110"
+                      style={{ backgroundColor: `${farben[i].ton}59` }}
                     />
-                    <Flaeche
-                      {...(service.external
-                        ? {
-                            href: service.external,
-                            target: "_blank",
-                            rel: "noopener noreferrer",
-                          }
-                        : {})}
-                      className="group flex h-[calc(100%-0.75rem)] flex-col rounded-[28px] bg-white p-7 transition-transform duration-300 hover:-translate-y-1 sm:p-9"
-                    >
-                      <div className="flex items-start justify-between gap-4">
-                        <h3 className="text-[1.45rem] font-extrabold tracking-[-0.03em] sm:text-[1.7rem]">
+
+                    <div className="relative">
+                      <div className="flex items-center gap-3">
+                        <span
+                          className="h-7 w-7 rounded-full"
+                          style={{ backgroundColor: farben[i].ton }}
+                        />
+                        <h3 className="text-[1.5rem] font-extrabold tracking-[-0.03em] sm:text-[1.85rem]">
                           {service.title}
                         </h3>
                         {service.external && (
-                          <span className="shrink-0 rounded-full bg-[#f1f2f2] px-4 py-1.5 text-[0.8rem] font-semibold text-[#6a6e72] transition-colors group-hover:bg-[#16181a] group-hover:text-white">
+                          <span className="ml-auto rounded-full bg-white/80 px-4 py-1.5 text-[0.8rem] font-bold">
                             Zum Shop ↗
                           </span>
                         )}
                       </div>
 
-                      <p className="mt-3 max-w-[34rem] leading-relaxed text-[#5b6064]">
+                      <p className="mt-4 max-w-[34rem] leading-relaxed" style={{ color: LEISE }}>
                         {service.teaser}
                       </p>
 
@@ -233,7 +260,7 @@ export default function Entwurf3Page() {
                         {service.points.map((point) => (
                           <li
                             key={point}
-                            className="rounded-full bg-[#f1f2f2] px-3.5 py-1.5 text-[0.85rem] text-[#6a6e72]"
+                            className="rounded-full bg-white/70 px-4 py-1.5 text-[0.85rem] font-medium"
                           >
                             {point}
                           </li>
@@ -242,97 +269,139 @@ export default function Entwurf3Page() {
 
                       <Bild
                         note={notes[service.id]}
-                        className={`mt-6 ${i === 0 || i === 3 ? "h-56 sm:h-72" : "h-44 sm:h-56"}`}
+                        ton={farben[i].ton}
+                        className={`mt-7 ${gross ? "h-60 sm:h-72" : "h-48 sm:h-56"}`}
                       />
-                    </Flaeche>
-                  </div>
+                    </div>
+                  </Flaeche>
                 );
               })}
             </div>
           </section>
 
-          {/* ── Ablauf ──────────────────────────────────────────────── */}
-          <section id="ablauf" className="mt-14 scroll-mt-28 sm:mt-20">
-            <div className="px-2 sm:px-4">
-              <p className="text-[0.85rem] font-semibold text-[#6a6e72]">Ablauf</p>
-              <h2 className="mt-2 max-w-[26rem] text-[clamp(1.7rem,3.6vw,2.6rem)] font-extrabold leading-tight tracking-[-0.035em]">
+          {/* ── Ablauf als Faden mit Punkten ────────────────────────────── */}
+          <section id="ablauf" className="mt-16 scroll-mt-28 sm:mt-24">
+            <div className="max-w-[32rem]">
+              <p className="text-[0.88rem] font-bold" style={{ color: farben[3].ton }}>
+                Ablauf
+              </p>
+              <h2 className="mt-2 text-[clamp(1.8rem,4vw,2.8rem)] font-extrabold leading-tight tracking-[-0.04em]">
                 Vom ersten Anruf bis zur fertigen Arbeit
               </h2>
             </div>
 
-            <ol className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <ol className="relative mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {/* Der Faden, der die Punkte verbindet. */}
+              <span
+                aria-hidden="true"
+                className="absolute left-0 right-0 top-[1.4rem] hidden h-[3px] rounded-full lg:block"
+                style={{
+                  background: `linear-gradient(to right, ${farben[0].ton}, ${farben[1].ton}, ${farben[2].ton}, ${farben[3].ton})`,
+                  opacity: 0.35,
+                }}
+              />
               {processSteps.map((step, i) => (
-                <li
-                  key={step.id}
-                  className="flex flex-col rounded-[28px] bg-white p-7 transition-transform duration-300 hover:-translate-y-1"
-                >
-                  <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#16181a] text-[0.9rem] font-bold text-white">
+                <li key={step.id} className="relative">
+                  <span
+                    className="flex h-11 w-11 items-center justify-center rounded-full text-[1rem] font-extrabold text-white"
+                    style={{ backgroundColor: farben[i].ton }}
+                  >
                     {i + 1}
                   </span>
-                  <h3 className="mt-5 text-[1.2rem] font-extrabold tracking-[-0.02em]">
-                    {step.title}
-                  </h3>
-                  <p className="mt-3 text-[0.95rem] leading-relaxed text-[#5b6064]">
-                    {step.body}
-                  </p>
-                  <ul className="mt-5 space-y-2 border-t border-[#16181a]/8 pt-4 text-[0.9rem] text-[#6a6e72]">
-                    {step.points.map((point) => (
-                      <li key={point}>{point}</li>
-                    ))}
-                  </ul>
+                  <div className="mt-4 rounded-[28px] bg-[#f6f6f7] p-6">
+                    <h3 className="text-[1.15rem] font-extrabold tracking-[-0.02em]">
+                      {step.title}
+                    </h3>
+                    <p className="mt-3 text-[0.95rem] leading-relaxed" style={{ color: LEISE }}>
+                      {step.body}
+                    </p>
+                    <ul className="mt-4 space-y-1.5 text-[0.88rem]" style={{ color: LEISE }}>
+                      {step.points.map((point) => (
+                        <li key={point} className="flex gap-2">
+                          <span style={{ color: farben[i].ton }}>•</span>
+                          {point}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </li>
               ))}
             </ol>
           </section>
 
-          {/* ── Standort ────────────────────────────────────────────── */}
-          <section id="standort" className="mt-14 scroll-mt-28 grid gap-5 sm:mt-20 lg:grid-cols-12">
-            <div className="rounded-[28px] bg-white p-7 sm:p-10 lg:col-span-7">
-              <p className="text-[0.85rem] font-semibold text-[#6a6e72]">Standort</p>
-              <p className="mt-4 text-[clamp(1.7rem,4vw,2.8rem)] font-extrabold leading-tight tracking-[-0.035em]">
-                {company.street}
-                <br />
-                <span className="text-[#9aa0a4]">
+          {/* ── Standort ─────────────────────────────────────────────────
+              Die Öffnungszeiten stehen in einer runden Scheibe. */}
+          <section id="standort" className="mt-16 scroll-mt-28 grid gap-5 sm:mt-24 lg:grid-cols-12">
+            <div
+              className="relative overflow-hidden rounded-[32px] p-7 sm:p-10 lg:col-span-7"
+              style={{ backgroundColor: `${farben[1].ton}1a` }}
+            >
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute -bottom-16 -left-10 h-56 w-56 rounded-full opacity-50 mix-blend-multiply"
+                style={{ backgroundColor: `${farben[1].ton}59` }}
+              />
+              <div className="relative">
+                <p className="text-[0.88rem] font-bold" style={{ color: farben[1].ton }}>
+                  Standort
+                </p>
+                <p className="mt-4 text-[clamp(1.7rem,4vw,2.6rem)] font-extrabold leading-tight tracking-[-0.04em]">
+                  {company.street}
+                  <br />
                   {company.zip} {company.city}
-                </span>
-              </p>
-              <p className="mt-5 max-w-[32rem] leading-relaxed text-[#5b6064]">
-                Rufen Sie am besten kurz an, bevor Sie herkommen – dann hat auch
-                jemand Zeit für Sie. Parken direkt vor dem Haus, größere
-                Fahrzeuge fahren auf den Hof.
-              </p>
-              <div className="mt-7 flex flex-wrap gap-2">
-                <a
-                  href={`tel:${company.phoneHref}`}
-                  className="rounded-full bg-[#f1f2f2] px-5 py-2.5 text-[0.9rem] font-semibold transition-colors hover:bg-[#16181a] hover:text-white"
-                >
-                  {company.phoneDisplay}
-                </a>
-                <a
-                  href={`mailto:${company.email}`}
-                  className="rounded-full bg-[#f1f2f2] px-5 py-2.5 text-[0.9rem] font-semibold transition-colors hover:bg-[#16181a] hover:text-white"
-                >
-                  {company.email}
-                </a>
-                <span className="rounded-full bg-[#f1f2f2] px-5 py-2.5 text-[0.9rem] text-[#6a6e72]">
-                  Fax {company.faxDisplay}
-                </span>
+                </p>
+                <p className="mt-5 max-w-[30rem] leading-relaxed" style={{ color: LEISE }}>
+                  Rufen Sie am besten kurz an, bevor Sie herkommen – dann hat
+                  auch jemand Zeit für Sie. Parken direkt vor dem Haus, größere
+                  Fahrzeuge fahren auf den Hof.
+                </p>
+                <div className="mt-7 flex flex-wrap gap-2">
+                  <a
+                    href={`tel:${company.phoneHref}`}
+                    className="rounded-full bg-white/80 px-5 py-2.5 text-[0.92rem] font-bold"
+                  >
+                    {company.phoneDisplay}
+                  </a>
+                  <a
+                    href={`mailto:${company.email}`}
+                    className="rounded-full bg-white/80 px-5 py-2.5 text-[0.92rem] font-bold"
+                  >
+                    {company.email}
+                  </a>
+                  <span
+                    className="rounded-full bg-white/60 px-5 py-2.5 text-[0.92rem]"
+                    style={{ color: LEISE }}
+                  >
+                    Fax {company.faxDisplay}
+                  </span>
+                </div>
               </div>
             </div>
 
-            <div className="rounded-[28px] bg-white p-7 sm:p-10 lg:col-span-5">
-              <p className="text-[0.85rem] font-semibold text-[#6a6e72]">Öffnungszeiten</p>
+            <div className="rounded-[32px] bg-[#f6f6f7] p-7 sm:p-10 lg:col-span-5">
+              <p className="text-[0.88rem] font-bold" style={{ color: farben[2].ton }}>
+                Öffnungszeiten
+              </p>
               <dl className="mt-5">
-                {openingHours.map((row) => (
+                {openingHours.map((row, i) => (
                   <div
                     key={row.days}
-                    className="flex items-baseline justify-between gap-4 border-b border-[#16181a]/8 py-4 last:border-0"
+                    className="flex items-baseline justify-between gap-4 py-4"
+                    style={{
+                      borderBottom:
+                        i === openingHours.length - 1
+                          ? "none"
+                          : "1px solid rgba(23,22,26,0.1)",
+                    }}
                   >
-                    <dt className="text-[0.95rem] text-[#5b6064]">{row.days}</dt>
+                    <dt className="text-[0.95rem]" style={{ color: LEISE }}>
+                      {row.days}
+                    </dt>
                     <dd
                       className={`whitespace-nowrap text-[0.95rem] ${
-                        row.byAppointment ? "text-[#6a6e72]" : "font-bold"
+                        row.byAppointment ? "" : "font-extrabold"
                       }`}
+                      style={row.byAppointment ? { color: LEISE } : undefined}
                     >
                       {row.time}
                     </dd>
@@ -342,31 +411,40 @@ export default function Entwurf3Page() {
             </div>
           </section>
 
-          {/* ── Kontakt ─────────────────────────────────────────────── */}
+          {/* ── Kontakt ─────────────────────────────────────────────────
+              Eine volle Farbfläche, rund wie alles andere hier. */}
           <section
             id="kontakt"
-            className="mt-14 scroll-mt-28 rounded-[28px] bg-[#16181a] p-8 text-white sm:mt-20 sm:p-12 lg:p-16"
+            className="relative mt-16 scroll-mt-28 overflow-hidden rounded-[32px] p-8 text-white sm:mt-24 sm:p-14"
+            style={{ backgroundColor: farben[0].ton }}
           >
-            <div className="grid gap-10 lg:grid-cols-[1.5fr_1fr] lg:items-end">
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute -right-20 -top-24 h-80 w-80 rounded-full opacity-50 mix-blend-multiply"
+              style={{ backgroundColor: farben[3].ton }}
+            />
+            <div className="relative grid gap-10 lg:grid-cols-[1.5fr_1fr] lg:items-end">
               <div>
-                <p className="text-[0.85rem] font-semibold text-white/55">Kontakt</p>
-                <h2 className="mt-3 text-[clamp(1.8rem,4.2vw,2.8rem)] font-extrabold leading-tight tracking-[-0.035em]">
+                <p className="text-[0.88rem] font-bold text-white/70">Kontakt</p>
+                <h2 className="mt-3 text-[clamp(1.9rem,4.4vw,3rem)] font-extrabold leading-tight tracking-[-0.04em]">
                   Was haben Sie vor?
                 </h2>
-                <p className="mt-4 max-w-[32rem] leading-relaxed text-white/70">
+                <p className="mt-4 max-w-[32rem] leading-relaxed text-white/85">
                   Ein Anruf reicht meistens schon. Sagen Sie kurz, worum es geht
                   – den Rest klären wir zusammen.
                 </p>
                 <div className="mt-8 flex flex-wrap gap-3">
                   <a
                     href={`tel:${company.phoneHref}`}
-                    className="rounded-full bg-white px-7 py-3.5 text-[1rem] font-bold text-[#16181a] transition-opacity hover:opacity-85"
+                    className="rounded-full bg-white px-7 py-4 text-[1.05rem] font-extrabold transition-transform duration-300 hover:-translate-y-0.5"
+                    style={{ color: TINTE }}
                   >
                     {company.phoneDisplay}
                   </a>
                   <a
                     href={`mailto:${company.email}`}
-                    className="rounded-full border border-white/25 px-7 py-3.5 text-[1rem] font-semibold transition-colors hover:bg-white/10"
+                    className="rounded-full px-7 py-4 text-[1.05rem] font-bold text-white transition-transform duration-300 hover:-translate-y-0.5"
+                    style={{ boxShadow: "inset 0 0 0 1.5px rgba(255,255,255,0.5)" }}
                   >
                     E-Mail schreiben
                   </a>
@@ -375,15 +453,15 @@ export default function Entwurf3Page() {
 
               <div className="flex items-start gap-5">
                 <div
-                  className="flex h-24 w-24 shrink-0 items-center justify-center rounded-[20px] border border-dashed border-white/35 text-center text-[0.72rem] text-white/60"
+                  className="flex h-24 w-24 shrink-0 items-center justify-center rounded-[24px] border border-dashed border-white/50 text-center text-[0.72rem] text-white/75"
                   role="img"
                   aria-label="Platzhalter für QR-Code"
                 >
                   QR-Code
                 </div>
-                <p className="text-[0.92rem] leading-relaxed text-white/65">
+                <p className="text-[0.92rem] leading-relaxed text-white/80">
                   Scannen und direkt Kontakt aufnehmen.
-                  <span className="mt-1 block text-white/45">
+                  <span className="mt-1 block text-white/55">
                     (Code wird hier eingesetzt)
                   </span>
                 </p>
@@ -393,24 +471,37 @@ export default function Entwurf3Page() {
         </main>
 
         {/* ── Fußzeile ───────────────────────────────────────────────── */}
-        <footer className="mx-auto w-full max-w-[1240px] px-4 pb-8 pt-6 sm:px-6">
-          <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-3 text-[0.88rem] text-[#6a6e72]">
+        <footer className="mx-auto w-full max-w-[1200px] px-4 pb-10 pt-8 sm:px-6">
+          {/* Noch einmal der Farbfächer, ganz klein. */}
+          <div aria-hidden="true" className="flex gap-1.5">
+            {farben.map((f) => (
+              <span
+                key={f.ton}
+                className="h-2 w-10 rounded-full"
+                style={{ backgroundColor: f.ton }}
+              />
+            ))}
+          </div>
+          <div
+            className="mt-5 flex flex-wrap items-center justify-between gap-x-8 gap-y-3 text-[0.88rem]"
+            style={{ color: LEISE }}
+          >
             <p>
               © 2026 {company.fullName} · {company.street}, {company.zip}{" "}
               {company.city}
             </p>
             <nav className="flex flex-wrap items-center gap-x-6 gap-y-2">
-              <Link href="/impressum" className="hover:text-[#16181a]">
+              <Link href="/impressum" className="hover:text-[#17161a]">
                 Impressum
               </Link>
-              <Link href="/datenschutz" className="hover:text-[#16181a]">
+              <Link href="/datenschutz" className="hover:text-[#17161a]">
                 Datenschutz
               </Link>
               <a
                 href={textilShopUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-[#16181a]"
+                className="hover:text-[#17161a]"
               >
                 Textilshop ↗
               </a>

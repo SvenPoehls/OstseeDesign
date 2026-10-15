@@ -73,7 +73,7 @@ export default function Services() {
       <div className="wrap">
         {/* Kapitelkopf: Nummer, Titel, Erklärung – alles an einer Linie. */}
         <div className="grid12 border-t border-ink pt-4">
-          <p className="col-span-4 text-[0.72rem] font-semibold uppercase tracking-label text-ink-soft lg:col-span-1">
+          <p className="col-span-4 text-[0.72rem] font-semibold uppercase tracking-label text-mark lg:col-span-1">
             01
           </p>
           <h2 className="display col-span-4 mt-2 text-[clamp(2.1rem,6.5vw,3.6rem)] lg:col-span-6 lg:mt-0">
@@ -127,7 +127,7 @@ export default function Services() {
 
                 <div className={`col-span-3 lg:row-start-1 ${plan.text}`}>
                   {service.external && (
-                    <p className="text-[0.72rem] uppercase tracking-label text-ink-soft">
+                    <p className="text-[0.72rem] uppercase tracking-label text-mark">
                       Externer Shop
                     </p>
                   )}

@@ -70,7 +70,7 @@ export default function Process() {
             man durch die Schritte scrollt. */}
         <div className="lg:sticky lg:top-0 lg:z-20 lg:bg-paper-deep lg:pb-6 lg:pt-24">
           <div className="grid12 border-t border-ink pt-4">
-            <p className="col-span-4 text-[0.72rem] font-semibold uppercase tracking-label text-ink-soft lg:col-span-1">
+            <p className="col-span-4 text-[0.72rem] font-semibold uppercase tracking-label text-mark lg:col-span-1">
               02
             </p>
             <h2 className="display col-span-4 mt-2 text-[clamp(2.1rem,6.5vw,3.6rem)] lg:col-span-6 lg:mt-0">
@@ -106,7 +106,7 @@ export default function Process() {
                 >
                   <div className="flex items-baseline gap-5">
                     {/* Große Ziffer, nur als Kontur – wie eine Schablone. */}
-                    <span className="display cutout shrink-0 text-[2.6rem] leading-none sm:text-[3.4rem]">
+                    <span className="display cutout cutout-mark shrink-0 text-[2.6rem] leading-none sm:text-[3.4rem]">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <h3 className="display text-[clamp(1.5rem,4.2vw,2.5rem)]">

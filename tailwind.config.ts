@@ -37,9 +37,11 @@ const config: Config = {
           soft: "var(--ink-soft)", // Nebentext
         },
         rule: "var(--rule)", // Haarlinien
-        // PLATZHALTER: die einzige „Farbe" im Entwurf. Steht bis auf Weiteres
-        // auf demselben Schwarz – hier später die echte Hausfarbe eintragen.
-        mark: "var(--mark)",
+        // Die zweite Druckfarbe (siehe globals.css).
+        mark: {
+          DEFAULT: "var(--mark)",
+          dark: "var(--mark-dark)",
+        },
       },
       fontFamily: {
         // Bricolage Grotesque: eigenwilliger Grotesk mit Breiten-Achse.

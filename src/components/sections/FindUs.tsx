@@ -14,7 +14,7 @@ export default function FindUs() {
     <section id="standort" className="bg-paper pb-16 pt-20 sm:pb-24 sm:pt-28">
       <div className="wrap">
         <div className="grid12 border-t border-ink pt-4">
-          <p className="col-span-4 text-[0.72rem] font-semibold uppercase tracking-label text-ink-soft lg:col-span-1">
+          <p className="col-span-4 text-[0.72rem] font-semibold uppercase tracking-label text-mark lg:col-span-1">
             03
           </p>
           <h2 className="display col-span-4 mt-2 text-[clamp(2.1rem,6.5vw,3.6rem)] lg:col-span-6 lg:mt-0">

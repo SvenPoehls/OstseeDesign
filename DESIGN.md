@@ -8,11 +8,17 @@ Gestaltungen nebeneinander, jede liegt auf einer eigenen Unterseite.
 | | Adresse | Leitsatz | Schrift | Grundton |
 | --- | --- | --- | --- | --- |
 | **1 Werkstatt-Druckbogen** | `/entwurf-1` | wie ein Druckbogen aus der eigenen Werkstatt | Bricolage Grotesque + Hanken Grotesk | warmes Papier |
-| **2 Vitrine** | `/entwurf-2` | wie ein beleuchtetes Schaufenster bei Nacht | Fraunces + Archivo | fast Schwarz |
-| **3 Laufzettel** | `/entwurf-3` | wie der Auftragszettel am Brett | JetBrains Mono | kühles Grauweiß |
+| **2 Vitrine** | `/entwurf-2` | wie ein helles Schaufenster am Vormittag | Fraunces + Archivo | helles Grauweiß |
+| **3 Stapel** | `/entwurf-3` | wie frisch gefaltete Shirts im Regal | Schibsted Grotesk | helles Grau, weiße Flächen |
 
-Inhalt und Texte sind in allen drei Entwürfen gleich, und alle drei kommen
-ohne Buntfarbe aus – so vergleicht man wirklich nur die Gestaltung.
+Inhalt und Texte sind in allen drei Entwürfen gleich, alle drei sind hell und
+kommen ohne Buntfarbe aus – so vergleicht man wirklich nur die Gestaltung.
+
+Zu den runden Ecken in Entwurf 3: Die gelten **nicht** allgemein als Merkmal
+von Baukasten-Seiten. Verräterisch ist nur, wenn überall derselbe
+Standardwert sitzt, ohne dass jemand entschieden hat. In Entwurf 3 sind sie
+Thema und folgen einer festen Staffelung (Flächen 28 px, Bilder 20 px,
+Knöpfe rund) – das ist eine Entscheidung, keine Voreinstellung.
 Die Begründungen stehen jeweils oben in der Datei des Entwurfs
 (`src/app/entwurf-2/page.tsx`, `src/app/entwurf-3/page.tsx`).
 

@@ -63,6 +63,18 @@ const archivo = localFont({
   display: "swap",
 });
 
+// Schibsted Grotesk → Entwurf 3 „Stapel": freundliche, etwas rundliche
+// Grotesk aus Skandinavien. Bewusst nicht Inter oder Poppins.
+const schibsted = localFont({
+  src: [
+    { path: "./fonts/schibsted-latin.woff2", style: "normal" },
+    { path: "./fonts/schibsted-latin-ext.woff2", style: "normal" },
+  ],
+  weight: "400 900",
+  variable: "--font-schibsted",
+  display: "swap",
+});
+
 const mono = localFont({
   src: [
     { path: "./fonts/jetbrains-latin.woff2", style: "normal" },
@@ -120,7 +132,7 @@ export default function RootLayout({
   return (
     <html
       lang="de"
-      className={`${sans.variable} ${display.variable} ${fraunces.variable} ${archivo.variable} ${mono.variable}`}
+      className={`${sans.variable} ${display.variable} ${fraunces.variable} ${archivo.variable} ${schibsted.variable} ${mono.variable}`}
     >
       <body>
         {/* Sprungmarke für Tastatur-/Screenreader-Nutzer (Barrierefreiheit). */}

@@ -12,7 +12,7 @@ import Link from "next/link";
 export const entwuerfe = [
   { nr: 1, href: "/entwurf-1", name: "Werkstatt-Druckbogen" },
   { nr: 2, href: "/entwurf-2", name: "Vitrine" },
-  { nr: 3, href: "/entwurf-3", name: "Laufzettel" },
+  { nr: 3, href: "/entwurf-3", name: "Stapel" },
 ] as const;
 
 export default function VariantBar({ current }: { current: 1 | 2 | 3 }) {

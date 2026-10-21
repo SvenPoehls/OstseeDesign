@@ -3,10 +3,8 @@ import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import Link from "next/link";
-import CookieNotice from "@/components/layout/CookieNotice";
 import { ArrowIcon } from "@/components/ui/Icons";
 import { asset } from "@/lib/assets";
-import { company } from "@/lib/site";
 
 // AUSWAHLSEITE
 // Zeigt die drei Entwürfe nebeneinander. Jede Kachel führt auf eine eigene
@@ -92,24 +90,8 @@ export default function AuswahlPage() {
         </div>
       </header>
 
-      <main id="hauptinhalt" className="wrap pb-20 pt-14 sm:pt-20">
-        <div className="grid12 border-t border-ink pt-4">
-          <p className="col-span-4 text-[0.72rem] font-semibold uppercase tracking-label text-ink-soft lg:col-span-1">
-            Auswahl
-          </p>
-          <h1 className="display col-span-4 mt-2 text-[clamp(2.2rem,6.5vw,4rem)] lg:col-span-6 lg:mt-0">
-            Drei Entwürfe.
-            <br />
-            Einer wird es.
-          </h1>
-          <p className="col-span-4 mt-5 text-ink-soft lg:col-span-4 lg:col-start-9 lg:mt-0">
-            Inhalt, Texte und Firmendaten sind überall gleich – verglichen wird
-            nur die Gestaltung. Alle drei kommen ohne Buntfarbe aus, damit man
-            sie nebeneinander beurteilen kann. Bilder sind noch Platzhalter.
-          </p>
-        </div>
-
-        <div className="mt-10 grid gap-10 sm:mt-14 lg:grid-cols-3 lg:gap-8">
+      <main id="hauptinhalt" className="wrap pb-20 pt-10 sm:pt-14">
+        <div className="grid gap-10 lg:grid-cols-3 lg:gap-8">
           {entwuerfe.map((e) => (
             <Link
               key={e.nr}
@@ -156,30 +138,7 @@ export default function AuswahlPage() {
           ))}
         </div>
 
-        <p className="mt-16 max-w-reading border-t border-ink pt-4 text-[0.9rem] text-ink-soft">
-          Sobald ein Entwurf gewählt ist, wird er zur eigentlichen Startseite;
-          die beiden anderen fliegen raus. Bis dahin liegt jeder unter seiner
-          eigenen Adresse, und die Vorschauleiste oben führt direkt von einem
-          zum nächsten.
-        </p>
       </main>
-
-      <footer className="border-t border-ink">
-        <div className="wrap flex flex-wrap items-center justify-between gap-x-6 gap-y-2 py-5 text-[0.78rem] text-ink-soft">
-          <p>
-            © 2026 {company.fullName}
-          </p>
-          <nav className="flex flex-wrap items-center gap-x-6 gap-y-2">
-            <Link href="/impressum" className="ul-link">
-              Impressum
-            </Link>
-            <Link href="/datenschutz" className="ul-link">
-              Datenschutz
-            </Link>
-          </nav>
-        </div>
-      </footer>
-      <CookieNotice />
     </div>
   );
 }

@@ -38,42 +38,9 @@ export const metadata: Metadata = {
 };
 
 const entwuerfe = [
-  {
-    nr: "01",
-    href: "/entwurf-1",
-    bild: "/vorschau-1.jpg",
-    name: "Werkstatt-Druckbogen",
-    satz: "Soll aussehen wie ein Druckbogen aus der eigenen Werkstatt.",
-    merkmale: [
-      "Zweifarbendruck: Papier, schwarze Tinte und ein Zinnoberrot",
-      "Große schmale Schrift, alles linksbündig am Raster",
-      "Haarlinien statt Kästen, durchgehend eckig, Laufband wie ein Banner",
-    ],
-  },
-  {
-    nr: "02",
-    href: "/entwurf-2",
-    bild: "/vorschau-2.jpg",
-    name: "Klare Kante",
-    satz: "So aufgeräumt wie die Hauptseite, aber mit eigener Handschrift.",
-    merkmale: [
-      "Hell und in Karten, Abschnitte im Wechsel weiß und getönt",
-      "Petrolblau statt Indigo, Mona Sans statt Jakarta Sans",
-      "Weniger Rundung, versetzte Kacheln statt Viererreihe",
-    ],
-  },
-  {
-    nr: "03",
-    href: "/entwurf-3",
-    bild: "/vorschau-3.jpg",
-    name: "Farbfächer",
-    satz: "Soll aussehen wie der Farbfächer an der Werkstattwand.",
-    merkmale: [
-      "Bunt: jeder Bereich hat seine eigene Farbe",
-      "Kreise liegen übereinander und mischen sich wie Druckfarben",
-      "Rund und verspielt – Pillen, Scheiben, weiche Flächen",
-    ],
-  },
+  { nr: "01", href: "/entwurf-1", bild: "/vorschau-1.jpg", name: "Werkstatt-Druckbogen" },
+  { nr: "02", href: "/entwurf-2", bild: "/vorschau-2.jpg", name: "Klare Kante" },
+  { nr: "03", href: "/entwurf-3", bild: "/vorschau-3.jpg", name: "Farbfächer" },
 ];
 
 export default function AuswahlPage() {
@@ -108,13 +75,9 @@ export default function AuswahlPage() {
                 </span>
               </div>
 
-              <h2 className="display mt-3 text-[clamp(1.6rem,4vw,2.2rem)]">
-                <span className="ul-link">{e.name}</span>
-              </h2>
-
               {/* Vorschaubild: oben ausgerichtet, damit man den Kopfbereich
                   sieht. Der Rahmen gehört zur Kachel, nicht zum Entwurf. */}
-              <div className="mt-5 h-[20rem] overflow-hidden border border-ink bg-paper-deep sm:h-[26rem] lg:h-[22rem]">
+              <div className="mt-4 h-[22rem] overflow-hidden border border-ink bg-paper-deep sm:h-[28rem] lg:h-[24rem]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={bildAdresse(e.bild)}
@@ -124,16 +87,6 @@ export default function AuswahlPage() {
                 />
               </div>
 
-              <p className="mt-5 text-ink-soft">{e.satz}</p>
-
-              <ul className="mt-4 space-y-2 text-[0.9rem] text-ink-soft">
-                {e.merkmale.map((m) => (
-                  <li key={m} className="flex gap-3 border-t border-rule pt-2">
-                    <span aria-hidden="true" className="mt-2 h-px w-4 shrink-0 bg-ink/40" />
-                    {m}
-                  </li>
-                ))}
-              </ul>
             </Link>
           ))}
         </div>

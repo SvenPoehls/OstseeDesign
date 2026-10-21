@@ -43,11 +43,11 @@ const farben = [
 ];
 
 const TINTE = "#17161a"; // Schriftfarbe
-// Flächen (Kopfzeile, Hauptknopf) sind nicht mehr tiefschwarz, sondern ein
-// dunkles Grau. Die Kopfzeile ist zusätzlich leicht durchscheinend, damit
-// die bunten Kreise darunter durchschimmern.
-const DUNKEL = "#3a3d42";
-const DUNKEL_GLAS = "rgba(58, 61, 66, 0.82)";
+// Flächen sind weder schwarz noch grau, sondern nehmen Farben aus dem
+// Fächer: die Kopfzeile das helle Ocker (leicht durchscheinend, damit die
+// Kreise darunter durchschimmern), Knöpfe das Petrol.
+const KOPF_GLAS = "rgba(255, 198, 61, 0.88)";
+const KNOPF = "#0e7c86";
 const LEISE = "#605c66";
 
 const notes: Record<string, string> = {
@@ -90,32 +90,33 @@ export default function Entwurf3Page() {
 
       <div className="min-h-screen bg-white font-schibsted antialiased" style={{ color: TINTE }}>
         {/* ── Kopfzeile als schwebende Pille ────────────────────────────
-            Dunkel statt weiß: Auf der weißen Seite war eine weiße Leiste
-            kaum zu erkennen. Jetzt hebt sie sich klar ab, und der bunte
-            Telefon-Knopf darin kommt besser zur Geltung. */}
+            Eine weiße Leiste war auf der weißen Seite kaum zu erkennen,
+            schwarz wirkte zu schwer. Jetzt trägt sie das helle Ocker aus
+            dem Farbfächer, leicht durchscheinend – die Kreise schimmern
+            durch, die Leiste bleibt aber klar sichtbar. */}
         <header className="sticky top-0 z-40 px-4 pt-4 sm:px-6">
           <div
-            className="mx-auto flex w-full max-w-[1200px] items-center justify-between gap-4 rounded-full py-2.5 pl-6 pr-2.5 text-white shadow-[0_8px_24px_rgba(23,22,26,0.14)] backdrop-blur"
-            style={{ backgroundColor: DUNKEL_GLAS }}
+            className="mx-auto flex w-full max-w-[1200px] items-center justify-between gap-4 rounded-full py-2.5 pl-6 pr-2.5 shadow-[0_8px_24px_rgba(23,22,26,0.12)] backdrop-blur"
+            style={{ backgroundColor: KOPF_GLAS, color: TINTE }}
           >
             <Link href="/entwurf-3" className="text-[1.15rem] font-extrabold tracking-[-0.03em]">
               ostseedesign
             </Link>
-            <nav className="hidden items-center gap-7 text-[0.92rem] font-medium text-white/70 lg:flex">
-              <a href="#leistungen" className="hover:text-white">
+            <nav className="hidden items-center gap-7 text-[0.92rem] font-semibold text-[#17161a]/70 lg:flex">
+              <a href="#leistungen" className="hover:text-[#17161a]">
                 Leistungen
               </a>
-              <a href="#ablauf" className="hover:text-white">
+              <a href="#ablauf" className="hover:text-[#17161a]">
                 Ablauf
               </a>
-              <a href="#standort" className="hover:text-white">
+              <a href="#standort" className="hover:text-[#17161a]">
                 Standort
               </a>
               <a
                 href={textilShopUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-white"
+                className="hover:text-[#17161a]"
               >
                 Textilshop ↗
               </a>
@@ -123,7 +124,7 @@ export default function Entwurf3Page() {
             <a
               href={`tel:${company.phoneHref}`}
               className="rounded-full px-5 py-2.5 text-[0.9rem] font-bold text-white transition-opacity hover:opacity-85"
-              style={{ backgroundColor: farben[0].ton }}
+              style={{ backgroundColor: KNOPF }}
             >
               {company.phoneDisplay}
             </a>
@@ -139,7 +140,7 @@ export default function Entwurf3Page() {
               ["Ablauf", "#ablauf", farben[1].ton],
               ["Standort", "#standort", farben[2].ton],
               ["Kontakt", "#kontakt", farben[3].ton],
-              ["Textilshop ↗", textilShopUrl, DUNKEL],
+              ["Textilshop ↗", textilShopUrl, KNOPF],
             ].map(([label, href, ton]) => (
               <a
                 key={label}
@@ -193,7 +194,7 @@ export default function Entwurf3Page() {
                 <a
                   href="#kontakt"
                   className="rounded-full px-7 py-4 text-[1rem] font-bold text-white transition-transform duration-300 hover:-translate-y-0.5"
-                  style={{ backgroundColor: DUNKEL }}
+                  style={{ backgroundColor: KNOPF }}
                 >
                   Projekt besprechen
                 </a>

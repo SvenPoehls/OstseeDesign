@@ -84,27 +84,33 @@ export default function Entwurf3Page() {
       <VariantBar current={3} />
 
       <div className="min-h-screen bg-white font-schibsted antialiased" style={{ color: TINTE }}>
-        {/* ── Kopfzeile als schwebende Pille ──────────────────────────── */}
+        {/* ── Kopfzeile als schwebende Pille ────────────────────────────
+            Dunkel statt weiß: Auf der weißen Seite war eine weiße Leiste
+            kaum zu erkennen. Jetzt hebt sie sich klar ab, und der bunte
+            Telefon-Knopf darin kommt besser zur Geltung. */}
         <header className="sticky top-0 z-40 px-4 pt-4 sm:px-6">
-          <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between gap-4 rounded-full bg-white/85 py-2.5 pl-6 pr-2.5 shadow-[0_1px_0_rgba(23,22,26,0.08)] backdrop-blur">
+          <div
+            className="mx-auto flex w-full max-w-[1200px] items-center justify-between gap-4 rounded-full py-2.5 pl-6 pr-2.5 text-white shadow-[0_8px_24px_rgba(23,22,26,0.18)]"
+            style={{ backgroundColor: TINTE }}
+          >
             <Link href="/entwurf-3" className="text-[1.15rem] font-extrabold tracking-[-0.03em]">
               ostseedesign
             </Link>
-            <nav className="hidden items-center gap-7 text-[0.92rem] font-medium lg:flex" style={{ color: LEISE }}>
-              <a href="#leistungen" className="hover:text-[#17161a]">
+            <nav className="hidden items-center gap-7 text-[0.92rem] font-medium text-white/70 lg:flex">
+              <a href="#leistungen" className="hover:text-white">
                 Leistungen
               </a>
-              <a href="#ablauf" className="hover:text-[#17161a]">
+              <a href="#ablauf" className="hover:text-white">
                 Ablauf
               </a>
-              <a href="#standort" className="hover:text-[#17161a]">
+              <a href="#standort" className="hover:text-white">
                 Standort
               </a>
               <a
                 href={textilShopUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-[#17161a]"
+                className="hover:text-white"
               >
                 Textilshop ↗
               </a>
@@ -120,6 +126,30 @@ export default function Entwurf3Page() {
         </header>
 
         <main id="hauptinhalt" className="mx-auto w-full max-w-[1200px] px-4 sm:px-6">
+          {/* Auf dem Handy ersetzt diese Reihe die Navigation. Jede Marke
+              trägt die Farbe ihres Bereichs. */}
+          <div className="mt-5 flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] lg:hidden [&::-webkit-scrollbar]:hidden">
+            {[
+              ["Leistungen", "#leistungen", farben[0].ton],
+              ["Ablauf", "#ablauf", farben[1].ton],
+              ["Standort", "#standort", farben[2].ton],
+              ["Kontakt", "#kontakt", farben[3].ton],
+              ["Textilshop ↗", textilShopUrl, TINTE],
+            ].map(([label, href, ton]) => (
+              <a
+                key={label}
+                href={href}
+                {...(href.startsWith("http")
+                  ? { target: "_blank", rel: "noopener noreferrer" }
+                  : {})}
+                className="shrink-0 rounded-full px-4 py-2 text-[0.85rem] font-semibold"
+                style={{ backgroundColor: `${ton}2e`, color: TINTE }}
+              >
+                {label}
+              </a>
+            ))}
+          </div>
+
           {/* ── Auftakt ────────────────────────────────────────────────
               Hinter der Schlagzeile liegen drei Kreise übereinander. Sie
               sind halb durchsichtig und mischen sich dort, wo sie sich

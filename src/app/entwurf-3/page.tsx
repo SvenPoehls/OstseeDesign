@@ -42,7 +42,12 @@ const farben = [
   { ton: "#e4557e", name: "Magenta" },
 ];
 
-const TINTE = "#17161a";
+const TINTE = "#17161a"; // Schriftfarbe
+// Flächen (Kopfzeile, Hauptknopf) sind nicht mehr tiefschwarz, sondern ein
+// dunkles Grau. Die Kopfzeile ist zusätzlich leicht durchscheinend, damit
+// die bunten Kreise darunter durchschimmern.
+const DUNKEL = "#3a3d42";
+const DUNKEL_GLAS = "rgba(58, 61, 66, 0.82)";
 const LEISE = "#605c66";
 
 const notes: Record<string, string> = {
@@ -90,8 +95,8 @@ export default function Entwurf3Page() {
             Telefon-Knopf darin kommt besser zur Geltung. */}
         <header className="sticky top-0 z-40 px-4 pt-4 sm:px-6">
           <div
-            className="mx-auto flex w-full max-w-[1200px] items-center justify-between gap-4 rounded-full py-2.5 pl-6 pr-2.5 text-white shadow-[0_8px_24px_rgba(23,22,26,0.18)]"
-            style={{ backgroundColor: TINTE }}
+            className="mx-auto flex w-full max-w-[1200px] items-center justify-between gap-4 rounded-full py-2.5 pl-6 pr-2.5 text-white shadow-[0_8px_24px_rgba(23,22,26,0.14)] backdrop-blur"
+            style={{ backgroundColor: DUNKEL_GLAS }}
           >
             <Link href="/entwurf-3" className="text-[1.15rem] font-extrabold tracking-[-0.03em]">
               ostseedesign
@@ -134,7 +139,7 @@ export default function Entwurf3Page() {
               ["Ablauf", "#ablauf", farben[1].ton],
               ["Standort", "#standort", farben[2].ton],
               ["Kontakt", "#kontakt", farben[3].ton],
-              ["Textilshop ↗", textilShopUrl, TINTE],
+              ["Textilshop ↗", textilShopUrl, DUNKEL],
             ].map(([label, href, ton]) => (
               <a
                 key={label}
@@ -188,7 +193,7 @@ export default function Entwurf3Page() {
                 <a
                   href="#kontakt"
                   className="rounded-full px-7 py-4 text-[1rem] font-bold text-white transition-transform duration-300 hover:-translate-y-0.5"
-                  style={{ backgroundColor: TINTE }}
+                  style={{ backgroundColor: DUNKEL }}
                 >
                   Projekt besprechen
                 </a>

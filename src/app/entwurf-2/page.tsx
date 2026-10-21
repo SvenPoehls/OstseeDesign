@@ -115,19 +115,16 @@ export default function Entwurf2Page() {
       <div className="min-h-screen bg-white font-mona antialiased" style={{ color: TEXT }}>
         {/* ── Kopfzeile ──────────────────────────────────────────────── */}
         <header
-          className="sticky top-0 z-50 border-b backdrop-blur"
-          style={{ borderColor: BORDER, backgroundColor: "rgba(255,255,255,0.92)" }}
+          className="sticky top-0 z-50 border-b bg-white"
+          style={{ borderColor: BORDER }}
         >
           <div className="mx-auto flex w-full max-w-[1180px] flex-wrap items-center justify-between gap-x-6 gap-y-3 px-6 py-4">
-            <Link href="/entwurf-2" className="flex items-center gap-2.5 text-[1.25rem] font-extrabold tracking-[-0.01em]">
-              <span
-                className="flex h-[34px] w-[34px] items-center justify-center rounded-[8px] text-[0.9rem] font-extrabold text-white"
-                style={{ backgroundColor: ACCENT }}
-                aria-hidden="true"
-              >
-                od
-              </span>
-              Ostseedesign
+            {/* Nur der Schriftzug – kein Logo-Kästchen. */}
+            <Link
+              href="/entwurf-2"
+              className="text-[1.3rem] font-extrabold tracking-[-0.02em]"
+            >
+              ostseedesign
             </Link>
 
             <nav className="flex flex-wrap items-center gap-x-7 gap-y-2 text-[0.92rem] font-medium">

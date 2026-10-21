@@ -127,7 +127,7 @@ export default function Entwurf3Page() {
           <section className="relative overflow-hidden pb-6 pt-10 sm:pt-16">
             <div aria-hidden="true" className="pointer-events-none absolute inset-0">
               <span
-                className="absolute -left-16 top-0 h-72 w-72 rounded-full opacity-70 mix-blend-multiply sm:h-[26rem] sm:w-[26rem]"
+                className="absolute left-0 top-0 h-64 w-64 rounded-full opacity-70 mix-blend-multiply sm:h-[22rem] sm:w-[22rem]"
                 style={{ backgroundColor: `${farben[2].ton}66` }}
               />
               <span

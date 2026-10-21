@@ -8,7 +8,7 @@ Gestaltungen nebeneinander, jede liegt auf einer eigenen Unterseite.
 | | Adresse | Leitsatz | Schrift | Farbe | Form |
 | --- | --- | --- | --- | --- | --- |
 | **1 Werkstatt-Druckbogen** | `/entwurf-1` | wie ein Druckbogen aus der eigenen Werkstatt | Bricolage Grotesque + Hanken Grotesk | Papier, Tinte, **Zinnoberrot** – auch als ganze Fläche | kantig, 0 px |
-| **2 Hausstil** | `/entwurf-2` | sieht aus wie poehlsdigital.de | Plus Jakarta Sans (+ Mono für die Marken) | Weiß, zart indigo getönte Abschnitte, **Indigo #4f46e5** | rund: Karten 22 px, Knöpfe als Pillen |
+| **2 Klare Kante** | `/entwurf-2` | so aufgeräumt wie die Hauptseite, aber eigenständig | Mona Sans | Weiß, zart getönte Abschnitte, **Petrolblau #17566b** | wenig Rundung: Karten 12 px, Knöpfe 10 px |
 | **3 Farbfächer** | `/entwurf-3` | wie der Farbfächer an der Werkstattwand | Schibsted Grotesk | Weiß + **vier Werkstattfarben** | rund, 32 px und Kreise |
 
 Jeder Entwurf hat außerdem **eigene Bausteine**, die es in den anderen nicht
@@ -17,12 +17,13 @@ gibt – daran erkennt man sie auch ohne Farbe:
 | | nur hier |
 | --- | --- |
 | **1** | Laufband wie eine Laufschrift · Konturschrift („ausgestanzt") · Stempel · sichtbare Rasterlinien · Papierkörnung · Schritte, die beim Scrollen stehen bleiben |
-| **2** | übernimmt den **Hausstil von PöhlsDigital** (Schrift, Farben, Rundungen, Schatten stammen 1:1 aus `css/style.css` im Repo SvenPoehls/PlanB) · mittiger Hero mit feinem Indigo-Raster im Hintergrund · Karten mit Symbolfeld · Abschnitte im Wechsel weiß / getönt · Knöpfe als Pillen · kein Bild |
+| **2** | folgt dem **aufgeräumten Stil der Hauptseite** (helle Seite, Inhalte in Karten, Symbolfelder, Marke über jeder Überschrift, Abschnitte im Wechsel weiß/getönt), aber mit eigener Schrift, eigener Farbe und weniger Rundung · Hero linksbündig mit Infokarte daneben und Punktraster · Leistungen versetzt (breit/schmal) statt Viererreihe · Ablauf als vier Zeilen in EINER Karte · Standort als geteilte Karte · kein Bild |
 | **3** | Farbfächer-Reihe · Kreise, die sich übereinander **mischen** (wie Druckfarben) · Faden mit farbigen Punkten · Pillen statt Listen |
 
-Zum Indigo in Entwurf 2: Das ist die **Hausfarbe von PöhlsDigital**, direkt
-aus deren Stylesheet übernommen – also eine bewusste Entscheidung, auch wenn
-derselbe Ton zufällig der Standardwert vieler Baukästen ist.
+Entwurf 2 ist bewusst nah am Stil der Hauptseite poehlsdigital.de gebaut
+(Aufbau, Karten, Marken über den Überschriften), setzt sich aber durch
+Schrift, Farbe und geringere Rundung davon ab – die Seite soll zur Familie
+gehören, aber nicht wie eine Kopie wirken.
 
 Inhalt und Texte sind überall gleich – verglichen wird nur die Gestaltung.
 Alle drei sind hell; die Farbe kommt aus Flächen, nicht aus dunklen

@@ -42,15 +42,16 @@ const sans = localFont({
 //                   hier als einzige Schrift des Entwurfs.
 //   JetBrains Mono → Entwurf 3 „Laufzettel": Schreibmaschinen-Anmutung,
 //                   alle Zeichen gleich breit – daher sauber in Tabellen.
-// Plus Jakarta Sans → Entwurf 2 „Hausstil". Dieselbe Schrift wie auf
-// poehlsdigital.de, direkt aus deren Projekt übernommen (selbst gehostet).
-const jakarta = localFont({
+// Mona Sans → Entwurf 2. Klare, moderne Grotesk mit etwas mehr Charakter
+// als die Schrift der Hauptseite – damit die Seite eigenständig bleibt,
+// aber genauso aufgeräumt wirkt.
+const mona = localFont({
   src: [
-    { path: "./fonts/jakarta-latin.woff2", style: "normal" },
-    { path: "./fonts/jakarta-latin-ext.woff2", style: "normal" },
+    { path: "./fonts/mona-latin.woff2", style: "normal" },
+    { path: "./fonts/mona-latin-ext.woff2", style: "normal" },
   ],
-  weight: "200 800",
-  variable: "--font-jakarta",
+  weight: "400 800",
+  variable: "--font-mona",
   display: "swap",
 });
 
@@ -133,7 +134,7 @@ export default function RootLayout({
   return (
     <html
       lang="de"
-      className={`${sans.variable} ${display.variable} ${archivo.variable} ${jakarta.variable} ${schibsted.variable} ${mono.variable}`}
+      className={`${sans.variable} ${display.variable} ${archivo.variable} ${mona.variable} ${schibsted.variable} ${mono.variable}`}
     >
       <body>
         {/* Sprungmarke für Tastatur-/Screenreader-Nutzer (Barrierefreiheit). */}

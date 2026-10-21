@@ -4,51 +4,53 @@ import VariantBar from "@/components/layout/VariantBar";
 import { company, openingHours, services, textilShopUrl } from "@/lib/site";
 
 // ════════════════════════════════════════════════════════════════════════
-// ENTWURF 2 — „HAUSSTIL"
+// ENTWURF 2 — „KLARE KANTE"
 // ════════════════════════════════════════════════════════════════════════
-// Leitsatz: Sieht aus wie poehlsdigital.de – clean, hell, ein Indigo.
+// Leitsatz: So aufgeräumt wie die Hauptseite von PöhlsDigital, aber mit
+// eigener Handschrift – ruhig, hell, in Karten, ohne Schnörkel.
 //
-// Dieser Entwurf übernimmt bewusst die Gestaltungsmittel der Hauptseite
-// von PöhlsDigital. Die Werte stammen 1:1 aus deren Stylesheet
-// (css/style.css im Repo SvenPoehls/PlanB):
+// WAS VOM HAUSSTIL BLEIBT (der „clean" Look):
+//   • helle Seite, Inhalte in Karten mit feinem Rahmen
+//   • Abschnitte im Wechsel: weiß und zart getönt
+//   • kleine Marke („eyebrow") über jeder Überschrift
+//   • Symbolfelder vor den Überschriften der Karten
+//   • weiche, leicht in der Akzentfarbe getönte Schatten
 //
-//   Schrift      Plus Jakarta Sans, 200–800, selbst gehostet.
-//                Überschriften 800, eng gesetzt (-0.02em).
-//                Kleine Marken („eyebrow") in JetBrains Mono, indigo.
-//   Farben       Weiß · Hellgrau-Indigo-Verlauf für jeden zweiten
-//                Abschnitt · Text #1c2029 · Nebentext #5b6270 ·
-//                Rahmen #e3e6ec · Akzent Indigo #4f46e5
-//   Rundung      Karten 22 px, Symbolfelder 14 px, Knöpfe ganz rund
-//   Schatten     weich und leicht indigo getönt
-//   Aufbau       Kopfzeile klebt oben (weiß, leicht durchscheinend),
-//                Hero mittig mit feinem Rasterhintergrund, danach
-//                Abschnitte im Wechsel Weiß / getönt, Inhalte in Karten.
+// WAS ANDERS IST (damit die Seite nicht wie eine Kopie wirkt):
+//   Schrift   Mona Sans statt Plus Jakarta Sans.
+//   Farbe     tiefes Petrolblau statt Indigo (passt zur Ostsee).
+//   Rundung   spürbar weniger: Karten 12 px, Symbolfelder 8 px,
+//             Knöpfe 10 px – keine Pillen.
+//   Anordnung kein Vierer-Raster: die Leistungen sitzen versetzt
+//             (breit/schmal, dann schmal/breit), der Ablauf steht als
+//             vier Zeilen in EINER Karte, der Standort in einer
+//             geteilten Karte.
+//   Hero      linksbündig statt mittig, mit einer kleinen Infokarte
+//             rechts daneben; Punktraster statt Linienraster.
 //
-// Anders als Entwurf 1 (kantig, zweifarbig) und Entwurf 3 (bunt, verspielt,
-// vier Farben): hier eine einzige Akzentfarbe und durchgehend Karten.
+// FARBE TAUSCHEN: die Werte unten.
 export const metadata: Metadata = {
-  title: "Entwurf 2 · Hausstil",
+  title: "Entwurf 2 · Klare Kante",
   description:
-    "Entwurf 2 für ostseedesign.de: im Stil von poehlsdigital.de – hell, clean, Indigo als einzige Akzentfarbe.",
+    "Entwurf 2 für ostseedesign.de: aufgeräumt und hell, Petrolblau als Akzent, Inhalte in Karten.",
 };
 
-const TEXT = "#1c2029";
-const MUTED = "#5b6270";
-const BORDER = "#e3e6ec";
-const ACCENT = "#4f46e5";
-const ACCENT_LIGHT = "#edecfd";
-const BG_ALT = "linear-gradient(135deg, #f8f9fc 0%, #eef0fb 55%, #f3eefc 100%)";
-const SHADOW = "0 14px 34px rgba(79, 70, 229, 0.16)";
-const SHADOW_SM = "0 2px 10px rgba(79, 70, 229, 0.1)";
+const TEXT = "#15202b";
+const MUTED = "#5a6673";
+const BORDER = "#e2e7ec";
+const ACCENT = "#17566b"; // tiefes Petrolblau
+const ACCENT_DARK = "#0f3d4d";
+const ACCENT_LIGHT = "#e5eef2";
+const BG_ALT = "#f5f8f9";
+const SHADOW_SM = "0 2px 10px rgba(23, 86, 107, 0.08)";
+const SHADOW = "0 16px 36px rgba(23, 86, 107, 0.14)";
 
-// Kurzfassungen – eine Zeile je Bereich.
 const kurz: Record<string, string> = {
   textilveredelung:
-    "Ihr Logo auf Arbeitskleidung, Poloshirts oder Trikots. Gestickt oder gedruckt.",
+    "Ihr Logo auf Arbeitskleidung, Poloshirts oder Trikots. Gestickt oder gedruckt – je nachdem, was länger halten muss.",
   werbetechnik:
     "Fahrzeuge, Schilder, Schaufenster und Banner – vom Aufkleber bis zur Vollfolierung.",
-  drucksachen:
-    "Visitenkarten, Flyer, Briefpapier und Stempel, passend zum Rest.",
+  drucksachen: "Visitenkarten, Flyer, Briefpapier und Stempel, passend zum Rest.",
   textilshop:
     "Kleidung in Ruhe aussuchen und auf Wunsch direkt bei uns veredeln lassen.",
 };
@@ -60,7 +62,14 @@ const ablauf = [
   ["Fertigen", "Gestickt, bedruckt oder foliert in unserer Werkstatt."],
 ];
 
-// Symbole in der Linienstärke der Hauptseite (1,8).
+// Breite der Leistungskarten: versetzt statt vier gleiche nebeneinander.
+const breiten = [
+  "lg:col-span-7",
+  "lg:col-span-5",
+  "lg:col-span-5",
+  "lg:col-span-7",
+];
+
 const Symbole: Record<string, React.ReactNode> = {
   textilveredelung: (
     <path d="M8 4l4 2 4-2 4 3-2.5 3L16 9v11H8V9l-1.5 1L4 7z" strokeLinejoin="round" />
@@ -87,9 +96,11 @@ const Symbole: Record<string, React.ReactNode> = {
 };
 
 function Marke({ children }: { children: React.ReactNode }) {
-  // „Eyebrow": kleine Marke über der Überschrift, in Mono und Indigo.
   return (
-    <span className="font-mono text-[0.82rem] font-medium" style={{ color: ACCENT }}>
+    <span
+      className="text-[0.8rem] font-semibold uppercase tracking-[0.12em]"
+      style={{ color: ACCENT }}
+    >
       {children}
     </span>
   );
@@ -101,16 +112,16 @@ export default function Entwurf2Page() {
       <style dangerouslySetInnerHTML={{ __html: "html,body{background:#ffffff;}" }} />
       <VariantBar current={2} />
 
-      <div className="min-h-screen bg-white font-jakarta antialiased" style={{ color: TEXT }}>
-        {/* ── Kopfzeile: klebt oben, weiß mit leichtem Schleier ──────── */}
+      <div className="min-h-screen bg-white font-mona antialiased" style={{ color: TEXT }}>
+        {/* ── Kopfzeile ──────────────────────────────────────────────── */}
         <header
           className="sticky top-0 z-50 border-b backdrop-blur"
-          style={{ borderColor: BORDER, backgroundColor: "rgba(255,255,255,0.9)" }}
+          style={{ borderColor: BORDER, backgroundColor: "rgba(255,255,255,0.92)" }}
         >
           <div className="mx-auto flex w-full max-w-[1180px] flex-wrap items-center justify-between gap-x-6 gap-y-3 px-6 py-4">
-            <Link href="/entwurf-2" className="flex items-center gap-2.5 text-[1.3rem] font-extrabold">
+            <Link href="/entwurf-2" className="flex items-center gap-2.5 text-[1.25rem] font-extrabold tracking-[-0.01em]">
               <span
-                className="flex h-[34px] w-[34px] items-center justify-center rounded-[10px] text-[0.95rem] font-extrabold text-white"
+                className="flex h-[34px] w-[34px] items-center justify-center rounded-[8px] text-[0.9rem] font-extrabold text-white"
                 style={{ backgroundColor: ACCENT }}
                 aria-hidden="true"
               >
@@ -119,7 +130,7 @@ export default function Entwurf2Page() {
               Ostseedesign
             </Link>
 
-            <nav className="flex flex-wrap items-center gap-x-7 gap-y-2 text-[0.9rem] font-medium">
+            <nav className="flex flex-wrap items-center gap-x-7 gap-y-2 text-[0.92rem] font-medium">
               <a href="#leistungen" className="hover:opacity-70">
                 Leistungen
               </a>
@@ -139,8 +150,8 @@ export default function Entwurf2Page() {
               </a>
               <a
                 href="#kontakt"
-                className="rounded-full px-5 py-2.5 text-[0.9rem] font-semibold text-white transition-transform duration-200 hover:-translate-y-0.5"
-                style={{ backgroundColor: ACCENT, boxShadow: SHADOW_SM }}
+                className="rounded-[10px] px-5 py-2.5 text-[0.9rem] font-semibold text-white transition-colors duration-200"
+                style={{ backgroundColor: ACCENT }}
               >
                 Projekt anfragen
               </a>
@@ -149,67 +160,93 @@ export default function Entwurf2Page() {
         </header>
 
         <main id="hauptinhalt">
-          {/* ── Hero: mittig, feines Raster im Hintergrund ───────────── */}
-          <section className="relative overflow-hidden px-6 pb-28 pt-24 text-center sm:pb-36 sm:pt-28">
+          {/* ── Hero: linksbündig, Infokarte rechts ──────────────────── */}
+          <section className="relative overflow-hidden border-b" style={{ borderColor: BORDER }}>
+            {/* Punktraster statt Linienraster. */}
             <div
               aria-hidden="true"
               className="pointer-events-none absolute inset-0"
               style={{
                 backgroundImage:
-                  "linear-gradient(to right, rgba(79,70,229,0.11) 1px, transparent 1px), linear-gradient(to bottom, rgba(79,70,229,0.11) 1px, transparent 1px)",
-                backgroundSize: "96px 96px",
+                  "radial-gradient(rgba(23,86,107,0.16) 1px, transparent 1px)",
+                backgroundSize: "22px 22px",
                 maskImage:
-                  "linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.35) 70%, rgba(0,0,0,0) 100%)",
+                  "linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.25) 65%, rgba(0,0,0,0) 100%)",
                 WebkitMaskImage:
-                  "linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.35) 70%, rgba(0,0,0,0) 100%)",
+                  "linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.25) 65%, rgba(0,0,0,0) 100%)",
               }}
             />
 
-            <div className="relative mx-auto flex max-w-[780px] flex-col items-center">
-              <Marke>
-                Werbung und Textilien · {company.city}
-              </Marke>
-              <h1 className="mt-5 text-[clamp(2.5rem,6vw,4.5rem)] font-extrabold leading-[1.08] tracking-[-0.02em]">
-                Ihr Logo.
-                <br />
-                <span style={{ color: ACCENT }}>Unsere Werkstatt.</span>
-              </h1>
-              <p className="mt-6 max-w-[46ch] text-[1.15rem] leading-relaxed" style={{ color: MUTED }}>
-                Wir besticken und bedrucken Kleidung, beschriften Fahrzeuge und
-                machen Schilder – seit über {company.yearsExperience} Jahren in{" "}
-                {company.city}.
-              </p>
-              <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-                <a
-                  href="#kontakt"
-                  className="rounded-full px-7 py-3.5 text-[1rem] font-semibold text-white transition-transform duration-200 hover:-translate-y-0.5"
-                  style={{ backgroundColor: ACCENT, boxShadow: SHADOW_SM }}
-                >
-                  Kontakt
-                </a>
-                <a
-                  href="#leistungen"
-                  className="rounded-full border-2 bg-white px-7 py-3.5 text-[1rem] font-semibold transition-transform duration-200 hover:-translate-y-0.5"
-                  style={{ borderColor: BORDER, boxShadow: SHADOW_SM }}
-                >
-                  Unsere Leistungen
-                </a>
+            <div className="relative mx-auto grid w-full max-w-[1180px] gap-10 px-6 pb-20 pt-20 lg:grid-cols-12 lg:items-center lg:pb-24 lg:pt-24">
+              <div className="lg:col-span-7">
+                <Marke>Werbung und Textilien · {company.city}</Marke>
+                <h1 className="mt-5 max-w-[16ch] text-[clamp(2.3rem,5.2vw,3.9rem)] font-extrabold leading-[1.08] tracking-[-0.025em]">
+                  Ihr Logo. Unsere Werkstatt.
+                </h1>
+                <p className="mt-6 max-w-[48ch] text-[1.1rem] leading-relaxed" style={{ color: MUTED }}>
+                  Wir besticken und bedrucken Kleidung, beschriften Fahrzeuge und
+                  machen Schilder – seit über {company.yearsExperience} Jahren in{" "}
+                  {company.city}.
+                </p>
+                <div className="mt-9 flex flex-wrap items-center gap-3">
+                  <a
+                    href="#kontakt"
+                    className="rounded-[10px] px-6 py-3.5 text-[1rem] font-semibold text-white transition-colors duration-200"
+                    style={{ backgroundColor: ACCENT }}
+                  >
+                    Kontakt aufnehmen
+                  </a>
+                  <a
+                    href="#leistungen"
+                    className="rounded-[10px] border bg-white px-6 py-3.5 text-[1rem] font-semibold"
+                    style={{ borderColor: BORDER, boxShadow: SHADOW_SM }}
+                  >
+                    Unsere Leistungen
+                  </a>
+                </div>
               </div>
+
+              {/* Kleine Infokarte – ersetzt die mittige Anordnung. */}
+              <aside
+                className="rounded-[12px] border bg-white p-7 lg:col-span-4 lg:col-start-9"
+                style={{ borderColor: BORDER, boxShadow: SHADOW_SM }}
+              >
+                <Marke>Direkt erreichbar</Marke>
+                <a
+                  href={`tel:${company.phoneHref}`}
+                  className="mt-4 block text-[1.6rem] font-extrabold tracking-[-0.02em]"
+                >
+                  {company.phoneDisplay}
+                </a>
+                <p className="mt-4 text-[0.95rem] leading-relaxed" style={{ color: MUTED }}>
+                  {company.street}
+                  <br />
+                  {company.zip} {company.city}
+                </p>
+                <dl className="mt-5 border-t pt-4 text-[0.92rem]" style={{ borderColor: BORDER }}>
+                  {openingHours.slice(0, 2).map((row) => (
+                    <div key={row.days} className="flex justify-between gap-4 py-1">
+                      <dt style={{ color: MUTED }}>{row.days.split(",")[0]}</dt>
+                      <dd className="whitespace-nowrap font-semibold">{row.time}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </aside>
             </div>
           </section>
 
-          {/* ── Leistungen: Karten auf getöntem Grund ────────────────── */}
-          <section id="leistungen" className="scroll-mt-20 px-6 py-20" style={{ background: BG_ALT }}>
+          {/* ── Leistungen: versetzte Karten ─────────────────────────── */}
+          <section id="leistungen" className="scroll-mt-20 px-6 py-20" style={{ backgroundColor: BG_ALT }}>
             <div className="mx-auto w-full max-w-[1180px]">
-              <div className="mx-auto mb-12 max-w-[640px] text-center">
+              <div className="mb-10 max-w-[620px]">
                 <Marke>Unsere Leistungen</Marke>
-                <h2 className="mt-3 text-[2.25rem] font-bold leading-[1.2] tracking-[-0.01em]">
+                <h2 className="mt-3 text-[2.1rem] font-extrabold leading-[1.18] tracking-[-0.02em]">
                   Vier Bereiche, eine Werkstatt
                 </h2>
               </div>
 
-              <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-4">
-                {services.map((service) => {
+              <div className="grid gap-5 lg:grid-cols-12">
+                {services.map((service, i) => {
                   const Karte = service.external ? "a" : "article";
                   return (
                     <Karte
@@ -221,11 +258,11 @@ export default function Entwurf2Page() {
                             rel: "noopener noreferrer",
                           }
                         : {})}
-                      className="group block rounded-[22px] border bg-white px-7 py-9 transition-all duration-200 hover:-translate-y-1"
+                      className={`group flex gap-5 rounded-[12px] border bg-white p-7 transition-shadow duration-200 hover:shadow-[0_16px_36px_rgba(23,86,107,0.14)] sm:p-8 ${breiten[i]}`}
                       style={{ borderColor: BORDER }}
                     >
                       <span
-                        className="mb-6 flex h-[52px] w-[52px] items-center justify-center rounded-[14px]"
+                        className="flex h-[48px] w-[48px] shrink-0 items-center justify-center rounded-[8px]"
                         style={{ backgroundColor: ACCENT_LIGHT, color: ACCENT }}
                         aria-hidden="true"
                       >
@@ -239,20 +276,23 @@ export default function Entwurf2Page() {
                           {Symbole[service.id]}
                         </svg>
                       </span>
-                      <h3 className="text-[1.5rem] font-bold leading-[1.2]">
-                        {service.title}
-                      </h3>
-                      <p className="mt-3 text-[1rem] leading-relaxed" style={{ color: MUTED }}>
-                        {kurz[service.id]}
-                      </p>
-                      {service.external && (
-                        <span
-                          className="mt-5 inline-block text-[0.95rem] font-semibold"
-                          style={{ color: ACCENT }}
-                        >
-                          Zum Shop →
-                        </span>
-                      )}
+
+                      <div>
+                        <h3 className="text-[1.35rem] font-extrabold leading-[1.2] tracking-[-0.01em]">
+                          {service.title}
+                        </h3>
+                        <p className="mt-2.5 text-[1rem] leading-relaxed" style={{ color: MUTED }}>
+                          {kurz[service.id]}
+                        </p>
+                        {service.external && (
+                          <span
+                            className="mt-4 inline-block text-[0.95rem] font-semibold"
+                            style={{ color: ACCENT }}
+                          >
+                            Zum Shop →
+                          </span>
+                        )}
+                      </div>
                     </Karte>
                   );
                 })}
@@ -260,31 +300,39 @@ export default function Entwurf2Page() {
             </div>
           </section>
 
-          {/* ── Ablauf: vier Schritte, weißer Grund ──────────────────── */}
+          {/* ── Ablauf: vier Zeilen in EINER Karte ───────────────────── */}
           <section id="ablauf" className="scroll-mt-20 px-6 py-20">
             <div className="mx-auto w-full max-w-[1180px]">
-              <div className="mx-auto mb-12 max-w-[640px] text-center">
+              <div className="mb-10 max-w-[620px]">
                 <Marke>So läuft das</Marke>
-                <h2 className="mt-3 text-[2.25rem] font-bold leading-[1.2] tracking-[-0.01em]">
-                  Ihr Weg zur fertigen Arbeit in 4 Schritten
+                <h2 className="mt-3 text-[2.1rem] font-extrabold leading-[1.18] tracking-[-0.02em]">
+                  Ihr Weg zur fertigen Arbeit
                 </h2>
               </div>
 
-              <ol className="grid gap-7 sm:grid-cols-2 lg:grid-cols-4">
+              <ol
+                className="overflow-hidden rounded-[12px] border bg-white"
+                style={{ borderColor: BORDER }}
+              >
                 {ablauf.map(([titel, satz], i) => (
                   <li
                     key={titel}
-                    className="rounded-[22px] border bg-white px-7 py-9"
-                    style={{ borderColor: BORDER }}
+                    className="grid items-start gap-x-5 gap-y-2 p-6 sm:grid-cols-[3rem_12rem_1fr] sm:p-7"
+                    style={{ borderTop: i === 0 ? "none" : `1px solid ${BORDER}` }}
                   >
                     <span
-                      className="flex h-[52px] w-[52px] items-center justify-center rounded-[14px] text-[1.15rem] font-extrabold"
+                      className="flex h-[38px] w-[38px] items-center justify-center rounded-[8px] text-[1rem] font-extrabold"
                       style={{ backgroundColor: ACCENT_LIGHT, color: ACCENT }}
                     >
                       {i + 1}
                     </span>
-                    <h3 className="mt-6 text-[1.5rem] font-bold leading-[1.2]">{titel}</h3>
-                    <p className="mt-3 text-[1rem] leading-relaxed" style={{ color: MUTED }}>
+                    <h3 className="self-center text-[1.2rem] font-extrabold tracking-[-0.01em]">
+                      {titel}
+                    </h3>
+                    <p
+                      className="self-center text-[1rem] leading-relaxed"
+                      style={{ color: MUTED }}
+                    >
                       {satz}
                     </p>
                   </li>
@@ -293,42 +341,44 @@ export default function Entwurf2Page() {
             </div>
           </section>
 
-          {/* ── Standort: zwei Karten auf getöntem Grund ─────────────── */}
-          <section id="standort" className="scroll-mt-20 px-6 py-20" style={{ background: BG_ALT }}>
+          {/* ── Standort: eine geteilte Karte ────────────────────────── */}
+          <section id="standort" className="scroll-mt-20 px-6 py-20" style={{ backgroundColor: BG_ALT }}>
             <div className="mx-auto w-full max-w-[1180px]">
-              <div className="mx-auto mb-12 max-w-[640px] text-center">
+              <div className="mb-10 max-w-[620px]">
                 <Marke>Standort</Marke>
-                <h2 className="mt-3 text-[2.25rem] font-bold leading-[1.2] tracking-[-0.01em]">
+                <h2 className="mt-3 text-[2.1rem] font-extrabold leading-[1.18] tracking-[-0.02em]">
                   Sie finden uns am {company.street}
                 </h2>
               </div>
 
-              <div className="grid gap-7 lg:grid-cols-2">
-                <div
-                  className="rounded-[22px] border bg-white px-8 py-9"
-                  style={{ borderColor: BORDER }}
-                >
-                  <h3 className="text-[1.5rem] font-bold leading-[1.2]">Werkstatt &amp; Laden</h3>
+              <div
+                className="grid overflow-hidden rounded-[12px] border bg-white lg:grid-cols-2"
+                style={{ borderColor: BORDER }}
+              >
+                <div className="p-8 sm:p-10">
+                  <h3 className="text-[1.35rem] font-extrabold tracking-[-0.01em]">
+                    Werkstatt &amp; Laden
+                  </h3>
                   <p className="mt-4 text-[1.05rem] leading-relaxed" style={{ color: MUTED }}>
                     {company.street}
                     <br />
                     {company.zip} {company.city}
                   </p>
-                  <p className="mt-5 text-[1rem] leading-relaxed" style={{ color: MUTED }}>
+                  <p className="mt-4 text-[1rem] leading-relaxed" style={{ color: MUTED }}>
                     Parken direkt vor dem Haus. Rufen Sie am besten kurz an,
                     bevor Sie herkommen.
                   </p>
                   <div className="mt-7 flex flex-wrap gap-3">
                     <a
                       href={`tel:${company.phoneHref}`}
-                      className="rounded-full px-6 py-3 text-[0.95rem] font-semibold text-white transition-transform duration-200 hover:-translate-y-0.5"
-                      style={{ backgroundColor: ACCENT, boxShadow: SHADOW_SM }}
+                      className="rounded-[10px] px-5 py-3 text-[0.95rem] font-semibold text-white"
+                      style={{ backgroundColor: ACCENT }}
                     >
                       {company.phoneDisplay}
                     </a>
                     <a
                       href={`mailto:${company.email}`}
-                      className="rounded-full border-2 bg-white px-6 py-3 text-[0.95rem] font-semibold transition-transform duration-200 hover:-translate-y-0.5"
+                      className="rounded-[10px] border bg-white px-5 py-3 text-[0.95rem] font-semibold"
                       style={{ borderColor: BORDER }}
                     >
                       E-Mail
@@ -337,18 +387,18 @@ export default function Entwurf2Page() {
                 </div>
 
                 <div
-                  className="rounded-[22px] border bg-white px-8 py-9"
-                  style={{ borderColor: BORDER }}
+                  className="border-t p-8 sm:p-10 lg:border-l lg:border-t-0"
+                  style={{ borderColor: BORDER, backgroundColor: "#fbfdfd" }}
                 >
-                  <h3 className="text-[1.5rem] font-bold leading-[1.2]">Öffnungszeiten</h3>
+                  <h3 className="text-[1.35rem] font-extrabold tracking-[-0.01em]">
+                    Öffnungszeiten
+                  </h3>
                   <dl className="mt-5">
                     {openingHours.map((row, i) => (
                       <div
                         key={row.days}
                         className="flex flex-wrap items-baseline justify-between gap-4 py-3.5"
-                        style={{
-                          borderTop: i === 0 ? "none" : `1px solid ${BORDER}`,
-                        }}
+                        style={{ borderTop: i === 0 ? "none" : `1px solid ${BORDER}` }}
                       >
                         <dt className="text-[1rem]" style={{ color: MUTED }}>
                           {row.days}
@@ -367,35 +417,38 @@ export default function Entwurf2Page() {
             </div>
           </section>
 
-          {/* ── Kontakt: Karte in Indigo ─────────────────────────────── */}
+          {/* ── Kontakt: Farbfläche, linksbündig ─────────────────────── */}
           <section id="kontakt" className="scroll-mt-20 px-6 py-20">
             <div
-              className="mx-auto w-full max-w-[1180px] rounded-[34px] px-8 py-16 text-center sm:px-14"
+              className="mx-auto grid w-full max-w-[1180px] gap-8 rounded-[16px] px-8 py-14 sm:px-12 lg:grid-cols-12 lg:items-end"
               style={{ backgroundColor: ACCENT, boxShadow: SHADOW }}
             >
-              <span className="font-mono text-[0.82rem] font-medium text-white/70">
-                Kontakt
-              </span>
-              <h2 className="mx-auto mt-4 max-w-[20ch] text-[clamp(1.9rem,4vw,2.75rem)] font-extrabold leading-[1.12] tracking-[-0.02em] text-white">
-                Sprechen wir über Ihr Projekt
-              </h2>
-              <p className="mx-auto mt-5 max-w-[46ch] text-[1.1rem] leading-relaxed text-white/80">
-                Ein Anruf reicht meistens schon. Sagen Sie kurz, worum es geht –
-                den Rest klären wir zusammen.
-              </p>
-              <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+              <div className="lg:col-span-7">
+                <span className="text-[0.8rem] font-semibold uppercase tracking-[0.12em] text-white/60">
+                  Kontakt
+                </span>
+                <h2 className="mt-4 max-w-[20ch] text-[clamp(1.8rem,3.6vw,2.6rem)] font-extrabold leading-[1.14] tracking-[-0.02em] text-white">
+                  Sprechen wir über Ihr Projekt
+                </h2>
+                <p className="mt-5 max-w-[46ch] text-[1.05rem] leading-relaxed text-white/80">
+                  Ein Anruf reicht meistens schon. Sagen Sie kurz, worum es geht
+                  – den Rest klären wir zusammen.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap gap-3 lg:col-span-5 lg:justify-end">
                 <a
                   href={`tel:${company.phoneHref}`}
-                  className="rounded-full bg-white px-7 py-3.5 text-[1rem] font-semibold transition-transform duration-200 hover:-translate-y-0.5"
-                  style={{ color: ACCENT }}
+                  className="rounded-[10px] bg-white px-6 py-3.5 text-[1rem] font-semibold"
+                  style={{ color: ACCENT_DARK }}
                 >
                   {company.phoneDisplay}
                 </a>
                 <a
                   href={`mailto:${company.email}`}
-                  className="rounded-full border-2 border-white/60 px-7 py-3.5 text-[1rem] font-semibold text-white transition-transform duration-200 hover:-translate-y-0.5"
+                  className="rounded-[10px] border border-white/50 px-6 py-3.5 text-[1rem] font-semibold text-white"
                 >
-                  {company.email}
+                  E-Mail schreiben
                 </a>
               </div>
             </div>

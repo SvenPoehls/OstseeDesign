@@ -35,12 +35,12 @@ const entwuerfe = [
     nr: "02",
     href: "/entwurf-2",
     bild: "/vorschau-2.jpg",
-    name: "Hausstil",
-    satz: "Sieht aus wie poehlsdigital.de – clean, hell, ein Indigo.",
+    name: "Klare Kante",
+    satz: "So aufgeräumt wie die Hauptseite, aber mit eigener Handschrift.",
     merkmale: [
-      "Dieselbe Schrift und Farbwelt wie die Hauptseite",
-      "Runde Karten mit Symbolfeldern, Knöpfe als Pillen",
-      "Abschnitte im Wechsel: weiß und zart indigo getönt",
+      "Hell und in Karten, Abschnitte im Wechsel weiß und getönt",
+      "Petrolblau statt Indigo, Mona Sans statt Jakarta Sans",
+      "Weniger Rundung, versetzte Kacheln statt Viererreihe",
     ],
   },
   {

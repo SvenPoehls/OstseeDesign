@@ -35,12 +35,12 @@ const entwuerfe = [
     nr: "02",
     href: "/entwurf-2",
     bild: "/vorschau-2.jpg",
-    name: "Weißraum",
-    satz: "Soll so ruhig sein wie ein aufgeräumter Werkstatttisch.",
+    name: "Hausstil",
+    satz: "Sieht aus wie poehlsdigital.de – clean, hell, ein Indigo.",
     merkmale: [
-      "Bild rechts bis an den Rand, Schrift auf weißem Streifen darüber",
-      "Sehr wenig Text: jeder Punkt eine Zeile",
-      "Eine moderne Schrift, viel Platz, eine grüne Fläche am Ende",
+      "Dieselbe Schrift und Farbwelt wie die Hauptseite",
+      "Runde Karten mit Symbolfeldern, Knöpfe als Pillen",
+      "Abschnitte im Wechsel: weiß und zart indigo getönt",
     ],
   },
   {

@@ -51,6 +51,7 @@ const config: Config = {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
         // Schriften der beiden anderen Entwürfe (siehe src/app/layout.tsx).
         archivo: ["var(--font-archivo)", "system-ui", "sans-serif"],
+        jakarta: ["var(--font-jakarta)", "system-ui", "sans-serif"],
         schibsted: ["var(--font-schibsted)", "system-ui", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },

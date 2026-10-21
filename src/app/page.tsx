@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { createHash } from "node:crypto";
+import { readFileSync } from "node:fs";
+import path from "node:path";
 import Link from "next/link";
 import CookieNotice from "@/components/layout/CookieNotice";
 import { ArrowIcon } from "@/components/ui/Icons";
@@ -12,10 +15,28 @@ import { company } from "@/lib/site";
 // Die Vorschaubilder liegen unter public/vorschau-1.jpg … -3.jpg. Sie werden
 // mit einem Skript erzeugt (siehe README) – wer einen Entwurf ändert, sollte
 // das Bild danach neu erzeugen, sonst zeigt die Kachel den alten Stand.
+//
+// FRISCHE BILDER: Weil die Dateien immer gleich heißen, zeigen Browser sonst
+// hartnäckig die alte Fassung aus ihrem Zwischenspeicher. Deshalb hängen wir
+// beim Bauen eine Kennung an die Adresse, die sich mit dem Bildinhalt ändert
+// (…/vorschau-2.jpg?v=3f9c1a2b). Ändert sich das Bild, ändert sich die
+// Adresse – und der Browser lädt es neu.
+function bildAdresse(datei: string): string {
+  const pfad = asset(datei);
+  try {
+    const inhalt = readFileSync(path.join(process.cwd(), "public", datei));
+    const kennung = createHash("sha1").update(inhalt).digest("hex").slice(0, 8);
+    return `${pfad}?v=${kennung}`;
+  } catch {
+    // Bild noch nicht erzeugt – dann eben ohne Kennung.
+    return pfad;
+  }
+}
+
 export const metadata: Metadata = {
   title: "Drei Entwürfe für ostseedesign.de",
   description:
-    "Dieselbe Website in drei Gestaltungen: Werkstatt-Druckbogen, Vitrine und Laufzettel.",
+    "Dieselbe Website in drei Gestaltungen: Werkstatt-Druckbogen, Klare Kante und Farbfächer.",
 };
 
 const entwuerfe = [
@@ -114,7 +135,7 @@ export default function AuswahlPage() {
               <div className="mt-5 h-[20rem] overflow-hidden border border-ink bg-paper-deep sm:h-[26rem] lg:h-[22rem]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={asset(e.bild)}
+                  src={bildAdresse(e.bild)}
                   alt={`Vorschau: ${e.name}`}
                   className="h-full w-full object-cover object-top transition-transform duration-500 ease-werk group-hover:scale-[1.02]"
                   loading="lazy"

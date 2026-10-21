@@ -33,6 +33,9 @@ der jeweiligen Seitendatei).
 
 **Vorschaubilder** der Kacheln: `public/vorschau-1.jpg` … `-3.jpg`.
 Neu erzeugen mit `node scripts/vorschau.js` (siehe Kopf der Datei).
+Die Auswahlseite hängt beim Bauen automatisch eine Kennung an die Adresse
+(`…/vorschau-2.jpg?v=8d65389a`), die sich mit dem Bildinhalt ändert. Dadurch
+zeigt kein Browser mehr ein altes Bild aus seinem Zwischenspeicher.
 
 **Wenn ein Entwurf gewählt ist:** Seine Seite wird zur Startseite, die beiden
 anderen Ordner werden gelöscht, und `VariantBar` fliegt raus (eine Zeile je

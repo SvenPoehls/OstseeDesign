@@ -45,27 +45,24 @@ export default function CookieNotice() {
       role="dialog"
       aria-modal="false"
       aria-labelledby="cookie-title"
-      className="fixed inset-x-0 bottom-0 z-[60] border-t border-ink bg-ink text-paper"
+      className="linie-hand-oben linie-hand-stark fixed inset-x-0 bottom-0 z-[80] bg-paper text-ink"
     >
       <div className="wrap flex flex-col gap-4 py-4 sm:flex-row sm:items-center sm:gap-8">
         <div className="flex-1">
-          <h2
-            id="cookie-title"
-            className="text-[0.7rem] uppercase tracking-label text-paper/60"
-          >
+          <h2 id="cookie-title" className="etikett">
             Datenschutz-Hinweis
           </h2>
-          <p className="mt-1 text-[0.9rem] leading-relaxed text-paper/85">
+          <p className="mt-1 text-[0.9rem] leading-relaxed text-ink-soft">
             Diese Website verwendet ausschließlich technisch notwendige Daten
             und setzt keine Tracking- oder Marketing-Cookies ein. Mehr dazu in
             unserer{" "}
-            <Link href="/datenschutz" className="font-semibold underline underline-offset-4">
+            <Link href="/datenschutz" className="ul-link font-semibold text-ink">
               Datenschutzerklärung
             </Link>
             .
           </p>
         </div>
-        <button type="button" onClick={accept} className="btn-paper shrink-0">
+        <button type="button" onClick={accept} className="btn-voll shrink-0">
           Verstanden
         </button>
       </div>

@@ -34,11 +34,11 @@ function bildAdresse(datei: string): string {
 export const metadata: Metadata = {
   title: "Drei Entwürfe für ostseedesign.de",
   description:
-    "Dieselbe Website in drei Gestaltungen: Werkstatt-Druckbogen, Klare Kante und Farbfächer.",
+    "Dieselbe Website in drei Gestaltungen: Handskizze, Klare Kante und Farbfächer.",
 };
 
 const entwuerfe = [
-  { nr: "01", href: "/entwurf-1", bild: "/vorschau-1.jpg", name: "Werkstatt-Druckbogen" },
+  { nr: "01", href: "/entwurf-1", bild: "/vorschau-1.jpg", name: "Handskizze" },
   { nr: "02", href: "/entwurf-2", bild: "/vorschau-2.jpg", name: "Klare Kante" },
   { nr: "03", href: "/entwurf-3", bild: "/vorschau-3.jpg", name: "Farbfächer" },
 ];

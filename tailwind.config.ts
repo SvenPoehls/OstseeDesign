@@ -46,9 +46,14 @@ const config: Config = {
       },
       fontFamily: {
         // Bricolage Grotesque: eigenwilliger Grotesk mit Breiten-Achse.
+        // Nur noch auf der Auswahlseite in Gebrauch.
         display: ["var(--font-display)", "Impact", "sans-serif"],
         // Hanken Grotesk: ruhige Leseschrift, bewusst NICHT Inter.
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        // Entwurf 1 „Handskizze": Caveat für alles Große, Patrick Hand für
+        // die kleinen Notizen am Rand.
+        hand: ["var(--font-hand)", "Segoe Script", "cursive"],
+        notiz: ["var(--font-notiz)", "Segoe Print", "cursive"],
         // Schriften der beiden anderen Entwürfe (siehe src/app/layout.tsx).
         archivo: ["var(--font-archivo)", "system-ui", "sans-serif"],
         mona: ["var(--font-mona)", "system-ui", "sans-serif"],

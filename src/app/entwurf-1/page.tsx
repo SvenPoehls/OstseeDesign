@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import Papier from "@/components/layout/Papier";
 import VariantBar from "@/components/layout/VariantBar";
 import Hero from "@/components/sections/Hero";
 import Services from "@/components/sections/Services";
@@ -9,28 +10,30 @@ import FindUs from "@/components/sections/FindUs";
 import CtaBand from "@/components/sections/CtaBand";
 import { company, services } from "@/lib/site";
 
-// ENTWURF 1 — „Werkstatt-Druckbogen"
-// Warmes Papier, schmale plakative Schrift, Haarlinien statt Kästen,
-// alles linksbündig an einem Zwölfer-Raster. Siehe DESIGN.md.
+// ENTWURF 1 — „Handskizze"
+// Leicht zerknittertes Papier, Handschrift, von Hand gezogene Rahmen und
+// Linien, Skizzen statt Platzhalterbildern. Siehe DESIGN.md.
 export const metadata: Metadata = {
-  title: "Entwurf 1 · Werkstatt-Druckbogen",
+  title: "Entwurf 1 · Handskizze",
   description:
-    "Entwurf 1 für ostseedesign.de: warmes Papier, große schmale Schrift, Haarlinien statt Kästen.",
+    "Entwurf 1 für ostseedesign.de: zerknittertes Papier, Handschrift, gezeichnete Rahmen und Skizzen.",
 };
 
 export default function Entwurf1Page() {
   return (
     <>
       <VariantBar current={1} />
-      <Header />
-      <main id="hauptinhalt">
-        <Hero />
-        <Services />
-        <Process />
-        <FindUs />
-        <CtaBand />
-      </main>
-      <Footer />
+      <Papier>
+        <Header />
+        <main id="hauptinhalt">
+          <Hero />
+          <Services />
+          <Process />
+          <FindUs />
+          <CtaBand />
+        </main>
+        <Footer />
+      </Papier>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd()) }}

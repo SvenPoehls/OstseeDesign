@@ -10,7 +10,7 @@ import Link from "next/link";
 // WENN EIN ENTWURF GEWÄHLT IST: Diese Komponente einfach aus der jeweiligen
 // Seite entfernen (eine Zeile), dann ist davon nichts mehr zu sehen.
 export const entwuerfe = [
-  { nr: 1, href: "/entwurf-1", name: "Werkstatt-Druckbogen" },
+  { nr: 1, href: "/entwurf-1", name: "Handskizze" },
   { nr: 2, href: "/entwurf-2", name: "Klare Kante" },
   { nr: 3, href: "/entwurf-3", name: "Farbfächer" },
 ] as const;

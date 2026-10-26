@@ -35,6 +35,35 @@ const sans = localFont({
   display: "swap",
 });
 
+// ── Schriften für Entwurf 1 „Handskizze" ────────────────────────────────
+//   Caveat      → alles Große: Schlagzeilen, Namen, Telefonnummern. Eine
+//                 flüssige Handschrift mit Breitenachse (400–700), die wie
+//                 mit einem Filzstift auf den Bogen geschrieben wirkt.
+//   Patrick Hand → die kleinen Notizen daneben: Bildunterschriften,
+//                 Randbemerkungen, Zettel. Ruhiger und gut lesbar, wie
+//                 sauber mit Bleistift geschrieben.
+// Der Fließtext bleibt bei Hanken Grotesk – Handschrift liest sich in
+// langen Absätzen schlecht, und Lesbarkeit geht hier vor.
+const hand = localFont({
+  src: [
+    { path: "./fonts/caveat-latin.woff2", style: "normal" },
+    { path: "./fonts/caveat-latin-ext.woff2", style: "normal" },
+  ],
+  weight: "400 700",
+  variable: "--font-hand",
+  display: "swap",
+});
+
+const notiz = localFont({
+  src: [
+    { path: "./fonts/patrick-latin.woff2", style: "normal" },
+    { path: "./fonts/patrick-latin-ext.woff2", style: "normal" },
+  ],
+  weight: "400",
+  variable: "--font-notiz",
+  display: "swap",
+});
+
 // ── Schriften der beiden anderen Entwürfe ───────────────────────────────
 // Sie stehen hier mit bereit, werden vom Browser aber nur geladen, wenn die
 // jeweilige Seite sie auch benutzt.
@@ -134,7 +163,7 @@ export default function RootLayout({
   return (
     <html
       lang="de"
-      className={`${sans.variable} ${display.variable} ${archivo.variable} ${mona.variable} ${schibsted.variable} ${mono.variable}`}
+      className={`${sans.variable} ${display.variable} ${hand.variable} ${notiz.variable} ${archivo.variable} ${mona.variable} ${schibsted.variable} ${mono.variable}`}
     >
       <body>
         {/* Sprungmarke für Tastatur-/Screenreader-Nutzer (Barrierefreiheit). */}

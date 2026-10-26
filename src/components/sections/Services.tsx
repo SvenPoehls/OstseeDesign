@@ -1,21 +1,33 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ArrowIcon, ExternalIcon } from "@/components/ui/Icons";
+import { PfeilHand, ExternHand } from "@/components/ui/Hand";
+import Skizze, { type SkizzenMotiv } from "@/components/ui/Skizze";
 import { services } from "@/lib/site";
 
 // „Das machen wir" – kein Kachelraster, sondern eine Liste wie in einem
-// Musterbuch: jeder Bereich bekommt eine eigene Zeile mit großem Namen,
-// kurzer Erklärung und einer Bildfläche. Die Zeilen sitzen absichtlich
-// unterschiedlich im Raster – mal Bild rechts, mal links, mal schmaler.
-// Dadurch wirkt die Seite gesetzt und nicht aus Bausteinen zusammengeklickt.
+// Musterbuch: jeder Bereich bekommt eine eigene Zeile mit großem
+// handgeschriebenem Namen, kurzer Erklärung und einer Skizze. Die Zeilen
+// sitzen absichtlich unterschiedlich im Raster – mal Bild rechts, mal
+// links, mal schmaler. Dadurch wirkt die Seite gezeichnet und nicht aus
+// Bausteinen zusammengeklickt.
 //
-// Die Notizen sagen, was auf das jeweilige Foto soll.
+// Die Notizen unter den Skizzen sagen, was später auf das jeweilige Foto
+// soll – sie stehen in der kleinen Handschrift, wie eine Bildunterschrift
+// auf einem Entwurf.
 const notes: Record<string, string> = {
   textilveredelung: "Stickmaschine, Nahaufnahme vom Garn",
   werbetechnik: "Frisch beschrifteter Transporter",
   drucksachen: "Visitenkarten auf dem Werkstatttisch",
   textilshop: "Stapel veredelter Arbeitskleidung",
+};
+
+// Welche Skizze zu welchem Bereich gehört.
+const motive: Record<string, SkizzenMotiv> = {
+  textilveredelung: "textil",
+  werbetechnik: "fahrzeug",
+  drucksachen: "druck",
+  textilshop: "shop",
 };
 
 // Platz im Raster je Zeile. Der erste Bereich ist der größte im Betrieb und
@@ -25,21 +37,25 @@ const layout = [
     text: "lg:col-span-5 lg:col-start-1",
     media: "lg:col-span-6 lg:col-start-7",
     ratio: "lg:aspect-[3/2]",
+    schraeg: "schief-2",
   },
   {
     text: "lg:col-span-5 lg:col-start-8",
     media: "lg:col-span-6 lg:col-start-1",
     ratio: "lg:aspect-[16/10]",
+    schraeg: "schief-1",
   },
   {
     text: "lg:col-span-4 lg:col-start-2",
     media: "lg:col-span-4 lg:col-start-8",
     ratio: "lg:aspect-square",
+    schraeg: "schief-2",
   },
   {
     text: "lg:col-span-5 lg:col-start-1",
     media: "lg:col-span-5 lg:col-start-8",
     ratio: "lg:aspect-[5/3]",
+    schraeg: "schief-1",
   },
 ];
 
@@ -69,14 +85,12 @@ export default function Services() {
   }, []);
 
   return (
-    <section id="leistungen" className="bg-paper pb-16 pt-20 sm:pb-24 sm:pt-28">
+    <section id="leistungen" className="pb-16 pt-20 sm:pb-24 sm:pt-28">
       <div className="wrap">
-        {/* Kapitelkopf: Nummer, Titel, Erklärung – alles an einer Linie. */}
-        <div className="grid12 border-t border-ink pt-4">
-          <p className="col-span-4 text-[0.72rem] font-semibold uppercase tracking-label text-mark lg:col-span-1">
-            01
-          </p>
-          <h2 className="display col-span-4 mt-2 text-[clamp(2.1rem,6.5vw,3.6rem)] lg:col-span-6 lg:mt-0">
+        {/* Kapitelkopf: Nummer, Titel, Erklärung – alles an einem Strich. */}
+        <div className="grid12 linie-hand-oben linie-hand-stark pt-5">
+          <p className="etikett etikett-rot col-span-4 lg:col-span-1">01</p>
+          <h2 className="hand col-span-4 mt-2 text-[clamp(2.5rem,7.5vw,4.4rem)] lg:col-span-6 lg:mt-0">
             Das machen wir
           </h2>
           <p className="col-span-4 mt-5 text-ink-soft lg:col-span-4 lg:col-start-9 lg:mt-0">
@@ -106,7 +120,7 @@ export default function Services() {
                       "aria-label": `${service.title} – Shop im neuen Fenster öffnen`,
                     }
                   : {})}
-                className={`group grid12 items-center border-t border-rule py-8 transition-[transform,opacity] duration-700 ease-werk first:border-mark sm:py-9 lg:py-12 ${
+                className={`group grid12 linie-hand linie-hand-fein items-center py-8 transition-[transform,opacity] duration-700 ease-werk sm:py-9 lg:py-12 ${
                   service.external ? "cursor-pointer" : ""
                 }`}
                 style={{
@@ -115,34 +129,34 @@ export default function Services() {
                   transitionDelay: `${(i % 2) * 90}ms`,
                 }}
               >
-                {/* Bildfläche: auf dem Handy schmal links neben dem Namen,
-                    ab Tablet groß im Raster. */}
+                {/* Skizze: auf dem Handy schmal links neben dem Namen,
+                    ab Tablet groß im Raster. Jede hängt ein kleines Stück
+                    schief auf dem Blatt. */}
                 <figure
-                  className={`plate col-span-1 aspect-square self-start border border-ink lg:row-start-1 lg:self-auto ${plan.media} ${plan.ratio}`}
+                  className={`bildflaeche rahmen rahmen-nachziehen col-span-1 aspect-square self-start text-ink lg:row-start-1 lg:self-auto ${plan.media} ${plan.ratio} ${plan.schraeg}`}
                 >
-                  <figcaption className="absolute inset-x-0 bottom-0 hidden px-3 py-2 text-[0.65rem] uppercase tracking-label text-ink-soft lg:block">
+                  <Skizze motiv={motive[service.id] ?? "textil"} />
+                  <figcaption className="notiz bildunterschrift absolute inset-x-0 bottom-0 hidden px-4 pb-2 pt-6 text-[0.85rem] text-ink-soft lg:block">
                     {notes[service.id]}
                   </figcaption>
                 </figure>
 
                 <div className={`col-span-3 lg:row-start-1 ${plan.text}`}>
                   {service.external && (
-                    <p className="text-[0.72rem] uppercase tracking-label text-mark">
-                      Externer Shop
-                    </p>
+                    <p className="etikett etikett-rot">Externer Shop</p>
                   )}
-                  <h3 className="display text-[clamp(1.6rem,5.5vw,3.4rem)]">
+                  <h3 className="hand text-[clamp(2rem,6.5vw,4rem)]">
                     <span className={service.external ? "ul-link" : undefined}>
                       {service.title}
                     </span>
                     {service.external && (
-                      <ExternalIcon className="ml-3 inline h-5 w-5 align-middle" />
+                      <ExternHand className="ml-3 inline h-6 w-6 align-middle" />
                     )}
                   </h3>
-                  <p className="mt-2 line-clamp-2 max-w-reading text-[0.92rem] text-ink-soft sm:mt-3 sm:line-clamp-none sm:text-[1rem]">
+                  <p className="mt-3 line-clamp-2 max-w-reading text-[0.95rem] text-ink-soft sm:line-clamp-none sm:text-[1rem]">
                     {service.teaser}
                   </p>
-                  <ul className="mt-4 hidden flex-wrap gap-x-5 gap-y-1 text-[0.85rem] text-ink-soft lg:flex">
+                  <ul className="notiz mt-5 hidden flex-wrap gap-x-6 gap-y-1.5 text-[1rem] text-ink-soft lg:flex">
                     {service.points.map((point) => (
                       <li key={point} className="flex items-center gap-2">
                         <span aria-hidden="true" className="h-px w-4 bg-mark" />
@@ -151,9 +165,9 @@ export default function Services() {
                     ))}
                   </ul>
                   {service.external && (
-                    <span className="mt-4 hidden items-center gap-2 text-[0.85rem] font-semibold lg:inline-flex">
+                    <span className="hand mt-5 hidden items-center gap-2 text-[1.2rem] lg:inline-flex">
                       Zum Shop
-                      <ArrowIcon className="h-4 w-4 transition-transform duration-200 ease-werk group-hover:translate-x-1" />
+                      <PfeilHand className="h-4 w-5 transition-transform duration-200 ease-werk group-hover:translate-x-1" />
                     </span>
                   )}
                 </div>

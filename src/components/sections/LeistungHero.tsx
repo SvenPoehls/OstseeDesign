@@ -7,8 +7,9 @@ import { company, type Service } from "@/lib/site";
 // führt die Farbe der Leistung (`index` = Platz in `services`, damit die
 // Seite dieselbe Farbe trägt wie ihre Karte und ihre Marke im Menü).
 //
-// Die Schlagzeile skaliert mit der Bildschirmbreite (9,5 vw), damit das
-// längste Wort („Textilveredelung") auch auf 320 px Breite noch passt.
+// Die Schlagzeile steht in Versalien wie alle Überschriften und skaliert mit
+// der Bildschirmbreite (7,6 vw), damit das längste Wort („TEXTILVEREDELUNG")
+// auch auf 320 px Breite noch passt.
 //
 // BEWEGUNG wie auf der Startseite: Kreise wachsen auf und treiben, Etikett,
 // Schlagzeile, Text und Knöpfe schieben sich nacheinander herein.
@@ -62,7 +63,7 @@ export default function LeistungHero({
           {farben[index].name}
         </p>
 
-        <h1 className="auftritt mt-4 text-[clamp(2.1rem,9.5vw,5rem)] font-extrabold leading-[1.02] tracking-[-0.045em] [--verz:420ms]">
+        <h1 className="auftritt mt-4 text-[clamp(1.6rem,7.6vw,5.2rem)] font-black uppercase leading-[0.97] tracking-[-0.03em] [--verz:420ms]">
           {service.title}
         </h1>
 
@@ -88,15 +89,15 @@ export default function LeistungHero({
         <div className="auftritt mt-8 flex flex-wrap items-center gap-3 [--verz:800ms]">
           <a
             href="#kontakt"
-            className="rounded-full px-7 py-4 text-[1rem] font-bold text-white transition-transform duration-300 hover:-translate-y-0.5"
+            className="inline-flex items-center gap-2 rounded-full px-7 py-4 text-[0.92rem] font-bold uppercase tracking-[0.04em] text-white transition-transform duration-300 hover:-translate-y-0.5"
             style={{ backgroundColor: KNOPF }}
           >
-            Projekt besprechen
+            <span aria-hidden="true">↓</span> Projekt besprechen
           </a>
           <a
             href={`tel:${company.phoneHref}`}
-            className="rounded-full bg-white/80 px-7 py-4 text-[1rem] font-bold backdrop-blur transition-transform duration-300 hover:-translate-y-0.5"
-            style={{ boxShadow: "inset 0 0 0 1.5px rgba(23,22,26,0.15)" }}
+            className="rounded-full bg-white/80 px-7 py-4 text-[0.92rem] font-bold uppercase tracking-[0.04em] backdrop-blur transition-transform duration-300 hover:-translate-y-0.5"
+            style={{ boxShadow: "inset 0 0 0 1.5px rgba(23,22,26,0.2)" }}
           >
             Anrufen
           </a>

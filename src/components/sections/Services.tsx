@@ -1,111 +1,144 @@
+import type { CSSProperties } from "react";
 import Link from "next/link";
-import { LEISE, PETROL_TEXT, farben } from "@/lib/farben";
-import { leistungsLink, services } from "@/lib/site";
-import Bild from "@/components/ui/Bild";
+import Etikett from "@/components/ui/Etikett";
+import { KNOPF, LEISE, farben } from "@/lib/farben";
+import { leistungsLink, services, textilShopUrl } from "@/lib/site";
 
-// Leistungen. Jeder Bereich bekommt seine Farbe und eine eigene Fläche.
-// Die erste ist die größte – das ist auch der größte Bereich im Betrieb.
+// Leistungen, aufgebaut wie im Vorbild der Abschnitt „Our Services": oben
+// Etikett und Überschrift, darunter vier gleich breite Karten nebeneinander
+// – je Leistung eine, mit großer Nummer (= Farbe 01 bis 04 aus dem Fächer),
+// Farbpunkt, Kurztext und den Punkten als Liste. Ganz unten ein Satz und zwei
+// Knöpfe.
 //
-// Jede Fläche führt auf die Unterseite ihrer Leistung (der Textilshop auf die
-// externe Seite). Das Motiv des Platzhalterfotos steht in `site.ts`.
+// Jede Karte führt auf die Unterseite ihrer Leistung (der Textilshop auf die
+// externe Seite).
 //
-// BEWEGUNG: Die Flächen erscheinen beim Scrollen (data-reveal), je zwei
-// nebeneinander leicht versetzt. Beim Überfahren hebt sich die Fläche und
-// der Eckkreis wächst.
+// BEWEGUNG: Die Karten erscheinen beim Scrollen nacheinander. Beim Überfahren
+// hebt sich die Karte und der Eckkreis wächst.
 export default function Services() {
   return (
-    <section id="leistungen" className="mt-16 scroll-mt-28 sm:mt-24">
-      <div data-reveal className="max-w-[30rem]">
-        <p className="text-[0.88rem] font-bold" style={{ color: PETROL_TEXT }}>
-          Leistungen
-        </p>
-        <h2 className="mt-2 text-[clamp(1.8rem,4vw,2.8rem)] font-extrabold leading-tight tracking-[-0.04em]">
-          Vier Farben, eine Werkstatt
-        </h2>
-      </div>
+    <section id="leistungen" className="abschnitt scroll-mt-28">
+      <div className="seitenrand">
+        <div data-reveal className="max-w-[44rem]">
+          <Etikett>Leistungen</Etikett>
+          <h2 className="titel mt-6">
+            Vier Farben,{" "}
+            <span className="markiert" style={{ "--ton": `${farben[1].ton}66` } as CSSProperties}>
+              eine Werkstatt
+            </span>
+          </h2>
+        </div>
 
-      <div className="mt-8 grid gap-4 sm:gap-5 lg:grid-cols-12">
-        {services.map((service, i) => {
-          const gross = i === 0 || i === 3;
-          const klasse = `group relative overflow-hidden rounded-kachel p-7 transition-transform duration-300 hover:-translate-y-1 sm:p-9 ${
-            gross ? "lg:col-span-7" : "lg:col-span-5"
-          } ${i % 2 === 1 ? "[--verz:120ms]" : ""}`;
-          const stil = { backgroundColor: `${farben[i].ton}1a` };
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
+          {services.map((service, i) => {
+            const klasse =
+              "group relative flex flex-col overflow-hidden rounded-kachel p-6 transition-transform duration-300 hover:-translate-y-1 sm:p-7";
+            const stil = {
+              backgroundColor: `${farben[i].ton}1a`,
+              "--verz": `${i * 120}ms`,
+            } as CSSProperties;
 
-          const inhalt = (
-            <>
-              {/* Großer Kreis in der Ecke, halb durchsichtig. */}
-              <span
-                aria-hidden="true"
-                className="pointer-events-none absolute -right-10 -top-10 h-44 w-44 rounded-full opacity-60 mix-blend-multiply transition-transform duration-500 group-hover:scale-110"
-                style={{ backgroundColor: `${farben[i].ton}59` }}
-              />
-
-              <div className="relative">
-                <div className="flex items-center gap-3">
+            const inhalt = (
+              <>
+                {/* Großer Kreis in der Ecke, halb durchsichtig. */}
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -right-10 -top-10 h-36 w-36 rounded-full opacity-60 mix-blend-multiply transition-transform duration-500 group-hover:scale-110"
+                  style={{ backgroundColor: `${farben[i].ton}59` }}
+                />
+                <div className="relative flex items-start justify-between">
                   <span
-                    className="h-7 w-7 shrink-0 rounded-full"
+                    aria-hidden="true"
+                    className="h-12 w-12 rounded-full"
                     style={{ backgroundColor: farben[i].ton }}
                   />
-                  <h3 className="text-[1.5rem] font-extrabold tracking-[-0.03em] sm:text-[1.85rem]">
-                    {service.title}
-                  </h3>
-                  <span className="ml-auto shrink-0 rounded-full bg-white/80 px-4 py-1.5 text-[0.8rem] font-bold">
-                    {service.external ? "Zum Shop ↗" : "Mehr erfahren →"}
+                  <span aria-hidden="true" className="text-[2.6rem] font-black leading-none tracking-[-0.04em] text-tinte/80">
+                    {String(i + 1).padStart(2, "0")}
                   </span>
                 </div>
 
-                <p
-                  className="mt-4 max-w-[34rem] leading-relaxed"
-                  style={{ color: LEISE }}
-                >
+                <h3 className="relative mt-6 text-[1.35rem] font-black uppercase tracking-[-0.02em]">
+                  {service.title}
+                </h3>
+                <p className="relative mt-3 text-[0.95rem] leading-relaxed" style={{ color: LEISE }}>
                   {service.teaser}
                 </p>
 
-                <ul className="mt-5 flex flex-wrap gap-2">
-                  {service.points.map((point) => (
-                    <li
-                      key={point}
-                      className="rounded-full bg-white/70 px-4 py-1.5 text-[0.85rem] font-medium"
-                    >
-                      {point}
+                <ul className="relative mt-5 space-y-2 border-t border-tinte/10 pt-5 text-[0.92rem] font-medium">
+                  {service.points.map((punkt) => (
+                    <li key={punkt} className="flex gap-2.5">
+                      <span
+                        aria-hidden="true"
+                        className="mt-[0.45rem] h-2 w-2 shrink-0 rounded-full"
+                        style={{ backgroundColor: farben[i].ton }}
+                      />
+                      {punkt}
                     </li>
                   ))}
                 </ul>
 
-                <Bild
-                  note={service.bilder[0]}
-                  ton={farben[i].ton}
-                  className={`mt-7 ${gross ? "h-60 sm:h-72" : "h-48 sm:h-56"}`}
-                />
-              </div>
-            </>
-          );
+                <span className="relative mt-auto inline-flex items-center gap-2 pt-7 text-[0.85rem] font-bold uppercase tracking-[0.06em]">
+                  {service.external ? "Zum Shop" : "Mehr erfahren"}
+                  <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">
+                    {service.external ? "↗" : "→"}
+                  </span>
+                </span>
+              </>
+            );
 
-          return service.external ? (
+            return service.external ? (
+              <a
+                key={service.id}
+                data-reveal
+                href={leistungsLink(service)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={klasse}
+                style={stil}
+              >
+                {inhalt}
+              </a>
+            ) : (
+              <Link
+                key={service.id}
+                data-reveal
+                href={leistungsLink(service)}
+                className={klasse}
+                style={stil}
+              >
+                {inhalt}
+              </Link>
+            );
+          })}
+        </div>
+
+        <div
+          data-reveal
+          className="mt-12 flex flex-col gap-6 rounded-kachel bg-white/60 p-6 sm:p-8 lg:flex-row lg:items-center lg:justify-between"
+        >
+          <p className="text-[1.15rem] font-semibold leading-snug">
+            Sie wissen noch nicht genau, was Sie brauchen?{" "}
+            <em className="font-extrabold not-italic">Wir sagen Ihnen, welche Technik passt.</em>
+          </p>
+          <div className="flex flex-wrap gap-3">
             <a
-              key={service.id}
-              data-reveal
-              href={leistungsLink(service)}
+              href="#kontakt"
+              className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-[0.88rem] font-bold uppercase tracking-[0.04em] text-white transition-transform duration-300 hover:-translate-y-0.5"
+              style={{ backgroundColor: KNOPF }}
+            >
+              <span aria-hidden="true">→</span> Projekt besprechen
+            </a>
+            <a
+              href={textilShopUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className={klasse}
-              style={stil}
+              className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-[0.88rem] font-bold uppercase tracking-[0.04em] transition-transform duration-300 hover:-translate-y-0.5"
+              style={{ boxShadow: "inset 0 0 0 1.5px rgba(23,22,26,0.2)" }}
             >
-              {inhalt}
+              Zum Textilshop <span aria-hidden="true">↗</span>
             </a>
-          ) : (
-            <Link
-              key={service.id}
-              data-reveal
-              href={leistungsLink(service)}
-              className={klasse}
-              style={stil}
-            >
-              {inhalt}
-            </Link>
-          );
-        })}
+          </div>
+        </div>
       </div>
     </section>
   );

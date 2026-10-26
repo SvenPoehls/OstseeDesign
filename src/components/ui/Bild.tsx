@@ -4,6 +4,14 @@
 // ECHTES FOTO EINSETZEN: Das <Bild …/> an der jeweiligen Stelle durch
 //   <img src={asset("/datei.jpg")} alt="…" className="… rounded-bild object-cover" />
 // ersetzen (asset kommt aus @/lib/assets und setzt den richtigen Pfad).
+
+// Die getönte, fein schraffierte Fläche – auch für die Galerie (Einblicke.tsx).
+export function platzhalterFlaeche(ton: string) {
+  return {
+    backgroundColor: `${ton}1f`,
+    backgroundImage: `repeating-linear-gradient(-45deg, ${ton}26 0 1px, transparent 1px 15px)`,
+  };
+}
 export default function Bild({
   note,
   ton,
@@ -20,10 +28,7 @@ export default function Bild({
     <figure
       data-reveal={reveal ? "" : undefined}
       className={`relative overflow-hidden rounded-bild ${className}`}
-      style={{
-        backgroundColor: `${ton}1f`,
-        backgroundImage: `repeating-linear-gradient(-45deg, ${ton}26 0 1px, transparent 1px 15px)`,
-      }}
+      style={platzhalterFlaeche(ton)}
     >
       <figcaption className="absolute bottom-3 left-3 rounded-full bg-white/85 px-3 py-1 text-[0.72rem] text-leise">
         {note}

@@ -38,7 +38,7 @@ src/
 ├── components/
 │   ├── layout/           # Header, Footer, Legal-Gerüst, Cookie-Hinweis
 │   ├── sections/         # Abschnitte der Startseite und der Unterseiten
-│   └── ui/               # Bild (Foto-Platzhalter), Einblenden (Scroll-Animation)
+│   └── ui/               # Bild, Einblenden, Etikett, Uebergang (gestrichelte Linien)
 └── lib/
     ├── site.ts           # ZENTRALE INHALTE / FIRMENDATEN (Adresse, Zeiten …)
     ├── farben.ts         # die vier Werkstattfarben
@@ -47,7 +47,7 @@ src/
 
 ## Inhalte pflegen
 
-- **Firmendaten, Öffnungszeiten, Leistungen, Ablauf:** `src/lib/site.ts`
+- **Firmendaten, Öffnungszeiten, Leistungen, Ablauf, Kundenstimmen, Fragen:** `src/lib/site.ts`
   (aus der Liste der Leistungen entstehen auch Menü und Unterseiten)
 - **Farben:** `src/lib/farben.ts`
 - **Wie kräftig das Gelb der Kopfzeile ist:** `--kopf` oben in `src/app/globals.css`

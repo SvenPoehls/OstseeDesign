@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import Link from "next/link";
+import Etikett from "@/components/ui/Etikett";
 import { LEISE, farben } from "@/lib/farben";
 import { leistungsLink, services } from "@/lib/site";
 
@@ -15,22 +16,11 @@ export default function WeitereLeistungen({ aktuell }: { aktuell: string }) {
 
   return (
     <section className="mt-16 sm:mt-24" aria-labelledby="weitere">
-      <div data-reveal className="max-w-[30rem]">
-        <p className="flex items-center gap-2 text-[0.88rem] font-bold">
-          <span aria-hidden="true" className="flex gap-1">
-            {weitere.map(({ i }) => (
-              <span
-                key={i}
-                className="h-3 w-3 rounded-full"
-                style={{ backgroundColor: farben[i].ton }}
-              />
-            ))}
-          </span>
-          Leistungen
-        </p>
+      <div data-reveal className="max-w-[44rem]">
+        <Etikett>Leistungen</Etikett>
         <h2
           id="weitere"
-          className="mt-2 text-[clamp(1.8rem,4vw,2.8rem)] font-extrabold leading-tight tracking-[-0.04em]"
+          className="titel mt-6"
         >
           Weitere Leistungen
         </h2>

@@ -229,6 +229,7 @@ body {
     opacity: 1 !important;
     translate: none !important;
     scale: none !important;
+    clip-path: none !important;
   }
   *,
   *::before,
@@ -298,6 +299,94 @@ body {
   .seitenrand {
     @apply mx-auto w-full max-w-seite px-4 sm:px-6 lg:px-10;
   }
+}
+
+/* ── ABSCHNITTE UND ÜBERSCHRIFTEN ────────────────────────────────────────── */
+/* Aufbau nach dem Vorbild mediaquestweb.com: Die Abschnitte laufen über die
+   ganze Breite, helle (auf dem Verlauf) und dunkelbraune wechseln sich ab.
+   Überschriften stehen groß in Versalien, einzelne Wörter sind farbig
+   hervorgehoben.
+
+   `.abschnitt`     Abstand oben/unten. Groß genug, dass die gestrichelten
+                    Übergangslinien (siehe Uebergang.tsx) im Rand liegen und
+                    nie über Text laufen.
+   `.titel`         Überschrift eines Abschnitts (h2).
+   `.markiert`      Hervorgehobenes Wort auf HELLEM Grund: Die Schrift bleibt
+                    dunkel, dahinter liegt ein Strich in der Farbe (`--ton`) wie
+                    von einem Textmarker. Farbige Schrift wäre auf Weiß zu
+                    schwach (Zinnober 2,5 : 1). Auf DUNKLEM Grund wird das Wort
+                    stattdessen direkt eingefärbt (siehe farben.ts). */
+@layer components {
+  .abschnitt {
+    @apply py-20 sm:py-24 lg:py-32;
+  }
+  .titel {
+    @apply text-[clamp(1.95rem,4.6vw,3.5rem)] font-black uppercase leading-[0.98] tracking-[-0.025em];
+  }
+  .markiert {
+    background-image: linear-gradient(
+      to bottom,
+      transparent 58%,
+      var(--ton, #ffc63d) 58%,
+      var(--ton, #ffc63d) 90%,
+      transparent 90%
+    );
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    padding: 0 0.06em;
+  }
+}
+
+/* ── ÜBERGANGSLINIEN ─────────────────────────────────────────────────────── */
+/* Die gestrichelten Bögen zwischen den Abschnitten (Uebergang.tsx). Beim
+   Hinscrollen „zeichnen" sie sich: Ein Ausschnitt gibt die Linie von ihrem
+   Anfang her frei (`--von-rechts` für Linien, die rechts beginnen). */
+[data-reveal="aus"][data-art="linie"] {
+  opacity: 1;
+  translate: none;
+  clip-path: inset(0 100% 0 0);
+}
+[data-reveal="aus"][data-art="linie"][data-start="rechts"] {
+  clip-path: inset(0 0 0 100%);
+}
+@keyframes linie-links {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes linie-rechts {
+  from {
+    clip-path: inset(0 0 0 100%);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+[data-reveal="an"][data-art="linie"] {
+  animation: linie-links 1.8s var(--weich) var(--verz, 0ms) backwards;
+}
+[data-reveal="an"][data-art="linie"][data-start="rechts"] {
+  animation-name: linie-rechts;
+}
+
+/* ── FRAGEN (Aufklapp-Liste) ─────────────────────────────────────────────── */
+/* Native <details>: funktioniert ohne Skript und mit Tastatur. Das Dreieck
+   des Browsers wird durch ein rundes Plus ersetzt, das sich beim Öffnen zum
+   Kreuz dreht. */
+.frage summary {
+  list-style: none;
+}
+.frage summary::-webkit-details-marker {
+  display: none;
+}
+.frage .frage-zeichen {
+  transition: rotate 0.3s var(--weich);
+}
+.frage[open] .frage-zeichen {
+  rotate: 45deg;
 }
 
 /* ── RECHTSTEXTE (Impressum / Datenschutz) ───────────────────────────────── */

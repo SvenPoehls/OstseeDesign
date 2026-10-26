@@ -30,12 +30,20 @@ export const KNOPF = "#0e7c86"; // Knöpfe: das Petrol aus dem Fächer
 // als das Papier und leicht durchscheinend, damit das Knittern durchschimmert.
 export const FLAECHE = "rgba(90, 76, 50, 0.07)";
 
-// Petrol und Magenta als SCHRIFT (kleine Überschriften wie „Leistungen",
-// „Standort", „Ablauf"): Die Fächerfarben selbst sind für kleine Schrift auf
-// dem beigen Grund zu hell. Für Text deshalb diese dunkleren Fassungen.
-// Flächen, Kreise und Knöpfe behalten die hellen Farben.
-export const PETROL_TEXT = "#074a51";
-export const MAGENTA_TEXT = "#8c2747";
+// Zinnober als kleine SCHRIFT auf hellem Grund (z. B. die Etiketten über den
+// Überschriften): ein gebranntes Orange-Braun. Das helle Zinnober selbst hat
+// auf Weiß nur 2,5 : 1, dieser Ton 7,5 : 1 (auf dem Beige unten 4,8 : 1).
+export const ZINNOBER_TEXT = "#8f3307";
+
+// ── DUNKLE ABSCHNITTE ────────────────────────────────────────────────────
+// Ein tiefes Espressobraun – die dunkle Fortsetzung des Verlaufs von Weiß zu
+// Beige. Darauf steht cremeweiße Schrift. Als Schmuckfarbe für Text taugen
+// dort nur Zinnober (6,0 : 1) und Ocker (10 : 1); Petrol und Magenta sind auf
+// Braun zu dunkel und bleiben Flächen und Knöpfen vorbehalten.
+export const DUNKEL = "#2a2019"; // Grund der dunklen Abschnitte und der Fußzeile
+export const DUNKEL_KARTE = "#3a2d23"; // Karten auf dem dunklen Grund
+export const CREME = "#f7f1e8"; // Schrift auf Dunkel
+export const CREME_LEISE = "#d8cbb8"; // Nebentext auf Dunkel (9 : 1)
 
 // Schrift AUF den vier Farbflächen (z. B. die Nummern in den Kreisen). Weiß
 // ist auf Ocker kaum lesbar (1,6 : 1) und auf Zinnober zu schwach (2,6 : 1),

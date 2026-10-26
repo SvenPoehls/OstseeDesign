@@ -4,6 +4,7 @@ import LeistungHero from "@/components/sections/LeistungHero";
 import LeistungDetails from "@/components/sections/LeistungDetails";
 import WeitereLeistungen from "@/components/sections/WeitereLeistungen";
 import Process from "@/components/sections/Process";
+import Aufruf from "@/components/sections/Aufruf";
 import Contact from "@/components/sections/Contact";
 import { company, services, unterseiten } from "@/lib/site";
 
@@ -16,7 +17,10 @@ import { company, services, unterseiten } from "@/lib/site";
 // selbst. Texte, Punkte und Foto-Motive kommen ebenfalls von dort.
 //
 // Aufbau: Kopfbereich in der Leistungsfarbe · Bilder · „Das gehört dazu" ·
-// weitere Leistungen · Ablauf (derselbe wie auf der Startseite) · Kontakt.
+// weitere Leistungen · Ablauf (derselbe wie auf der Startseite) ·
+// Schlussaufruf (dunkel) · Kontakt. Die oberen drei Teile teilen sich einen
+// Seitenrand; Ablauf, Aufruf und Kontakt laufen wie auf der Startseite über
+// die ganze Breite und setzen ihren Rand selbst.
 
 // Der Export ist statisch: Es dürfen nur die Adressen aufgerufen werden, die
 // beim Bauen erzeugt wurden. Alles andere ergibt die 404-Seite.
@@ -67,14 +71,14 @@ export default async function LeistungPage({ params }: Props) {
 
   return (
     <>
-      <main
-        id="hauptinhalt"
-        className="seitenrand"
-      >
-        <LeistungHero service={service} index={index} />
-        <LeistungDetails service={service} index={index} />
-        <WeitereLeistungen aktuell={service.id} />
+      <main id="hauptinhalt">
+        <div className="seitenrand">
+          <LeistungHero service={service} index={index} />
+          <LeistungDetails service={service} index={index} />
+          <WeitereLeistungen aktuell={service.id} />
+        </div>
         <Process />
+        <Aufruf />
         <Contact />
       </main>
       <script

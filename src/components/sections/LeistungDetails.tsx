@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import Bild from "@/components/ui/Bild";
+import Etikett from "@/components/ui/Etikett";
 import { SCHRIFT_AUF, farben } from "@/lib/farben";
 import type { Service } from "@/lib/site";
 
@@ -49,18 +50,11 @@ export default function LeistungDetails({
 
       {/* ── Das gehört dazu ────────────────────────────────────────────── */}
       <section className="mt-16 sm:mt-24" aria-labelledby="dazu">
-        <div data-reveal className="max-w-[30rem]">
-          <p className="flex items-center gap-2 text-[0.88rem] font-bold">
-            <span
-              aria-hidden="true"
-              className="h-3 w-3 rounded-full"
-              style={{ backgroundColor: ton }}
-            />
-            {service.title}
-          </p>
+        <div data-reveal className="max-w-[44rem]">
+          <Etikett>{service.title}</Etikett>
           <h2
             id="dazu"
-            className="mt-2 text-[clamp(1.8rem,4vw,2.8rem)] font-extrabold leading-tight tracking-[-0.04em]"
+            className="titel mt-6"
           >
             Das gehört dazu
           </h2>

@@ -23,6 +23,41 @@ Gestaltungsgespür, ohne nach Werbeagentur zu klingen – wichtig, weil die
 Kundschaft Handwerksbetriebe, Vereine und lokale Geschäfte sind, die sich
 trauen sollen anzurufen.
 
+## Der Aufbau (nach dem Vorbild mediaquestweb.com)
+
+Farben, Schrift und Hintergrund sind die des Farbfächers. Der **Aufbau** der
+Seite folgt dem Vorbild mediaquestweb.com. Übernommen wurde nur das Layout,
+weder Texte noch Leistungen:
+
+- **Abschnitte über die ganze Breite.** Helle (auf dem Verlauf) und
+  **dunkelbraune** wechseln sich ab. Das Braun ist die dunkle Fortsetzung des
+  Verlaufs von Weiß zu Beige.
+- **Gestrichelte Bögen** in Zinnober verbinden einige Abschnitte und laufen
+  über die Kante von Dunkel nach Hell (`components/ui/Uebergang.tsx`). Sie
+  liegen im Innenabstand der Abschnitte, also nie über Text.
+- **Etikett über jeder Überschrift**: Versalien mit weitem Abstand, darunter
+  eine feine Linie mit kurzem Zinnober-Strich (`components/ui/Etikett.tsx`).
+- **Überschriften groß in Versalien**, einzelne Wörter hervorgehoben: auf
+  hellem Grund mit einem Farbmarker hinter dunkler Schrift (`.markiert`), auf
+  dunklem Grund direkt in Zinnober.
+- Bewusst **ohne** Hintergrundbild im Kopfbereich und **ohne** Logo-Wand
+  („Valuable Clients").
+
+Reihenfolge der Startseite:
+
+| Abschnitt | Vorbild | Inhalt |
+| --- | --- | --- |
+| Kopfbereich | Hero | links Schlagzeile, Kennzahlen, Knöpfe · rechts der Farbfächer und ein dunkles Band mit der Anschrift (statt Video) |
+| So arbeiten wir (dunkel) | „Move forward…" | die Zusagen aus dem Ablauf als Liste mit Häkchen |
+| Leistungen | „Our Services" | vier Karten 01–04 mit Punkten |
+| Einblicke | „Favorite Work" | Galerie 3 × 3 mit den Foto-Motiven der Leistungen |
+| Kundenstimmen (dunkel) | „What our clients are saying" | Karussell mit Pfeilen, Punkten und Pause-Knopf – **zurzeit Platzhalter** |
+| Ablauf | Screenshot 2 | unverändert: Faden mit Nummernkreisen und vier Karten |
+| Häufige Fragen | „FAQ" | Aufklapp-Liste, Antworten nur aus Angaben in `site.ts` |
+| Schlussaufruf (dunkel) | „Ready for the next chapter" | mittig, mit kurzer gestrichelter Schlaufe |
+| Kontakt | „Get in touch" | Kontaktwege, QR-Feld, Öffnungszeiten (statt Formular: ohne Server gäbe es niemanden, der es verschickt) |
+| Fußzeile (dunkel) | Footer | vier Spalten: Marke, Seiten, Kontakt, Öffnungszeiten |
+
 ## Die Entscheidungen
 
 | Bereich | Entscheidung |
@@ -35,6 +70,7 @@ trauen sollen anzurufen.
 | Kopfzeile | **Durchgehende Leiste** im zarten Ocker: Wortmarke mit Unterzeile links, Menü in Großbuchstaben, rechts zwei runde Knöpfe (Telefon dunkel, „Projekt anfragen" Petrol), unten ein Band aus den vier Fächerfarben. Die aktive Seite ist in ihrer Farbe unterstrichen. Unter 1280 px Breite steht das Menü als farbige Marken unter der Leiste. |
 | Breite | Inhalt bis **1440 px** breit (vorher 1200), damit große Monitore genutzt werden. |
 | Ablauf | Faden mit farbigen Punkten statt Liste. |
+| Dunkle Abschnitte | Espressobraun `#2a2019`, Schrift Creme `#f7f1e8`, Nebentext `#d8cbb8`. Farbige Schrift darauf nur Zinnober und Ocker. |
 | Knöpfe | Petrol (das zweite Farbfächer-Muster), damit Ocker und Zinnober Flächen bleiben. |
 
 ## Die Unterseiten
@@ -45,7 +81,7 @@ Drucksachen) läuft über **eine gemeinsame Vorlage**
 der Karte der Startseite, im Menü (Unterstrich, Handy-Marke) und im
 Kopfbereich ihrer Seite. Aufbau: Kopfbereich mit Farbkreisen · drei
 Foto-Platzhalter · „Das gehört dazu" · weitere Leistungen · Ablauf ·
-Kontakt.
+Schlussaufruf (dunkel) · Kontakt.
 
 **Neue Leistung hinzufügen:** in `src/lib/site.ts` einen Eintrag in
 `services` ergänzen (und in `src/lib/farben.ts` eine Farbe). Seite, Menüpunkt
@@ -65,10 +101,12 @@ Farbfächer-Gedanken:
 | **Kreise** | Die drei Farbkreise im Kopfbereich wachsen auf und treiben danach sehr langsam (nur ab Tablet-Breite, weil Dauerbewegung mit Farbmischung auf einem schwachen Handy Akku kostet). |
 | **Fächer** | Die vier Farbkarten klappen nacheinander auf wie ein Fächer: erst verdreht und zur Mitte geschoben, dann an ihrem Platz. |
 | **Einblenden** | Alles weiter unten erscheint erst, wenn man dort ankommt. Der Ablauf-Faden zeichnet sich dabei von links nach rechts, die Nummernkreise poppen nacheinander auf. |
-| **Hover** | Karten und Knöpfe heben sich leicht, Eckkreise wachsen. |
+| **Linien** | Die gestrichelten Bögen zeichnen sich beim Hinscrollen von ihrem Anfang her. |
+| **Kundenstimmen** | Wechseln alle 7 Sekunden; Pause-Knopf, hält bei Maus oder Tastatur darauf an, läuft bei „Bewegung reduzieren" gar nicht. |
+| **Hover** | Karten und Knöpfe heben sich leicht, Eckkreise wachsen, in der Galerie wird die Farbleiste voll breit. |
 
 **Wie ein Element zum Einblenden kommt:** `data-reveal` ans Element schreiben
-(optional `data-art="faden"` oder `"pop"`, und eine Verzögerung mit
+(optional `data-art="faden"`, `"pop"` oder `"linie"`, und eine Verzögerung mit
 `className="[--verz:120ms]"`). Das Skript dazu steht in
 `src/components/ui/Einblenden.tsx` und ist im Layout eingebunden; es läuft bei
 jedem Seitenwechsel neu.
@@ -101,8 +139,9 @@ jedem Seitenwechsel neu.
 Alle Texte erfüllen **WCAG AA** (4,5 : 1, große Schrift 3 : 1). Gemessen
 wird nicht gegen eine angenommene Hintergrundfarbe, sondern gegen das, was
 tatsächlich hinter jedem Text liegt – Beige-Verlauf, Farbkreise und getönte
-Kacheln eingerechnet. Letzte Messung: **1.047 Texte** auf allen sechs Seiten,
-am Rechner (1440 px) und auf dem Handy (390 px), schwächster Wert **4,95 : 1**.
+Kacheln und dunkle Abschnitte eingerechnet, aufgeklappte Fragen ebenfalls.
+Letzte Messung: **1.690 Texte** auf allen sechs Seiten, am Rechner (1440 px)
+und auf dem Handy (390 px), schwächster Wert **4,94 : 1**.
 
 Dafür gibt es eigene Schriftfarben in `src/lib/farben.ts`:
 
@@ -110,19 +149,21 @@ Dafür gibt es eigene Schriftfarben in `src/lib/farben.ts`:
 | --- | --- |
 | `LEISE` `#3f3b45` | Nebentext. Kräftiger als auf weißem Grund nötig wäre – unten ist der Grund beige, getönte Kacheln darauf noch dunkler. |
 | `LEISE_AUF_KREISEN` `#36323c` | Nebentext über den Farbkreisen der Kopfbereiche |
-| `PETROL_TEXT` `#074a51`, `MAGENTA_TEXT` `#8c2747` | kleine farbige Überschriften („Leistungen", „Standort", „Ablauf") – die hellen Fächerfarben sind dafür zu schwach |
+| `ZINNOBER_TEXT` `#8f3307` | die Etiketten über den Überschriften auf hellem Grund – das helle Zinnober ist dafür zu schwach (2,5 : 1) |
+| `CREME`, `CREME_LEISE` | Schrift und Nebentext auf den dunkelbraunen Abschnitten (Nebentext 9 : 1) |
 | `SCHRIFT_AUF` | Schrift auf den vier Farbflächen (z. B. Nummern in Kreisen): je Farbe die besser lesbare, mind. 4,95 : 1 |
 
-Auf der orangen Kontaktfläche steht dunkle Schrift (weiße hätte nur
-2,6 : 1). **Beim Umfärben daran denken:** helle Farben taugen nicht als
+Hervorgehobene Wörter auf hellem Grund bekommen einen Farbmarker hinter
+dunkler Schrift statt farbiger Schrift. **Beim Umfärben daran denken:** helle Farben taugen nicht als
 Schriftfarbe, und auf dem beigen Grund braucht Text etwas mehr Kraft als auf Weiß.
 Die farbigen Aufzählungspunkte im Ablauf sind reiner Schmuck und für
 Screenreader ausgeblendet.
 
 ## Regeln für spätere Änderungen
 
-1. **Farbe kommt aus Flächen**, nicht aus dunklen Hintergründen. Die Seite
-   bleibt hell, der Grund bleibt Papier.
+1. **Hell und Dunkel wechseln sich ab.** Grund ist der Verlauf, dazwischen
+   stehen dunkelbraune Abschnitte (nie zwei dunkle direkt hintereinander).
+   Andere dunkle Töne als `DUNKEL` gibt es nicht.
 2. **Ein Bereich = eine Farbe.** Die vier Farben gehören fest zu den vier
    Leistungen; sie nicht für andere Zwecke wiederverwenden.
 3. **Kacheln eckig, Knöpfe rund.** Neue Flächen benutzen `rounded-kachel`
@@ -145,17 +186,22 @@ src/app/globals.css            Kopfzeilen-Farbe, Seitenrand, Animationen, Rechts
 src/lib/farben.ts              Farben (auch: welche Schrift auf welcher Farbe)
 src/lib/site.ts                Inhalte, Menü, Liste der Unterseiten
 src/components/layout/         Header, Footer, Papiergrund, LegalPage, CookieNotice
-src/components/sections/       Startseite: Hero, Faecher, Services, Process, FindUs, Contact
+src/components/sections/       Startseite: Hero (mit Faecher), Werkstatt, Services, Einblicke,
+                               Kundenstimmen, Process, Fragen, Aufruf, Contact
                                Unterseiten: LeistungHero, LeistungDetails, WeitereLeistungen
-src/components/ui/             Bild (Foto-Platzhalter), Einblenden (Scroll-Skript)
+src/components/ui/             Bild (Foto-Platzhalter), Einblenden (Scroll-Skript),
+                               Etikett (Überschriften-Etikett), Uebergang (gestrichelte Bögen)
 ```
 
 ## Was noch fehlt
 
 - **Echte Fotos.** Überall, wo jetzt eine gestreifte Fläche steht
-  (`components/ui/Bild.tsx`), gehört ein Foto hin. Die Notiz auf der Fläche
+  (`components/ui/Bild.tsx`, Galerie in `Einblicke.tsx`), gehört ein Foto hin. Die Notiz auf der Fläche
   sagt, welches Motiv gedacht ist. Für eine Designfirma ist das das
   Wichtigste, was noch fehlt: Arbeitsproben sind der stärkste Beweis.
+- **Echte Kundenstimmen.** Die drei Stimmen sind Platzhalter und auf der
+  Seite so beschriftet. Echte Zitate nur mit Einverständnis eintragen
+  (`kundenstimmen` in `src/lib/site.ts`).
 - **Der QR-Code** als `public/qr-code.png` (siehe Hinweis in `Contact.tsx`).
 - **Datenschutz-Hinweis:** Die Datenschutzerklärung (Abschnitt 4) beschreibt
   einen Hinweis-Banner, den es auf der Seite nicht gibt. Entweder

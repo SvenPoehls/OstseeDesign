@@ -71,7 +71,7 @@ export default function LeistungDetails({
             <li
               key={punkt}
               data-reveal
-              className="relative overflow-hidden rounded-[28px] p-6 sm:p-7"
+              className="relative overflow-hidden rounded-kachel p-6 sm:p-7"
               style={
                 {
                   backgroundColor: `${ton}1a`,

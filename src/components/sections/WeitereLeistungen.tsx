@@ -39,7 +39,7 @@ export default function WeitereLeistungen({ aktuell }: { aktuell: string }) {
       <div className="mt-8 grid gap-4 sm:gap-5 md:grid-cols-3">
         {weitere.map(({ service, i }, n) => {
           const klasse =
-            "group relative flex flex-col overflow-hidden rounded-[28px] p-6 transition-transform duration-300 hover:-translate-y-1 sm:p-7";
+            "group relative flex flex-col overflow-hidden rounded-kachel p-6 transition-transform duration-300 hover:-translate-y-1 sm:p-7";
           const stil = {
             backgroundColor: `${farben[i].ton}1a`,
             "--verz": `${n * 130}ms`,

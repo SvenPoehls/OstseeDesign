@@ -69,7 +69,7 @@ export default async function LeistungPage({ params }: Props) {
     <>
       <main
         id="hauptinhalt"
-        className="mx-auto w-full max-w-[1200px] px-4 sm:px-6"
+        className="seitenrand"
       >
         <LeistungHero service={service} index={index} />
         <LeistungDetails service={service} index={index} />

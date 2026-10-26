@@ -27,7 +27,7 @@ export default function Services() {
       <div className="mt-8 grid gap-4 sm:gap-5 lg:grid-cols-12">
         {services.map((service, i) => {
           const gross = i === 0 || i === 3;
-          const klasse = `group relative overflow-hidden rounded-[32px] p-7 transition-transform duration-300 hover:-translate-y-1 sm:p-9 ${
+          const klasse = `group relative overflow-hidden rounded-kachel p-7 transition-transform duration-300 hover:-translate-y-1 sm:p-9 ${
             gross ? "lg:col-span-7" : "lg:col-span-5"
           } ${i % 2 === 1 ? "[--verz:120ms]" : ""}`;
           const stil = { backgroundColor: `${farben[i].ton}1a` };

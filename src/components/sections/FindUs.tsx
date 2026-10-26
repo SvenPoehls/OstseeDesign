@@ -14,7 +14,7 @@ export default function FindUs() {
     >
       <div
         data-reveal
-        className="relative overflow-hidden rounded-[32px] p-7 sm:p-10 lg:col-span-7"
+        className="relative overflow-hidden rounded-kachel p-7 sm:p-10 lg:col-span-7"
         style={{ backgroundColor: `${farben[1].ton}1a` }}
       >
         <span
@@ -61,7 +61,7 @@ export default function FindUs() {
 
       <div
         data-reveal
-        className="rounded-[32px] p-7 [--verz:140ms] sm:p-10 lg:col-span-5"
+        className="rounded-kachel p-7 [--verz:140ms] sm:p-10 lg:col-span-5"
         style={{ backgroundColor: FLAECHE }}
       >
         {/* Ocker auf Weiß hat zu wenig Kontrast für Text – deshalb die

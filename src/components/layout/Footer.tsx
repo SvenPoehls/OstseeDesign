@@ -8,7 +8,7 @@ export default function Footer() {
   const year = 2026; // statisch – kein Client-Datum nötig
 
   return (
-    <footer className="mx-auto w-full max-w-[1200px] px-4 pb-10 pt-12 sm:px-6">
+    <footer className="seitenrand pb-10 pt-12">
       <div aria-hidden="true" className="flex gap-1.5">
         {farben.map((f) => (
           <span

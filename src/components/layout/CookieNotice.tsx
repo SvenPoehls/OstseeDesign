@@ -48,7 +48,7 @@ export default function CookieNotice() {
       role="dialog"
       aria-modal="false"
       aria-labelledby="cookie-title"
-      className="fixed inset-x-3 bottom-3 z-[60] mx-auto max-w-[1200px] rounded-[28px] bg-white p-5 shadow-[0_12px_40px_rgba(23,22,26,0.18)] ring-1 ring-tinte/10 sm:inset-x-6 sm:bottom-6"
+      className="fixed inset-x-3 bottom-3 z-[60] mx-auto max-w-seite rounded-kachel bg-white p-5 shadow-[0_12px_40px_rgba(23,22,26,0.18)] ring-1 ring-tinte/10 sm:inset-x-6 sm:bottom-6"
     >
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-8">
         <div className="flex-1">

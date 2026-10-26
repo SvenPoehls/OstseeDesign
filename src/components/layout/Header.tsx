@@ -3,21 +3,23 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { KNOPF, TINTE, farben } from "@/lib/farben";
-import { company, nav } from "@/lib/site";
+import { company, nav, unterseiten } from "@/lib/site";
 
-// Kopfzeile als schwebende Pille.
+// Kopfzeile: eine durchgehende Leiste über die ganze Breite.
 //
-// Menü: die drei Leistungen (jede mit eigener Unterseite) und der externe
-// Textilshop. Die Seite, auf der man gerade ist, ist hervorgehoben.
+//   links    Wortmarke „ostseedesign" mit kleiner Unterzeile
+//   Mitte    die drei Leistungen und der Textilshop, in Großbuchstaben
+//   rechts   zwei runde Knöpfe: die Telefonnummer (dunkel) und
+//            „Projekt anfragen" (Petrol)
+//   unten    eine kräftige Linie aus den vier Farben des Fächers
 //
-// Auf einer weißen Seite wäre eine weiße Leiste kaum zu sehen, schwarz wirkt
-// zu schwer. Deshalb trägt sie das Ocker aus dem Farbfächer – leicht
-// durchscheinend, sodass die Kreise darunter beim Scrollen durchschimmern.
-// WIE STARK das Gelb ist, steht als Variable `--kopf` in globals.css.
+// Die Seite, auf der man gerade ist, ist im Menü unterstrichen – in ihrer
+// eigenen Farbe. Der Grund der Leiste ist das zarte Ocker (`--kopf` in
+// globals.css).
 //
-// Auf dem Handy ersetzt eine Reihe farbiger Marken die Navigation; jede trägt
-// die Farbe ihrer Leistung (wie die Karten auf der Startseite). Sie scrollt
-// mit der Seite weg, die Pille bleibt.
+// PLATZ: Menü, Wortmarke und beide Knöpfe passen erst ab 1280 px Breite
+// nebeneinander. Darunter rückt das Menü in die Reihe farbiger Marken unter
+// der Leiste, auf dem Handy bleibt neben der Wortmarke nur „Anrufen".
 //
 // Warum ein Client-Baustein? Nur, um die aktuelle Adresse zu kennen
 // (`usePathname`) und den richtigen Menüpunkt zu markieren.
@@ -25,9 +27,15 @@ export default function Header() {
   const pfad = (usePathname() ?? "/").replace(/\/$/, "") || "/";
   const aktiv = (href: string) => !href.startsWith("http") && href === pfad;
 
+  // Startseite und Leistungsseiten haben unten einen Kontaktbereich – dorthin
+  // springt „Projekt anfragen" direkt. Von Impressum und Datenschutz aus geht
+  // es zum Kontaktbereich der Startseite.
+  const hatKontakt =
+    pfad === "/" || unterseiten.some((s) => `/${s.id}` === pfad);
+
   // Handy-Marken: jede Leistung in ihrer Farbe (die Reihenfolge in `nav`
-  // entspricht der in `farben`), dazu „Kontakt" in neutralem Grau – der steht
-  // am Rechner im Telefonknopf. Der externe Shop kommt zuletzt.
+  // entspricht der in `farben`), dazu „Kontakt" in neutralem Grau. Der
+  // externe Shop kommt zuletzt.
   const leistungen = nav.map((n, i) => ({
     ...n,
     ton: farben[i].ton,
@@ -39,28 +47,33 @@ export default function Header() {
     ...leistungen.filter((n) => n.external),
   ];
 
+  const knopf =
+    "inline-flex items-center justify-center whitespace-nowrap rounded-full px-5 py-3 text-[0.85rem] font-bold uppercase tracking-[0.04em] text-white transition-transform duration-300 hover:-translate-y-0.5";
+
   return (
     <>
-      <header className="kopf-ein sticky top-0 z-40 px-4 pt-4 sm:px-6">
-        <div
-          className="mx-auto flex w-full max-w-[1200px] items-center justify-between gap-4 rounded-full py-2.5 pl-6 pr-2.5 backdrop-blur"
-          style={{
-            backgroundColor: "var(--kopf)",
-            boxShadow: "var(--kopf-schatten)",
-            color: TINTE,
-          }}
-        >
+      <header
+        className="kopf-ein sticky top-0 z-40 backdrop-blur"
+        style={{ backgroundColor: "var(--kopf)", color: TINTE }}
+      >
+        <div className="seitenrand flex h-[4.5rem] items-center justify-between gap-6 sm:h-20">
+          {/* Wortmarke mit Unterzeile */}
           <Link
             href="/"
             aria-label={`${company.name} – zur Startseite`}
-            className="text-[1.15rem] font-extrabold tracking-[-0.03em]"
+            className="flex shrink-0 flex-col leading-none"
           >
-            ostseedesign
+            <span className="text-[1.45rem] font-extrabold tracking-[-0.03em] sm:text-[1.6rem]">
+              ostseedesign
+            </span>
+            <span className="mt-1.5 text-[0.6rem] font-semibold uppercase tracking-[0.24em] text-tinte/75">
+              Werbung &amp; Textilien
+            </span>
           </Link>
 
           <nav
             aria-label="Hauptnavigation"
-            className="hidden items-center gap-7 text-[0.92rem] font-semibold lg:flex"
+            className="ml-auto hidden items-center gap-8 xl:flex"
           >
             {nav.map((item, i) =>
               item.external ? (
@@ -69,7 +82,7 @@ export default function Header() {
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-tinte/75 transition-colors hover:text-tinte"
+                  className="text-[0.86rem] font-semibold uppercase tracking-[0.05em] text-tinte/80 transition-colors hover:text-tinte"
                 >
                   {item.label} ↗
                 </a>
@@ -78,16 +91,16 @@ export default function Header() {
                   key={item.label}
                   href={item.href}
                   aria-current={aktiv(item.href) ? "page" : undefined}
-                  className={`relative transition-colors hover:text-tinte ${
-                    aktiv(item.href) ? "text-tinte" : "text-tinte/75"
+                  className={`relative py-1 text-[0.86rem] font-semibold uppercase tracking-[0.05em] transition-colors hover:text-tinte ${
+                    aktiv(item.href) ? "text-tinte" : "text-tinte/80"
                   }`}
                 >
                   {item.label}
-                  {/* Aktive Seite: ein Punkt in ihrer Farbe unter dem Wort. */}
+                  {/* Aktive Seite: ein Strich in ihrer Farbe unter dem Wort. */}
                   {aktiv(item.href) && (
                     <span
                       aria-hidden="true"
-                      className="absolute -bottom-2 left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full"
+                      className="absolute -bottom-1 left-0 right-0 h-[3px] rounded-full"
                       style={{ backgroundColor: farben[i].ton }}
                     />
                   )}
@@ -96,19 +109,54 @@ export default function Header() {
             )}
           </nav>
 
-          <a
-            href={`tel:${company.phoneHref}`}
-            className="rounded-full px-5 py-2.5 text-[0.9rem] font-bold text-white transition-transform duration-300 hover:-translate-y-0.5"
-            style={{ backgroundColor: KNOPF }}
-          >
-            {company.phoneDisplay}
-          </a>
+          <div className="flex shrink-0 items-center gap-2.5">
+            <a
+              href={`tel:${company.phoneHref}`}
+              className={`${knopf} hidden sm:inline-flex`}
+              style={{ backgroundColor: TINTE }}
+            >
+              {company.phoneDisplay}
+            </a>
+            {hatKontakt ? (
+              <a
+                href="#kontakt"
+                className={`${knopf} hidden sm:inline-flex`}
+                style={{ backgroundColor: KNOPF }}
+              >
+                Projekt anfragen
+              </a>
+            ) : (
+              <Link
+                href="/#kontakt"
+                className={`${knopf} hidden sm:inline-flex`}
+                style={{ backgroundColor: KNOPF }}
+              >
+                Projekt anfragen
+              </Link>
+            )}
+            {/* Handy: nur ein Knopf, damit die Wortmarke Platz behält. */}
+            <a
+              href={`tel:${company.phoneHref}`}
+              className={`${knopf} px-4 py-2.5 sm:hidden`}
+              style={{ backgroundColor: TINTE }}
+            >
+              Anrufen
+            </a>
+          </div>
+        </div>
+
+        {/* Die Linie unter der Leiste: der Farbfächer als Band. */}
+        <div aria-hidden="true" className="flex h-1">
+          {farben.map((f) => (
+            <span key={f.ton} className="flex-1" style={{ backgroundColor: f.ton }} />
+          ))}
         </div>
       </header>
 
+      {/* Unter 1280 px: das Menü als Reihe farbiger Marken. */}
       <nav
         aria-label="Mobile Navigation"
-        className="mx-auto mt-5 flex w-full max-w-[1200px] gap-2 overflow-x-auto px-4 pb-1 [-ms-overflow-style:none] [scrollbar-width:none] sm:px-6 lg:hidden [&::-webkit-scrollbar]:hidden"
+        className="mx-auto mt-5 flex w-full max-w-seite gap-2 overflow-x-auto px-4 pb-1 [-ms-overflow-style:none] [scrollbar-width:none] sm:px-6 lg:px-10 xl:hidden [&::-webkit-scrollbar]:hidden"
       >
         {marken.map((m) => {
           const extern = m.href.startsWith("http");

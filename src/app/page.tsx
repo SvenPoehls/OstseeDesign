@@ -17,7 +17,7 @@ export default function StartseitePage() {
     <>
       <main
         id="hauptinhalt"
-        className="mx-auto w-full max-w-[1200px] px-4 sm:px-6"
+        className="seitenrand"
       >
         <Hero />
         <Faecher />

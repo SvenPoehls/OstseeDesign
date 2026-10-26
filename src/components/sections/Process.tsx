@@ -53,7 +53,7 @@ export default function Process() {
               {i + 1}
             </span>
             <div
-              className="mt-4 rounded-[28px] p-6"
+              className="mt-4 rounded-kachel p-6"
               style={{ backgroundColor: FLAECHE }}
             >
               <h3 className="text-[1.15rem] font-extrabold tracking-[-0.02em]">

@@ -2,7 +2,7 @@
 // feiner Schraffur und einer Notiz, was später darauf zu sehen sein soll.
 //
 // ECHTES FOTO EINSETZEN: Das <Bild …/> an der jeweiligen Stelle durch
-//   <img src={asset("/datei.jpg")} alt="…" className="… rounded-[24px] object-cover" />
+//   <img src={asset("/datei.jpg")} alt="…" className="… rounded-bild object-cover" />
 // ersetzen (asset kommt aus @/lib/assets und setzt den richtigen Pfad).
 export default function Bild({
   note,
@@ -19,7 +19,7 @@ export default function Bild({
   return (
     <figure
       data-reveal={reveal ? "" : undefined}
-      className={`relative overflow-hidden rounded-[24px] ${className}`}
+      className={`relative overflow-hidden rounded-bild ${className}`}
       style={{
         backgroundColor: `${ton}1f`,
         backgroundImage: `repeating-linear-gradient(-45deg, ${ton}26 0 1px, transparent 1px 15px)`,

@@ -16,7 +16,7 @@ export default function LegalPage({
   return (
     <main
       id="hauptinhalt"
-      className="mx-auto w-full max-w-[1200px] px-4 py-14 sm:px-6 md:py-20"
+      className="seitenrand py-14 md:py-20"
     >
       <div className="max-w-3xl">
         <Link

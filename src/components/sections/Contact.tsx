@@ -15,14 +15,14 @@ import { company } from "@/lib/site";
 // QR-CODE EINFÜGEN: Bild als public/qr-code.png ablegen und den Platzhalter
 // unten ersetzen durch:
 //   <img src={asset("/qr-code.png")} alt="QR-Code zum Kontakt"
-//        className="h-24 w-24 rounded-[24px] bg-white p-2" />
+//        className="h-24 w-24 rounded-bild bg-white p-2" />
 // (asset kommt aus @/lib/assets und setzt den richtigen Pfad.)
 export default function Contact() {
   return (
     <section
       id="kontakt"
       data-reveal
-      className="relative mt-16 scroll-mt-28 overflow-hidden rounded-[32px] p-8 text-tinte sm:mt-24 sm:p-14"
+      className="relative mt-16 scroll-mt-28 overflow-hidden rounded-kachel p-8 text-tinte sm:mt-24 sm:p-14"
       style={{ backgroundColor: farben[0].ton }}
     >
       <span
@@ -60,7 +60,7 @@ export default function Contact() {
 
         <div className="flex items-start gap-5">
           <div
-            className="flex h-24 w-24 shrink-0 items-center justify-center rounded-[24px] border border-dashed border-tinte/60 text-center text-[0.72rem] text-tinte"
+            className="flex h-24 w-24 shrink-0 items-center justify-center rounded-bild border border-dashed border-tinte/60 text-center text-[0.72rem] text-tinte"
             role="img"
             aria-label="Platzhalter für QR-Code"
           >

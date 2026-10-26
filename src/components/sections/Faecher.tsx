@@ -32,7 +32,7 @@ export default function Faecher() {
           "--verz": `${900 + i * 130}ms`,
         } as CSSProperties;
         const klasse =
-          "faecher-karte group rounded-[28px] p-5 transition-transform duration-300 hover:-translate-y-1 sm:p-6";
+          "faecher-karte group rounded-kachel p-5 transition-transform duration-300 hover:-translate-y-1 sm:p-6";
         const inhalt = (
           <>
             <span

@@ -21,8 +21,6 @@
      kräftig gelb, bei 0 unsichtbar. Die Schrift darauf bleibt auch bei
      niedrigen Werten gut lesbar (siehe DESIGN.md). */
   --kopf: rgba(255, 198, 61, 0.5);
-  /* Der Schatten unter der Leiste – ebenfalls leiser als vorher. */
-  --kopf-schatten: 0 6px 20px rgba(23, 22, 26, 0.08);
 
   /* Ein Bewegungsverlauf für alles: schnell los, weich aus. */
   --weich: cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -227,6 +225,15 @@ body {
   *::before,
   *::after {
     transition-duration: 0.001ms !important;
+  }
+}
+
+/* ── SEITENRAND ───────────────────────────────────────────────────────────── */
+/* Ein Maß für alle Abschnitte, Kopf- und Fußzeile. Die Breite selbst steht
+   in tailwind.config.ts (`seite`), hier nur die Ränder links und rechts. */
+@layer components {
+  .seitenrand {
+    @apply mx-auto w-full max-w-seite px-4 sm:px-6 lg:px-10;
   }
 }
 

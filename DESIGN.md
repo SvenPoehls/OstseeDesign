@@ -29,11 +29,29 @@ trauen sollen anzurufen.
 | --- | --- |
 | Schrift | **Schibsted Grotesk**, die einzige Schrift der Seite. Freundlich und etwas rund, bewusst nicht Inter. Liegt im Projekt, kein Abruf bei Google. |
 | Farbe | Weißer Grund, **vier Werkstattfarben** (Zinnober, Petrol, Ocker, Magenta) – jede gehört zu einer Leistung. Siehe `src/lib/farben.ts`. |
-| Form | **Rund**: Flächen 28–32 px, Bilder 24 px, Knöpfe und Marken ganz rund. Die Rundung ist hier das Thema. |
+| Form | **Kreise und runde Knöpfe, aber eher eckige Kacheln**: Karten und Farbflächen 14 px, Bildflächen 10 px, Knöpfe, Marken und Kreise ganz rund. |
 | Transparenz | Kreise liegen übereinander und **mischen sich** (`mix-blend-multiply`) – wie Druckfarben. |
-| Kopfzeile | Schwebende Pille im **zarten Ocker**, leicht durchscheinend. Auf dem Handy ersetzen farbige Marken die Navigation. |
+| Kopfzeile | **Durchgehende Leiste** im zarten Ocker: Wortmarke mit Unterzeile links, Menü in Großbuchstaben, rechts zwei runde Knöpfe (Telefon dunkel, „Projekt anfragen" Petrol), unten ein Band aus den vier Fächerfarben. Die aktive Seite ist in ihrer Farbe unterstrichen. Unter 1280 px Breite steht das Menü als farbige Marken unter der Leiste. |
+| Breite | Inhalt bis **1440 px** breit (vorher 1200), damit große Monitore genutzt werden. |
 | Ablauf | Faden mit farbigen Punkten statt Liste. |
 | Knöpfe | Petrol (das zweite Farbfächer-Muster), damit Ocker und Zinnober Flächen bleiben. |
+
+## Die Unterseiten
+
+Jede Leistung mit eigener Seite (Textilveredelung, Werbetechnik,
+Drucksachen) läuft über **eine gemeinsame Vorlage**
+(`src/app/[leistung]/page.tsx`) und trägt durchgehend **ihre Farbe** – auf
+der Karte der Startseite, im Menü (Unterstrich, Handy-Marke) und im
+Kopfbereich ihrer Seite. Aufbau: Kopfbereich mit Farbkreisen · drei
+Foto-Platzhalter · „Das gehört dazu" · weitere Leistungen · Ablauf ·
+Kontakt.
+
+**Neue Leistung hinzufügen:** in `src/lib/site.ts` einen Eintrag in
+`services` ergänzen (und in `src/lib/farben.ts` eine Farbe). Seite, Menüpunkt
+und Karte entstehen von selbst. Der Textilshop hat einen externen Link und
+deshalb keine eigene Seite.
+
+Kopf- und Fußzeile sitzen im Layout und bleiben beim Seitenwechsel stehen.
 
 ## Die Animationen
 
@@ -51,8 +69,8 @@ Farbfächer-Gedanken:
 **Wie ein Element zum Einblenden kommt:** `data-reveal` ans Element schreiben
 (optional `data-art="faden"` oder `"pop"`, und eine Verzögerung mit
 `className="[--verz:120ms]"`). Das Skript dazu steht in
-`src/components/ui/Einblenden.tsx` und ist auf jeder Seite über `Seite.tsx`
-eingebunden.
+`src/components/ui/Einblenden.tsx` und ist im Layout eingebunden; es läuft bei
+jedem Seitenwechsel neu.
 
 **Regeln, damit Animation nicht stört:**
 
@@ -70,10 +88,11 @@ eingebunden.
 | Wo | Was |
 | --- | --- |
 | `src/lib/farben.ts` | die vier Farben, Schrift-, Knopf- und Flächenfarbe |
-| `src/app/globals.css` → `--kopf` | **wie kräftig das Gelb der Kopfzeile ist.** Die letzte Zahl ist die Deckkraft: 0,5 = zart (jetzt), 0,88 = so kräftig wie früher, 1 = volles Ocker |
-| `src/app/globals.css` → `--kopf-schatten` | der Schatten unter der Kopfzeile |
+| `src/app/globals.css` → `--kopf` | **wie kräftig das Gelb der Kopfzeile ist.** Die letzte Zahl ist die Deckkraft: 0,5 = zart (jetzt), 0,88 = so kräftig wie früher, 1 = volles Ocker. Für eine weiße Leiste: `#ffffff` |
+| `tailwind.config.ts` → `seite` | **wie breit die Seite auf großen Bildschirmen wird** (jetzt 1440 px) |
+| `tailwind.config.ts` → `kachel`, `bild` | **wie rund die Kacheln sind** (jetzt 14 px bzw. 10 px). Knöpfe sind davon nicht betroffen |
 | `src/app/globals.css` → `--weich` | der Bewegungsverlauf aller Animationen |
-| `src/lib/site.ts` | alle Inhalte: Adresse, Zeiten, Leistungen, Ablauf, Navigation |
+| `src/lib/site.ts` | alle Inhalte: Adresse, Zeiten, Leistungen (samt Foto-Motiven), Ablauf. Das Menü und die Unterseiten ergeben sich von selbst aus der Liste der Leistungen |
 
 ## Kontraste
 
@@ -82,11 +101,13 @@ Alle Textfarben erfüllen WCAG AA (mindestens 4,5 : 1), gemessen:
 | Paar | Verhältnis |
 | --- | --- |
 | Nebentext auf Weiß | 6,5 : 1 |
-| Menüschrift auf der Kopfzeile (Gelb 50 %) | 7,1 : 1 |
+| Menüschrift auf der Kopfzeile (Gelb 50 %) | über 7 : 1 |
+| Grauer Text über den Farbkreisen (`LEISE_AUF_KREISEN`), am dunkelsten Punkt gemessen | mind. 4,98 : 1 |
+| Nummern in den Farbkreisen (`SCHRIFT_AUF`, je Farbe die bessere Schrift) | mind. 4,95 : 1 |
 | Menüschrift auf der Kopfzeile, ungünstigster Fall über einem Ocker-Kreis | 6,7 : 1 |
 | Weiß auf Petrol-Knopf | 4,95 : 1 |
 | Überschrift „Ablauf" (dunkleres Magenta `#c23a64`) | 5,1 : 1 |
-| Schrift auf der Kontaktfläche (Tinte auf Zinnober) | 6,9 : 1 |
+| Schrift auf der Kontaktfläche (Tinte auf Zinnober, auch über dem Magenta-Kreis) | mind. 5,1 : 1 |
 
 Zwei Stellen waren im ursprünglichen Entwurf zu schwach und wurden angepasst:
 Weiße Schrift auf dem Zinnober der Kontaktfläche (nur 2,6 : 1) ist jetzt
@@ -100,8 +121,9 @@ daran denken:** helle Farben taugen nicht als Schriftfarbe.
    bleibt hell.
 2. **Ein Bereich = eine Farbe.** Die vier Farben gehören fest zu den vier
    Leistungen; sie nicht für andere Zwecke wiederverwenden.
-3. **Rund, aber ruhig.** Neue Flächen bekommen dieselben Radien wie die
-   vorhandenen; keine eckigen Kästen daneben.
+3. **Kacheln eckig, Knöpfe rund.** Neue Flächen benutzen `rounded-kachel`
+   bzw. `rounded-bild`, Knöpfe und Marken `rounded-full` – keine eigenen
+   Zwischenwerte.
 4. **Helle Farben nie als Schrift** auf Weiß (siehe Kontraste).
 5. **Animation sparsam.** Neue bewegte Elemente brauchen einen Grund;
    Dauerbewegung nur, wo sie nichts kostet.
@@ -112,12 +134,14 @@ daran denken:** helle Farben taugen nicht als Schriftfarbe.
 
 ```
 src/app/page.tsx               Startseite (setzt die Abschnitte zusammen, JSON-LD)
-src/app/layout.tsx             Schrift, SEO-Titel und -Beschreibung
-src/app/globals.css            Kopfzeilen-Variable, alle Animationen, Rechtstext-Stil
-src/lib/farben.ts              Farben
-src/lib/site.ts                Inhalte
-src/components/layout/         Header, Footer, Seite (Rahmen), LegalPage, CookieNotice
-src/components/sections/       Hero, Faecher, Services, Process, FindUs, Contact
+src/app/[leistung]/page.tsx    EINE Vorlage für alle Leistungs-Unterseiten
+src/app/layout.tsx             Schrift, SEO, Kopf- und Fußzeile, Einblenden-Skript
+src/app/globals.css            Kopfzeilen-Farbe, Seitenrand, Animationen, Rechtstexte
+src/lib/farben.ts              Farben (auch: welche Schrift auf welcher Farbe)
+src/lib/site.ts                Inhalte, Menü, Liste der Unterseiten
+src/components/layout/         Header, Footer, LegalPage, CookieNotice
+src/components/sections/       Startseite: Hero, Faecher, Services, Process, FindUs, Contact
+                               Unterseiten: LeistungHero, LeistungDetails, WeitereLeistungen
 src/components/ui/             Bild (Foto-Platzhalter), Einblenden (Scroll-Skript)
 ```
 

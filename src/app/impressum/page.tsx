@@ -5,6 +5,7 @@ import { company, textilShopUrl } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Impressum",
   description: `Impressum von ${company.fullName} in ${company.city}.`,
+  alternates: { canonical: "/impressum/" },
   robots: { index: true, follow: true },
 };
 

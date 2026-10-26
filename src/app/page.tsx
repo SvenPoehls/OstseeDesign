@@ -1,4 +1,3 @@
-import Seite from "@/components/layout/Seite";
 import Hero from "@/components/sections/Hero";
 import Faecher from "@/components/sections/Faecher";
 import Services from "@/components/sections/Services";
@@ -16,19 +15,17 @@ import { company, services } from "@/lib/site";
 export default function StartseitePage() {
   return (
     <>
-      <Seite>
-        <main
-          id="hauptinhalt"
-          className="mx-auto w-full max-w-[1200px] px-4 sm:px-6"
-        >
-          <Hero />
-          <Faecher />
-          <Services />
-          <Process />
-          <FindUs />
-          <Contact />
-        </main>
-      </Seite>
+      <main
+        id="hauptinhalt"
+        className="mx-auto w-full max-w-[1200px] px-4 sm:px-6"
+      >
+        <Hero />
+        <Faecher />
+        <Services />
+        <Process />
+        <FindUs />
+        <Contact />
+      </main>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd()) }}

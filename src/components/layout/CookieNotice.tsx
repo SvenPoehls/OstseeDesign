@@ -7,7 +7,7 @@ import Link from "next/link";
 //
 // ACHTUNG: Diese Komponente ist zurzeit auf keiner Seite eingebunden. Die
 // Datenschutzerklärung (Abschnitt 4) beschreibt aber genau diesen Hinweis.
-// Entweder hier einbinden (in src/components/layout/Seite.tsx) oder den
+// Entweder hier einbinden (in src/app/layout.tsx) oder den
 // Abschnitt in der Erklärung streichen – beides gleichzeitig geht nicht.
 //
 // Wichtig: Diese Website lädt selbst KEINE Tracking- oder Marketing-Cookies

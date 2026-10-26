@@ -1,4 +1,4 @@
-import { KNOPF, LEISE, farben } from "@/lib/farben";
+import { KNOPF, LEISE, LEISE_AUF_KREISEN, farben } from "@/lib/farben";
 import { company } from "@/lib/site";
 
 // Auftakt. Hinter der Schlagzeile liegen drei Kreise übereinander. Sie sind
@@ -39,7 +39,7 @@ export default function Hero() {
         </h1>
         <p
           className="auftritt mt-6 max-w-[34rem] text-[1.08rem] leading-relaxed [--verz:560ms]"
-          style={{ color: LEISE }}
+          style={{ color: LEISE_AUF_KREISEN }}
         >
           Wir besticken und bedrucken Kleidung, beschriften Fahrzeuge und machen
           Schilder. Alles in einer Werkstatt.

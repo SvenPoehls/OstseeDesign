@@ -8,13 +8,17 @@ export default function Bild({
   note,
   ton,
   className = "",
+  reveal = false,
 }: {
   note: string;
   ton: string;
   className?: string;
+  /** Fläche erscheint erst beim Scrollen (siehe Einblenden.tsx). */
+  reveal?: boolean;
 }) {
   return (
     <figure
+      data-reveal={reveal ? "" : undefined}
       className={`relative overflow-hidden rounded-[24px] ${className}`}
       style={{
         backgroundColor: `${ton}1f`,

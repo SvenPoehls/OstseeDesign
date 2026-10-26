@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import Einblenden from "@/components/ui/Einblenden";
 import { company } from "@/lib/site";
 
 // Die Schrift liegt als Datei im Projekt (src/app/fonts) und wird mit der
@@ -66,10 +69,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="de"
-      className={schibsted.variable}
-    >
+    <html lang="de" className={schibsted.variable}>
       <body className="font-sans">
         {/* Sprungmarke für Tastatur-/Screenreader-Nutzer (Barrierefreiheit). */}
         <a
@@ -78,7 +78,20 @@ export default function RootLayout({
         >
           Zum Inhalt springen
         </a>
-        {children}
+        {/* Kopf- und Fußzeile stehen im Layout, nicht in den Seiten: Beim
+            Wechsel zwischen Seiten bleiben sie stehen und gleiten nicht jedes
+            Mal neu herein. Sie liegen in einem gemeinsamen Rahmen, damit die
+            Kopfzeile (sticky) über die ganze Seitenlänge mitläuft.
+            `overflow-x-clip` ist ein Sicherheitsnetz: Kein Element (z. B. ein
+            noch seitlich versetzter Animationsstart) darf die Seite breiter
+            machen als den Bildschirm. Anders als „hidden" bricht „clip" die
+            mitlaufende Kopfzeile nicht. */}
+        <div className="min-h-screen overflow-x-clip bg-white">
+          <Einblenden />
+          <Header />
+          {children}
+          <Footer />
+        </div>
       </body>
     </html>
   );

@@ -5,6 +5,7 @@ import { company, textilShopUrl } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Datenschutzerklärung",
   description: `Datenschutzerklärung von ${company.fullName} in ${company.city}.`,
+  alternates: { canonical: "/datenschutz/" },
   robots: { index: true, follow: true },
 };
 

@@ -5,7 +5,9 @@ import { company } from "@/lib/site";
 // Darauf steht das, worauf es ankommt – die Telefonnummer.
 //
 // Die Schrift ist dunkel, nicht weiß: Weiß auf diesem Orange hat nur 2,6 : 1
-// Kontrast, Tinte dagegen 6,9 : 1.
+// Kontrast, Tinte dagegen 6,9 : 1. Auch kein abgeschwächtes Grau: Der
+// Magenta-Kreis macht den Untergrund stellenweise dunkler (auf dem Handy
+// liegt er hinter dem Text), und abgeschwächte Schrift fiel dort auf 4,0 : 1.
 //
 // BEWEGUNG: Die Fläche erscheint beim Scrollen, der Magenta-Kreis in der
 // Ecke treibt dabei ganz langsam.
@@ -30,11 +32,11 @@ export default function Contact() {
       />
       <div className="relative grid gap-10 lg:grid-cols-[1.5fr_1fr] lg:items-end">
         <div>
-          <p className="text-[0.88rem] font-bold text-tinte/80">Kontakt</p>
+          <p className="text-[0.88rem] font-bold text-tinte">Kontakt</p>
           <h2 className="mt-3 text-[clamp(1.9rem,4.4vw,3rem)] font-extrabold leading-tight tracking-[-0.04em]">
             Was haben Sie vor?
           </h2>
-          <p className="mt-4 max-w-[32rem] leading-relaxed text-tinte/85">
+          <p className="mt-4 max-w-[32rem] leading-relaxed text-tinte">
             Ein Anruf reicht meistens schon. Sagen Sie kurz, worum es geht – den
             Rest klären wir zusammen.
           </p>
@@ -58,15 +60,15 @@ export default function Contact() {
 
         <div className="flex items-start gap-5">
           <div
-            className="flex h-24 w-24 shrink-0 items-center justify-center rounded-[24px] border border-dashed border-tinte/45 text-center text-[0.72rem] text-tinte/80"
+            className="flex h-24 w-24 shrink-0 items-center justify-center rounded-[24px] border border-dashed border-tinte/60 text-center text-[0.72rem] text-tinte"
             role="img"
             aria-label="Platzhalter für QR-Code"
           >
             QR-Code
           </div>
-          <p className="text-[0.92rem] leading-relaxed text-tinte/85">
+          <p className="text-[0.92rem] leading-relaxed text-tinte">
             Scannen und direkt Kontakt aufnehmen.
-            <span className="mt-1 block text-tinte/80">
+            <span className="mt-1 block text-tinte">
               (Code wird hier eingesetzt)
             </span>
           </p>

@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { FLAECHE, LEISE, MAGENTA_TEXT, farben } from "@/lib/farben";
+import { FLAECHE, LEISE, MAGENTA_TEXT, SCHRIFT_AUF, farben } from "@/lib/farben";
 import { processSteps } from "@/lib/site";
 
 // Ablauf als Faden mit farbigen Punkten.
@@ -41,10 +41,11 @@ export default function Process() {
             <span
               data-reveal
               data-art="pop"
-              className="flex h-11 w-11 items-center justify-center rounded-full text-[1rem] font-extrabold text-white"
+              className="flex h-12 w-12 items-center justify-center rounded-full text-[1.25rem] font-extrabold"
               style={
                 {
                   backgroundColor: farben[i].ton,
+                  color: SCHRIFT_AUF[i],
                   "--verz": `${i * 160 + 250}ms`,
                 } as CSSProperties
               }

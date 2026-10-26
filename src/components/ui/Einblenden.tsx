@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 // ───────────────────────────────────────────────────────────────────────
 //  EINBLENDEN BEIM SCROLLEN
@@ -22,8 +23,14 @@ import { useEffect } from "react";
 //  versteckt nur Dinge, die ohnehin noch unterhalb des Bildschirms liegen.
 //  Man sieht also nie ein Element erst da stehen und dann verschwinden.
 //
+//  Das Skript sitzt im Layout und bleibt beim Seitenwechsel bestehen. Deshalb
+//  läuft es bei jeder neuen Adresse noch einmal und sucht die Elemente der
+//  neu geöffneten Seite.
+//
 //  Die Animation selbst steht in globals.css (Abschnitt „EINBLENDEN").
 export default function Einblenden() {
+  const pfad = usePathname();
+
   useEffect(() => {
     // Wer „Bewegung reduzieren" eingestellt hat, bekommt gar nichts versteckt.
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -54,7 +61,7 @@ export default function Einblenden() {
     }
 
     return () => beobachter.disconnect();
-  }, []);
+  }, [pfad]);
 
   return null;
 }

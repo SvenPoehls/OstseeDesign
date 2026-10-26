@@ -1,8 +1,14 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { KNOPF, TINTE, farben } from "@/lib/farben";
 import { company, nav } from "@/lib/site";
 
 // Kopfzeile als schwebende Pille.
+//
+// Menü: die drei Leistungen (jede mit eigener Unterseite) und der externe
+// Textilshop. Die Seite, auf der man gerade ist, ist hervorgehoben.
 //
 // Auf einer weißen Seite wäre eine weiße Leiste kaum zu sehen, schwarz wirkt
 // zu schwer. Deshalb trägt sie das Ocker aus dem Farbfächer – leicht
@@ -10,18 +16,27 @@ import { company, nav } from "@/lib/site";
 // WIE STARK das Gelb ist, steht als Variable `--kopf` in globals.css.
 //
 // Auf dem Handy ersetzt eine Reihe farbiger Marken die Navigation; jede trägt
-// die Farbe ihres Bereichs. Sie scrollt mit der Seite weg, die Pille bleibt.
+// die Farbe ihrer Leistung (wie die Karten auf der Startseite). Sie scrollt
+// mit der Seite weg, die Pille bleibt.
+//
+// Warum ein Client-Baustein? Nur, um die aktuelle Adresse zu kennen
+// (`usePathname`) und den richtigen Menüpunkt zu markieren.
 export default function Header() {
-  // Handy-Marken: die Menüpunkte, dazu „Kontakt" (steht am Rechner im
-  // Telefonknopf). Der Shop trägt das Petrol der Knöpfe.
+  const pfad = (usePathname() ?? "/").replace(/\/$/, "") || "/";
+  const aktiv = (href: string) => !href.startsWith("http") && href === pfad;
+
+  // Handy-Marken: jede Leistung in ihrer Farbe (die Reihenfolge in `nav`
+  // entspricht der in `farben`), dazu „Kontakt" in neutralem Grau – der steht
+  // am Rechner im Telefonknopf. Der externe Shop kommt zuletzt.
+  const leistungen = nav.map((n, i) => ({
+    ...n,
+    ton: farben[i].ton,
+    label: n.external ? `${n.label} ↗` : n.label,
+  }));
   const marken = [
-    { label: "Leistungen", href: "/#leistungen", ton: farben[0].ton },
-    { label: "Ablauf", href: "/#ablauf", ton: farben[1].ton },
-    { label: "Standort", href: "/#standort", ton: farben[2].ton },
-    { label: "Kontakt", href: "/#kontakt", ton: farben[3].ton },
-    ...nav
-      .filter((n) => n.external)
-      .map((n) => ({ label: `${n.label} ↗`, href: n.href, ton: KNOPF })),
+    ...leistungen.filter((n) => !n.external),
+    { label: "Kontakt", href: "/#kontakt", ton: TINTE, external: false },
+    ...leistungen.filter((n) => n.external),
   ];
 
   return (
@@ -45,16 +60,16 @@ export default function Header() {
 
           <nav
             aria-label="Hauptnavigation"
-            className="hidden items-center gap-7 text-[0.92rem] font-semibold text-tinte/75 lg:flex"
+            className="hidden items-center gap-7 text-[0.92rem] font-semibold lg:flex"
           >
-            {nav.map((item) =>
+            {nav.map((item, i) =>
               item.external ? (
                 <a
                   key={item.label}
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="transition-colors hover:text-tinte"
+                  className="text-tinte/75 transition-colors hover:text-tinte"
                 >
                   {item.label} ↗
                 </a>
@@ -62,9 +77,20 @@ export default function Header() {
                 <Link
                   key={item.label}
                   href={item.href}
-                  className="transition-colors hover:text-tinte"
+                  aria-current={aktiv(item.href) ? "page" : undefined}
+                  className={`relative transition-colors hover:text-tinte ${
+                    aktiv(item.href) ? "text-tinte" : "text-tinte/75"
+                  }`}
                 >
                   {item.label}
+                  {/* Aktive Seite: ein Punkt in ihrer Farbe unter dem Wort. */}
+                  {aktiv(item.href) && (
+                    <span
+                      aria-hidden="true"
+                      className="absolute -bottom-2 left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full"
+                      style={{ backgroundColor: farben[i].ton }}
+                    />
+                  )}
                 </Link>
               )
             )}
@@ -86,14 +112,23 @@ export default function Header() {
       >
         {marken.map((m) => {
           const extern = m.href.startsWith("http");
+          const ist = aktiv(m.href);
+          const stil = {
+            // Die aktive Marke ist kräftiger eingefärbt und fett.
+            backgroundColor: `${m.ton}${ist ? "55" : m.ton === TINTE ? "14" : "2e"}`,
+            color: TINTE,
+          };
+          const klasse = `shrink-0 rounded-full px-4 py-2 text-[0.85rem] ${
+            ist ? "font-extrabold" : "font-semibold"
+          }`;
           return extern ? (
             <a
               key={m.label}
               href={m.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="shrink-0 rounded-full px-4 py-2 text-[0.85rem] font-semibold"
-              style={{ backgroundColor: `${m.ton}2e`, color: TINTE }}
+              className={klasse}
+              style={stil}
             >
               {m.label}
             </a>
@@ -101,8 +136,9 @@ export default function Header() {
             <Link
               key={m.label}
               href={m.href}
-              className="shrink-0 rounded-full px-4 py-2 text-[0.85rem] font-semibold"
-              style={{ backgroundColor: `${m.ton}2e`, color: TINTE }}
+              aria-current={ist ? "page" : undefined}
+              className={klasse}
+              style={stil}
             >
               {m.label}
             </Link>

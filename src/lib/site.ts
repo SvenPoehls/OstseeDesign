@@ -43,6 +43,9 @@ export type Service = {
   teaser: string;
   points: string[];
   icon: "signage" | "textile" | "print" | "shop";
+  // Was auf die Fotos soll. Solange es keine echten Fotos gibt, steht das als
+  // Notiz auf der Platzhalterfläche. Das erste Motiv ist das Hauptbild.
+  bilder: string[];
   external?: string; // externer Link statt interner Unterseite
 };
 
@@ -58,6 +61,11 @@ export const services: Service[] = [
       "Aufnäher und Applikationen",
     ],
     icon: "textile",
+    bilder: [
+      "Stickmaschine, Nahaufnahme vom Garn",
+      "Bestickte Arbeitsjacke mit Firmenlogo",
+      "Mütze und Aufnäher, fertig veredelt",
+    ],
   },
   {
     id: "werbetechnik",
@@ -70,6 +78,11 @@ export const services: Service[] = [
       "Fenster und Schaufenster",
     ],
     icon: "signage",
+    bilder: [
+      "Frisch beschrifteter Transporter",
+      "Beklebtes Schaufenster",
+      "Firmenschild an der Hauswand",
+    ],
   },
   {
     id: "drucksachen",
@@ -78,6 +91,11 @@ export const services: Service[] = [
       "Visitenkarten, Flyer, Briefpapier, Stempel. Gestaltet passend zu dem, was schon am Auto und am Schild steht.",
     points: ["Visitenkarten und Briefpapier", "Flyer und Formulare", "Stempel"],
     icon: "print",
+    bilder: [
+      "Visitenkarten auf dem Werkstatttisch",
+      "Briefpapier und Flyer im Stapel",
+      "Stempel in der Werkstatt",
+    ],
   },
   {
     id: "textilshop",
@@ -86,19 +104,29 @@ export const services: Service[] = [
       "Im Shop suchen Sie sich in Ruhe Kleidung aus. Was Sie bestellen, besticken wir auf Wunsch hier bei uns.",
     points: ["Arbeits- und Freizeitkleidung", "Bestellung direkt im Shop", "Veredelung auf Wunsch"],
     icon: "shop",
+    bilder: ["Stapel veredelter Arbeitskleidung"],
     external: textilShopUrl,
   },
 ];
 
-// Navigation (Kopfzeile). Alle Punkte springen zu Abschnitten der Startseite,
-// der Textilshop öffnet im neuen Fenster. „/#…" funktioniert auch von den
-// Unterseiten (Impressum, Datenschutz) aus.
-export const nav: { label: string; href: string; external?: boolean }[] = [
-  { label: "Leistungen", href: "/#leistungen" },
-  { label: "Ablauf", href: "/#ablauf" },
-  { label: "Standort", href: "/#standort" },
-  { label: "Textilshop", href: textilShopUrl, external: true },
-];
+// Wohin eine Leistung führt: intern auf ihre eigene Unterseite (/werbetechnik),
+// beim Textilshop auf die externe Seite.
+export function leistungsLink(service: Service): string {
+  return service.external ?? `/${service.id}`;
+}
+
+// Die Leistungen mit eigener Unterseite (alle außer dem externen Shop).
+export const unterseiten = services.filter((s) => !s.external);
+
+// Navigation (Kopfzeile): die drei Leistungen mit eigener Unterseite und der
+// externe Textilshop. Sie wird aus `services` abgeleitet – eine neue Leistung
+// erscheint damit automatisch im Menü, der Reihenfolge und Farbe nach.
+export const nav: { label: string; href: string; external?: boolean }[] =
+  services.map((s) => ({
+    label: s.title,
+    href: leistungsLink(s),
+    external: Boolean(s.external),
+  }));
 
 // ── „So läuft Ihr Auftrag" – Ablauf eines Projekts ───────────────────────
 export type ProcessStep = {

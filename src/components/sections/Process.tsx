@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 import Etikett from "@/components/ui/Etikett";
-import { FLAECHE, KNOPF, LEISE, SCHRIFT_AUF, farben } from "@/lib/farben";
+import { FLAECHE, KNOPF, KNOPF_SCHRIFT, LEISE, SCHRIFT_AUF, farben } from "@/lib/farben";
 import { processSteps } from "@/lib/site";
 
 // Ablauf als Faden mit farbigen Punkten. Bleibt, wie er war (so gewünscht);
@@ -17,7 +17,7 @@ export default function Process() {
           <Etikett>Ablauf</Etikett>
           <h2 className="titel mt-6">
             Vom ersten Anruf bis zur{" "}
-            <span className="markiert" style={{ "--ton": `${farben[3].ton}80` } as CSSProperties}>
+            <span className="markiert" style={{ "--ton": `${farben[0].ton}80` } as CSSProperties}>
               fertigen Arbeit
             </span>
           </h2>
@@ -90,8 +90,8 @@ export default function Process() {
         <div data-reveal className="mt-12 flex justify-center">
           <a
             href="#kontakt"
-            className="inline-flex items-center gap-2 rounded-full px-7 py-4 text-[0.92rem] font-bold uppercase tracking-[0.04em] text-white transition-transform duration-300 hover:-translate-y-0.5"
-            style={{ backgroundColor: KNOPF }}
+            className="inline-flex items-center gap-2 rounded-full px-7 py-4 text-[0.92rem] font-bold uppercase tracking-[0.04em] transition-transform duration-300 hover:-translate-y-0.5"
+            style={{ backgroundColor: KNOPF, color: KNOPF_SCHRIFT }}
           >
             <span aria-hidden="true">→</span> Projekt besprechen
           </a>

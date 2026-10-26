@@ -1,5 +1,5 @@
 import Etikett from "@/components/ui/Etikett";
-import { CREME, CREME_LEISE, DUNKEL, DUNKEL_KARTE, farben } from "@/lib/farben";
+import { APRICOT, CREME, CREME_LEISE, DUNKEL, DUNKEL_KARTE, farben } from "@/lib/farben";
 import { company, versprechen } from "@/lib/site";
 
 // Erster dunkler Abschnitt der Startseite (im Vorbild der dunkle Block direkt
@@ -7,15 +7,15 @@ import { company, versprechen } from "@/lib/site";
 //
 //   links   Etikett, Überschrift mit eingefärbtem Wort, kurzer Text
 //   rechts  „Darauf können Sie sich verlassen": drei Zusagen aus dem Ablauf
-//           als große Zeilen mit Häkchen, darunter ein Schlusssatz in Ocker
+//           als große Zeilen mit Häkchen, darunter ein Schlusssatz in Apricot
 //
-// Auf dem dunklen Grund werden Wörter direkt eingefärbt (Zinnober), nicht
+// Auf dem dunklen Grund werden Wörter direkt eingefärbt (Orange), nicht
 // mit dem Marker hinterlegt – siehe `.markiert` in globals.css.
 //
 // BEWEGUNG: Beide Spalten erscheinen beim Scrollen, die rechte etwas später.
 export default function Werkstatt() {
   return (
-    <section className="abschnitt" style={{ backgroundColor: DUNKEL, color: CREME }}>
+    <section className="abschnitt dunkel" style={{ backgroundColor: DUNKEL, color: CREME }}>
       <div className="seitenrand grid gap-12 lg:grid-cols-2 lg:gap-20">
         <div data-reveal>
           <Etikett dunkel>Seit über {company.yearsExperience} Jahren in {company.city}</Etikett>
@@ -33,7 +33,7 @@ export default function Werkstatt() {
           <h3 className="text-[1.25rem] font-extrabold tracking-[-0.02em]">
             Darauf können Sie sich verlassen
           </h3>
-          {/* Drei Zusagen, alle in einer Farbe: ein Ring in Zinnober mit
+          {/* Drei Zusagen, alle in einer Farbe: ein Ring in Orange mit
               Häkchen – ruhig statt bunt. */}
           <ul className="mt-6 space-y-4">
             {versprechen.map((punkt) => (
@@ -63,7 +63,7 @@ export default function Werkstatt() {
               </li>
             ))}
           </ul>
-          <p className="mt-7 text-[1.15rem] font-extrabold" style={{ color: farben[2].ton }}>
+          <p className="mt-7 text-[1.15rem] font-extrabold" style={{ color: APRICOT }}>
             Produziert wird erst, wenn Sie zufrieden sind.
           </p>
         </div>

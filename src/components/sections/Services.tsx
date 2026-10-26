@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 import Link from "next/link";
 import Etikett from "@/components/ui/Etikett";
-import { KNOPF, LEISE, farben } from "@/lib/farben";
+import { KNOPF, KNOPF_SCHRIFT, LEISE, farben } from "@/lib/farben";
 import { leistungsLink, services, textilShopUrl } from "@/lib/site";
 
 // Leistungen: oben Etikett und Überschrift, darunter vier Karten – je
@@ -130,8 +130,8 @@ export default function Services() {
           <div className="flex flex-wrap gap-3">
             <a
               href="#kontakt"
-              className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-[0.88rem] font-bold uppercase tracking-[0.04em] text-white transition-transform duration-300 hover:-translate-y-0.5"
-              style={{ backgroundColor: KNOPF }}
+              className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-[0.88rem] font-bold uppercase tracking-[0.04em] transition-transform duration-300 hover:-translate-y-0.5"
+              style={{ backgroundColor: KNOPF, color: KNOPF_SCHRIFT }}
             >
               <span aria-hidden="true">→</span> Projekt besprechen
             </a>
@@ -140,7 +140,7 @@ export default function Services() {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-[0.88rem] font-bold uppercase tracking-[0.04em] transition-transform duration-300 hover:-translate-y-0.5"
-              style={{ boxShadow: "inset 0 0 0 1.5px rgba(23,22,26,0.2)" }}
+              style={{ boxShadow: "inset 0 0 0 1.5px rgba(30,24,20,0.2)" }}
             >
               Zum Textilshop <span aria-hidden="true">↗</span>
             </a>

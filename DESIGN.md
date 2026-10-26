@@ -31,16 +31,16 @@ Seite folgt dem Vorbild mediaquestweb.com – frei abgewandelt, nicht 1:1.
 **lieber weniger Inhalte, dafür größer und lockerer angeordnet.**
 
 - **Abschnitte über die ganze Breite.** Helle (auf dem Verlauf) und
-  **dunkelbraune** wechseln sich ab. Das Braun ist die dunkle Fortsetzung des
+  **braune** wechseln sich ab. Das Braun ist die kräftige Fortsetzung des
   Verlaufs von Weiß zu Beige.
-- **Gestrichelte Bögen** in Zinnober verbinden einige Abschnitte und laufen
+- **Gestrichelte Bögen** in Orange verbinden einige Abschnitte und laufen
   über die Kante von Dunkel nach Hell (`components/ui/Uebergang.tsx`). Sie
   liegen im Innenabstand der Abschnitte, also nie über Text.
 - **Etikett über jeder Überschrift**: Versalien mit weitem Abstand, darunter
-  eine feine Linie mit kurzem Zinnober-Strich (`components/ui/Etikett.tsx`).
+  eine feine Linie mit kurzem orangen Strich (`components/ui/Etikett.tsx`).
 - **Überschriften groß in Versalien**, einzelne Wörter hervorgehoben: auf
   hellem Grund mit einem Farbmarker hinter dunkler Schrift (`.markiert`), auf
-  dunklem Grund direkt in Zinnober.
+  braunem Grund direkt in Orange.
 - Bewusst **ohne** Hintergrundbild im Kopfbereich und **ohne** Logo-Wand
   („Valuable Clients").
 
@@ -54,8 +54,8 @@ Reihenfolge der Startseite:
 | Einblicke | „Favorite Work" | **drei Fotos**, verschieden groß, schräg und versetzt wie Abzüge auf dem Werktisch, mit Klebestreifen |
 | Kundenstimmen (dunkel) | „What our clients are saying" | Karussell mit Pfeilen, Punkten und Pause-Knopf – **zurzeit Platzhalter** |
 | Ablauf | Screenshot 2 | unverändert: Faden mit Nummernkreisen und vier Karten |
-| Häufige Fragen | „FAQ" | **drei Fragen** in großen Kacheln mit Nummer, die erste aufgeklappt; Antworten nur aus Angaben in `site.ts` |
-| Schlussaufruf (dunkel) | „Ready for the next chapter" | mittig, mit kurzer gestrichelter Schlaufe |
+| Häufige Fragen | „FAQ" | **drei Fragen** in großen Kacheln mit Nummer; die erste ist beim Laden offen, und es ist **immer nur eine offen** (gemeinsamer `name` der `<details>`); Antworten nur aus Angaben in `site.ts` |
+| Schlussaufruf (dunkel) | „Ready for the next chapter" | mittig, mit gestricheltem S-Bogen, der gerade in die Pfeilspitze läuft |
 | Kontakt | „Get in touch" | Kontaktwege, QR-Feld, Öffnungszeiten (statt Formular: ohne Server gäbe es niemanden, der es verschickt) |
 | Fußzeile (dunkel) | Footer | vier Spalten: Marke, Seiten, Kontakt, Öffnungszeiten |
 
@@ -65,14 +65,14 @@ Reihenfolge der Startseite:
 | --- | --- |
 | Schrift | **Schibsted Grotesk**, die einzige Schrift der Seite. Freundlich und etwas rund, bewusst nicht Inter. Liegt im Projekt, kein Abruf bei Google. |
 | Grund | **Verlauf von fast Weiß zu Sandbeige** mit feiner Körnung im unteren Teil – nach einer Vorlage abgemessen (`#faf8f5` oben, `#dbccb5` unten). Steht fest im Bildschirm (oben immer hell, unten immer beige), liegt hinter dem Inhalt und schimmert durch Kopfzeile und Kacheln. Keine Bilddatei. |
-| Farbe | **Vier Werkstattfarben** (Zinnober, Petrol, Ocker, Magenta) auf dem Papier – jede gehört zu einer Leistung. Siehe `src/lib/farben.ts`. |
+| Farbe | **Warme Palette ohne Gelb, Blau und Pink:** Grund Weiß → Beige, dazu Braun und Orange als Kontrastfarbe. Die vier Leistungsfarben sind **Orange, Mokka, Karamell, Rost** – jede gehört zu einer Leistung. Siehe `src/lib/farben.ts`. |
 | Form | **Kreise und runde Knöpfe, aber eher eckige Kacheln**: Karten und Farbflächen 14 px, Bildflächen 10 px, Knöpfe, Marken und Kreise ganz rund. |
 | Transparenz | Kreise liegen übereinander und **mischen sich** (`mix-blend-multiply`) – wie Druckfarben. |
-| Kopfzeile | **Durchgehende Leiste** im zarten Ocker: Wortmarke mit Unterzeile links, Menü in Großbuchstaben, rechts zwei runde Knöpfe (Telefon dunkel, „Projekt anfragen" Petrol), unten ein Band aus den vier Fächerfarben. Die aktive Seite ist in ihrer Farbe unterstrichen. Unter 1280 px Breite steht das Menü als farbige Marken unter der Leiste. |
+| Kopfzeile | **Durchgehende Leiste in Braun** (wie die braunen Abschnitte und die Fußzeile): Wortmarke mit Unterzeile links, Menü in cremefarbenen Großbuchstaben, rechts zwei runde Knöpfe (Telefon umrandet, „Projekt anfragen" Orange), unten eine schmale orange Linie. Die aktive Seite ist orange unterstrichen. Unter 1280 px Breite steht das Menü als farbige Marken unter der Leiste. |
 | Breite | Inhalt bis **1440 px** breit (vorher 1200), damit große Monitore genutzt werden. |
 | Ablauf | Faden mit farbigen Punkten statt Liste. |
-| Dunkle Abschnitte | Espressobraun `#2a2019`, Schrift Creme `#f7f1e8`, Nebentext `#d8cbb8`. Farbige Schrift darauf nur Zinnober und Ocker. |
-| Knöpfe | Petrol (das zweite Farbfächer-Muster), damit Ocker und Zinnober Flächen bleiben. |
+| Braune Abschnitte | Mittleres Braun `#5e4434` (Karten darauf `#4e3829`), Schrift Creme `#f7f1e8`, Nebentext `#e3d7c6`. Orange nur für große Schrift (Überschriften-Wörter, 3,4 : 1), kleine farbige Schrift in Apricot `#ffb48a`. Heller darf das Braun nicht werden, sonst reicht der Kontrast für Orange nicht mehr. |
+| Knöpfe | **Orange mit dunkler Schrift** (weiße Schrift hätte auf Orange nur 2,5 : 1). |
 
 ## Die Unterseiten
 
@@ -127,7 +127,7 @@ jedem Seitenwechsel neu.
 | Wo | Was |
 | --- | --- |
 | `src/lib/farben.ts` | die vier Farben, Schrift-, Knopf- und Flächenfarbe |
-| `src/app/globals.css` → `--kopf` | **wie kräftig das Gelb der Kopfzeile ist.** Die letzte Zahl ist die Deckkraft: 0,5 = zart (jetzt), 0,88 = so kräftig wie früher, 1 = volles Ocker. Für eine weiße Leiste: `#ffffff` |
+| `src/app/globals.css` → `--kopf` | **die Farbe der Kopfzeile** (jetzt das Braun der Abschnitte). Bei einem hellen Ton müssen in `Header.tsx` auch die Schriftfarben auf dunkel zurück. |
 | `src/app/globals.css` → `--papier`, `--papier-unten`, `.papier-verlauf` | **der Hintergrund-Verlauf**: oberer und unterer Ton, dazwischen die Prozentpunkte, an denen welcher Ton erreicht ist. Die Körnung hat ihre Stärke bei `.papier-verlauf::after` (opacity). Soll der Verlauf über die ganze Seitenlänge laufen statt im Bildschirm stehen: `position: fixed` → `absolute` |
 | `tailwind.config.ts` → `seite` | **wie breit die Seite auf großen Bildschirmen wird** (jetzt 1440 px) |
 | `tailwind.config.ts` → `kachel`, `bild` | **wie rund die Kacheln sind** (jetzt 14 px bzw. 10 px). Knöpfe sind davon nicht betroffen |
@@ -140,8 +140,10 @@ Alle Texte erfüllen **WCAG AA** (4,5 : 1, große Schrift 3 : 1). Gemessen
 wird nicht gegen eine angenommene Hintergrundfarbe, sondern gegen das, was
 tatsächlich hinter jedem Text liegt – Beige-Verlauf, Farbkreise und getönte
 Kacheln und dunkle Abschnitte eingerechnet, aufgeklappte Fragen ebenfalls.
-Letzte Messung: **1.560 Texte** auf allen sechs Seiten, am Rechner (1440 px)
-und auf dem Handy (390 px), schwächster Wert **4,94 : 1**.
+Letzte Messung: **1.556 Texte** auf allen sechs Seiten, am Rechner (1440 px)
+und auf dem Handy (390 px). Schwächster Wert bei normaler Schrift über
+4,5 : 1; der knappste Wert überhaupt sind die großen orangen Wörter auf
+Braun mit **3,4 : 1** (Grenze für große Schrift: 3 : 1).
 
 Dafür gibt es eigene Schriftfarben in `src/lib/farben.ts`:
 
@@ -149,9 +151,9 @@ Dafür gibt es eigene Schriftfarben in `src/lib/farben.ts`:
 | --- | --- |
 | `LEISE` `#3f3b45` | Nebentext. Kräftiger als auf weißem Grund nötig wäre – unten ist der Grund beige, getönte Kacheln darauf noch dunkler. |
 | `LEISE_AUF_KREISEN` `#36323c` | Nebentext über den Farbkreisen der Kopfbereiche |
-| `ZINNOBER_TEXT` `#8f3307` | die Etiketten über den Überschriften auf hellem Grund – das helle Zinnober ist dafür zu schwach (2,5 : 1) |
-| `CREME`, `CREME_LEISE` | Schrift und Nebentext auf den dunkelbraunen Abschnitten (Nebentext 9 : 1) |
-| `SCHRIFT_AUF` | Schrift auf den vier Farbflächen (z. B. Nummern in Kreisen): je Farbe die besser lesbare, mind. 4,95 : 1 |
+| `ZINNOBER_TEXT` `#8f3307` | die Etiketten über den Überschriften auf hellem Grund – das helle Orange ist dafür zu schwach (2,5 : 1) |
+| `CREME`, `CREME_LEISE`, `APRICOT` | Schrift, Nebentext und kleine farbige Schrift auf den braunen Abschnitten |
+| `SCHRIFT_AUF` | Schrift auf den vier Farbflächen (z. B. Nummern in Kreisen): je Farbe die besser lesbare, mind. 5,6 : 1 |
 
 Hervorgehobene Wörter auf hellem Grund bekommen einen Farbmarker hinter
 dunkler Schrift statt farbiger Schrift. **Beim Umfärben daran denken:** helle Farben taugen nicht als
@@ -162,8 +164,8 @@ Screenreader ausgeblendet.
 ## Regeln für spätere Änderungen
 
 1. **Hell und Dunkel wechseln sich ab.** Grund ist der Verlauf, dazwischen
-   stehen dunkelbraune Abschnitte (nie zwei dunkle direkt hintereinander).
-   Andere dunkle Töne als `DUNKEL` gibt es nicht.
+   stehen braune Abschnitte (nie zwei direkt hintereinander). Andere dunkle
+   Töne als `DUNKEL` gibt es nicht. **Kein Gelb, Blau oder Pink.**
 2. **Ein Bereich = eine Farbe.** Die vier Farben gehören fest zu den vier
    Leistungen; sie nicht für andere Zwecke wiederverwenden.
 3. **Kacheln eckig, Knöpfe rund.** Neue Flächen benutzen `rounded-kachel`

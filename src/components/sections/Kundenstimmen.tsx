@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Etikett from "@/components/ui/Etikett";
-import { CREME, CREME_LEISE, DUNKEL, DUNKEL_KARTE, farben } from "@/lib/farben";
+import { APRICOT, CREME, CREME_LEISE, DUNKEL, DUNKEL_KARTE, farben } from "@/lib/farben";
 import { kundenstimmen } from "@/lib/site";
 
 // „Was unsere Kunden sagen" – wie im Vorbild ein Karussell: immer eine
@@ -44,7 +44,7 @@ export default function Kundenstimmen() {
 
   return (
     <section
-      className="abschnitt"
+      className="abschnitt dunkel"
       style={{ backgroundColor: DUNKEL, color: CREME }}
       aria-labelledby="stimmen-titel"
     >
@@ -72,7 +72,7 @@ export default function Kundenstimmen() {
               type="button"
               onClick={() => gehe(aktiv + 1)}
               className={rundknopf}
-              style={{ backgroundColor: farben[0].ton, color: "#17161a" }}
+              style={{ backgroundColor: farben[0].ton, color: "#1e1814" }}
               aria-label="Nächste Stimme"
             >
               <span aria-hidden="true">→</span>
@@ -124,7 +124,7 @@ export default function Kundenstimmen() {
                   {stimme.platzhalter && (
                     <span
                       className="relative inline-block rounded-full px-3 py-1 text-[0.72rem] font-bold uppercase tracking-[0.1em]"
-                      style={{ boxShadow: `inset 0 0 0 1.5px ${farben[2].ton}`, color: farben[2].ton }}
+                      style={{ boxShadow: `inset 0 0 0 1.5px ${APRICOT}`, color: APRICOT }}
                     >
                       Platzhalter
                     </span>

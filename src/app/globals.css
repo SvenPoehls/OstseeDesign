@@ -16,11 +16,11 @@
 
 :root {
   /* ── KOPFZEILE ──────────────────────────────────────────────────────────
-     Das Ocker aus dem Fächer, hier bewusst zurückgenommen: Je kleiner die
-     letzte Zahl (die Deckkraft), desto blasser die Leiste. Bei 1 ist sie
-     kräftig gelb, bei 0 unsichtbar. Die Schrift darauf bleibt auch bei
-     niedrigen Werten gut lesbar (siehe DESIGN.md). */
-  --kopf: rgba(255, 198, 61, 0.5);
+     Dasselbe Braun wie die braunen Abschnitte und die Fußzeile (DUNKEL in
+     src/lib/farben.ts), ganz leicht durchscheinend. Die Schrift darauf ist
+     cremeweiß – wer hier einen hellen Ton einsetzt, muss in Header.tsx
+     auch die Schriftfarben zurück auf dunkel stellen. */
+  --kopf: rgba(94, 68, 52, 0.97);
 
   /* Ein Bewegungsverlauf für alles: schnell los, weich aus. */
   --weich: cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -42,18 +42,25 @@ html {
 
 body {
   background-color: var(--papier);
-  color: #17161a;
+  color: #1e1814;
   -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: rgba(255, 198, 61, 0.55);
-  color: #17161a;
+  background: rgba(255, 122, 48, 0.3);
+  color: #1e1814;
 }
 
+/* Tastatur-Fokus: auf hellem Grund ein gebranntes Orange, in den braunen
+   Bereichen (Klasse `dunkel`) helles Apricot – so ist der Rahmen überall
+   deutlich zu sehen. */
 :focus-visible {
-  outline: 3px solid #0e7c86;
+  outline: 3px solid #8f3307;
   outline-offset: 3px;
+}
+.dunkel :focus-visible,
+.dunkel:focus-visible {
+  outline-color: #ffb48a;
 }
 
 /*
@@ -295,7 +302,7 @@ body {
    `.markiert`      Hervorgehobenes Wort auf HELLEM Grund: Die Schrift bleibt
                     dunkel, dahinter liegt ein Strich in der Farbe (`--ton`) wie
                     von einem Textmarker. Farbige Schrift wäre auf Weiß zu
-                    schwach (Zinnober 2,5 : 1). Auf DUNKLEM Grund wird das Wort
+                    schwach (Orange 2,5 : 1). Auf DUNKLEM Grund wird das Wort
                     stattdessen direkt eingefärbt (siehe farben.ts). */
 @layer components {
   .abschnitt {
@@ -308,8 +315,8 @@ body {
     background-image: linear-gradient(
       to bottom,
       transparent 58%,
-      var(--ton, #ffc63d) 58%,
-      var(--ton, #ffc63d) 90%,
+      var(--ton, #d4a373) 58%,
+      var(--ton, #d4a373) 90%,
       transparent 90%
     );
     -webkit-box-decoration-break: clone;
@@ -321,7 +328,8 @@ body {
 /* ── ÜBERGANGSLINIEN ─────────────────────────────────────────────────────── */
 /* Die gestrichelten Bögen zwischen den Abschnitten (Uebergang.tsx). Beim
    Hinscrollen „zeichnen" sie sich: Ein Ausschnitt gibt die Linie von ihrem
-   Anfang her frei (`--von-rechts` für Linien, die rechts beginnen). */
+   Anfang her frei (`data-start="rechts"` für Linien, die rechts beginnen,
+   `data-start="oben"` für solche, die nach unten laufen). */
 [data-reveal="aus"][data-art="linie"] {
   opacity: 1;
   translate: none;
@@ -330,9 +338,20 @@ body {
 [data-reveal="aus"][data-art="linie"][data-start="rechts"] {
   clip-path: inset(0 0 0 100%);
 }
+[data-reveal="aus"][data-art="linie"][data-start="oben"] {
+  clip-path: inset(0 0 100% 0);
+}
 @keyframes linie-links {
   from {
     clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes linie-oben {
+  from {
+    clip-path: inset(0 0 100% 0);
   }
   to {
     clip-path: inset(0 0 0 0);
@@ -351,6 +370,9 @@ body {
 }
 [data-reveal="an"][data-art="linie"][data-start="rechts"] {
   animation-name: linie-rechts;
+}
+[data-reveal="an"][data-art="linie"][data-start="oben"] {
+  animation-name: linie-oben;
 }
 
 /* ── FRAGEN (Aufklapp-Liste) ─────────────────────────────────────────────── */
@@ -394,7 +416,7 @@ body {
     @apply mt-3 max-w-reading list-disc space-y-1 pl-5 text-leise;
   }
   .legal-body a {
-    @apply font-semibold text-tinte underline decoration-[#0e7c86] decoration-2 underline-offset-4 hover:text-[#0e7c86];
+    @apply font-semibold text-tinte underline decoration-[#ff7a30] decoration-2 underline-offset-4 hover:text-[#8f3307];
   }
   .legal-body strong {
     @apply font-bold text-tinte;

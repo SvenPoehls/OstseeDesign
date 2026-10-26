@@ -105,7 +105,7 @@ export default function Contact() {
                 key={row.days}
                 className="flex items-baseline justify-between gap-4 py-4"
                 style={{
-                  borderBottom: i === openingHours.length - 1 ? "none" : "1px solid rgba(23,22,26,0.1)",
+                  borderBottom: i === openingHours.length - 1 ? "none" : "1px solid rgba(30,24,20,0.1)",
                 }}
               >
                 <dt className="text-[0.95rem]" style={{ color: LEISE }}>

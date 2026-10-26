@@ -1,10 +1,10 @@
-import { CREME_LEISE, ZINNOBER_TEXT, farben } from "@/lib/farben";
+import { APRICOT, CREME_LEISE, ZINNOBER_TEXT, farben } from "@/lib/farben";
 
 // Das kleine Etikett über jeder Abschnitts-Überschrift: Versalien mit weitem
-// Abstand, darunter eine feine Linie mit einem kurzen Zinnober-Strich am
+// Abstand, darunter eine feine Linie mit einem kurzen orangen Strich am
 // Anfang (wie im Vorbild „WHERE WE COME IN").
 //
-// `dunkel`  steht auf einem dunkelbraunen Abschnitt → Schrift in Ocker.
+// `dunkel`  steht auf einem braunen Abschnitt → Schrift in hellem Apricot.
 //           Sonst → gebranntes Orange (ZINNOBER_TEXT), das auf hellem Grund
 //           genug Kontrast hat.
 // `mitte`   zentriert (für den Schlussaufruf).
@@ -21,7 +21,7 @@ export default function Etikett({
     <div className={mitte ? "flex flex-col items-center" : ""}>
       <p
         className="text-[0.78rem] font-bold uppercase tracking-[0.18em]"
-        style={{ color: dunkel ? farben[2].ton : ZINNOBER_TEXT }}
+        style={{ color: dunkel ? APRICOT : ZINNOBER_TEXT }}
       >
         {children}
       </p>
@@ -29,7 +29,7 @@ export default function Etikett({
         aria-hidden="true"
         className="relative mt-3 block h-px w-full max-w-[15rem]"
         style={{
-          backgroundColor: dunkel ? `${CREME_LEISE}40` : "rgba(23,22,26,0.18)",
+          backgroundColor: dunkel ? `${CREME_LEISE}40` : "rgba(30,24,20,0.18)",
         }}
       >
         <span

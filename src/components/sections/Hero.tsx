@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 import Bild from "@/components/ui/Bild";
-import { CREME, DUNKEL, KNOPF, LEISE_AUF_KREISEN, farben } from "@/lib/farben";
+import { CREME, DUNKEL, KNOPF, KNOPF_SCHRIFT, LEISE_AUF_KREISEN, farben } from "@/lib/farben";
 import { company, unterseiten } from "@/lib/site";
 
 // Auftakt der Startseite, zweispaltig wie im Vorbild:
@@ -59,15 +59,15 @@ export default function Hero() {
 
           <h1 className="auftritt mt-3 text-[clamp(2.35rem,5.6vw,4.9rem)] font-black uppercase leading-[0.97] tracking-[-0.03em] [--verz:400ms]">
             Ihr Logo aufs{" "}
-            <span className="markiert" style={{ "--ton": farben[2].ton } as CSSProperties}>
+            <span className="markiert" style={{ "--ton": `${farben[2].ton}b3` } as CSSProperties}>
               Shirt
             </span>
             , aufs{" "}
-            <span className="markiert" style={{ "--ton": `${farben[0].ton}b3` } as CSSProperties}>
+            <span className="markiert" style={{ "--ton": `${farben[0].ton}99` } as CSSProperties}>
               Auto
             </span>{" "}
             oder an die{" "}
-            <span className="markiert" style={{ "--ton": `${farben[3].ton}99` } as CSSProperties}>
+            <span className="markiert" style={{ "--ton": `${farben[1].ton}66` } as CSSProperties}>
               Wand
             </span>
             .
@@ -106,15 +106,15 @@ export default function Hero() {
           <div className="auftritt mt-9 flex flex-wrap items-center gap-3 [--verz:760ms]">
             <a
               href="#kontakt"
-              className="inline-flex items-center gap-2 rounded-full px-7 py-4 text-[0.92rem] font-bold uppercase tracking-[0.04em] text-white transition-transform duration-300 hover:-translate-y-0.5"
-              style={{ backgroundColor: KNOPF }}
+              className="inline-flex items-center gap-2 rounded-full px-7 py-4 text-[0.92rem] font-bold uppercase tracking-[0.04em] transition-transform duration-300 hover:-translate-y-0.5"
+              style={{ backgroundColor: KNOPF, color: KNOPF_SCHRIFT }}
             >
               <span aria-hidden="true">↓</span> Projekt besprechen
             </a>
             <a
               href={`tel:${company.phoneHref}`}
               className="inline-flex items-center gap-2 rounded-full bg-white/80 px-7 py-4 text-[0.92rem] font-bold uppercase tracking-[0.04em] backdrop-blur transition-transform duration-300 hover:-translate-y-0.5"
-              style={{ boxShadow: "inset 0 0 0 1.5px rgba(23,22,26,0.2)" }}
+              style={{ boxShadow: "inset 0 0 0 1.5px rgba(30,24,20,0.2)" }}
             >
               Anrufen
             </a>
@@ -126,13 +126,13 @@ export default function Hero() {
       <div className="auftritt [--verz:600ms]">
         <Bild
           note="Foto: die Werkstatt am Rosseer Weg"
-          ton={farben[1].ton}
+          ton={farben[2].ton}
           className="aspect-[4/3] w-full lg:aspect-[1/1]"
         />
 
         <a
           href="#kontakt"
-          className="group mt-4 flex items-center gap-4 rounded-full py-2.5 pl-2.5 pr-6 transition-transform duration-300 hover:-translate-y-0.5"
+          className="dunkel group mt-4 flex items-center gap-4 rounded-full py-2.5 pl-2.5 pr-6 transition-transform duration-300 hover:-translate-y-0.5"
           style={{ backgroundColor: DUNKEL, color: CREME }}
         >
           <span
@@ -141,7 +141,7 @@ export default function Hero() {
             style={{ backgroundColor: farben[0].ton }}
           >
             {/* Sprechblase */}
-            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="#17161a" strokeWidth="2.2" strokeLinejoin="round">
+            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="#1e1814" strokeWidth="2.2" strokeLinejoin="round">
               <path d="M4.5 5.5h15v10h-8l-4.5 4v-4h-2.5Z" />
             </svg>
           </span>

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { KNOPF, LEISE_AUF_KREISEN, farben } from "@/lib/farben";
+import { KNOPF, KNOPF_SCHRIFT, LEISE_AUF_KREISEN, farben } from "@/lib/farben";
 import { company, type Service } from "@/lib/site";
 
 // Kopfbereich einer Leistungs-Unterseite. Gleiche Sprache wie die Startseite:
@@ -52,7 +52,7 @@ export default function LeistungHero({
         </Link>
 
         <p className="auftritt mt-8 flex items-center gap-2 text-[0.88rem] font-bold [--verz:300ms]">
-          {/* Die Farbe als Punkt, die Schrift dunkel – helle Farben wie Ocker
+          {/* Die Farbe als Punkt, die Schrift dunkel – helle Farben wie Karamell
               wären als Schrift auf Weiß kaum zu lesen. */}
           <span
             aria-hidden="true"
@@ -89,15 +89,15 @@ export default function LeistungHero({
         <div className="auftritt mt-8 flex flex-wrap items-center gap-3 [--verz:800ms]">
           <a
             href="#kontakt"
-            className="inline-flex items-center gap-2 rounded-full px-7 py-4 text-[0.92rem] font-bold uppercase tracking-[0.04em] text-white transition-transform duration-300 hover:-translate-y-0.5"
-            style={{ backgroundColor: KNOPF }}
+            className="inline-flex items-center gap-2 rounded-full px-7 py-4 text-[0.92rem] font-bold uppercase tracking-[0.04em] transition-transform duration-300 hover:-translate-y-0.5"
+            style={{ backgroundColor: KNOPF, color: KNOPF_SCHRIFT }}
           >
             <span aria-hidden="true">↓</span> Projekt besprechen
           </a>
           <a
             href={`tel:${company.phoneHref}`}
             className="rounded-full bg-white/80 px-7 py-4 text-[0.92rem] font-bold uppercase tracking-[0.04em] backdrop-blur transition-transform duration-300 hover:-translate-y-0.5"
-            style={{ boxShadow: "inset 0 0 0 1.5px rgba(23,22,26,0.2)" }}
+            style={{ boxShadow: "inset 0 0 0 1.5px rgba(30,24,20,0.2)" }}
           >
             Anrufen
           </a>

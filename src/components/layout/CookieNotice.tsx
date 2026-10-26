@@ -48,11 +48,11 @@ export default function CookieNotice() {
       role="dialog"
       aria-modal="false"
       aria-labelledby="cookie-title"
-      className="fixed inset-x-3 bottom-3 z-[60] mx-auto max-w-seite rounded-kachel bg-white p-5 shadow-[0_12px_40px_rgba(23,22,26,0.18)] ring-1 ring-tinte/10 sm:inset-x-6 sm:bottom-6"
+      className="fixed inset-x-3 bottom-3 z-[60] mx-auto max-w-seite rounded-kachel bg-white p-5 shadow-[0_12px_40px_rgba(30,24,20,0.18)] ring-1 ring-tinte/10 sm:inset-x-6 sm:bottom-6"
     >
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-8">
         <div className="flex-1">
-          <h2 id="cookie-title" className="text-[0.88rem] font-bold text-[#074a51]">
+          <h2 id="cookie-title" className="text-[0.88rem] font-bold text-[#8f3307]">
             Datenschutz-Hinweis
           </h2>
           <p className="mt-1 text-[0.92rem] leading-relaxed text-leise">
@@ -61,7 +61,7 @@ export default function CookieNotice() {
             unserer{" "}
             <Link
               href="/datenschutz"
-              className="font-semibold text-tinte underline decoration-[#0e7c86] decoration-2 underline-offset-4"
+              className="font-semibold text-tinte underline decoration-[#ff7a30] decoration-2 underline-offset-4"
             >
               Datenschutzerklärung
             </Link>
@@ -71,7 +71,7 @@ export default function CookieNotice() {
         <button
           type="button"
           onClick={accept}
-          className="shrink-0 rounded-full bg-[#0e7c86] px-7 py-3 text-[0.95rem] font-bold text-white transition-opacity hover:opacity-85"
+          className="shrink-0 rounded-full bg-[#ff7a30] px-7 py-3 text-[0.95rem] font-bold text-tinte transition-opacity hover:opacity-85"
         >
           Verstanden
         </button>

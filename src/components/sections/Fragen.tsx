@@ -1,13 +1,18 @@
 import Etikett from "@/components/ui/Etikett";
-import { LEISE, farben } from "@/lib/farben";
+import { LEISE, SCHRIFT_AUF, farben } from "@/lib/farben";
 import { company, fragen } from "@/lib/site";
 
 // Häufige Fragen: links Etikett, Überschrift und der Hinweis aufs Telefon
 // (bleibt beim Scrollen stehen), rechts nur drei Fragen – dafür große
-// Kacheln mit Nummer, die erste ist schon aufgeklappt.
+// Kacheln mit Nummer.
 //
-// Die Fragen und Antworten stehen in site.ts (`fragen`). Aufklappen läuft
-// über <details> – ohne Skript, mit Tastatur und Screenreader.
+// IMMER NUR EINE OFFEN: Die erste ist beim Laden aufgeklappt (macht neugierig).
+// Öffnet man eine andere, schließt sich die vorige. Das erledigt der Browser
+// selbst: Alle <details> tragen denselben `name` („fragen") und bilden so
+// eine Gruppe, von der nur eine offen sein kann. Kein Skript nötig, mit
+// Tastatur und Screenreader bedienbar.
+//
+// Die Fragen und Antworten stehen in site.ts (`fragen`).
 export default function Fragen() {
   return (
     <section className="abschnitt pt-0 sm:pt-0 lg:pt-0">
@@ -33,6 +38,7 @@ export default function Fragen() {
             return (
               <details
                 key={f.frage}
+                name="fragen"
                 open={i === 0}
                 className="frage group relative overflow-hidden rounded-kachel bg-white/70 backdrop-blur"
               >
@@ -51,7 +57,7 @@ export default function Fragen() {
                   <span
                     aria-hidden="true"
                     className="frage-zeichen flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-[1.5rem] font-bold leading-none sm:h-12 sm:w-12"
-                    style={{ backgroundColor: ton, color: i % farben.length === 1 ? "#ffffff" : "#17161a" }}
+                    style={{ backgroundColor: ton, color: SCHRIFT_AUF[i % farben.length] }}
                   >
                     +
                   </span>

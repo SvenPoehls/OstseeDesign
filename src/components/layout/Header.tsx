@@ -2,20 +2,20 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { KNOPF, TINTE, farben } from "@/lib/farben";
+import { CREME, CREME_LEISE, KNOPF, KNOPF_SCHRIFT, TINTE, farben } from "@/lib/farben";
 import { company, nav, unterseiten } from "@/lib/site";
 
 // Kopfzeile: eine durchgehende Leiste über die ganze Breite.
 //
 //   links    Wortmarke „ostseedesign" mit kleiner Unterzeile
 //   Mitte    die drei Leistungen und der Textilshop, in Großbuchstaben
-//   rechts   zwei runde Knöpfe: die Telefonnummer (dunkel) und
-//            „Projekt anfragen" (Petrol)
-//   unten    eine kräftige Linie aus den vier Farben des Fächers
+//   rechts   zwei runde Knöpfe: die Telefonnummer (cremefarben umrandet)
+//            und „Projekt anfragen" (Orange)
+//   unten    eine schmale orange Linie
 //
-// Die Seite, auf der man gerade ist, ist im Menü unterstrichen – in ihrer
-// eigenen Farbe. Der Grund der Leiste ist das zarte Ocker (`--kopf` in
-// globals.css).
+// Die Seite, auf der man gerade ist, ist im Menü orange unterstrichen. Der
+// Grund der Leiste ist das Braun der dunklen Abschnitte (`--kopf` in
+// globals.css), die Schrift darauf cremeweiß.
 //
 // PLATZ: Menü, Wortmarke und beide Knöpfe passen erst ab 1280 px Breite
 // nebeneinander. Darunter rückt das Menü in die Reihe farbiger Marken unter
@@ -48,13 +48,13 @@ export default function Header() {
   ];
 
   const knopf =
-    "inline-flex items-center justify-center whitespace-nowrap rounded-full px-5 py-3 text-[0.85rem] font-bold uppercase tracking-[0.04em] text-white transition-transform duration-300 hover:-translate-y-0.5";
+    "inline-flex items-center justify-center whitespace-nowrap rounded-full px-5 py-3 text-[0.85rem] font-bold uppercase tracking-[0.04em] transition-transform duration-300 hover:-translate-y-0.5";
 
   return (
     <>
       <header
-        className="kopf-ein sticky top-0 z-40 backdrop-blur"
-        style={{ backgroundColor: "var(--kopf)", color: TINTE }}
+        className="kopf-ein dunkel sticky top-0 z-40 backdrop-blur"
+        style={{ backgroundColor: "var(--kopf)", color: CREME }}
       >
         <div className="seitenrand flex h-[4.5rem] items-center justify-between gap-6 sm:h-20">
           {/* Wortmarke mit Unterzeile */}
@@ -66,7 +66,7 @@ export default function Header() {
             <span className="text-[1.45rem] font-extrabold tracking-[-0.03em] sm:text-[1.6rem]">
               ostseedesign
             </span>
-            <span className="mt-1.5 text-[0.6rem] font-semibold uppercase tracking-[0.24em] text-tinte/75">
+            <span className="mt-1.5 text-[0.6rem] font-semibold uppercase tracking-[0.24em]" style={{ color: CREME_LEISE }}>
               Werbung &amp; Textilien
             </span>
           </Link>
@@ -82,7 +82,7 @@ export default function Header() {
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[0.86rem] font-semibold uppercase tracking-[0.05em] text-tinte/80 transition-colors hover:text-tinte"
+                  className="text-[0.86rem] font-semibold uppercase tracking-[0.05em] text-[#e3d7c6] transition-colors hover:text-white"
                 >
                   {item.label} ↗
                 </a>
@@ -91,17 +91,17 @@ export default function Header() {
                   key={item.label}
                   href={item.href}
                   aria-current={aktiv(item.href) ? "page" : undefined}
-                  className={`relative py-1 text-[0.86rem] font-semibold uppercase tracking-[0.05em] transition-colors hover:text-tinte ${
-                    aktiv(item.href) ? "text-tinte" : "text-tinte/80"
+                  className={`relative py-1 text-[0.86rem] font-semibold uppercase tracking-[0.05em] transition-colors hover:text-white ${
+                    aktiv(item.href) ? "text-white" : "text-[#e3d7c6]"
                   }`}
                 >
                   {item.label}
-                  {/* Aktive Seite: ein Strich in ihrer Farbe unter dem Wort. */}
+                  {/* Aktive Seite: ein oranger Strich unter dem Wort. */}
                   {aktiv(item.href) && (
                     <span
                       aria-hidden="true"
                       className="absolute -bottom-1 left-0 right-0 h-[3px] rounded-full"
-                      style={{ backgroundColor: farben[i].ton }}
+                      style={{ backgroundColor: farben[0].ton }}
                     />
                   )}
                 </Link>
@@ -113,7 +113,7 @@ export default function Header() {
             <a
               href={`tel:${company.phoneHref}`}
               className={`${knopf} hidden sm:inline-flex`}
-              style={{ backgroundColor: TINTE }}
+              style={{ boxShadow: `inset 0 0 0 1.5px ${CREME_LEISE}80`, color: CREME }}
             >
               {company.phoneDisplay}
             </a>
@@ -121,7 +121,7 @@ export default function Header() {
               <a
                 href="#kontakt"
                 className={`${knopf} hidden sm:inline-flex`}
-                style={{ backgroundColor: KNOPF }}
+                style={{ backgroundColor: KNOPF, color: KNOPF_SCHRIFT }}
               >
                 Projekt anfragen
               </a>
@@ -129,7 +129,7 @@ export default function Header() {
               <Link
                 href="/#kontakt"
                 className={`${knopf} hidden sm:inline-flex`}
-                style={{ backgroundColor: KNOPF }}
+                style={{ backgroundColor: KNOPF, color: KNOPF_SCHRIFT }}
               >
                 Projekt anfragen
               </Link>
@@ -138,19 +138,15 @@ export default function Header() {
             <a
               href={`tel:${company.phoneHref}`}
               className={`${knopf} px-4 py-2.5 sm:hidden`}
-              style={{ backgroundColor: TINTE }}
+              style={{ backgroundColor: KNOPF, color: KNOPF_SCHRIFT }}
             >
               Anrufen
             </a>
           </div>
         </div>
 
-        {/* Die Linie unter der Leiste: der Farbfächer als Band. */}
-        <div aria-hidden="true" className="flex h-1">
-          {farben.map((f) => (
-            <span key={f.ton} className="flex-1" style={{ backgroundColor: f.ton }} />
-          ))}
-        </div>
+        {/* Die Linie unter der Leiste: schmal und orange. */}
+        <div aria-hidden="true" className="h-[3px]" style={{ backgroundColor: farben[0].ton }} />
       </header>
 
       {/* Unter 1280 px: das Menü als Reihe farbiger Marken. */}

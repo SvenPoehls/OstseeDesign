@@ -5,73 +5,93 @@ import { platzhalterFlaeche } from "@/components/ui/Bild";
 import { LEISE, farben } from "@/lib/farben";
 import { services, unterseiten } from "@/lib/site";
 
-// „Einblicke": eine Bildergalerie drei mal drei, wie im Vorbild „Some of our
-// favorite work". Je Leistung ihre drei Foto-Motive aus site.ts. Solange es
-// keine echten Fotos gibt, stehen dort getönte Platzhalter.
+// „Einblicke": drei Fotos, locker hingeworfen wie Abzüge auf dem Werktisch –
+// verschieden groß, leicht schräg, in der Höhe versetzt, jedes mit einem
+// Streifen Klebeband in der Leistungsfarbe. Je Leistung ihr erstes Foto-Motiv
+// aus site.ts. Solange es keine echten Fotos gibt, stehen dort Platzhalter.
 //
-// Jede Kachel führt auf die Unterseite ihrer Leistung. Unten liegt eine
-// Beschriftung (Leistung, Motiv) und eine Leiste in der Leistungsfarbe, die
-// beim Überfahren breiter wird.
+// Jedes Foto führt auf die Unterseite seiner Leistung. Beim Überfahren richtet
+// es sich gerade und hebt sich leicht.
+//
+// ANORDNUNG je Foto (`LAGE`): Spaltenbreite auf großen Bildschirmen,
+// Seitenverhältnis, Versatz nach unten und Drehung. Auf dem Handy stehen die
+// drei untereinander, abwechselnd nach links und rechts gerückt.
 //
 // ECHTE FOTOS: In der Kachel das <span …platzhalterFlaeche…/> durch ein
-//   <img src={asset("/datei.jpg")} alt="…" className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+//   <img src={asset("/datei.jpg")} alt="…" className="absolute inset-0 h-full w-full object-cover" />
 // ersetzen (asset kommt aus @/lib/assets).
+const LAGE = [
+  { spalte: "lg:col-span-5", form: "aspect-[4/5]", versatz: "", drehung: "-rotate-2", seite: "mr-6 sm:mr-24 lg:mr-0" },
+  { spalte: "lg:col-span-4", form: "aspect-square", versatz: "lg:mt-28", drehung: "rotate-3", seite: "ml-6 sm:ml-24 lg:ml-0" },
+  { spalte: "lg:col-span-3", form: "aspect-[3/4]", versatz: "lg:mt-10", drehung: "-rotate-1", seite: "mr-10 sm:mr-32 lg:mr-0" },
+];
+
 export default function Einblicke() {
-  const kacheln = unterseiten.flatMap((service) => {
-    const i = services.indexOf(service);
-    return service.bilder.map((motiv) => ({ service, motiv, ton: farben[i].ton }));
-  });
+  const fotos = unterseiten.map((service) => ({
+    service,
+    motiv: service.bilder[0],
+    ton: farben[services.indexOf(service)].ton,
+  }));
 
   return (
-    <section className="abschnitt pt-0 sm:pt-0 lg:pt-0">
+    <section className="abschnitt overflow-x-clip pt-0 sm:pt-0 lg:pt-0">
       <div className="seitenrand">
         <div data-reveal className="max-w-[44rem]">
           <Etikett>Einblicke</Etikett>
           <h2 className="titel mt-6">
             Aus der{" "}
-            <span className="markiert" style={{ "--ton": `${farben[2].ton}` } as CSSProperties}>
+            <span className="markiert" style={{ "--ton": farben[2].ton } as CSSProperties}>
               Werkstatt
             </span>
           </h2>
         </div>
 
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
-          {kacheln.map(({ service, motiv, ton }, n) => (
-            <Link
-              key={motiv}
-              href={`/${service.id}`}
-              data-reveal
-              className="group relative block aspect-[16/11] overflow-hidden rounded-kachel"
-              style={{ "--verz": `${(n % 3) * 110}ms` } as CSSProperties}
-            >
-              <span
-                aria-hidden="true"
-                className="absolute inset-0 transition-transform duration-500 group-hover:scale-105"
-                style={platzhalterFlaeche(ton)}
-              />
-              <span className="absolute inset-x-3 bottom-3 rounded-bild bg-white/90 p-4 backdrop-blur">
-                <span className="flex items-center gap-2 text-[0.7rem] font-bold uppercase tracking-[0.14em]" style={{ color: LEISE }}>
-                  <span aria-hidden="true" className="h-2 w-2 rounded-full" style={{ backgroundColor: ton }} />
-                  {service.title}
-                </span>
-                <span className="mt-1.5 block text-[1rem] font-extrabold leading-snug tracking-[-0.01em]">
-                  {motiv}
-                </span>
-                <span className="mt-2 inline-flex items-center gap-1.5 text-[0.75rem] font-bold uppercase tracking-[0.08em]">
-                  Zur Leistung
-                  <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">
-                    →
+        <div className="mt-14 grid gap-10 lg:grid-cols-12 lg:items-start lg:gap-10">
+          {fotos.map(({ service, motiv, ton }, n) => {
+            const lage = LAGE[n];
+            return (
+              <div
+                key={motiv}
+                data-reveal
+                className={`${lage.spalte} ${lage.versatz} ${lage.seite}`}
+                style={{ "--verz": `${n * 140}ms` } as CSSProperties}
+              >
+                <Link
+                  href={`/${service.id}`}
+                  className={`group relative block ${lage.drehung} rounded-kachel bg-white p-3 pb-5 shadow-[0_18px_40px_-18px_rgba(42,32,25,0.45)] transition-transform duration-500 hover:-translate-y-1 hover:rotate-0`}
+                >
+                  {/* Klebeband oben in der Mitte */}
+                  <span
+                    aria-hidden="true"
+                    className="absolute -top-3 left-1/2 z-10 h-7 w-24 -translate-x-1/2 -rotate-3 rounded-[3px] opacity-80"
+                    style={{ backgroundColor: ton }}
+                  />
+                  <span className={`relative block ${lage.form} overflow-hidden rounded-bild`}>
+                    <span
+                      aria-hidden="true"
+                      className="absolute inset-0 transition-transform duration-500 group-hover:scale-105"
+                      style={platzhalterFlaeche(ton)}
+                    />
                   </span>
-                </span>
-              </span>
-              {/* Farbleiste am unteren Rand, wird beim Überfahren voll breit. */}
-              <span
-                aria-hidden="true"
-                className="absolute bottom-0 left-0 h-1.5 w-1/3 transition-[width] duration-500 group-hover:w-full"
-                style={{ backgroundColor: ton }}
-              />
-            </Link>
-          ))}
+                  <span className="mt-4 block px-2">
+                    <span
+                      className="flex items-center gap-2 text-[0.7rem] font-bold uppercase tracking-[0.14em]"
+                      style={{ color: LEISE }}
+                    >
+                      <span aria-hidden="true" className="h-2 w-2 rounded-full" style={{ backgroundColor: ton }} />
+                      {service.title}
+                    </span>
+                    <span className="mt-1.5 flex items-baseline justify-between gap-3 text-[1.05rem] font-extrabold leading-snug tracking-[-0.01em]">
+                      {motiv}
+                      <span aria-hidden="true" className="shrink-0 transition-transform duration-300 group-hover:translate-x-1">
+                        →
+                      </span>
+                    </span>
+                  </span>
+                </Link>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -26,8 +26,9 @@ trauen sollen anzurufen.
 ## Der Aufbau (nach dem Vorbild mediaquestweb.com)
 
 Farben, Schrift und Hintergrund sind die des Farbfächers. Der **Aufbau** der
-Seite folgt dem Vorbild mediaquestweb.com. Übernommen wurde nur das Layout,
-weder Texte noch Leistungen:
+Seite folgt dem Vorbild mediaquestweb.com – frei abgewandelt, nicht 1:1.
+Übernommen wurde nur das Layout, weder Texte noch Leistungen. Grundsatz:
+**lieber weniger Inhalte, dafür größer und lockerer angeordnet.**
 
 - **Abschnitte über die ganze Breite.** Helle (auf dem Verlauf) und
   **dunkelbraune** wechseln sich ab. Das Braun ist die dunkle Fortsetzung des
@@ -47,13 +48,13 @@ Reihenfolge der Startseite:
 
 | Abschnitt | Vorbild | Inhalt |
 | --- | --- | --- |
-| Kopfbereich | Hero | links Schlagzeile, Kennzahlen, Knöpfe · rechts der Farbfächer und ein dunkles Band mit der Anschrift (statt Video) |
-| So arbeiten wir (dunkel) | „Move forward…" | die Zusagen aus dem Ablauf als Liste mit Häkchen |
-| Leistungen | „Our Services" | vier Karten 01–04 mit Punkten |
-| Einblicke | „Favorite Work" | Galerie 3 × 3 mit den Foto-Motiven der Leistungen |
+| Kopfbereich | Hero | links Schlagzeile mit Farbkreisen dahinter, Kennzahlen, Knöpfe · rechts ein großes Foto (Platzhalter) und das dunkle Band „Jetzt kontaktieren" (statt Video) |
+| So arbeiten wir (dunkel) | „Move forward…" | drei Zusagen als große Zeilen, einfarbige Häkchen |
+| Leistungen | „Our Services" | vier Karten 01–04 als **Treppe**: jede ein Stück tiefer als die vorige |
+| Einblicke | „Favorite Work" | **drei Fotos**, verschieden groß, schräg und versetzt wie Abzüge auf dem Werktisch, mit Klebestreifen |
 | Kundenstimmen (dunkel) | „What our clients are saying" | Karussell mit Pfeilen, Punkten und Pause-Knopf – **zurzeit Platzhalter** |
 | Ablauf | Screenshot 2 | unverändert: Faden mit Nummernkreisen und vier Karten |
-| Häufige Fragen | „FAQ" | Aufklapp-Liste, Antworten nur aus Angaben in `site.ts` |
+| Häufige Fragen | „FAQ" | **drei Fragen** in großen Kacheln mit Nummer, die erste aufgeklappt; Antworten nur aus Angaben in `site.ts` |
 | Schlussaufruf (dunkel) | „Ready for the next chapter" | mittig, mit kurzer gestrichelter Schlaufe |
 | Kontakt | „Get in touch" | Kontaktwege, QR-Feld, Öffnungszeiten (statt Formular: ohne Server gäbe es niemanden, der es verschickt) |
 | Fußzeile (dunkel) | Footer | vier Spalten: Marke, Seiten, Kontakt, Öffnungszeiten |
@@ -98,12 +99,11 @@ Farbfächer-Gedanken:
 | Was | Wie |
 | --- | --- |
 | **Auftritt** | Beim Laden gleitet die Kopfzeile von oben herein, Etikett, Schlagzeile, Text und Knöpfe schieben sich nacheinander hoch. |
-| **Kreise** | Die drei Farbkreise im Kopfbereich wachsen auf und treiben danach sehr langsam (nur ab Tablet-Breite, weil Dauerbewegung mit Farbmischung auf einem schwachen Handy Akku kostet). |
-| **Fächer** | Die vier Farbkarten klappen nacheinander auf wie ein Fächer: erst verdreht und zur Mitte geschoben, dann an ihrem Platz. |
+| **Kreise** | Die drei Farbkreise hinter der Schlagzeile wachsen auf und treiben danach sehr langsam (nur ab Tablet-Breite, weil Dauerbewegung mit Farbmischung auf einem schwachen Handy Akku kostet). |
 | **Einblenden** | Alles weiter unten erscheint erst, wenn man dort ankommt. Der Ablauf-Faden zeichnet sich dabei von links nach rechts, die Nummernkreise poppen nacheinander auf. |
 | **Linien** | Die gestrichelten Bögen zeichnen sich beim Hinscrollen von ihrem Anfang her. |
 | **Kundenstimmen** | Wechseln alle 7 Sekunden; Pause-Knopf, hält bei Maus oder Tastatur darauf an, läuft bei „Bewegung reduzieren" gar nicht. |
-| **Hover** | Karten und Knöpfe heben sich leicht, Eckkreise wachsen, in der Galerie wird die Farbleiste voll breit. |
+| **Hover** | Karten und Knöpfe heben sich leicht, Eckkreise wachsen, die schrägen Fotos in „Einblicke" richten sich gerade. |
 
 **Wie ein Element zum Einblenden kommt:** `data-reveal` ans Element schreiben
 (optional `data-art="faden"`, `"pop"` oder `"linie"`, und eine Verzögerung mit
@@ -140,7 +140,7 @@ Alle Texte erfüllen **WCAG AA** (4,5 : 1, große Schrift 3 : 1). Gemessen
 wird nicht gegen eine angenommene Hintergrundfarbe, sondern gegen das, was
 tatsächlich hinter jedem Text liegt – Beige-Verlauf, Farbkreise und getönte
 Kacheln und dunkle Abschnitte eingerechnet, aufgeklappte Fragen ebenfalls.
-Letzte Messung: **1.690 Texte** auf allen sechs Seiten, am Rechner (1440 px)
+Letzte Messung: **1.560 Texte** auf allen sechs Seiten, am Rechner (1440 px)
 und auf dem Handy (390 px), schwächster Wert **4,94 : 1**.
 
 Dafür gibt es eigene Schriftfarben in `src/lib/farben.ts`:
@@ -186,7 +186,7 @@ src/app/globals.css            Kopfzeilen-Farbe, Seitenrand, Animationen, Rechts
 src/lib/farben.ts              Farben (auch: welche Schrift auf welcher Farbe)
 src/lib/site.ts                Inhalte, Menü, Liste der Unterseiten
 src/components/layout/         Header, Footer, Papiergrund, LegalPage, CookieNotice
-src/components/sections/       Startseite: Hero (mit Faecher), Werkstatt, Services, Einblicke,
+src/components/sections/       Startseite: Hero, Werkstatt, Services, Einblicke,
                                Kundenstimmen, Process, Fragen, Aufruf, Contact
                                Unterseiten: LeistungHero, LeistungDetails, WeitereLeistungen
 src/components/ui/             Bild (Foto-Platzhalter), Einblenden (Scroll-Skript),
@@ -196,7 +196,7 @@ src/components/ui/             Bild (Foto-Platzhalter), Einblenden (Scroll-Skrip
 ## Was noch fehlt
 
 - **Echte Fotos.** Überall, wo jetzt eine gestreifte Fläche steht
-  (`components/ui/Bild.tsx`, Galerie in `Einblicke.tsx`), gehört ein Foto hin. Die Notiz auf der Fläche
+  (`components/ui/Bild.tsx`, Kopfbereich in `Hero.tsx`, Fotos in `Einblicke.tsx`), gehört ein Foto hin. Die Notiz auf der Fläche
   sagt, welches Motiv gedacht ist. Für eine Designfirma ist das das
   Wichtigste, was noch fehlt: Arbeitsproben sind der stärkste Beweis.
 - **Echte Kundenstimmen.** Die drei Stimmen sind Platzhalter und auf der

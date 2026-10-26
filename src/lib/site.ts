@@ -164,13 +164,12 @@ export const processSteps: ProcessStep[] = [
 ];
 
 // ── „Darauf können Sie sich verlassen" (dunkler Abschnitt der Startseite)
-// Die Zusagen aus dem Ablauf, hier noch einmal gesammelt.
+// Drei Zusagen aus dem Ablauf, hier noch einmal hervorgehoben. Bewusst nur
+// drei – mehr wirkt wie eine Liste, die keiner liest.
 export const versprechen: string[] = [
   "Das erste Gespräch kostet nichts",
   "Preis steht fest, bevor es losgeht",
-  "Korrekturen sind eingerechnet",
   "Immer derselbe Ansprechpartner",
-  "Nichts läuft ohne Ihre Freigabe",
 ];
 
 // ── Kundenstimmen ────────────────────────────────────────────────────────
@@ -206,9 +205,9 @@ export const kundenstimmen: Kundenstimme[] = [
 ];
 
 // ── Häufige Fragen ───────────────────────────────────────────────────────
-// Jede Antwort beruht auf den Angaben weiter oben in dieser Datei. Bei der
-// Frage nach den Öffnungszeiten hängt die Seite `openingHours` mit an.
-export const fragen: { frage: string; antwort: string; oeffnungszeiten?: boolean }[] = [
+// Bewusst nur drei, dafür groß. Jede Antwort beruht auf den Angaben weiter
+// oben in dieser Datei. Weitere Fragen einfach unten anhängen.
+export const fragen: { frage: string; antwort: string }[] = [
   {
     frage: "Was kostet das erste Gespräch?",
     antwort:
@@ -217,36 +216,12 @@ export const fragen: { frage: string; antwort: string; oeffnungszeiten?: boolean
   {
     frage: "Kann ich vorher sehen, wie es aussieht?",
     antwort:
-      "Ja. Wir bereiten Ihr Logo auf und zeigen Ihnen vorab, wie es aussieht: auf dem Shirt, auf dem Schild oder am Fahrzeug. Sie müssen sich also nichts vorstellen.",
-  },
-  {
-    frage: "Was ist, wenn mir der Entwurf nicht gefällt?",
-    antwort:
-      "Sagen Sie einfach, was anders soll: Logo größer, andere Farbe, Schriftzug woanders. Korrekturen sind eingerechnet, und produziert wird erst, wenn Sie zufrieden sind.",
+      "Ja. Wir bereiten Ihr Logo auf und zeigen Ihnen vorab, wie es aussieht: auf dem Shirt, auf dem Schild oder am Fahrzeug. Korrekturen sind eingerechnet, produziert wird erst, wenn Sie zufrieden sind.",
   },
   {
     frage: "Wie komme ich an die fertige Arbeit?",
     antwort:
-      "Textilien und Drucksachen holen Sie ab oder wir schicken sie Ihnen. Was angebracht werden muss, montieren wir vor Ort.",
-  },
-  {
-    frage: "Kann ich später nachbestellen?",
-    antwort: "Ja, nachbestellen geht jederzeit.",
-  },
-  {
-    frage: "Kann ich Kleidung auch online aussuchen?",
-    antwort:
-      "Ja. Im Textilshop suchen Sie sich in Ruhe Kleidung aus. Was Sie bestellen, besticken wir auf Wunsch hier bei uns.",
-  },
-  {
-    frage: "Wann haben Sie geöffnet?",
-    antwort:
-      "Rufen Sie am besten kurz an, bevor Sie herkommen – dann hat auch jemand Zeit für Sie.",
-    oeffnungszeiten: true,
-  },
-  {
-    frage: "Wo kann ich parken?",
-    antwort: "Direkt vor dem Haus. Größere Fahrzeuge fahren auf den Hof.",
+      "Textilien und Drucksachen holen Sie ab oder wir schicken sie Ihnen. Was angebracht werden muss, montieren wir vor Ort. Nachbestellen geht jederzeit.",
   },
 ];
 

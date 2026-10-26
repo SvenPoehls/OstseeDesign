@@ -4,17 +4,24 @@ import Etikett from "@/components/ui/Etikett";
 import { KNOPF, LEISE, farben } from "@/lib/farben";
 import { leistungsLink, services, textilShopUrl } from "@/lib/site";
 
-// Leistungen, aufgebaut wie im Vorbild der Abschnitt „Our Services": oben
-// Etikett und Überschrift, darunter vier gleich breite Karten nebeneinander
-// – je Leistung eine, mit großer Nummer (= Farbe 01 bis 04 aus dem Fächer),
+// Leistungen: oben Etikett und Überschrift, darunter vier Karten – je
+// Leistung eine, mit großer Nummer (= Farbe 01 bis 04 aus dem Fächer),
 // Farbpunkt, Kurztext und den Punkten als Liste. Ganz unten ein Satz und zwei
 // Knöpfe.
+//
+// TREPPE: Auf breiten Bildschirmen steht jede Karte ein Stück tiefer als die
+// vorige (`STUFE`), sodass die vier zusammen eine Treppe nach rechts unten
+// bilden. Alle Karten sind gleich hoch, damit die Stufen gleichmäßig sind.
+// Auf dem Tablet (zwei Spalten) ist nur die rechte Spalte versetzt, auf dem
+// Handy stehen sie einfach untereinander.
 //
 // Jede Karte führt auf die Unterseite ihrer Leistung (der Textilshop auf die
 // externe Seite).
 //
 // BEWEGUNG: Die Karten erscheinen beim Scrollen nacheinander. Beim Überfahren
 // hebt sich die Karte und der Eckkreis wächst.
+const STUFE = ["", "sm:mt-16 lg:mt-20", "lg:mt-40", "sm:mt-16 lg:mt-60"];
+
 export default function Services() {
   return (
     <section id="leistungen" className="abschnitt scroll-mt-28">
@@ -29,10 +36,10 @@ export default function Services() {
           </h2>
         </div>
 
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
+        <div className="mt-12 grid items-start gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
           {services.map((service, i) => {
             const klasse =
-              "group relative flex flex-col overflow-hidden rounded-kachel p-6 transition-transform duration-300 hover:-translate-y-1 sm:p-7";
+              `group relative flex flex-col overflow-hidden rounded-kachel p-6 transition-transform duration-300 hover:-translate-y-1 sm:min-h-[33rem] sm:p-7 ${STUFE[i]}`;
             const stil = {
               backgroundColor: `${farben[i].ton}1a`,
               "--verz": `${i * 120}ms`,

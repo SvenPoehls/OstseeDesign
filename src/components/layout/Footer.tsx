@@ -27,7 +27,7 @@ export default function Footer() {
           </Link>
           <p className="mt-5 max-w-[22rem] text-[0.92rem] leading-relaxed">{company.claim}.</p>
           <ul className="mt-6 space-y-2.5 text-[0.9rem]">
-            {[`Seit über ${company.yearsExperience} Jahren in ${company.city}`, versprechen[0], versprechen[3]].map(
+            {[`Seit über ${company.yearsExperience} Jahren in ${company.city}`, versprechen[0], versprechen[2]].map(
               (punkt) => (
                 <li key={punkt} className="flex items-center gap-2.5">
                   <span aria-hidden="true" className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full" style={{ backgroundColor: farben[0].ton }}>

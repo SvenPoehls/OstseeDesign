@@ -6,8 +6,8 @@ import { company, versprechen } from "@/lib/site";
 // unter dem Kopfbereich). Zweispaltig:
 //
 //   links   Etikett, Überschrift mit eingefärbtem Wort, kurzer Text
-//   rechts  „Darauf können Sie sich verlassen": die Zusagen aus dem Ablauf
-//           als Liste mit Häkchen, darunter ein Schlusssatz in Ocker
+//   rechts  „Darauf können Sie sich verlassen": drei Zusagen aus dem Ablauf
+//           als große Zeilen mit Häkchen, darunter ein Schlusssatz in Ocker
 //
 // Auf dem dunklen Grund werden Wörter direkt eingefärbt (Zinnober), nicht
 // mit dem Marker hinterlegt – siehe `.markiert` in globals.css.
@@ -33,23 +33,25 @@ export default function Werkstatt() {
           <h3 className="text-[1.25rem] font-extrabold tracking-[-0.02em]">
             Darauf können Sie sich verlassen
           </h3>
-          <ul className="mt-6 space-y-3">
-            {versprechen.map((punkt, i) => (
+          {/* Drei Zusagen, alle in einer Farbe: ein Ring in Zinnober mit
+              Häkchen – ruhig statt bunt. */}
+          <ul className="mt-6 space-y-4">
+            {versprechen.map((punkt) => (
               <li
                 key={punkt}
-                className="flex items-center gap-4 rounded-kachel px-4 py-3.5 text-[1rem] font-semibold"
+                className="flex items-center gap-5 rounded-kachel px-5 py-6 text-[1.15rem] font-bold tracking-[-0.01em] sm:px-7 sm:text-[1.3rem]"
                 style={{ backgroundColor: DUNKEL_KARTE }}
               >
                 <span
                   aria-hidden="true"
-                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full"
-                  style={{ backgroundColor: farben[i % farben.length].ton }}
+                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full"
+                  style={{ boxShadow: `inset 0 0 0 2px ${farben[0].ton}` }}
                 >
                   <svg
                     viewBox="0 0 24 24"
-                    className="h-4 w-4"
+                    className="h-5 w-5"
                     fill="none"
-                    stroke={i % farben.length === 1 ? "#ffffff" : "#17161a"}
+                    stroke={farben[0].ton}
                     strokeWidth="3"
                     strokeLinecap="round"
                     strokeLinejoin="round"

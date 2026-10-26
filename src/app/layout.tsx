@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import Einblenden from "@/components/ui/Einblenden";
+import Papiergrund from "@/components/layout/Papiergrund";
 import { company } from "@/lib/site";
 
 // Die Schrift liegt als Datei im Projekt (src/app/fonts) und wird mit der
@@ -85,12 +86,17 @@ export default function RootLayout({
             `overflow-x-clip` ist ein Sicherheitsnetz: Kein Element (z. B. ein
             noch seitlich versetzter Animationsstart) darf die Seite breiter
             machen als den Bildschirm. Anders als „hidden" bricht „clip" die
-            mitlaufende Kopfzeile nicht. */}
-        <div className="min-h-screen overflow-x-clip bg-white">
-          <Einblenden />
-          <Header />
-          {children}
-          <Footer />
+            mitlaufende Kopfzeile nicht.
+            `papier` + <Papiergrund />: der zerknitterte Papierbogen hinter
+            allem (siehe globals.css, Abschnitt PAPIER). */}
+        <div className="papier min-h-screen overflow-x-clip">
+          <Papiergrund />
+          <div className="papier-inhalt">
+            <Einblenden />
+            <Header />
+            {children}
+            <Footer />
+          </div>
         </div>
       </body>
     </html>

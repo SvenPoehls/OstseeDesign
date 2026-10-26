@@ -8,7 +8,7 @@ import { company, services } from "@/lib/site";
 
 // STARTSEITE – Gestaltung „Farbfächer" (Begründung: DESIGN.md).
 //
-// Die Seite sieht aus wie der Farbfächer an der Werkstattwand: weißer Grund,
+// Die Seite sieht aus wie der Farbfächer an der Werkstattwand: Papiergrund,
 // vier Werkstattfarben, runde Formen, Kreise, die sich übereinander mischen
 // wie Druckfarben. Der Titel und die Beschreibung der Seite stehen in
 // layout.tsx, die Farben in src/lib/farben.ts, die Animationen in globals.css.

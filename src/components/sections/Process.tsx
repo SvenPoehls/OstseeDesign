@@ -71,7 +71,9 @@ export default function Process() {
               >
                 {step.points.map((point) => (
                   <li key={point} className="flex gap-2">
-                    <span style={{ color: farben[i].ton }}>•</span>
+                    <span aria-hidden="true" style={{ color: farben[i].ton }}>
+                      •
+                    </span>
                     {point}
                   </li>
                 ))}

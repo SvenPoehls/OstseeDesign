@@ -1,4 +1,4 @@
-import { FLAECHE, LEISE, farben } from "@/lib/farben";
+import { FLAECHE, LEISE, PETROL_TEXT, farben } from "@/lib/farben";
 import { company, openingHours } from "@/lib/site";
 
 // Standort. Die Anschrift steht groß in einer Petrol-Fläche, die
@@ -23,7 +23,7 @@ export default function FindUs() {
           style={{ backgroundColor: `${farben[1].ton}59` }}
         />
         <div className="relative">
-          <p className="text-[0.88rem] font-bold" style={{ color: farben[1].ton }}>
+          <p className="text-[0.88rem] font-bold" style={{ color: PETROL_TEXT }}>
             Standort
           </p>
           <p className="mt-4 text-[clamp(1.7rem,4vw,2.6rem)] font-extrabold leading-tight tracking-[-0.04em]">

@@ -6,12 +6,12 @@
   ═══════════════════════════════════════════════════════════════════════════
   GESTALTUNG: „FARBFÄCHER"
   ═══════════════════════════════════════════════════════════════════════════
-  Die Seite sieht aus wie der Farbfächer an der Werkstattwand: weißer Grund,
+  Die Seite sieht aus wie der Farbfächer an der Werkstattwand: Papiergrund,
   vier Werkstattfarben (siehe src/lib/farben.ts), runde Formen, Kreise, die
   sich übereinander mischen wie Druckfarben.
 
   Diese Datei enthält nur das, was sich mit Tailwind-Klassen nicht sauber
-  sagen lässt: die Kopfzeilen-Farbe und alle Animationen.
+  sagen lässt: Papiergrund, Kopfzeilen-Farbe, Seitenrand und Animationen.
 */
 
 :root {
@@ -24,15 +24,21 @@
 
   /* Ein Bewegungsverlauf für alles: schnell los, weich aus. */
   --weich: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  /* ── PAPIER ─────────────────────────────────────────────────────────────
+     Der Grund der Seite ist ein warmes, leicht zerknittertes Blatt (siehe
+     `.papier-knick` unten und src/components/layout/Papiergrund.tsx). */
+  --papier: #faf6ea; /* Cremeweiß */
+  --papier-rand: rgba(68, 60, 40, 0.09); /* Schatten an Falzen und Rändern */
 }
 
 html {
   scroll-behavior: smooth;
-  background-color: #ffffff;
+  background-color: var(--papier);
 }
 
 body {
-  background-color: #ffffff;
+  background-color: var(--papier);
   color: #17161a;
   -webkit-font-smoothing: antialiased;
 }
@@ -226,6 +232,67 @@ body {
   *::after {
     transition-duration: 0.001ms !important;
   }
+}
+
+/* ── PAPIER ──────────────────────────────────────────────────────────────── */
+/* `.papier` umschließt die ganze Seite (siehe layout.tsx). Darin liegt die
+   festsitzende Schicht `.papier-knick`: oben das Knittern als SVG (aus
+   Papiergrund.tsx), darunter zwei kaum sichtbare Falzkanten, eine leichte
+   Abdunklung zum Rand und eine feine Körnung.
+
+   Die Schicht liegt HINTER dem Inhalt (z-index 0, Inhalt darüber auf 1):
+   Schrift und Farben bleiben dadurch unverfälscht, und beim Scrollen muss
+   nichts neu gemischt werden. Durch die durchscheinende Kopfzeile und die
+   Farbkacheln schimmert das Papier trotzdem hindurch.
+
+   STÄRKE: `opacity` bei `.papier-knick` – 0 = glattes Papier, 1 = stark
+   geknittert. Die Körnung hat ihre eigene Stärke bei `::after`. */
+.papier {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--papier);
+}
+.papier-knick {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  opacity: 0.6;
+  background-image:
+    linear-gradient(
+      96deg,
+      transparent 0 36.4%,
+      rgba(255, 255, 255, 0.6) 36.6%,
+      var(--papier-rand) 37.2%,
+      transparent 38%
+    ),
+    linear-gradient(
+      178deg,
+      transparent 0 61%,
+      rgba(255, 255, 255, 0.5) 61.3%,
+      var(--papier-rand) 61.9%,
+      transparent 62.6%
+    ),
+    radial-gradient(130% 80% at 50% 10%, transparent 52%, var(--papier-rand) 100%);
+}
+.papier-knick svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+/* Feine Papierkörnung – man sieht sie kaum bewusst, aber die Fläche wirkt
+   dadurch wie Papier und nicht wie eine glatte Bildschirmfläche. */
+.papier-knick::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.65;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.22'/%3E%3C/svg%3E");
+}
+.papier-inhalt {
+  position: relative;
+  z-index: 1;
 }
 
 /* ── SEITENRAND ───────────────────────────────────────────────────────────── */

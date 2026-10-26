@@ -28,7 +28,8 @@ trauen sollen anzurufen.
 | Bereich | Entscheidung |
 | --- | --- |
 | Schrift | **Schibsted Grotesk**, die einzige Schrift der Seite. Freundlich und etwas rund, bewusst nicht Inter. Liegt im Projekt, kein Abruf bei Google. |
-| Farbe | Weißer Grund, **vier Werkstattfarben** (Zinnober, Petrol, Ocker, Magenta) – jede gehört zu einer Leistung. Siehe `src/lib/farben.ts`. |
+| Grund | **Leicht zerknittertes Cremepapier** mit feiner Körnung (übernommen aus dem früheren Entwurf „Handskizze"). Wird im Browser gerechnet, keine Bilddatei. Liegt hinter dem Inhalt und schimmert durch Kopfzeile und Kacheln. |
+| Farbe | **Vier Werkstattfarben** (Zinnober, Petrol, Ocker, Magenta) auf dem Papier – jede gehört zu einer Leistung. Siehe `src/lib/farben.ts`. |
 | Form | **Kreise und runde Knöpfe, aber eher eckige Kacheln**: Karten und Farbflächen 14 px, Bildflächen 10 px, Knöpfe, Marken und Kreise ganz rund. |
 | Transparenz | Kreise liegen übereinander und **mischen sich** (`mix-blend-multiply`) – wie Druckfarben. |
 | Kopfzeile | **Durchgehende Leiste** im zarten Ocker: Wortmarke mit Unterzeile links, Menü in Großbuchstaben, rechts zwei runde Knöpfe (Telefon dunkel, „Projekt anfragen" Petrol), unten ein Band aus den vier Fächerfarben. Die aktive Seite ist in ihrer Farbe unterstrichen. Unter 1280 px Breite steht das Menü als farbige Marken unter der Leiste. |
@@ -89,6 +90,9 @@ jedem Seitenwechsel neu.
 | --- | --- |
 | `src/lib/farben.ts` | die vier Farben, Schrift-, Knopf- und Flächenfarbe |
 | `src/app/globals.css` → `--kopf` | **wie kräftig das Gelb der Kopfzeile ist.** Die letzte Zahl ist die Deckkraft: 0,5 = zart (jetzt), 0,88 = so kräftig wie früher, 1 = volles Ocker. Für eine weiße Leiste: `#ffffff` |
+| `src/app/globals.css` → `.papier-knick` (opacity) | **wie stark das Papier geknittert wirkt**: 0 = glatt, 0,6 = jetzt, 1 = kräftig. Die Körnung hat ihre eigene Stärke bei `.papier-knick::after` |
+| `src/components/layout/Papiergrund.tsx` | Größe der Falten (`baseFrequency`) und ihre Tiefe (`surfaceScale`) |
+| `src/app/globals.css` → `--papier` | der Papierton |
 | `tailwind.config.ts` → `seite` | **wie breit die Seite auf großen Bildschirmen wird** (jetzt 1440 px) |
 | `tailwind.config.ts` → `kachel`, `bild` | **wie rund die Kacheln sind** (jetzt 14 px bzw. 10 px). Knöpfe sind davon nicht betroffen |
 | `src/app/globals.css` → `--weich` | der Bewegungsverlauf aller Animationen |
@@ -96,35 +100,38 @@ jedem Seitenwechsel neu.
 
 ## Kontraste
 
-Alle Textfarben erfüllen WCAG AA (mindestens 4,5 : 1), gemessen:
+Alle Texte erfüllen **WCAG AA** (4,5 : 1, große Schrift 3 : 1). Gemessen
+wird nicht gegen eine angenommene Hintergrundfarbe, sondern gegen das, was
+tatsächlich hinter jedem Text liegt – Papierknicke, Farbkreise und getönte
+Kacheln eingerechnet. Letzte Messung: **1.047 Texte** auf allen sechs Seiten,
+am Rechner (1440 px) und auf dem Handy (390 px), schwächster Wert **4,8 : 1**.
 
-| Paar | Verhältnis |
+Dafür gibt es eigene Schriftfarben in `src/lib/farben.ts`:
+
+| Farbe | wofür |
 | --- | --- |
-| Nebentext auf Weiß | 6,5 : 1 |
-| Menüschrift auf der Kopfzeile (Gelb 50 %) | über 7 : 1 |
-| Grauer Text über den Farbkreisen (`LEISE_AUF_KREISEN`), am dunkelsten Punkt gemessen | mind. 4,98 : 1 |
-| Nummern in den Farbkreisen (`SCHRIFT_AUF`, je Farbe die bessere Schrift) | mind. 4,95 : 1 |
-| Menüschrift auf der Kopfzeile, ungünstigster Fall über einem Ocker-Kreis | 6,7 : 1 |
-| Weiß auf Petrol-Knopf | 4,95 : 1 |
-| Überschrift „Ablauf" (dunkleres Magenta `#c23a64`) | 5,1 : 1 |
-| Schrift auf der Kontaktfläche (Tinte auf Zinnober, auch über dem Magenta-Kreis) | mind. 5,1 : 1 |
+| `LEISE` `#4a4650` | Nebentext. Kräftiger als auf weißem Grund nötig wäre – auf dem Papier ist der Untergrund stellenweise dunkler. |
+| `LEISE_AUF_KREISEN` `#433f49` | Nebentext über den Farbkreisen der Kopfbereiche |
+| `PETROL_TEXT` `#0a5f67`, `MAGENTA_TEXT` `#a52f55` | kleine farbige Überschriften („Leistungen", „Standort", „Ablauf") – die hellen Fächerfarben sind dafür zu schwach |
+| `SCHRIFT_AUF` | Schrift auf den vier Farbflächen (z. B. Nummern in Kreisen): je Farbe die besser lesbare, mind. 4,95 : 1 |
 
-Zwei Stellen waren im ursprünglichen Entwurf zu schwach und wurden angepasst:
-Weiße Schrift auf dem Zinnober der Kontaktfläche (nur 2,6 : 1) ist jetzt
-dunkel, und das helle Magenta als Schrift (3,6 : 1) ist als Schrift
-dunkler – Flächen und Kreise behalten das helle Magenta. **Beim Umfärben
-daran denken:** helle Farben taugen nicht als Schriftfarbe.
+Auf der orangen Kontaktfläche steht dunkle Schrift (weiße hätte nur
+2,6 : 1). **Beim Umfärben daran denken:** helle Farben taugen nicht als
+Schriftfarbe, und auf Papier braucht Text etwas mehr Kraft als auf Weiß.
+Die farbigen Aufzählungspunkte im Ablauf sind reiner Schmuck und für
+Screenreader ausgeblendet.
 
 ## Regeln für spätere Änderungen
 
 1. **Farbe kommt aus Flächen**, nicht aus dunklen Hintergründen. Die Seite
-   bleibt hell.
+   bleibt hell, der Grund bleibt Papier.
 2. **Ein Bereich = eine Farbe.** Die vier Farben gehören fest zu den vier
    Leistungen; sie nicht für andere Zwecke wiederverwenden.
 3. **Kacheln eckig, Knöpfe rund.** Neue Flächen benutzen `rounded-kachel`
    bzw. `rounded-bild`, Knöpfe und Marken `rounded-full` – keine eigenen
    Zwischenwerte.
-4. **Helle Farben nie als Schrift** auf Weiß (siehe Kontraste).
+4. **Helle Farben nie als Schrift** (siehe Kontraste) – für farbige Schrift
+   die `…_TEXT`-Fassungen aus `farben.ts` nehmen.
 5. **Animation sparsam.** Neue bewegte Elemente brauchen einen Grund;
    Dauerbewegung nur, wo sie nichts kostet.
 6. **Konkret schreiben.** „Stickerei, auch auf Jacken und Mützen" statt
@@ -139,7 +146,7 @@ src/app/layout.tsx             Schrift, SEO, Kopf- und Fußzeile, Einblenden-Skr
 src/app/globals.css            Kopfzeilen-Farbe, Seitenrand, Animationen, Rechtstexte
 src/lib/farben.ts              Farben (auch: welche Schrift auf welcher Farbe)
 src/lib/site.ts                Inhalte, Menü, Liste der Unterseiten
-src/components/layout/         Header, Footer, LegalPage, CookieNotice
+src/components/layout/         Header, Footer, Papiergrund, LegalPage, CookieNotice
 src/components/sections/       Startseite: Hero, Faecher, Services, Process, FindUs, Contact
                                Unterseiten: LeistungHero, LeistungDetails, WeitereLeistungen
 src/components/ui/             Bild (Foto-Platzhalter), Einblenden (Scroll-Skript)

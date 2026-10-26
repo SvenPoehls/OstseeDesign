@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { LEISE, farben } from "@/lib/farben";
+import { LEISE, PETROL_TEXT, farben } from "@/lib/farben";
 import { leistungsLink, services } from "@/lib/site";
 import Bild from "@/components/ui/Bild";
 
@@ -16,7 +16,7 @@ export default function Services() {
   return (
     <section id="leistungen" className="mt-16 scroll-mt-28 sm:mt-24">
       <div data-reveal className="max-w-[30rem]">
-        <p className="text-[0.88rem] font-bold" style={{ color: farben[1].ton }}>
+        <p className="text-[0.88rem] font-bold" style={{ color: PETROL_TEXT }}>
           Leistungen
         </p>
         <h2 className="mt-2 text-[clamp(1.8rem,4vw,2.8rem)] font-extrabold leading-tight tracking-[-0.04em]">

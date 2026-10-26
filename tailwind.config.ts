@@ -2,7 +2,7 @@ import type { Config } from "tailwindcss";
 
 // Tailwind-Konfiguration.
 //
-// Gestaltung „Farbfächer": weißer Grund, vier Werkstattfarben, Kreise und
+// Gestaltung „Farbfächer": Papiergrund, vier Werkstattfarben, Kreise und
 // leicht gerundete Kacheln.
 // Die Farben selbst stehen in src/lib/farben.ts, die Kopfzeilen-Farbe und die
 // Animationen in src/app/globals.css.
@@ -16,7 +16,7 @@ const config: Config = {
     extend: {
       colors: {
         tinte: "#17161a", // Schriftfarbe
-        leise: "#605c66", // Nebentext
+        leise: "#4a4650", // Nebentext (gleich LEISE in src/lib/farben.ts)
       },
       fontFamily: {
         // Schibsted Grotesk: freundliche, etwas rundliche Grotesk aus

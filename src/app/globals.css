@@ -375,10 +375,40 @@ body {
   animation-name: linie-oben;
 }
 
+/* Strichstärke der Übergangslinien. Die Linie wird mit der Bildschirmbreite
+   kleiner oder größer gezeichnet – damit der Strich trotzdem überall etwa
+   2,5 px dick aussieht, ist er auf schmalen Bildschirmen (in Linien-
+   Einheiten) dicker. */
+.linie-strich {
+  stroke-width: 7;
+}
+@media (min-width: 640px) {
+  .linie-strich {
+    stroke-width: 5;
+  }
+}
+@media (min-width: 768px) {
+  .linie-strich {
+    stroke-width: 3.6;
+  }
+}
+@media (min-width: 1024px) {
+  .linie-strich {
+    stroke-width: 2.9;
+  }
+}
+@media (min-width: 1280px) {
+  .linie-strich {
+    stroke-width: 2.3;
+  }
+}
+
 /* ── FRAGEN (Aufklapp-Liste) ─────────────────────────────────────────────── */
 /* Native <details>: funktioniert ohne Skript und mit Tastatur. Das Dreieck
    des Browsers wird durch ein rundes Plus ersetzt, das sich beim Öffnen zum
-   Kreuz dreht. */
+   Kreuz dreht. Das weiche Auf- und Zuklappen steuert FragenAufklappen.tsx;
+   während des Zuklappens trägt die Frage die Klasse `zu`, damit sich das
+   Kreuz schon zurückdreht. */
 .frage summary {
   list-style: none;
 }
@@ -388,7 +418,7 @@ body {
 .frage .frage-zeichen {
   transition: rotate 0.3s var(--weich);
 }
-.frage[open] .frage-zeichen {
+.frage[open]:not(.zu) .frage-zeichen {
   rotate: 45deg;
 }
 

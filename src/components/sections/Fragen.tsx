@@ -1,4 +1,5 @@
 import Etikett from "@/components/ui/Etikett";
+import FragenAufklappen from "@/components/ui/FragenAufklappen";
 import { LEISE, SCHRIFT_AUF, farben } from "@/lib/farben";
 import { company, fragen } from "@/lib/site";
 
@@ -7,10 +8,11 @@ import { company, fragen } from "@/lib/site";
 // Kacheln mit Nummer.
 //
 // IMMER NUR EINE OFFEN: Die erste ist beim Laden aufgeklappt (macht neugierig).
-// Öffnet man eine andere, schließt sich die vorige. Das erledigt der Browser
-// selbst: Alle <details> tragen denselben `name` („fragen") und bilden so
-// eine Gruppe, von der nur eine offen sein kann. Kein Skript nötig, mit
-// Tastatur und Screenreader bedienbar.
+// Öffnet man eine andere, schließt sich die vorige. Beides gleitet weich auf
+// und zu (FragenAufklappen.tsx). Ohne Skript erledigt das der Browser selbst:
+// Alle <details> tragen denselben `name` („fragen") und bilden so eine
+// Gruppe, von der nur eine offen sein kann. Mit Tastatur und Screenreader
+// bedienbar.
 //
 // Die Fragen und Antworten stehen in site.ts (`fragen`).
 export default function Fragen() {
@@ -33,6 +35,7 @@ export default function Fragen() {
         </div>
 
         <div data-reveal className="space-y-5 [--verz:120ms]">
+          <FragenAufklappen />
           {fragen.map((f, i) => {
             const ton = farben[i % farben.length].ton;
             return (

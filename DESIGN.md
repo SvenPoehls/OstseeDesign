@@ -48,13 +48,13 @@ Reihenfolge der Startseite:
 
 | Abschnitt | Vorbild | Inhalt |
 | --- | --- | --- |
-| Kopfbereich | Hero | links Schlagzeile mit Farbkreisen dahinter, Kennzahlen, Knöpfe · rechts ein großes Foto (Platzhalter) und das dunkle Band „Jetzt kontaktieren" (statt Video) |
+| Kopfbereich | Hero | links Schlagzeile mit Farbkreisen dahinter, Kennzahlen (30+ Jahre · 0 € fürs erste Gespräch · 1 fester Ansprechpartner), Knöpfe · rechts ein großes Foto (Platzhalter) und das dunkle Band „Jetzt kontaktieren" (statt Video) |
 | So arbeiten wir (dunkel) | „Move forward…" | drei Zusagen als große Zeilen, einfarbige Häkchen |
 | Leistungen | „Our Services" | vier Karten 01–04 als **Treppe**: jede ein Stück tiefer als die vorige |
 | Einblicke | „Favorite Work" | **drei Fotos**, verschieden groß, schräg und versetzt wie Abzüge auf dem Werktisch, mit Klebestreifen |
 | Kundenstimmen (dunkel) | „What our clients are saying" | Karussell mit Pfeilen, Punkten und Pause-Knopf – **zurzeit Platzhalter** |
 | Ablauf | Screenshot 2 | unverändert: Faden mit Nummernkreisen und vier Karten |
-| Häufige Fragen | „FAQ" | **drei Fragen** in großen Kacheln mit Nummer; die erste ist beim Laden offen, und es ist **immer nur eine offen** (gemeinsamer `name` der `<details>`); Antworten nur aus Angaben in `site.ts` |
+| Häufige Fragen | „FAQ" | **drei Fragen** in großen Kacheln mit Nummer; die erste ist beim Laden offen, es ist **immer nur eine offen**, und Auf- und Zuklappen gleiten weich (`FragenAufklappen.tsx`; ohne Skript übernimmt der gemeinsame `name` der `<details>`); Antworten nur aus Angaben in `site.ts` |
 | Schlussaufruf (dunkel) | „Ready for the next chapter" | mittig, mit gestricheltem S-Bogen, der gerade in die Pfeilspitze läuft |
 | Kontakt | „Get in touch" | Kontaktwege, QR-Feld, Öffnungszeiten (statt Formular: ohne Server gäbe es niemanden, der es verschickt) |
 | Fußzeile (dunkel) | Footer | vier Spalten: Marke, Seiten, Kontakt, Öffnungszeiten |
@@ -101,7 +101,8 @@ Farbfächer-Gedanken:
 | **Auftritt** | Beim Laden gleitet die Kopfzeile von oben herein, Etikett, Schlagzeile, Text und Knöpfe schieben sich nacheinander hoch. |
 | **Kreise** | Die drei Farbkreise hinter der Schlagzeile wachsen auf und treiben danach sehr langsam (nur ab Tablet-Breite, weil Dauerbewegung mit Farbmischung auf einem schwachen Handy Akku kostet). |
 | **Einblenden** | Alles weiter unten erscheint erst, wenn man dort ankommt. Der Ablauf-Faden zeichnet sich dabei von links nach rechts, die Nummernkreise poppen nacheinander auf. |
-| **Linien** | Die gestrichelten Bögen zeichnen sich beim Hinscrollen von ihrem Anfang her. |
+| **Linien** | Die gestrichelten Bögen zeichnen sich beim Hinscrollen von ihrem Anfang her. Jede endet mit einem Strich genau in der Pfeilspitze (`pathLength` + berechnete Strichlängen, siehe `Uebergang.tsx`). |
+| **Fragen** | Auf- und Zuklappen gleiten (0,4 s); öffnet man eine Frage, klappt die offene gleichzeitig zu. |
 | **Kundenstimmen** | Wechseln alle 7 Sekunden; Pause-Knopf, hält bei Maus oder Tastatur darauf an, läuft bei „Bewegung reduzieren" gar nicht. |
 | **Hover** | Karten und Knöpfe heben sich leicht, Eckkreise wachsen, die schrägen Fotos in „Einblicke" richten sich gerade. |
 

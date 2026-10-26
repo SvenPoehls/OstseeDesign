@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 import Bild from "@/components/ui/Bild";
 import { CREME, DUNKEL, KNOPF, KNOPF_SCHRIFT, LEISE_AUF_KREISEN, farben } from "@/lib/farben";
-import { company, unterseiten } from "@/lib/site";
+import { company } from "@/lib/site";
 
 // Auftakt der Startseite, zweispaltig wie im Vorbild:
 //
@@ -14,8 +14,8 @@ import { company, unterseiten } from "@/lib/site";
 //           Stelle, an der im Vorbild das Video steht. Bewusst KEIN
 //           Hintergrundbild.
 //
-// Die Kennzahlen stammen aus site.ts (Jahre, Zahl der Leistungen, „immer
-// derselbe Ansprechpartner" aus dem Ablauf).
+// Die Kennzahlen stammen aus site.ts (Jahre; „Das erste Gespräch kostet
+// nichts" und „Immer derselbe Ansprechpartner" aus dem Ablauf).
 //
 // Text über den Kreisen benutzt LEISE_AUF_KREISEN – die Kreise machen den
 // Untergrund dort dunkler (siehe farben.ts).
@@ -25,7 +25,7 @@ import { company, unterseiten } from "@/lib/site";
 export default function Hero() {
   const kennzahlen = [
     { zahl: `${company.yearsExperience}+`, text: "Jahre Erfahrung" },
-    { zahl: String(unterseiten.length), text: "Leistungen, eine Werkstatt" },
+    { zahl: "0 €", text: "fürs erste Gespräch" },
     // ­ = weiches Trennzeichen: Auf schmalen Handys wird hier getrennt.
     { zahl: "1", text: "fester Ansprech­partner" },
   ];
@@ -82,7 +82,7 @@ export default function Hero() {
           </p>
 
           {/* Kennzahlen, durch feine Linien getrennt */}
-          <dl className="auftritt mt-9 grid max-w-[36rem] grid-cols-3 border-y border-tinte/15 [--verz:640ms]">
+          <dl className="auftritt mt-9 grid max-w-[40rem] grid-cols-3 border-y border-tinte/15 [--verz:640ms]">
             {kennzahlen.map((k, i) => (
               <div
                 key={k.text}

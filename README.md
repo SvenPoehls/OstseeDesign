@@ -20,22 +20,7 @@ datenschutzfreundlich bleibt.
 ```bash
 npm install
 npm run dev      # http://localhost:3000
-npm run build    # Produktions-Build
-npm run start    # Build lokal starten
-```
-
-## Drei Entwürfe
-
-Die Startseite zeigt zurzeit drei Gestaltungsvorschläge zur Auswahl. Details
-und Begründungen: **[DESIGN.md](DESIGN.md)**.
-
-Die Vorschaubilder der Auswahlkacheln werden erzeugt mit:
-
-```bash
-npm run build
-cd out && python3 -m http.server 8099   # in einem zweiten Terminal
-node scripts/vorschau.js                # braucht playwright
-npm run build                           # Bilder mit ausliefern
+npm run build    # Produktions-Build (statischer Export in den Ordner "out")
 ```
 
 ## Struktur
@@ -43,47 +28,52 @@ npm run build                           # Bilder mit ausliefern
 ```
 src/
 ├── app/
-│   ├── layout.tsx        # Grundgerüst, Schriften (self-hosted), SEO-Metadaten
-│   ├── page.tsx          # Auswahlseite: drei Entwürfe nebeneinander
-│   ├── entwurf-1/        # Entwurf 1 „Werkstatt-Druckbogen" (+ JSON-LD)
-│   ├── entwurf-2/        # Entwurf 2 „Vitrine" (eigenständig, eine Datei)
-│   ├── entwurf-3/        # Entwurf 3 „Laufzettel" (eigenständig, eine Datei)
-│   ├── globals.css       # ZENTRALE DESIGN-TOKENS (Farben, Schrift, Bausteine)
+│   ├── layout.tsx        # Grundgerüst, Schrift (self-hosted), SEO-Metadaten
+│   ├── page.tsx          # Startseite – setzt die Abschnitte zusammen
+│   ├── globals.css       # Kopfzeilen-Farbe (--kopf) und alle Animationen
 │   ├── icon.svg          # Favicon
 │   ├── impressum/        # Pflichtseite
 │   └── datenschutz/      # Pflichtseite (DSGVO)
 ├── components/
-│   ├── layout/           # Header, Footer, Cookie-Hinweis, Legal-Gerüst
-│   ├── sections/         # Hero, Services, Process, FindUs, CtaBand
-│   └── ui/               # Logo, Icons
+│   ├── layout/           # Header, Footer, Seite (Rahmen), Legal-Gerüst, Cookie-Hinweis
+│   ├── sections/         # Hero, Faecher, Services, Process, FindUs, Contact
+│   └── ui/               # Bild (Foto-Platzhalter), Einblenden (Scroll-Animation)
 └── lib/
-    └── site.ts           # ZENTRALE INHALTE / FIRMENDATEN (Adresse, Zeiten …)
+    ├── site.ts           # ZENTRALE INHALTE / FIRMENDATEN (Adresse, Zeiten …)
+    ├── farben.ts         # die vier Werkstattfarben
+    └── assets.ts         # Bildpfade (für GitHub Pages und eigene Domain)
 ```
 
 ## Inhalte pflegen
 
-- **Firmendaten, Öffnungszeiten, Leistungen:** `src/lib/site.ts`
-- **Farben / Marke:** die CSS-Variablen oben in `src/app/globals.css`
-- **Bilder:** Aktuell Platzhalter mit Bildregie-Notizen
-  (`components/ui/Placeholder.tsx`). Sie werden 1:1 durch echte Fotos ersetzt.
+- **Firmendaten, Öffnungszeiten, Leistungen, Ablauf:** `src/lib/site.ts`
+- **Farben:** `src/lib/farben.ts`
+- **Wie kräftig das Gelb der Kopfzeile ist:** `--kopf` oben in `src/app/globals.css`
+- **Bilder:** Aktuell Platzhalter mit Notiz, was darauf zu sehen sein soll
+  (`components/ui/Bild.tsx`). Sie werden 1:1 durch echte Fotos ersetzt – das
+  Vorgehen steht im Dateikopf von `Bild.tsx`. Die Bilddateien kommen in einen
+  Ordner `public/` (neu anlegen) und werden über `asset("/datei.jpg")`
+  angesprochen.
 
 ## Vor dem Livegang ausfüllen
 
-In `impressum/page.tsx` und `datenschutz/page.tsx` sind rechtlich relevante
-Angaben mit `[PLATZHALTER]` markiert (u. a. Inhaber:in, ggf. USt-IdNr.,
-Hosting-Anbieter). Diese vor Veröffentlichung ergänzen.
+In `impressum/page.tsx` und `datenschutz/page.tsx` stehen rechtlich relevante
+Hinweise in den Kommentaren am Dateikopf (u. a. Handwerkskammer-Angaben,
+Hosting-Anbieter bei einem Umzug). Diese vor Veröffentlichung klären.
 
 ## Umfang
 
 Dieser Ausbauschritt umfasst die **Startseite** als vollständiges Layout sowie
 die Pflichtseiten Impressum und Datenschutz. Eigene Unterseiten
 (Werbetechnik, Textilveredelung, Drucksachen) folgen später – die Navigation
-springt aktuell zu den entsprechenden Sektionen der Startseite. Der Textilshop
-ist als externer Link eingebunden.
+springt aktuell zu den entsprechenden Abschnitten der Startseite. Der
+Textilshop ist als externer Link eingebunden.
 
 ## Datenschutz / Performance
 
 - Keine Tracking-/Marketing-Cookies, keine Analyse-Dienste.
-- Schriften (Inter, Sora) werden self-hosted ausgeliefert – kein externer Aufruf.
-- Karten-Vorschau öffnet den Kartendienst erst auf Klick (kein Drittanbieter-Embed
-  beim Laden).
+- Die Schrift (Schibsted Grotesk) wird self-hosted ausgeliefert – kein
+  externer Aufruf.
+- Animationen bewegen nur `opacity`, `translate`, `scale` und `rotate`
+  und werden bei „Bewegung reduzieren" im Betriebssystem komplett
+  abgeschaltet.

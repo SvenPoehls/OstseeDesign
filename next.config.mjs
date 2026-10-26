@@ -13,7 +13,7 @@ const nextConfig = {
   // kein Server nötig.
   output: "export",
   // Jede Seite bekommt einen eigenen Ordner mit index.html
-  // (/entwurf-2/index.html statt /entwurf-2.html). So findet JEDER einfache
+  // (/impressum/index.html statt /impressum.html). So findet JEDER einfache
   // Webspace die Unterseiten, auch beim direkten Aufruf oder Neuladen.
   trailingSlash: true,
   // Ohne Server keine Bild-Optimierung zur Laufzeit.

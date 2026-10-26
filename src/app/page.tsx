@@ -1,97 +1,80 @@
-import type { Metadata } from "next";
-import { createHash } from "node:crypto";
-import { readFileSync } from "node:fs";
-import path from "node:path";
-import Link from "next/link";
-import { ArrowIcon } from "@/components/ui/Icons";
-import { asset } from "@/lib/assets";
+import Seite from "@/components/layout/Seite";
+import Hero from "@/components/sections/Hero";
+import Faecher from "@/components/sections/Faecher";
+import Services from "@/components/sections/Services";
+import Process from "@/components/sections/Process";
+import FindUs from "@/components/sections/FindUs";
+import Contact from "@/components/sections/Contact";
+import { company, services } from "@/lib/site";
 
-// AUSWAHLSEITE
-// Zeigt die drei Entwürfe nebeneinander. Jede Kachel führt auf eine eigene
-// Unterseite, auf der der Entwurf vollständig zu sehen ist.
+// STARTSEITE – Gestaltung „Farbfächer" (Begründung: DESIGN.md).
 //
-// Die Vorschaubilder liegen unter public/vorschau-1.jpg … -3.jpg. Sie werden
-// mit einem Skript erzeugt (siehe README) – wer einen Entwurf ändert, sollte
-// das Bild danach neu erzeugen, sonst zeigt die Kachel den alten Stand.
-//
-// FRISCHE BILDER: Weil die Dateien immer gleich heißen, zeigen Browser sonst
-// hartnäckig die alte Fassung aus ihrem Zwischenspeicher. Deshalb hängen wir
-// beim Bauen eine Kennung an die Adresse, die sich mit dem Bildinhalt ändert
-// (…/vorschau-2.jpg?v=3f9c1a2b). Ändert sich das Bild, ändert sich die
-// Adresse – und der Browser lädt es neu.
-function bildAdresse(datei: string): string {
-  const pfad = asset(datei);
-  try {
-    const inhalt = readFileSync(path.join(process.cwd(), "public", datei));
-    const kennung = createHash("sha1").update(inhalt).digest("hex").slice(0, 8);
-    return `${pfad}?v=${kennung}`;
-  } catch {
-    // Bild noch nicht erzeugt – dann eben ohne Kennung.
-    return pfad;
-  }
+// Die Seite sieht aus wie der Farbfächer an der Werkstattwand: weißer Grund,
+// vier Werkstattfarben, runde Formen, Kreise, die sich übereinander mischen
+// wie Druckfarben. Der Titel und die Beschreibung der Seite stehen in
+// layout.tsx, die Farben in src/lib/farben.ts, die Animationen in globals.css.
+export default function StartseitePage() {
+  return (
+    <>
+      <Seite>
+        <main
+          id="hauptinhalt"
+          className="mx-auto w-full max-w-[1200px] px-4 sm:px-6"
+        >
+          <Hero />
+          <Faecher />
+          <Services />
+          <Process />
+          <FindUs />
+          <Contact />
+        </main>
+      </Seite>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd()) }}
+      />
+    </>
+  );
 }
 
-export const metadata: Metadata = {
-  title: "Drei Entwürfe für ostseedesign.de",
-  description:
-    "Dieselbe Website in drei Gestaltungen: Handskizze, Klare Kante und Farbfächer.",
-};
-
-const entwuerfe = [
-  { nr: "01", href: "/entwurf-1", bild: "/vorschau-1.jpg", name: "Handskizze" },
-  { nr: "02", href: "/entwurf-2", bild: "/vorschau-2.jpg", name: "Klare Kante" },
-  { nr: "03", href: "/entwurf-3", bild: "/vorschau-3.jpg", name: "Farbfächer" },
-];
-
-export default function AuswahlPage() {
-  return (
-    <div className="min-h-screen bg-paper">
-      <header className="border-b border-ink">
-        <div className="wrap flex h-[4.25rem] items-center justify-between gap-6 sm:h-[4.75rem]">
-          <span className="display text-[1.35rem] lowercase sm:text-[1.55rem]">
-            ostseedesign<span className="text-ink-soft">.de</span>
-          </span>
-          <span className="text-[0.72rem] uppercase tracking-label text-ink-soft">
-            Entwürfe
-          </span>
-        </div>
-      </header>
-
-      <main id="hauptinhalt" className="wrap pb-20 pt-10 sm:pt-14">
-        <div className="grid gap-10 lg:grid-cols-3 lg:gap-8">
-          {entwuerfe.map((e) => (
-            <Link
-              key={e.nr}
-              href={e.href}
-              className="group flex flex-col border-t border-ink pt-4"
-            >
-              <div className="flex items-baseline justify-between gap-4">
-                <span className="text-[0.72rem] font-semibold uppercase tracking-label text-ink-soft">
-                  {e.nr}
-                </span>
-                <span className="inline-flex items-center gap-2 text-[0.72rem] uppercase tracking-label text-ink-soft transition-colors group-hover:text-ink">
-                  Ansehen
-                  <ArrowIcon className="h-3.5 w-3.5 transition-transform duration-200 ease-werk group-hover:translate-x-1" />
-                </span>
-              </div>
-
-              {/* Vorschaubild: oben ausgerichtet, damit man den Kopfbereich
-                  sieht. Der Rahmen gehört zur Kachel, nicht zum Entwurf. */}
-              <div className="mt-4 h-[22rem] overflow-hidden border border-ink bg-paper-deep sm:h-[28rem] lg:h-[24rem]">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={bildAdresse(e.bild)}
-                  alt={`Vorschau: ${e.name}`}
-                  className="h-full w-full object-cover object-top transition-transform duration-500 ease-werk group-hover:scale-[1.02]"
-                  loading="lazy"
-                />
-              </div>
-
-            </Link>
-          ))}
-        </div>
-
-      </main>
-    </div>
-  );
+// Schema.org LocalBusiness – aus den zentralen Firmendaten aufgebaut.
+function localBusinessJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: company.fullName,
+    description:
+      "Fahrzeugbeschriftung, Schilder, Stickerei und Drucksachen. Werkstatt am Rosseer Weg in Eckernförde.",
+    telephone: company.phoneHref,
+    faxNumber: company.faxDisplay,
+    email: company.email,
+    url: "https://www.ostseedesign.de",
+    areaServed: company.region,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: company.street,
+      postalCode: company.zip,
+      addressLocality: company.city,
+      addressRegion: company.region,
+      addressCountry: "DE",
+    },
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Thursday"],
+        opens: "09:00",
+        closes: "16:30",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "Wednesday",
+        opens: "09:00",
+        closes: "13:00",
+      },
+    ],
+    makesOffer: services.map((s) => ({
+      "@type": "Offer",
+      itemOffered: { "@type": "Service", name: s.title },
+    })),
+  };
 }

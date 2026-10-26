@@ -1,163 +1,114 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Link from "next/link";
-import Logo from "@/components/ui/Logo";
-import { ExternHand, TelefonHand, MenueHand, KreuzHand } from "@/components/ui/Hand";
+import { KNOPF, TINTE, farben } from "@/lib/farben";
 import { company, nav } from "@/lib/site";
 
-// Kopfzeile: eine Zeile am oberen Blattrand, darunter ein mit dem Stift
-// gezogener Strich. Kein Kasten, kein Schatten – der Strich reicht.
-// Links die handgeschriebene Wortmarke, rechts die Navigation und die
-// Telefonnummer.
+// Kopfzeile als schwebende Pille.
 //
-// Auf dem Handy klappt das Menü als eigenes Blatt auf: wieder Papier,
-// wieder Handschrift – nur größer, mit durchnummerierten Zeilen wie auf
-// einem Notizzettel.
+// Auf einer weißen Seite wäre eine weiße Leiste kaum zu sehen, schwarz wirkt
+// zu schwer. Deshalb trägt sie das Ocker aus dem Farbfächer – leicht
+// durchscheinend, sodass die Kreise darunter beim Scrollen durchschimmern.
+// WIE STARK das Gelb ist, steht als Variable `--kopf` in globals.css.
+//
+// Auf dem Handy ersetzt eine Reihe farbiger Marken die Navigation; jede trägt
+// die Farbe ihres Bereichs. Sie scrollt mit der Seite weg, die Pille bleibt.
 export default function Header() {
-  const [open, setOpen] = useState(false);
-
-  // Onepage-Navigation: Liegt der Abschnitt auf der aktuellen Seite, wird
-  // direkt dorthin gescrollt. Auf Unterseiten (Impressum) bleibt der
-  // normale Link zur Startseite + Anker erhalten.
-  const jumpToSection = (
-    event: React.MouseEvent<HTMLAnchorElement>,
-    href: string
-  ) => {
-    const id = href.split("#")[1];
-    if (!id || !document.getElementById(id)) return;
-    event.preventDefault();
-    setOpen(false);
-    // Erst scrollen, wenn das Menü wirklich zu ist: Solange es offen ist,
-    // ist die Seite gesperrt und der Sprung würde falsch landen.
-    window.requestAnimationFrame(() => {
-      window.requestAnimationFrame(() => {
-        document
-          .getElementById(id)
-          ?.scrollIntoView({ behavior: "smooth", block: "start" });
-        window.history.replaceState(null, "", `#${id}`);
-      });
-    });
-  };
-
-  useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [open]);
+  // Handy-Marken: die Menüpunkte, dazu „Kontakt" (steht am Rechner im
+  // Telefonknopf). Der Shop trägt das Petrol der Knöpfe.
+  const marken = [
+    { label: "Leistungen", href: "/#leistungen", ton: farben[0].ton },
+    { label: "Ablauf", href: "/#ablauf", ton: farben[1].ton },
+    { label: "Standort", href: "/#standort", ton: farben[2].ton },
+    { label: "Kontakt", href: "/#kontakt", ton: farben[3].ton },
+    ...nav
+      .filter((n) => n.external)
+      .map((n) => ({ label: `${n.label} ↗`, href: n.href, ton: KNOPF })),
+  ];
 
   return (
-    <header className="linie-hand linie-hand-stark sticky top-0 z-50 bg-paper">
-      <div className="wrap flex h-[4.25rem] items-center justify-between gap-6 sm:h-[4.75rem]">
-        <Link
-          href="/"
-          aria-label={`${company.name} – zur Startseite`}
-          onClick={() => setOpen(false)}
+    <>
+      <header className="kopf-ein sticky top-0 z-40 px-4 pt-4 sm:px-6">
+        <div
+          className="mx-auto flex w-full max-w-[1200px] items-center justify-between gap-4 rounded-full py-2.5 pl-6 pr-2.5 backdrop-blur"
+          style={{
+            backgroundColor: "var(--kopf)",
+            boxShadow: "var(--kopf-schatten)",
+            color: TINTE,
+          }}
         >
-          <Logo />
-        </Link>
+          <Link
+            href="/"
+            aria-label={`${company.name} – zur Startseite`}
+            className="text-[1.15rem] font-extrabold tracking-[-0.03em]"
+          >
+            ostseedesign
+          </Link>
 
-        <nav
-          aria-label="Hauptnavigation"
-          className="hidden items-center gap-8 lg:flex"
-        >
-          {nav.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              target={item.external ? "_blank" : undefined}
-              rel={item.external ? "noopener noreferrer" : undefined}
-              onClick={(e) => jumpToSection(e, item.href)}
-              className="ul-link ul-zeichnen notiz inline-flex items-center gap-1.5 text-[1.05rem] text-ink"
-            >
-              {item.label}
-              {item.external && <ExternHand />}
-            </Link>
-          ))}
-          {/* Die Telefonnummer steht bewusst als Zahl da, nicht als Knopf mit
-              Wort – so liest man sie auch, ohne zu klicken. */}
+          <nav
+            aria-label="Hauptnavigation"
+            className="hidden items-center gap-7 text-[0.92rem] font-semibold text-tinte/75 lg:flex"
+          >
+            {nav.map((item) =>
+              item.external ? (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-colors hover:text-tinte"
+                >
+                  {item.label} ↗
+                </a>
+              ) : (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className="transition-colors hover:text-tinte"
+                >
+                  {item.label}
+                </Link>
+              )
+            )}
+          </nav>
+
           <a
             href={`tel:${company.phoneHref}`}
-            className="ul-link hand ml-1 text-[1.4rem] text-ink"
+            className="rounded-full px-5 py-2.5 text-[0.9rem] font-bold text-white transition-transform duration-300 hover:-translate-y-0.5"
+            style={{ backgroundColor: KNOPF }}
           >
             {company.phoneDisplay}
           </a>
-        </nav>
-
-        <div className="flex items-center gap-2.5 lg:hidden">
-          <a
-            href={`tel:${company.phoneHref}`}
-            className="rahmen rahmen-nachziehen flex h-11 w-11 items-center justify-center text-ink"
-            aria-label="Anrufen"
-          >
-            <TelefonHand className="h-[1.1rem] w-[1.1rem]" />
-          </a>
-          <button
-            type="button"
-            onClick={() => setOpen((v) => !v)}
-            className="rahmen rahmen-nachziehen flex h-11 w-11 items-center justify-center text-ink"
-            aria-expanded={open}
-            aria-controls="mobile-menu"
-            aria-label={open ? "Menü schließen" : "Menü öffnen"}
-          >
-            {open ? (
-              <KreuzHand className="h-[1.1rem] w-[1.1rem]" />
-            ) : (
-              <MenueHand className="h-[1.1rem] w-[1.3rem]" />
-            )}
-          </button>
         </div>
-      </div>
+      </header>
 
-      {/* Menü auf dem Handy: ein eigenes Blatt, das sich über die Seite legt. */}
-      {open && (
-        <div
-          id="mobile-menu"
-          className="fixed inset-x-0 bottom-0 top-[4.25rem] z-[70] overflow-y-auto bg-paper sm:top-[4.75rem] lg:hidden"
-        >
-          <nav aria-label="Mobile Navigation" className="wrap py-2">
-            {nav.map((item, i) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                target={item.external ? "_blank" : undefined}
-                rel={item.external ? "noopener noreferrer" : undefined}
-                onClick={(e) => {
-                  setOpen(false);
-                  jumpToSection(e, item.href);
-                }}
-                className="linie-hand linie-hand-fein flex items-baseline gap-4 py-6 text-ink"
-              >
-                <span className="etikett etikett-rot">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span className="hand text-[2.5rem] lowercase">
-                  {item.label}
-                </span>
-                {item.external && (
-                  <ExternHand className="h-4 w-4 self-center text-ink-soft" />
-                )}
-              </Link>
-            ))}
-
-            <div className="py-9">
-              <p className="etikett">Direkt anrufen</p>
-              <a
-                href={`tel:${company.phoneHref}`}
-                className="hand mt-2 block text-[2.2rem] text-ink"
-              >
-                {company.phoneDisplay}
-              </a>
-              <p className="notiz mt-7 text-[1.05rem] leading-relaxed text-ink-soft">
-                {company.street}
-                <br />
-                {company.zip} {company.city}
-              </p>
-            </div>
-          </nav>
-        </div>
-      )}
-    </header>
+      <nav
+        aria-label="Mobile Navigation"
+        className="mx-auto mt-5 flex w-full max-w-[1200px] gap-2 overflow-x-auto px-4 pb-1 [-ms-overflow-style:none] [scrollbar-width:none] sm:px-6 lg:hidden [&::-webkit-scrollbar]:hidden"
+      >
+        {marken.map((m) => {
+          const extern = m.href.startsWith("http");
+          return extern ? (
+            <a
+              key={m.label}
+              href={m.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="shrink-0 rounded-full px-4 py-2 text-[0.85rem] font-semibold"
+              style={{ backgroundColor: `${m.ton}2e`, color: TINTE }}
+            >
+              {m.label}
+            </a>
+          ) : (
+            <Link
+              key={m.label}
+              href={m.href}
+              className="shrink-0 rounded-full px-4 py-2 text-[0.85rem] font-semibold"
+              style={{ backgroundColor: `${m.ton}2e`, color: TINTE }}
+            >
+              {m.label}
+            </Link>
+          );
+        })}
+      </nav>
+    </>
   );
 }

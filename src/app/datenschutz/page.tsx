@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 // Datenschutzerklärung (DSGVO). Bewusst auf die tatsächliche, datensparsame
 // Umsetzung dieser Website zugeschnitten: keine Cookies für Tracking/Marketing,
 // keine Analyse-Dienste, keine Karten-Einbindung, keine externen Schriften
-// (Open Sans wird beim Bauen mit ausgeliefert, geprüft im fertigen Build).
+// (Schibsted Grotesk wird beim Bauen mit ausgeliefert, geprüft im fertigen Build).
 //
 // WICHTIG BEI EINEM UMZUG: Der Abschnitt „Hosting" nennt GitHub Pages als
 // Anbieter. Zieht die Seite auf einen anderen Server um (z. B. eigenes

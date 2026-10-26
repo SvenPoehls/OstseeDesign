@@ -4,724 +4,259 @@
 
 /*
   ═══════════════════════════════════════════════════════════════════════════
-  GESTALTUNG: „HANDSKIZZE" (Entwurf 1)
+  GESTALTUNG: „FARBFÄCHER"
   ═══════════════════════════════════════════════════════════════════════════
-  Leitbild: Die Seite soll aussehen wie der erste Entwurf auf Papier – ein
-  Bogen, auf dem jemand mit Bleistift skizziert hat, was gebaut werden soll.
-  Deshalb:
+  Die Seite sieht aus wie der Farbfächer an der Werkstattwand: weißer Grund,
+  vier Werkstattfarben (siehe src/lib/farben.ts), runde Formen, Kreise, die
+  sich übereinander mischen wie Druckfarben.
 
-    • leicht zerknittertes, cremefarbenes Papier als Grund
-    • Überschriften in Handschrift, Fließtext in einer ruhigen Leseschrift
-    • Rahmen, Linien und Knöpfe sind von Hand gezogen: leicht schief,
-      mit kleinen Überständen an den Ecken, manchmal doppelt nachgezogen
-    • Platzhalterbilder sind Skizzen mit Schraffur statt grauer Flächen
-    • Randnotizen, Unterstreichungen, Kreise, Pfeile, Klebeband
-    • Graphit als Hauptfarbe, Rotstift und Textmarker als einzige Akzente
-
-  ────────────────────────────────────────────────────────────────────────
-  STELLSCHRAUBEN
-  Alles Farbige und alle Linienstärken hängen an den Variablen direkt
-  darunter. Wer den Stil umstellen will, ändert nur diese Werte – Papierton,
-  Stiftfarbe, Strichstärke und die beiden Akzente ziehen überall nach.
+  Diese Datei enthält nur das, was sich mit Tailwind-Klassen nicht sauber
+  sagen lässt: die Kopfzeilen-Farbe und alle Animationen.
 */
+
 :root {
-  /* ── Papier ─────────────────────────────────────────────────────────── */
-  --papier: #faf6ea; /* Grundton: warmes Cremeweiß */
-  --papier-tief: #f2ecdc; /* zweite Fläche: etwas angeschmutzter Bogen */
-  --papier-rand: rgba(68, 60, 40, 0.09); /* Schattierung an den Blatträndern */
+  /* ── KOPFZEILE ──────────────────────────────────────────────────────────
+     Das Ocker aus dem Fächer, hier bewusst zurückgenommen: Je kleiner die
+     letzte Zahl (die Deckkraft), desto blasser die Leiste. Bei 1 ist sie
+     kräftig gelb, bei 0 unsichtbar. Die Schrift darauf bleibt auch bei
+     niedrigen Werten gut lesbar (siehe DESIGN.md). */
+  --kopf: rgba(255, 198, 61, 0.5);
+  /* Der Schatten unter der Leiste – ebenfalls leiser als vorher. */
+  --kopf-schatten: 0 6px 20px rgba(23, 22, 26, 0.08);
 
-  /* ── Stift ──────────────────────────────────────────────────────────── */
-  --stift: #26241f; /* Graphit – Hauptfarbe für Schrift und Striche */
-  --stift-leicht: #595247; /* Nebentext, Notizen */
-  --stift-linie: rgba(38, 36, 31, 0.38); /* feine Hilfs- und Trennlinien */
-
-  /* Strichstärke der handgezogenen Linien. Ein Wert für alles – größer
-     wirkt wie ein dickerer Stift, kleiner wie ein spitzer Bleistift. */
-  --strich: 1.7px;
-  --strich-stark: 2.6px;
-
-  /* ── Akzente (bewusst nur zwei) ─────────────────────────────────────── */
-  --rotstift: #b63324; /* Rotstift: Markierungen, Kapitelnummern */
-  --rotstift-tief: #9b2d21;
-  --rotstift-zart: #f6e6e2; /* Rotstift ganz dünn als Fläche */
-  --marker: #ffe066; /* Textmarker-Gelb – nur hinter dunkler Schrift */
-
-  /* ── Altnamen ───────────────────────────────────────────────────────────
-     Die Tailwind-Klassen heißen weiterhin paper/ink/mark. Damit man nicht
-     überall umbenennen muss, zeigen die alten Namen einfach auf die neuen. */
-  --paper: var(--papier);
-  --paper-deep: var(--papier-tief);
-  --ink: var(--stift);
-  --ink-soft: var(--stift-leicht);
-  --rule: var(--stift-linie);
-  --mark: var(--rotstift);
-  --mark-dark: var(--rotstift-tief);
-  --mark-soft: var(--rotstift-zart);
-
-  /* ── Die gezeichneten Striche ───────────────────────────────────────────
-     Kleine SVG-Zeichnungen, die als Maske benutzt werden (siehe Abschnitt 4).
-     Weil sie nur maskieren, bekommen sie ihre Farbe vom Text darüber. */
-  --linie-fein: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='7' viewBox='0 0 400 7' preserveAspectRatio='none'%3E%3Cpath d='M1 4.2C46 2.6 92 5.1 138 3.7c46-1.4 92 1.9 138 .4 36-1.2 82 2 123 1.1' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round'/%3E%3C/svg%3E");
-  /* Der kräftige Strich ist einmal kurz abgesetzt – dort hat die Hand
-     neu angesetzt. */
-  --linie-stark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='10' viewBox='0 0 400 10' preserveAspectRatio='none'%3E%3Cg fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round'%3E%3Cpath d='M2 5.4C52 3.2 104 6.6 156 4.6c38-1.5 76 1 114 0.8'/%3E%3Cpath d='M274.6 5.2c12 0.2 24 1 36 0.9 30-0.2 62 1.6 87 0.9'/%3E%3C/g%3E%3C/svg%3E");
-  --kreis-pfad: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='70' viewBox='0 0 200 70' preserveAspectRatio='none'%3E%3Cpath d='M52 4C26 7 4 18 3 33c-1 16 24 30 64 32 40 2 86-6 112-21 14-8 20-20 7-28C166 5 126 1 84 2 70 2 57 3 46 6' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E");
-
-  /* ── Die gezeichneten Rahmen ────────────────────────────────────────────
-     Zwei Fassungen desselben schiefen Vierecks (dieselbe Hand, ein anderer
-     Strich) – die zweite wird beim Überfahren gezeigt. Dazu je eine Fassung
-     in Rotstift. Siehe Abschnitt 6. */
-  --rahmen-1: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%2326241f' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8.5 13C7.5 9.5 9.5 7 13 6.6 45 4.2 78 8.4 110.5 6.2c3-0.2 4.5 1.8 4.1 4.8-2.2 33-1.4 66.4-1 99.4 0.2 3-2.4 4.6-5.6 4-32-2.4-66 1.2-96 -1.2-3.6-0.4-5.6-3-5-6.4C10 74 4.6 42 8.5 13'/%3E%3Cpath d='M12.5 10c4.5-0.8 8.5-1.2 12-1.3' stroke-width='2' opacity='0.45'/%3E%3Cpath d='M111 100c0.8 5.5 1 9 0.6 11.5' stroke-width='2' opacity='0.4'/%3E%3C/g%3E%3C/svg%3E");
-  --rahmen-2: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%2326241f' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 12C8 8.6 10.4 6.4 14 6.2 46 5 79 7.2 109.6 6.6c3.4 0 4.8 2.2 4.4 5-2.4 33.4-0.6 66.8-1 98-0.4 3.2-3 5-6 4.4-32-1.4-66 0.6-94.4-1.4-3.6-0.4-5.8-3-5.2-6.6C10.6 73 4 41 9 12'/%3E%3Cpath d='M98 8.6c6 0.4 10 0.8 12.6 1.4' stroke-width='2' opacity='0.45'/%3E%3Cpath d='M8.6 98c0.4 5.6 0.8 9.4 1.4 12' stroke-width='2' opacity='0.4'/%3E%3C/g%3E%3C/svg%3E");
-  --rahmen-rot: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23b63324' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8.5 13C7.5 9.5 9.5 7 13 6.6 45 4.2 78 8.4 110.5 6.2c3-0.2 4.5 1.8 4.1 4.8-2.2 33-1.4 66.4-1 99.4 0.2 3-2.4 4.6-5.6 4-32-2.4-66 1.2-96 -1.2-3.6-0.4-5.6-3-5-6.4C10 74 4.6 42 8.5 13'/%3E%3Cpath d='M12.5 10c4.5-0.8 8.5-1.2 12-1.3' stroke-width='2' opacity='0.45'/%3E%3Cpath d='M111 100c0.8 5.5 1 9 0.6 11.5' stroke-width='2' opacity='0.4'/%3E%3C/g%3E%3C/svg%3E");
-  --rahmen-rot-2: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23b63324' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 12C8 8.6 10.4 6.4 14 6.2 46 5 79 7.2 109.6 6.6c3.4 0 4.8 2.2 4.4 5-2.4 33.4-0.6 66.8-1 98-0.4 3.2-3 5-6 4.4-32-1.4-66 0.6-94.4-1.4-3.6-0.4-5.8-3-5.2-6.6C10.6 73 4 41 9 12'/%3E%3Cpath d='M98 8.6c6 0.4 10 0.8 12.6 1.4' stroke-width='2' opacity='0.45'/%3E%3Cpath d='M8.6 98c0.4 5.6 0.8 9.4 1.4 12' stroke-width='2' opacity='0.4'/%3E%3C/g%3E%3C/svg%3E");
-
-  /* Eine ausgemalte Fläche mit handgezogener Kante. Anders als beim Rahmen
-     ist das hier eine gefüllte Form – die darf man in die Breite ziehen,
-     ohne dass etwas dünner oder dicker wird. Deshalb wird sie als Maske
-     benutzt und bekommt ihre Farbe aus den Variablen oben. */
-  --flaeche-form: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M2.5 9C2 4.5 4 1.5 8.5 1.5 34 3 59 0.5 84 1.5c6 0.3 11 0 14 1.5 2.5 1.3 2.8 4 2.3 8.5-1.5 26-1 52-0.3 78 0.4 5-1.5 8-6.5 8.5-29-1.5-58 0.5-87-0.3-5.3-0.1-7.8-2.3-7.5-7C0.8 64 1.8 36.5 2.5 9z' fill='black'/%3E%3C/svg%3E");
-}
-
-/* Auf kleinen Geräten zeichnet ein etwas feinerer Stift – sonst wirken die
-   Rahmen auf engem Raum zu grob. */
-@media (max-width: 640px) {
-  :root {
-    --strich: 1.5px;
-    --strich-stark: 2.2px;
-  }
+  /* Ein Bewegungsverlauf für alles: schnell los, weich aus. */
+  --weich: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
 html {
   scroll-behavior: smooth;
-  /* Platz, den Sprungmarken oben frei lassen (Höhe der Kopfzeile). */
-  scroll-padding-top: 5.5rem;
-  background-color: var(--papier);
+  background-color: #ffffff;
 }
 
 body {
-  background-color: var(--papier);
-  color: var(--stift);
-  font-family: var(--font-sans), system-ui, -apple-system, "Segoe UI", Roboto,
-    Helvetica, Arial, sans-serif;
-  font-size: 17px;
-  line-height: 1.6;
+  background-color: #ffffff;
+  color: #17161a;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Feine Papierkörnung über der gesamten Seite. Sehr zurückhaltend – man
-   sieht sie kaum bewusst, aber die Fläche wirkt dadurch wie Papier und
-   nicht wie eine glatte Bildschirmfläche. */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  pointer-events: none;
-  opacity: 0.4;
-  mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.22'/%3E%3C/svg%3E");
-}
-
 ::selection {
-  background: var(--marker);
-  color: var(--stift);
+  background: rgba(255, 198, 61, 0.55);
+  color: #17161a;
 }
 
 :focus-visible {
-  outline: var(--strich-stark) solid var(--rotstift);
+  outline: 3px solid #0e7c86;
   outline-offset: 3px;
 }
 
-/* Laufband im Kopfbereich. Der Inhalt steht zweimal hintereinander, die
-   Bewegung um die halbe Breite läuft dadurch nahtlos weiter. */
-@keyframes marquee {
+/*
+  ═══════════════════════════════════════════════════════════════════════════
+  ANIMATIONEN
+  ═══════════════════════════════════════════════════════════════════════════
+  Vier Arten, alle in der Sprache des Farbfächers:
+
+   1. AUFTRITT   Beim Laden schieben sich Kopfzeile und Schlagzeile herein.
+   2. KREISE     Die Farbkreise wachsen auf und treiben danach ganz langsam –
+                 wie Farbe, die sich auf Papier ausbreitet.
+   3. FÄCHER     Die vier Farbkarten klappen nacheinander auf wie ein
+                 Farbfächer.
+   4. EINBLENDEN Alles weiter unten erscheint erst, wenn man dort ankommt.
+                 Der Ablauf-Faden zeichnet sich dabei von links nach rechts.
+
+  Regeln, damit das nicht nervt:
+   • Nur `transform`, `translate`, `scale` und `opacity` werden bewegt –
+     das läuft auf der Grafikkarte und ruckelt nicht.
+   • Alles Sichtbare steht auch OHNE JavaScript da. Versteckt wird erst,
+     wenn das Skript läuft (siehe src/components/ui/Einblenden.tsx).
+   • „Bewegung reduzieren" im Betriebssystem schaltet alles ab (ganz unten).
+   • `backwards` statt `both`: Nach dem Ende gibt die Animation den Wert
+     wieder frei, sodass das Anheben beim Überfahren weiter funktioniert.
+*/
+
+/* ── 1. AUFTRITT ─────────────────────────────────────────────────────────── */
+@keyframes auftritt {
   from {
-    transform: translateX(0);
+    opacity: 0;
+    translate: 0 1.25rem;
   }
+}
+.auftritt {
+  animation: auftritt 0.9s var(--weich) var(--verz, 0ms) backwards;
+}
+
+/* Die Kopfzeile kommt von oben. */
+@keyframes kopf-ein {
+  from {
+    opacity: 0;
+    translate: 0 -1.5rem;
+  }
+}
+.kopf-ein {
+  animation: kopf-ein 0.8s var(--weich) backwards;
+}
+
+/* ── 2. KREISE ───────────────────────────────────────────────────────────── */
+@keyframes kreis-ein {
+  from {
+    opacity: 0;
+    scale: 0.55;
+  }
+}
+@keyframes treiben {
   to {
-    transform: translateX(-50%);
+    translate: var(--dx, 1.5rem) var(--dy, 1rem);
+    scale: var(--sk, 1.06);
   }
 }
-.marquee {
-  animation: marquee 48s linear infinite;
+.kreis {
+  animation: kreis-ein 1.4s var(--weich) var(--verz, 0ms) backwards;
 }
-
-/* Leichtes Wackeln – wie ein Blatt, das man kurz anstupst. Wird nur beim
-   Überfahren einzelner Elemente benutzt (siehe `.wackelt`), nie dauerhaft.
-   Bei „Bewegung reduzieren" fällt es ganz weg. */
-@keyframes wackeln {
-  0%,
-  100% {
-    transform: rotate(0deg);
-  }
-  25% {
-    transform: rotate(-0.8deg);
-  }
-  75% {
-    transform: rotate(0.7deg);
+/* Das langsame Treiben gibt es nur auf größeren Bildschirmen: Die Kreise
+   mischen sich mit `mix-blend-multiply`, und das Dauerbewegen kostet auf
+   einem schwachen Handy Akku. Dort bleibt es beim Aufwachsen. */
+@media (min-width: 768px) {
+  .kreis {
+    animation:
+      kreis-ein 1.4s var(--weich) var(--verz, 0ms) backwards,
+      treiben var(--dauer, 18s) ease-in-out calc(var(--verz, 0ms) + 1.4s)
+        infinite alternate;
   }
 }
 
+/* Kreise weiter unten auf der Seite: nur Treiben, kein Aufwachsen (das
+   würde unbemerkt ablaufen, lange bevor man dort ankommt). */
+@media (min-width: 768px) {
+  .treibt {
+    animation: treiben var(--dauer, 20s) ease-in-out infinite alternate;
+  }
+}
+
+/* ── 3. FÄCHER ───────────────────────────────────────────────────────────── */
+/* Jede Karte startet leicht verdreht und übereinandergeschoben
+   (`--von`, `--winkel`) und klappt dann an ihren Platz. */
+@keyframes faecher {
+  from {
+    opacity: 0;
+    translate: var(--von, 0) 0.75rem;
+    rotate: var(--winkel, 0deg);
+    scale: 0.92;
+    transform-origin: 50% 120%;
+  }
+}
+.faecher-karte {
+  animation: faecher 0.9s var(--weich) var(--verz, 0ms) backwards;
+}
+
+/* ── 4. EINBLENDEN BEIM SCROLLEN ─────────────────────────────────────────── */
+/* Das Skript setzt `data-reveal="aus"` auf Elemente, die noch unterhalb des
+   Bildschirms liegen, und wechselt auf „an", sobald sie ins Bild kommen. */
+[data-reveal="aus"] {
+  opacity: 0;
+  translate: 0 1.5rem;
+}
+@keyframes einblenden {
+  from {
+    opacity: 0;
+    translate: 0 1.5rem;
+  }
+}
+[data-reveal="an"] {
+  animation: einblenden 0.85s var(--weich) var(--verz, 0ms) backwards;
+}
+
+/* Der Faden im Ablauf zeichnet sich von links nach rechts. */
+[data-reveal][data-art="faden"] {
+  transform-origin: left center;
+}
+[data-reveal="aus"][data-art="faden"] {
+  opacity: 1;
+  translate: none;
+  scale: 0 1;
+}
+@keyframes zeichnen {
+  from {
+    scale: 0 1;
+  }
+}
+[data-reveal="an"][data-art="faden"] {
+  animation: zeichnen 1.6s var(--weich) var(--verz, 0ms) backwards;
+}
+
+/* Die Nummernkreise im Ablauf poppen auf. */
+[data-reveal="aus"][data-art="pop"] {
+  opacity: 0;
+  translate: none;
+  scale: 0.4;
+}
+@keyframes aufpoppen {
+  from {
+    opacity: 0;
+    scale: 0.4;
+  }
+  60% {
+    scale: 1.12;
+  }
+}
+[data-reveal="an"][data-art="pop"] {
+  animation: aufpoppen 0.6s cubic-bezier(0.3, 1.3, 0.5, 1) var(--verz, 0ms)
+    backwards;
+}
+
+/* ── BEWEGUNG REDUZIEREN ─────────────────────────────────────────────────── */
+/* Wer das im Betriebssystem eingestellt hat, bekommt eine völlig ruhige
+   Seite: alles steht sofort da, nichts bewegt sich. */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
+  .auftritt,
+  .kopf-ein,
+  .kreis,
+  .treibt,
+  .faecher-karte,
+  [data-reveal],
+  [data-reveal="an"] {
+    animation: none !important;
+  }
+  [data-reveal="aus"] {
+    opacity: 1 !important;
+    translate: none !important;
+    scale: none !important;
+  }
   *,
   *::before,
   *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
 }
 
+/* ── RECHTSTEXTE (Impressum / Datenschutz) ───────────────────────────────── */
+/* Hier zählt Lesbarkeit: schmale Spalte, ruhige Abstände. Die Überschriften
+   tragen zur Auflockerung eine kurze Farbmarke aus dem Fächer. */
 @layer components {
-  /* ══════════════════════════════════════════════════════════════════════
-     1. DER BOGEN
-     ══════════════════════════════════════════════════════════════════════
-     `.papier` umschließt die ganze Seite. Darin liegt eine festsitzende
-     Schicht (`.papier-knick`), die mit einem SVG-Filter ein leichtes
-     Knittern erzeugt: unregelmäßiges Rauschen, von schräg oben beleuchtet.
-     Das Ergebnis sind weiche Licht- und Schattenverläufe – keine harten
-     Kanten, keine Bilddatei. */
-  .papier {
-    position: relative;
-    isolation: isolate;
-    background-color: var(--papier);
-  }
-
-  /* Diese Schicht liegt fest im Bild und scrollt nicht mit – der Besucher
-     schaut also immer auf dasselbe Blatt. Sie enthält das Knittern (SVG)
-     und zusätzlich zwei kaum sichtbare Falzkanten sowie eine leichte
-     Abdunklung zu den Rändern hin. */
-  .papier-knick {
-    position: fixed;
-    inset: 0;
-    /* Liegt ÜBER dem Inhalt (deshalb der hohe Wert): Sonst wäre die
-       Kopfzeile, die ja eine eigene Papierfläche braucht, als glattes
-       Rechteck zu sehen. So zieht sich das Knittern durch das ganze Blatt. */
-    z-index: 60;
-    pointer-events: none;
-    mix-blend-mode: multiply;
-    opacity: 0.6;
-    background-image:
-      linear-gradient(
-        96deg,
-        transparent 0 36.4%,
-        rgba(255, 255, 255, 0.6) 36.6%,
-        var(--papier-rand) 37.2%,
-        transparent 38%
-      ),
-      linear-gradient(
-        178deg,
-        transparent 0 61%,
-        rgba(255, 255, 255, 0.5) 61.3%,
-        var(--papier-rand) 61.9%,
-        transparent 62.6%
-      ),
-      radial-gradient(
-        130% 80% at 50% 10%,
-        transparent 52%,
-        var(--papier-rand) 100%
-      );
-  }
-  .papier-knick svg {
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-
-  /* Der Inhalt liegt über dem Knittern. */
-  .papier-inhalt {
-    position: relative;
-    z-index: 1;
-  }
-
-  /* Zweite Papierfläche für einen ganzen Abschnitt – wie ein zweites Blatt,
-     das untergelegt wurde. Darüber ein ganz feines Karoraster, wie auf
-     einem Skizzenblock. */
-  .papier-block {
-    position: relative;
-    background-color: var(--papier-tief);
-    /* Das Karoraster ist nur angedeutet – man ahnt es eher, als dass man
-       es sieht. */
-    background-image:
-      repeating-linear-gradient(
-        to right,
-        rgba(38, 36, 31, 0.07) 0 1px,
-        transparent 1px 28px
-      ),
-      repeating-linear-gradient(
-        to bottom,
-        rgba(38, 36, 31, 0.07) 0 1px,
-        transparent 1px 28px
-      );
-  }
-
-  /* Senkrechte Hilfslinien wie auf einem Konstruktionsbogen. Absichtlich
-     schnurgerade – sie sind gedruckt, alles andere ist gezeichnet. */
-  .hilfslinien {
-    background-image: repeating-linear-gradient(
-      to right,
-      var(--stift-linie) 0 1px,
-      transparent 1px calc(100% / 6)
-    );
-    opacity: 0.5;
-  }
-
-  /* ══════════════════════════════════════════════════════════════════════
-     2. RASTER
-     ══════════════════════════════════════════════════════════════════════ */
-  .wrap {
-    @apply mx-auto w-full max-w-content px-5 sm:px-8 lg:px-10;
-  }
-
-  .grid12 {
-    @apply grid grid-cols-4 gap-x-5 sm:gap-x-6 lg:grid-cols-12 lg:gap-x-8;
-  }
-
-  /* ══════════════════════════════════════════════════════════════════════
-     3. SCHRIFT
-     ══════════════════════════════════════════════════════════════════════
-     `.hand`  → Handschrift für alles Große (Caveat)
-     `.notiz` → die kleine, saubere Handschrift für Randbemerkungen
-     Fließtext bleibt in der Leseschrift: Handschrift liest sich in langen
-     Absätzen schlecht, und Lesbarkeit geht hier vor Wirkung. */
-  .hand {
-    font-family: var(--font-hand), "Segoe Script", cursive;
-    font-weight: 700;
-    line-height: 0.98;
-    letter-spacing: 0.005em;
-    /* Handschrift sitzt optisch tiefer als Druckschrift. */
-    word-spacing: 0.04em;
-  }
-  .hand-leicht {
-    font-family: var(--font-hand), "Segoe Script", cursive;
-    font-weight: 500;
-    line-height: 1.1;
-  }
-  .notiz {
-    font-family: var(--font-notiz), "Segoe Print", cursive;
-    font-weight: 400;
-    line-height: 1.35;
-  }
-
-  /* Kleine Randbeschriftung: Handschrift, gesperrt, in Versalien – wie eine
-     Beschriftung an einem Maßpfeil. */
-  .etikett {
-    font-family: var(--font-notiz), "Segoe Print", cursive;
-    @apply text-[0.78rem] uppercase tracking-[0.14em] text-ink-soft;
-  }
-  .etikett-rot {
-    color: var(--rotstift);
-  }
-
-  /* Wackelt kurz, wenn man darüberfährt. */
-  .wackelt:hover {
-    animation: wackeln 0.55s ease-in-out;
-  }
-
-  /* Leicht schief gestellt – nichts auf diesem Blatt liegt exakt gerade. */
-  .schief-1 {
-    transform: rotate(-0.6deg);
-  }
-  .schief-2 {
-    transform: rotate(0.5deg);
-  }
-  .schief-3 {
-    transform: rotate(-1.4deg);
-  }
-
-  /* ══════════════════════════════════════════════════════════════════════
-     4. HANDGEZOGENE LINIEN
-     ══════════════════════════════════════════════════════════════════════
-     Die Linien sind kleine SVG-Zeichnungen, die als Maske über eine Fläche
-     in der aktuellen Schriftfarbe gelegt werden. Dadurch nehmen sie
-     automatisch die Farbe des Textes an und lassen sich über die Variablen
-     oben umfärben. Gestreckt wird nur in die Breite – die Strichstärke
-     bleibt dadurch überall gleich. */
-  .linie-hand,
-  .linie-hand-oben {
-    position: relative;
-  }
-  .linie-hand::after,
-  .linie-hand-oben::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 7px;
-    background-color: currentColor;
-    opacity: 0.85;
-    pointer-events: none;
-    -webkit-mask: var(--linie-fein) 0 0 / 100% 100% no-repeat;
-    mask: var(--linie-fein) 0 0 / 100% 100% no-repeat;
-  }
-  .linie-hand::after {
-    bottom: -3px;
-  }
-  .linie-hand-oben::before {
-    top: -3px;
-  }
-  /* Kräftiger Strich – für Kapitelanfänge. */
-  .linie-hand-stark::after,
-  .linie-hand-stark::before {
-    height: 10px;
-    opacity: 1;
-    -webkit-mask-image: var(--linie-stark);
-    mask-image: var(--linie-stark);
-  }
-  /* Ganz feine Trennlinie zwischen Tabellenzeilen. */
-  .linie-hand-fein::after,
-  .linie-hand-fein::before {
-    opacity: 0.4;
-  }
-
-  /* ══════════════════════════════════════════════════════════════════════
-     5. HERVORHEBUNGEN
-     ══════════════════════════════════════════════════════════════════════ */
-
-  /* Textmarker: zwei übereinandergelegte Striche, die über den Text
-     hinausstehen – so, wie man mit einem Marker eben nicht genau trifft.
-     Die Schrift bleibt graphitfarben und damit bestens lesbar. */
-  .marker {
-    background-image:
-      linear-gradient(
-        101deg,
-        rgba(255, 224, 102, 0) 0.4%,
-        var(--marker) 2.4%,
-        var(--marker) 96%,
-        rgba(255, 224, 102, 0) 99.2%
-      ),
-      linear-gradient(
-        99deg,
-        rgba(255, 224, 102, 0) 1%,
-        rgba(255, 224, 102, 0.55) 4%,
-        rgba(255, 224, 102, 0.55) 92%,
-        rgba(255, 224, 102, 0) 98%
-      );
-    background-size:
-      100% 0.8em,
-      100% 0.44em;
-    background-position:
-      0 0.3em,
-      0 0.74em;
-    background-repeat: no-repeat;
-    padding: 0 0.12em;
-    -webkit-box-decoration-break: clone;
-    box-decoration-break: clone;
-  }
-
-  /* Ein von Hand gezogener Kreis um ein Wort – die klassische Markierung
-     auf einem Entwurf. */
-  .kreis-wort {
-    position: relative;
-    display: inline-block;
-    padding: 0.02em 0.22em;
-  }
-  /* Der Kringel sitzt enger als die Zeilenhöhe: Handschrift hat lange
-     Ober- und Unterlängen, der Kreis soll aber nur um die Buchstaben
-     herumgehen und nicht in die Zeile darüber ragen. */
-  .kreis-wort::before {
-    content: "";
-    position: absolute;
-    inset: 0.06em -0.26em 0.03em;
-    background-color: var(--rotstift);
-    pointer-events: none;
-    -webkit-mask: var(--kreis-pfad) 0 0 / 100% 100% no-repeat;
-    mask: var(--kreis-pfad) 0 0 / 100% 100% no-repeat;
-  }
-
-  /* Textlink: beim Überfahren wird die Linie darunter nachgezogen. */
-  .ul-link {
-    position: relative;
-    display: inline-block;
-    transition: color 0.2s ease;
-  }
-  .ul-link::after {
-    content: "";
-    position: absolute;
-    left: -0.08em;
-    right: -0.08em;
-    bottom: -0.18em;
-    height: 7px;
-    background-color: currentColor;
-    opacity: 0.75;
-    pointer-events: none;
-    -webkit-mask: var(--linie-fein) 0 0 / 100% 100% no-repeat;
-    mask: var(--linie-fein) 0 0 / 100% 100% no-repeat;
-    transform: scaleX(1);
-    transform-origin: left center;
-    transition:
-      transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1),
-      opacity 0.2s ease;
-  }
-  .ul-link:hover::after {
-    opacity: 1;
-    height: 9px;
-  }
-  /* Links, deren Linie erst beim Überfahren gezogen wird. */
-  .ul-zeichnen::after {
-    transform: scaleX(0);
-  }
-  .ul-zeichnen:hover::after,
-  .ul-zeichnen:focus-visible::after {
-    transform: scaleX(1);
-  }
-
-  /* ══════════════════════════════════════════════════════════════════════
-     6. RAHMEN, KNÖPFE, ZETTEL
-     ══════════════════════════════════════════════════════════════════════
-     Jeder Rahmen auf der Seite ist eine kleine Zeichnung: ein schiefes
-     Viereck, an zwei Ecken nachgezogen. Diese Zeichnung wird als
-     `border-image` benutzt. Der Vorteil gegenüber einem gezeichneten SVG im
-     Element: Die Ecken bleiben immer unverzerrt, und die Strichstärke ist
-     bei einem winzigen Knopf genauso dick wie bei einer großen Fläche.
-
-     Die Rahmenbreite rechnet sich aus der Strichstärke (`--strich`), damit
-     auch die Rahmen mitziehen, wenn oben ein dickerer Stift eingestellt
-     wird.
-
-     ACHTUNG: Die Farbe steckt in der Zeichnung selbst (`%2326241f` =
-     Graphit, `%23b63324` = Rotstift). Wer die Stiftfarbe oben ändert, muss
-     sie in den folgenden drei Zeilen mitändern. */
-  .rahmen,
-  .rahmen-rot {
-    border-style: solid;
-    border-width: calc(var(--strich) * 8.1);
-    border-image-slice: 26;
-    border-image-repeat: stretch;
-    transition: border-image-source 0.2s ease;
-  }
-  .rahmen {
-    border-image-source: var(--rahmen-1);
-  }
-  .rahmen-rot {
-    border-image-source: var(--rahmen-rot);
-  }
-  /* Beim Überfahren wird der Rahmen noch einmal nachgezogen – es ist
-     dieselbe Hand, aber nicht derselbe Strich. */
-  .rahmen-nachziehen:hover,
-  .rahmen-nachziehen:focus-visible {
-    border-image-source: var(--rahmen-2);
-  }
-  /* Doppelte Kontur: ein zweiter, blasserer Umriss daneben. */
-  .rahmen-doppelt {
-    position: relative;
-  }
-  .rahmen-doppelt::before {
-    content: "";
-    position: absolute;
-    inset: calc(var(--strich) * -4);
-    border-style: solid;
-    border-width: calc(var(--strich) * 8.1);
-    border-image-source: var(--rahmen-2);
-    border-image-slice: 26;
-    border-image-repeat: stretch;
-    opacity: 0.3;
-    pointer-events: none;
-  }
-
-  /* Knöpfe. Alle sind Kästen mit handgezeichnetem Rahmen; beim Überfahren
-     wird der Rahmen nachgezogen und der Knopf rutscht einen Hauch nach
-     oben, als hebe man ihn kurz vom Blatt. */
-  .btn {
-    @apply rahmen rahmen-nachziehen relative inline-flex items-center justify-center gap-2.5 px-3 py-1 text-[1.12rem] leading-tight;
-    --flaeche-rand: calc(var(--strich) * -8.1);
-    font-family: var(--font-hand), "Segoe Script", cursive;
-    font-weight: 700;
-    letter-spacing: 0.01em;
-    text-align: center;
-    transition:
-      transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1),
-      background-color 0.25s ease,
-      color 0.25s ease;
-  }
-  .btn:hover {
-    transform: translateY(-2px) rotate(-0.5deg);
-  }
-  .btn:active {
-    transform: translateY(0) rotate(0.2deg);
-  }
-
-  /* Ausgemalte Fläche mit handgezogener Kante. Liegt hinter dem Inhalt und
-     nimmt die Farbe aus `--flaeche-farbe` (voreingestellt: Graphit). */
-  .flaeche {
-    position: relative;
-  }
-  .flaeche::before {
-    content: "";
-    position: absolute;
-    /* Elemente mit gezeichnetem Rahmen brauchen etwas Überstand, damit die
-       Fläche bis unter den Rahmen reicht (siehe `.btn`). */
-    inset: var(--flaeche-rand, 0);
-    z-index: -1;
-    background-color: var(--flaeche-farbe, var(--stift));
-    pointer-events: none;
-    -webkit-mask: var(--flaeche-form) 0 0 / 100% 100% no-repeat;
-    mask: var(--flaeche-form) 0 0 / 100% 100% no-repeat;
-    transition: background-color 0.25s ease;
-  }
-
-  /* Es gibt genau zwei Knöpfe:
-
-     „wichtig"  – der gezeichnete Kasten ist mit dem Textmarker ausgemalt.
-                  Der gelbe Strich steht absichtlich etwas über den Rahmen
-                  hinaus, so wie ein Marker eben nicht genau trifft.
-     „normal"   – nur der gezeichnete Kasten. Beim Überfahren wird er
-                  ebenfalls kurz angemalt.
-
-     Die Schrift bleibt in beiden Fällen graphitfarben – auf Gelb ist der
-     Kontrast damit sehr hoch (rund 12:1). */
-  .btn-voll {
-    @apply btn flaeche text-ink;
-    --flaeche-farbe: var(--marker);
-    --flaeche-rand: calc(var(--strich) * -10);
-  }
-  .btn-voll:hover {
-    --flaeche-farbe: #ffd633;
-  }
-  .btn-strich {
-    @apply btn flaeche text-ink;
-    --flaeche-farbe: transparent;
-  }
-  .btn-strich:hover {
-    --flaeche-farbe: rgba(255, 224, 102, 0.55);
-  }
-
-  /* Notizzettel: ein kleines Blatt, das lose aufliegt. Leicht schief, mit
-     einem weichen Schlagschatten – das einzige Element der Seite, das
-     überhaupt einen Schatten hat, weil es ja obenauf liegt. */
-  .zettel {
-    position: relative;
-    background-color: #fdfaf0;
-    box-shadow:
-      0 1px 2px rgba(60, 50, 30, 0.12),
-      0 10px 18px -12px rgba(60, 50, 30, 0.35);
-  }
-
-  /* Klebeband: ein mattes Stück Tesa über der Ecke. */
-  .klebeband {
-    position: absolute;
-    width: 6.5rem;
-    height: 1.6rem;
-    background: linear-gradient(
-      104deg,
-      rgba(236, 228, 199, 0.55),
-      rgba(226, 216, 181, 0.78) 45%,
-      rgba(236, 228, 199, 0.5)
-    );
-    border-left: 1px solid rgba(255, 255, 255, 0.5);
-    border-right: 1px solid rgba(255, 255, 255, 0.5);
-    box-shadow: 0 1px 2px rgba(60, 50, 30, 0.1);
-    pointer-events: none;
-  }
-  .klebeband::before {
-    /* Die typischen ausgefransten Ränder links und rechts. */
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: repeating-linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0.35) 0 1px,
-      transparent 1px 4px
-    );
-    opacity: 0.6;
-  }
-
-  /* ══════════════════════════════════════════════════════════════════════
-     7. BILDFLÄCHEN
-     ══════════════════════════════════════════════════════════════════════
-     Jedes Platzhalterbild ist ein leerer Rahmen mit einer Skizze darin
-     (src/components/ui/Skizze.tsx). Die Fläche selbst bleibt Papier – nur
-     eine Spur heller, damit sie sich abhebt wie ein aufgeklebtes Blatt. */
-  .bildflaeche {
-    position: relative;
-    overflow: hidden;
-    background-color: rgba(255, 253, 246, 0.72);
-  }
-
-  /* Bildunterschrift auf der Skizze: Damit die Notiz auch dann lesbar
-     bleibt, wenn eine Linie der Zeichnung darunter durchläuft, liegt ein
-     weicher Papierverlauf dahinter. */
-  .bildunterschrift {
-    background-image: linear-gradient(
-      to top,
-      rgba(255, 253, 246, 0.95) 45%,
-      rgba(255, 253, 246, 0)
-    );
-  }
-
-  /* Das Platzhalter-Kreuz: Rechteck mit zwei Diagonalen. Es wird über die
-     ganze Fläche gezogen (deshalb „preserveAspectRatio=none"), bleibt aber
-     dank `non-scaling-stroke` überall gleich dünn. */
-  .skizze-kreuz,
-  .skizze-motiv {
-    position: absolute;
-    inset: 0;
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
-  .skizze-kreuz path,
-  .skizze-motiv path,
-  .skizze-strich path {
-    fill: none;
-    stroke: currentColor;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    vector-effect: non-scaling-stroke;
-  }
-  .skizze-kreuz path {
-    stroke-width: 1.1px;
-    opacity: 0.28;
-  }
-  .skizze-motiv path {
-    stroke-width: var(--strich);
-  }
-  .skizze-strich path {
-    stroke-width: var(--strich);
-  }
-  .skizze-strich {
-    fill: none;
-  }
-
-  /* ══════════════════════════════════════════════════════════════════════
-     8. RECHTSTEXTE (Impressum / Datenschutz)
-     ══════════════════════════════════════════════════════════════════════ */
   .legal-body {
-    @apply text-[1rem] leading-relaxed text-ink;
+    @apply text-[1rem] leading-relaxed text-tinte;
   }
   .legal-body h2 {
-    @apply hand linie-hand-oben mt-12 pt-4 text-[1.9rem] text-ink;
+    @apply mt-12 flex items-center gap-3 text-[1.35rem] font-extrabold tracking-[-0.02em] text-tinte;
+  }
+  .legal-body h2::before {
+    content: "";
+    @apply h-3 w-3 shrink-0 rounded-full bg-[#ff7a30];
   }
   .legal-body h3 {
-    @apply mt-7 font-sans text-base font-bold text-ink;
+    @apply mt-7 text-base font-bold text-tinte;
   }
   .legal-body p {
-    @apply mt-3 max-w-reading text-ink-soft;
+    @apply mt-3 max-w-reading text-leise;
   }
   .legal-body ul {
-    @apply mt-3 max-w-reading list-disc space-y-1 pl-5 text-ink-soft;
+    @apply mt-3 max-w-reading list-disc space-y-1 pl-5 text-leise;
   }
   .legal-body a {
-    @apply ul-link font-semibold text-ink;
+    @apply font-semibold text-tinte underline decoration-[#0e7c86] decoration-2 underline-offset-4 hover:text-[#0e7c86];
   }
   .legal-body strong {
-    @apply font-bold text-ink;
-  }
-
-  /* ══════════════════════════════════════════════════════════════════════
-     9. AUSWAHLSEITE
-     ══════════════════════════════════════════════════════════════════════
-     Die Startseite mit den drei Entwürfen ist bewusst neutral gehalten und
-     benutzt weiterhin die sachliche Grotesk. */
-  .display {
-    font-family: var(--font-display), Impact, sans-serif;
-    font-stretch: 88%;
-    font-weight: 800;
-    letter-spacing: -0.035em;
-    line-height: 0.92;
+    @apply font-bold text-tinte;
   }
 }

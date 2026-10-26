@@ -90,28 +90,14 @@ export const services: Service[] = [
   },
 ];
 
-// Navigation (Header). Anker springen zu den Sektionen der Startseite;
-// eigene Unterseiten folgen später.
+// Navigation (Kopfzeile). Alle Punkte springen zu Abschnitten der Startseite,
+// der Textilshop öffnet im neuen Fenster. „/#…" funktioniert auch von den
+// Unterseiten (Impressum, Datenschutz) aus.
 export const nav: { label: string; href: string; external?: boolean }[] = [
-  // „Leistungen" führt zum Leistungs-Abschnitt. Ein zweiter Punkt „Ablauf"
-  // stand vorher daneben – der ist entfallen, damit das Menü eindeutig bleibt.
-  { label: "Leistungen", href: "/entwurf-1#leistungen" },
-  { label: "Standort", href: "/entwurf-1#standort" },
+  { label: "Leistungen", href: "/#leistungen" },
+  { label: "Ablauf", href: "/#ablauf" },
+  { label: "Standort", href: "/#standort" },
   { label: "Textilshop", href: textilShopUrl, external: true },
-  { label: "Kontakt", href: "/entwurf-1#kontakt" },
-];
-
-// ── Kopfbereich: Bilder, die sich beim Laden auffächern ──────────────────
-// Reihenfolge = Reihenfolge im Fächer (Mitte ist das dritte Bild).
-// Noch Platzhalter: Sobald echte Fotos vorliegen, in Hero.tsx statt der
-// gestreiften Fläche ein <img> mit diesem Text als Alt-Text ausgeben.
-export const heroFan: string[] = [
-  "Bestickte Arbeitskleidung",
-  "Fahrzeugbeschriftung",
-  "Firmenschild an der Fassade",
-  "Schaufensterbeschriftung",
-  "Visitenkarten & Drucksachen",
-  "Banner & Aufkleber",
 ];
 
 // ── „So läuft Ihr Auftrag" – Ablauf eines Projekts ───────────────────────

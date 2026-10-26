@@ -5,13 +5,16 @@ import Link from "next/link";
 
 // DSGVO-konformer Cookie-/Datenschutz-Hinweis.
 //
+// ACHTUNG: Diese Komponente ist zurzeit auf keiner Seite eingebunden. Die
+// Datenschutzerklärung (Abschnitt 4) beschreibt aber genau diesen Hinweis.
+// Entweder hier einbinden (in src/components/layout/Seite.tsx) oder den
+// Abschnitt in der Erklärung streichen – beides gleichzeitig geht nicht.
+//
 // Wichtig: Diese Website lädt selbst KEINE Tracking- oder Marketing-Cookies
 // (keine Analytics, keine externen Skripte). Es genügt daher ein reiner
 // Informations-Hinweis mit Bestätigung – es werden nur technisch notwendige
 // Daten verarbeitet. Die Bestätigung wird lokal im Browser gespeichert
 // (localStorage), damit der Hinweis nicht bei jedem Besuch erneut erscheint.
-// Es findet KEINE Einwilligung in nicht-notwendige Cookies statt, weil es
-// keine gibt – das ist der datensparsamste, saubere Weg.
 const STORAGE_KEY = "osd-cookie-hinweis";
 
 export default function CookieNotice() {
@@ -45,24 +48,31 @@ export default function CookieNotice() {
       role="dialog"
       aria-modal="false"
       aria-labelledby="cookie-title"
-      className="linie-hand-oben linie-hand-stark fixed inset-x-0 bottom-0 z-[80] bg-paper text-ink"
+      className="fixed inset-x-3 bottom-3 z-[60] mx-auto max-w-[1200px] rounded-[28px] bg-white p-5 shadow-[0_12px_40px_rgba(23,22,26,0.18)] ring-1 ring-tinte/10 sm:inset-x-6 sm:bottom-6"
     >
-      <div className="wrap flex flex-col gap-4 py-4 sm:flex-row sm:items-center sm:gap-8">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-8">
         <div className="flex-1">
-          <h2 id="cookie-title" className="etikett">
+          <h2 id="cookie-title" className="text-[0.88rem] font-bold text-[#0e7c86]">
             Datenschutz-Hinweis
           </h2>
-          <p className="mt-1 text-[0.9rem] leading-relaxed text-ink-soft">
+          <p className="mt-1 text-[0.92rem] leading-relaxed text-leise">
             Diese Website verwendet ausschließlich technisch notwendige Daten
             und setzt keine Tracking- oder Marketing-Cookies ein. Mehr dazu in
             unserer{" "}
-            <Link href="/datenschutz" className="ul-link font-semibold text-ink">
+            <Link
+              href="/datenschutz"
+              className="font-semibold text-tinte underline decoration-[#0e7c86] decoration-2 underline-offset-4"
+            >
               Datenschutzerklärung
             </Link>
             .
           </p>
         </div>
-        <button type="button" onClick={accept} className="btn-voll shrink-0">
+        <button
+          type="button"
+          onClick={accept}
+          className="shrink-0 rounded-full bg-[#0e7c86] px-7 py-3 text-[0.95rem] font-bold text-white transition-opacity hover:opacity-85"
+        >
           Verstanden
         </button>
       </div>

@@ -3,99 +3,14 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { company } from "@/lib/site";
 
-// Schriften liegen als Dateien im Projekt (src/app/fonts) und werden mit der
+// Die Schrift liegt als Datei im Projekt (src/app/fonts) und wird mit der
 // Seite ausgeliefert. Kein Aufruf bei Google – weder beim Besucher noch beim
 // Bauen. Das ist datenschutzfreundlich und macht den Bau unabhängig.
 //
-//   Bricolage Grotesque → Überschriften. Eine eigenwillige, kantige Grotesk
-//        mit Breiten-Achse: damit lassen sich Schlagzeilen schmal und
-//        plakativ setzen, wie ein Schriftzug auf einem Schild.
-//   Hanken Grotesk → Fließtext. Bewusst NICHT Inter: Inter ist die
-//        Standardschrift fast aller Baukästen und sieht entsprechend
-//        nach Standard aus.
-//
-// Beides sind variable Schriften – eine Datei deckt alle Stärken ab.
-const display = localFont({
-  src: [
-    { path: "./fonts/bricolage-latin.woff2", style: "normal" },
-    { path: "./fonts/bricolage-latin-ext.woff2", style: "normal" },
-  ],
-  weight: "400 800",
-  variable: "--font-display",
-  display: "swap",
-});
-
-const sans = localFont({
-  src: [
-    { path: "./fonts/hanken-latin.woff2", style: "normal" },
-    { path: "./fonts/hanken-latin-ext.woff2", style: "normal" },
-  ],
-  weight: "400 800",
-  variable: "--font-sans",
-  display: "swap",
-});
-
-// ── Schriften für Entwurf 1 „Handskizze" ────────────────────────────────
-//   Caveat      → alles Große: Schlagzeilen, Namen, Telefonnummern. Eine
-//                 flüssige Handschrift mit Breitenachse (400–700), die wie
-//                 mit einem Filzstift auf den Bogen geschrieben wirkt.
-//   Patrick Hand → die kleinen Notizen daneben: Bildunterschriften,
-//                 Randbemerkungen, Zettel. Ruhiger und gut lesbar, wie
-//                 sauber mit Bleistift geschrieben.
-// Der Fließtext bleibt bei Hanken Grotesk – Handschrift liest sich in
-// langen Absätzen schlecht, und Lesbarkeit geht hier vor.
-const hand = localFont({
-  src: [
-    { path: "./fonts/caveat-latin.woff2", style: "normal" },
-    { path: "./fonts/caveat-latin-ext.woff2", style: "normal" },
-  ],
-  weight: "400 700",
-  variable: "--font-hand",
-  display: "swap",
-});
-
-const notiz = localFont({
-  src: [
-    { path: "./fonts/patrick-latin.woff2", style: "normal" },
-    { path: "./fonts/patrick-latin-ext.woff2", style: "normal" },
-  ],
-  weight: "400",
-  variable: "--font-notiz",
-  display: "swap",
-});
-
-// ── Schriften der beiden anderen Entwürfe ───────────────────────────────
-// Sie stehen hier mit bereit, werden vom Browser aber nur geladen, wenn die
-// jeweilige Seite sie auch benutzt.
-//   Archivo       → Entwurf 2 „Weißraum": ruhige, moderne Grotesk,
-//                   hier als einzige Schrift des Entwurfs.
-//   JetBrains Mono → Entwurf 3 „Laufzettel": Schreibmaschinen-Anmutung,
-//                   alle Zeichen gleich breit – daher sauber in Tabellen.
-// Mona Sans → Entwurf 2. Klare, moderne Grotesk mit etwas mehr Charakter
-// als die Schrift der Hauptseite – damit die Seite eigenständig bleibt,
-// aber genauso aufgeräumt wirkt.
-const mona = localFont({
-  src: [
-    { path: "./fonts/mona-latin.woff2", style: "normal" },
-    { path: "./fonts/mona-latin-ext.woff2", style: "normal" },
-  ],
-  weight: "400 800",
-  variable: "--font-mona",
-  display: "swap",
-});
-
-const archivo = localFont({
-  src: [
-    { path: "./fonts/archivo-latin.woff2", style: "normal" },
-    { path: "./fonts/archivo-latin-ext.woff2", style: "normal" },
-  ],
-  weight: "400 700",
-  variable: "--font-archivo",
-  display: "swap",
-});
-
-// Schibsted Grotesk → Entwurf 3 „Stapel": freundliche, etwas rundliche
-// Grotesk aus Skandinavien. Bewusst nicht Inter oder Poppins.
+//   Schibsted Grotesk → die einzige Schrift der Seite. Eine freundliche,
+//        etwas rundliche Grotesk aus Skandinavien. Bewusst nicht Inter, das
+//        die Standardschrift fast aller Baukästen ist. Variable Schrift:
+//        eine Datei deckt alle Stärken von 400 bis 900 ab.
 const schibsted = localFont({
   src: [
     { path: "./fonts/schibsted-latin.woff2", style: "normal" },
@@ -103,16 +18,6 @@ const schibsted = localFont({
   ],
   weight: "400 900",
   variable: "--font-schibsted",
-  display: "swap",
-});
-
-const mono = localFont({
-  src: [
-    { path: "./fonts/jetbrains-latin.woff2", style: "normal" },
-    { path: "./fonts/jetbrains-latin-ext.woff2", style: "normal" },
-  ],
-  weight: "400 700",
-  variable: "--font-mono",
   display: "swap",
 });
 
@@ -163,13 +68,13 @@ export default function RootLayout({
   return (
     <html
       lang="de"
-      className={`${sans.variable} ${display.variable} ${hand.variable} ${notiz.variable} ${archivo.variable} ${mona.variable} ${schibsted.variable} ${mono.variable}`}
+      className={schibsted.variable}
     >
-      <body>
+      <body className="font-sans">
         {/* Sprungmarke für Tastatur-/Screenreader-Nutzer (Barrierefreiheit). */}
         <a
           href="#hauptinhalt"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:rounded-full focus:bg-ink focus:px-5 focus:py-2 focus:text-sm focus:font-semibold focus:text-paper"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:rounded-full focus:bg-tinte focus:px-5 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
         >
           Zum Inhalt springen
         </a>

@@ -52,7 +52,7 @@ export default function CookieNotice() {
     >
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-8">
         <div className="flex-1">
-          <h2 id="cookie-title" className="text-[0.88rem] font-bold text-[#0a5f67]">
+          <h2 id="cookie-title" className="text-[0.88rem] font-bold text-[#074a51]">
             Datenschutz-Hinweis
           </h2>
           <p className="mt-1 text-[0.92rem] leading-relaxed text-leise">

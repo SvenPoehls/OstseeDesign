@@ -28,7 +28,7 @@ trauen sollen anzurufen.
 | Bereich | Entscheidung |
 | --- | --- |
 | Schrift | **Schibsted Grotesk**, die einzige Schrift der Seite. Freundlich und etwas rund, bewusst nicht Inter. Liegt im Projekt, kein Abruf bei Google. |
-| Grund | **Leicht zerknittertes Cremepapier** mit feiner Körnung (übernommen aus dem früheren Entwurf „Handskizze"). Wird im Browser gerechnet, keine Bilddatei. Liegt hinter dem Inhalt und schimmert durch Kopfzeile und Kacheln. |
+| Grund | **Verlauf von fast Weiß zu Sandbeige** mit feiner Körnung im unteren Teil – nach einer Vorlage abgemessen (`#faf8f5` oben, `#dbccb5` unten). Steht fest im Bildschirm (oben immer hell, unten immer beige), liegt hinter dem Inhalt und schimmert durch Kopfzeile und Kacheln. Keine Bilddatei. |
 | Farbe | **Vier Werkstattfarben** (Zinnober, Petrol, Ocker, Magenta) auf dem Papier – jede gehört zu einer Leistung. Siehe `src/lib/farben.ts`. |
 | Form | **Kreise und runde Knöpfe, aber eher eckige Kacheln**: Karten und Farbflächen 14 px, Bildflächen 10 px, Knöpfe, Marken und Kreise ganz rund. |
 | Transparenz | Kreise liegen übereinander und **mischen sich** (`mix-blend-multiply`) – wie Druckfarben. |
@@ -90,9 +90,7 @@ jedem Seitenwechsel neu.
 | --- | --- |
 | `src/lib/farben.ts` | die vier Farben, Schrift-, Knopf- und Flächenfarbe |
 | `src/app/globals.css` → `--kopf` | **wie kräftig das Gelb der Kopfzeile ist.** Die letzte Zahl ist die Deckkraft: 0,5 = zart (jetzt), 0,88 = so kräftig wie früher, 1 = volles Ocker. Für eine weiße Leiste: `#ffffff` |
-| `src/app/globals.css` → `.papier-knick` (opacity) | **wie stark das Papier geknittert wirkt**: 0 = glatt, 0,6 = jetzt, 1 = kräftig. Die Körnung hat ihre eigene Stärke bei `.papier-knick::after` |
-| `src/components/layout/Papiergrund.tsx` | Größe der Falten (`baseFrequency`) und ihre Tiefe (`surfaceScale`) |
-| `src/app/globals.css` → `--papier` | der Papierton |
+| `src/app/globals.css` → `--papier`, `--papier-unten`, `.papier-verlauf` | **der Hintergrund-Verlauf**: oberer und unterer Ton, dazwischen die Prozentpunkte, an denen welcher Ton erreicht ist. Die Körnung hat ihre Stärke bei `.papier-verlauf::after` (opacity). Soll der Verlauf über die ganze Seitenlänge laufen statt im Bildschirm stehen: `position: fixed` → `absolute` |
 | `tailwind.config.ts` → `seite` | **wie breit die Seite auf großen Bildschirmen wird** (jetzt 1440 px) |
 | `tailwind.config.ts` → `kachel`, `bild` | **wie rund die Kacheln sind** (jetzt 14 px bzw. 10 px). Knöpfe sind davon nicht betroffen |
 | `src/app/globals.css` → `--weich` | der Bewegungsverlauf aller Animationen |
@@ -102,22 +100,22 @@ jedem Seitenwechsel neu.
 
 Alle Texte erfüllen **WCAG AA** (4,5 : 1, große Schrift 3 : 1). Gemessen
 wird nicht gegen eine angenommene Hintergrundfarbe, sondern gegen das, was
-tatsächlich hinter jedem Text liegt – Papierknicke, Farbkreise und getönte
+tatsächlich hinter jedem Text liegt – Beige-Verlauf, Farbkreise und getönte
 Kacheln eingerechnet. Letzte Messung: **1.047 Texte** auf allen sechs Seiten,
-am Rechner (1440 px) und auf dem Handy (390 px), schwächster Wert **4,8 : 1**.
+am Rechner (1440 px) und auf dem Handy (390 px), schwächster Wert **4,95 : 1**.
 
 Dafür gibt es eigene Schriftfarben in `src/lib/farben.ts`:
 
 | Farbe | wofür |
 | --- | --- |
-| `LEISE` `#4a4650` | Nebentext. Kräftiger als auf weißem Grund nötig wäre – auf dem Papier ist der Untergrund stellenweise dunkler. |
-| `LEISE_AUF_KREISEN` `#433f49` | Nebentext über den Farbkreisen der Kopfbereiche |
-| `PETROL_TEXT` `#0a5f67`, `MAGENTA_TEXT` `#a52f55` | kleine farbige Überschriften („Leistungen", „Standort", „Ablauf") – die hellen Fächerfarben sind dafür zu schwach |
+| `LEISE` `#3f3b45` | Nebentext. Kräftiger als auf weißem Grund nötig wäre – unten ist der Grund beige, getönte Kacheln darauf noch dunkler. |
+| `LEISE_AUF_KREISEN` `#36323c` | Nebentext über den Farbkreisen der Kopfbereiche |
+| `PETROL_TEXT` `#074a51`, `MAGENTA_TEXT` `#8c2747` | kleine farbige Überschriften („Leistungen", „Standort", „Ablauf") – die hellen Fächerfarben sind dafür zu schwach |
 | `SCHRIFT_AUF` | Schrift auf den vier Farbflächen (z. B. Nummern in Kreisen): je Farbe die besser lesbare, mind. 4,95 : 1 |
 
 Auf der orangen Kontaktfläche steht dunkle Schrift (weiße hätte nur
 2,6 : 1). **Beim Umfärben daran denken:** helle Farben taugen nicht als
-Schriftfarbe, und auf Papier braucht Text etwas mehr Kraft als auf Weiß.
+Schriftfarbe, und auf dem beigen Grund braucht Text etwas mehr Kraft als auf Weiß.
 Die farbigen Aufzählungspunkte im Ablauf sind reiner Schmuck und für
 Screenreader ausgeblendet.
 

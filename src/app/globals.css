@@ -26,10 +26,13 @@
   --weich: cubic-bezier(0.2, 0.7, 0.2, 1);
 
   /* ── PAPIER ─────────────────────────────────────────────────────────────
-     Der Grund der Seite ist ein warmes, leicht zerknittertes Blatt (siehe
-     `.papier-knick` unten und src/components/layout/Papiergrund.tsx). */
-  --papier: #faf6ea; /* Cremeweiß */
-  --papier-rand: rgba(68, 60, 40, 0.09); /* Schatten an Falzen und Rändern */
+     Der Grund der Seite: ein Verlauf von fast Weiß (oben) zu warmem
+     Sandbeige (unten), dazu eine feine Körnung (siehe `.papier-verlauf`
+     unten). Die beiden Töne sind aus der Vorlage abgelesen. */
+  --papier: #faf8f5; /* oben: fast Weiß */
+  /* unten: Sandbeige. Ein Hauch heller als der Zielton #dbccb5, weil die
+     Körnung darüber noch etwas abdunkelt. */
+  --papier-unten: #dfd0b9;
 }
 
 html {
@@ -236,58 +239,51 @@ body {
 
 /* ── PAPIER ──────────────────────────────────────────────────────────────── */
 /* `.papier` umschließt die ganze Seite (siehe layout.tsx). Darin liegt die
-   festsitzende Schicht `.papier-knick`: oben das Knittern als SVG (aus
-   Papiergrund.tsx), darunter zwei kaum sichtbare Falzkanten, eine leichte
-   Abdunklung zum Rand und eine feine Körnung.
+   festsitzende Schicht `.papier-verlauf`: der Verlauf von hell nach beige
+   und darüber eine feine Körnung.
 
-   Die Schicht liegt HINTER dem Inhalt (z-index 0, Inhalt darüber auf 1):
-   Schrift und Farben bleiben dadurch unverfälscht, und beim Scrollen muss
-   nichts neu gemischt werden. Durch die durchscheinende Kopfzeile und die
-   Farbkacheln schimmert das Papier trotzdem hindurch.
+   Die Schicht steht fest im Bildschirm (oben immer hell, unten immer beige)
+   und liegt HINTER dem Inhalt (z-index 0, Inhalt darüber auf 1). Schrift und
+   Farben bleiben dadurch unverfälscht, und beim Scrollen kostet sie nichts.
 
-   STÄRKE: `opacity` bei `.papier-knick` – 0 = glattes Papier, 1 = stark
-   geknittert. Die Körnung hat ihre eigene Stärke bei `::after`. */
+   VERLAUF ÄNDERN: Die Prozentzahlen sagen, wo welcher Ton erreicht ist.
+   Oben bleibt es bis 15 % hell, ab 66 % ist es ganz beige.
+   LIEBER ÜBER DIE GANZE SEITENLÄNGE? Bei `.papier-verlauf` `position: fixed`
+   durch `position: absolute` ersetzen – dann ist der Seitenanfang hell und
+   erst die Fußzeile beige. */
 .papier {
   position: relative;
   isolation: isolate;
   background-color: var(--papier);
 }
-.papier-knick {
+.papier-verlauf {
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  mix-blend-mode: multiply;
-  opacity: 0.6;
-  background-image:
-    linear-gradient(
-      96deg,
-      transparent 0 36.4%,
-      rgba(255, 255, 255, 0.6) 36.6%,
-      var(--papier-rand) 37.2%,
-      transparent 38%
-    ),
-    linear-gradient(
-      178deg,
-      transparent 0 61%,
-      rgba(255, 255, 255, 0.5) 61.3%,
-      var(--papier-rand) 61.9%,
-      transparent 62.6%
-    ),
-    radial-gradient(130% 80% at 50% 10%, transparent 52%, var(--papier-rand) 100%);
+  background-image: linear-gradient(
+    to bottom,
+    var(--papier) 0%,
+    var(--papier) 15%,
+    #f6f3ed 25%,
+    #f1ece2 35%,
+    #e9e0d1 50%,
+    #e4d7c3 60%,
+    var(--papier-unten) 66%,
+    var(--papier-unten) 100%
+  );
 }
-.papier-knick svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-/* Feine Papierkörnung – man sieht sie kaum bewusst, aber die Fläche wirkt
-   dadurch wie Papier und nicht wie eine glatte Bildschirmfläche. */
-.papier-knick::after {
+/* Feine Papierkörnung. Wie in der Vorlage ist der helle obere Teil glatt und
+   die Körnung wird nach unten hin, im Beige, sichtbar – dafür sorgt die
+   Maske. Stärke: `opacity`. */
+.papier-verlauf::after {
   content: "";
   position: absolute;
   inset: 0;
-  opacity: 0.65;
+  mix-blend-mode: multiply;
+  opacity: 0.6;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 15%, #000 65%);
+  mask-image: linear-gradient(to bottom, transparent 15%, #000 65%);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.22'/%3E%3C/svg%3E");
 }
 .papier-inhalt {

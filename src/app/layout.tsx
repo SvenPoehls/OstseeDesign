@@ -87,7 +87,7 @@ export default function RootLayout({
             noch seitlich versetzter Animationsstart) darf die Seite breiter
             machen als den Bildschirm. Anders als „hidden" bricht „clip" die
             mitlaufende Kopfzeile nicht.
-            `papier` + <Papiergrund />: der zerknitterte Papierbogen hinter
+            `papier` + <Papiergrund />: der Verlauf von hell nach beige hinter
             allem (siehe globals.css, Abschnitt PAPIER). */}
         <div className="papier min-h-screen overflow-x-clip">
           <Papiergrund />

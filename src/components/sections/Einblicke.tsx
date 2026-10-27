@@ -39,9 +39,9 @@ export default function Einblicke() {
         <div data-reveal className="max-w-[44rem]">
           <Etikett>Einblicke</Etikett>
           <h2 className="titel mt-6">
-            Aus der{" "}
+            Aus unserer{" "}
             <span className="markiert" style={{ "--ton": farben[2].ton } as CSSProperties}>
-              Werkstatt
+              Arbeit
             </span>
           </h2>
         </div>

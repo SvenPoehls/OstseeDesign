@@ -36,10 +36,13 @@ export const openingHours: { days: string; time: string; byAppointment?: boolean
 // Externer Textilshop – wird verlinkt, nicht integriert.
 export const textilShopUrl = "https://ostseetextilien.de/";
 
-// Leistungen als Kacheln der Startseite.
+// Leistungen – Reihenfolge, Mottos und Beschreibungen wie auf der bisherigen
+// Website ostseedesign.de. Nur dort Genanntes steht hier als Leistung.
 export type Service = {
   id: string;
   title: string;
+  // Kurzer Leitspruch der Leistung (von der bisherigen Website).
+  motto?: string;
   teaser: string;
   points: string[];
   icon: "signage" | "textile" | "print" | "shop";
@@ -51,60 +54,50 @@ export type Service = {
 
 export const services: Service[] = [
   {
-    id: "textilveredelung",
-    title: "Textilveredelung",
+    id: "werbetechnik",
+    title: "Werbetechnik",
+    motto: "Zeigen Sie, was Sie können!",
     teaser:
-      "Unser größter Bereich. Ihr Logo auf Arbeitsjacken, Poloshirts oder Vereinstrikots. Gestickt oder per Transfer aufgebracht, je nachdem, was länger halten muss.",
-    points: [
-      "Stickerei, auch auf Jacken und Mützen",
-      "Verschiedene Transfertechniken",
-      "Aufnäher und Applikationen",
-    ],
-    icon: "textile",
+      "Beschriftungen aller Art und auf nahezu jedem Medium: Fahrzeuge, Schilder, Fenster, Displays und mehr.",
+    points: ["Fahrzeugbeschriftungen", "Schilder und Displays", "Fensterbeschriftungen"],
+    icon: "signage",
     bilder: [
-      "Stickmaschine, Nahaufnahme vom Garn",
-      "Bestickte Arbeitsjacke mit Firmenlogo",
-      "Mütze und Aufnäher, fertig veredelt",
+      "Beschriftetes Firmenfahrzeug",
+      "Schild an der Hauswand",
+      "Beschriftetes Schaufenster",
     ],
   },
   {
-    id: "werbetechnik",
-    title: "Werbetechnik",
+    id: "textilveredelung",
+    title: "Textilveredelung",
+    motto: "Kleidung vereint in Arbeit & Freizeit!",
     teaser:
-      "Wir bekleben fast alles: Transporter, Schaufenster, Bauzäune. Auch das Schild an der Hauswand kommt von uns.",
-    points: [
-      "Fahrzeuge, vom Aufkleber bis zur Vollfolierung",
-      "Schilder, Displays und Bauzaunbanner",
-      "Fenster und Schaufenster",
-    ],
-    icon: "signage",
+      "Individuelle und hochwertige Applikationen – mit verschiedenen Transfertechniken und Stickereien. Für Berufsbekleidung genauso wie für die Freizeit.",
+    points: ["Stickereien", "Verschiedene Transfertechniken", "Individuelle Applikationen"],
+    icon: "textile",
     bilder: [
-      "Frisch beschrifteter Transporter",
-      "Beklebtes Schaufenster",
-      "Firmenschild an der Hauswand",
+      "Stickerei, Nahaufnahme",
+      "Berufsbekleidung mit Firmenlogo",
+      "Freizeitkleidung mit Transfer",
     ],
   },
   {
     id: "drucksachen",
     title: "Drucksachen",
-    teaser:
-      "Visitenkarten, Flyer, Briefpapier, Stempel. Gestaltet passend zu dem, was schon am Auto und am Schild steht.",
-    points: ["Visitenkarten und Briefpapier", "Flyer und Formulare", "Stempel"],
+    motto: "Mit Druck präsent!",
+    teaser: "Briefpapier, Visitenkarten, Stempel und vieles mehr.",
+    points: ["Briefpapier", "Visitenkarten", "Stempel"],
     icon: "print",
-    bilder: [
-      "Visitenkarten auf dem Werkstatttisch",
-      "Briefpapier und Flyer im Stapel",
-      "Stempel in der Werkstatt",
-    ],
+    bilder: ["Visitenkarten", "Briefpapier", "Stempel"],
   },
   {
     id: "textilshop",
     title: "Textilshop",
     teaser:
-      "Im Shop suchen Sie sich in Ruhe Kleidung aus. Was Sie bestellen, besticken wir auf Wunsch hier bei uns.",
-    points: ["Arbeits- und Freizeitkleidung", "Bestellung direkt im Shop", "Veredelung auf Wunsch"],
+      "Unser Onlineshop für Textilien: ostseetextilien.de – passend zur Textilveredelung.",
+    points: ["Eigener Onlineshop", "Berufsbekleidung und mehr", "ostseetextilien.de"],
     icon: "shop",
-    bilder: ["Stapel veredelter Arbeitskleidung"],
+    bilder: ["Kleidung aus dem Textilshop"],
     external: textilShopUrl,
   },
 ];
@@ -128,7 +121,10 @@ export const nav: { label: string; href: string; external?: boolean }[] =
     external: Boolean(s.external),
   }));
 
-// ── „So läuft Ihr Auftrag" – Ablauf eines Projekts ───────────────────────
+// ── Ablauf eines Auftrags ─────────────────────────────────────────────────
+// Bewusst allgemein gehalten: Die bisherige Website nennt keine Einzelheiten
+// zum Ablauf (Preise, Korrekturen, Lieferung …). Solche Zusagen erst
+// eintragen, wenn Ostseedesign sie bestätigt hat.
 export type ProcessStep = {
   id: string;
   title: string;
@@ -138,38 +134,37 @@ export type ProcessStep = {
 
 export const processSteps: ProcessStep[] = [
   {
-    id: "gespraech",
-    title: "Erst mal reden",
-    body: "Rufen Sie an oder kommen Sie in der Werkstatt vorbei. Sie sagen, was Sie brauchen: bestickte Poloshirts fürs Team, ein Schild, ein beschriftetes Fahrzeug oder alles zusammen. Wir sagen Ihnen, was davon geht und was es kostet.",
-    points: ["Das erste Gespräch kostet nichts", "Wir sagen, welche Technik passt", "Preis steht fest, bevor es losgeht"],
+    id: "kontakt",
+    title: "Sprechen Sie uns an",
+    body: "Rufen Sie uns an, schreiben Sie uns oder kommen Sie zu den Öffnungszeiten am Rosseer Weg vorbei und erzählen Sie, was Sie vorhaben.",
+    points: ["Telefon, E-Mail oder persönlich", "Freitag nach Vereinbarung"],
   },
   {
-    id: "entwurf",
-    title: "Der erste Entwurf",
-    body: "Wir bereiten Ihr Logo auf und zeigen Ihnen vorab, wie es aussieht: auf dem Shirt, auf dem Schild oder am Fahrzeug. Sie müssen sich also nichts vorstellen.",
-    points: ["Ansicht am jeweiligen Produkt", "Wir bereiten Ihr Logo auf", "Vorschläge zu Farbe, Größe und Platzierung"],
+    id: "paket",
+    title: "Gemeinsam planen",
+    body: "Gemeinsam formen wir ein Paket – ob nur die Fahrzeugbeschriftung oder das komplette Paket mit Drucksachen und Berufsbekleidung.",
+    points: ["Einzelne Leistung oder ganzes Paket", "Alles aus einer Hand"],
   },
   {
-    id: "feinschliff",
-    title: "Änderungen? Kein Problem",
-    body: "Der erste Entwurf sitzt selten schon perfekt. Sagen Sie einfach, was anders soll: Logo größer, andere Farbe, Schriftzug woanders. Produziert wird erst, wenn Sie zufrieden sind.",
-    points: ["Korrekturen sind eingerechnet", "Immer derselbe Ansprechpartner", "Nichts läuft ohne Ihre Freigabe"],
+    id: "gestaltung",
+    title: "Individuell gestaltet",
+    body: "Ihr Auftritt wird auf Sie zugeschnitten – auf dem Fahrzeug, auf der Kleidung oder auf dem Papier.",
+    points: ["Werbetechnik, Textil und Druck", "Ein einheitlicher Auftritt"],
   },
   {
     id: "umsetzung",
-    title: "Wir setzen es um",
-    body: "Gestickt, bedruckt, foliert oder gedruckt wird bei uns am Rosseer Weg. Textilien und Drucksachen holen Sie ab oder wir schicken sie Ihnen. Was angebracht werden muss, montieren wir vor Ort.",
-    points: ["Fertigung in der eigenen Werkstatt", "Abholung, Versand oder Montage", "Nachbestellen geht jederzeit"],
+    title: "Hochwertig umgesetzt",
+    body: "Beschriftung, Stickerei, Transfer oder Druck: Wir setzen Ihr Paket um – mit über 30 Jahren Erfahrung.",
+    points: ["Hochwertige Applikationen", "Ihr Werbepartner in Eckernförde"],
   },
 ];
 
-// ── „Darauf können Sie sich verlassen" (dunkler Abschnitt der Startseite)
-// Drei Zusagen aus dem Ablauf, hier noch einmal hervorgehoben. Bewusst nur
-// drei – mehr wirkt wie eine Liste, die keiner liest.
+// ── Drei Punkte im Band „Alles aus einer Hand" (und in der Fußzeile)
+// Alle drei stehen so auf der bisherigen Website.
 export const versprechen: string[] = [
-  "Das erste Gespräch kostet nichts",
-  "Preis steht fest, bevor es losgeht",
-  "Immer derselbe Ansprechpartner",
+  "Seit über 30 Jahren in Werbetechnik und Textilveredelung",
+  "Alles aus einer Hand – vom Fahrzeug bis zur Berufsbekleidung",
+  "Individuelle und hochwertige Umsetzung",
 ];
 
 // ── Kundenstimmen ────────────────────────────────────────────────────────
@@ -185,7 +180,7 @@ export type Kundenstimme = {
 
 export const kundenstimmen: Kundenstimme[] = [
   {
-    text: "Hier steht später ein echtes Zitat – zum Beispiel über bestickte Arbeitskleidung fürs ganze Team.",
+    text: "Hier steht später ein echtes Zitat – zum Beispiel über bestickte Berufsbekleidung.",
     name: "Name der Kundin oder des Kunden",
     firma: "Firma, Ort",
     platzhalter: true,
@@ -197,7 +192,7 @@ export const kundenstimmen: Kundenstimme[] = [
     platzhalter: true,
   },
   {
-    text: "Hier steht später ein echtes Zitat – zum Beispiel über Visitenkarten und Briefpapier, die zum Schild passen.",
+    text: "Hier steht später ein echtes Zitat – zum Beispiel über Visitenkarten und Briefpapier.",
     name: "Name der Kundin oder des Kunden",
     firma: "Verein, Ort",
     platzhalter: true,
@@ -205,23 +200,25 @@ export const kundenstimmen: Kundenstimme[] = [
 ];
 
 // ── Häufige Fragen ───────────────────────────────────────────────────────
-// Bewusst nur drei, dafür groß. Jede Antwort beruht auf den Angaben weiter
-// oben in dieser Datei. Weitere Fragen einfach unten anhängen.
+// Bewusst nur drei, dafür groß. Die Antworten geben nur wieder, was auch auf
+// der bisherigen Website steht (Leistungen, „Alles aus einer Hand",
+// Öffnungszeiten, Kontakt). Weitere Fragen einfach unten anhängen.
 export const fragen: { frage: string; antwort: string }[] = [
   {
-    frage: "Was kostet das erste Gespräch?",
+    frage: "Was bieten Sie an?",
     antwort:
-      "Nichts. Rufen Sie an oder kommen Sie in der Werkstatt vorbei. Wir sagen Ihnen, was geht und was es kostet – der Preis steht fest, bevor es losgeht.",
+      "Werbetechnik – Beschriftungen aller Art, zum Beispiel für Fahrzeuge, Schilder, Fenster und Displays. Textilveredelung – Stickereien, verschiedene Transfertechniken und individuelle Applikationen. Drucksachen – Briefpapier, Visitenkarten, Stempel und vieles mehr. Dazu kommt unser Textilshop ostseetextilien.de.",
   },
   {
-    frage: "Kann ich vorher sehen, wie es aussieht?",
+    frage: "Bekomme ich alles aus einer Hand?",
     antwort:
-      "Ja. Wir bereiten Ihr Logo auf und zeigen Ihnen vorab, wie es aussieht: auf dem Shirt, auf dem Schild oder am Fahrzeug. Korrekturen sind eingerechnet, produziert wird erst, wenn Sie zufrieden sind.",
+      "Ja. Gemeinsam formen wir ein Paket – ob nur die Fahrzeugbeschriftung oder das komplette Paket mit Drucksachen und Berufsbekleidung.",
   },
   {
-    frage: "Wie komme ich an die fertige Arbeit?",
-    antwort:
-      "Textilien und Drucksachen holen Sie ab oder wir schicken sie Ihnen. Was angebracht werden muss, montieren wir vor Ort. Nachbestellen geht jederzeit.",
+    frage: "Wann und wie erreiche ich Sie?",
+    antwort: `${openingHours
+      .map((z) => `${z.days}: ${z.time}`)
+      .join(" · ")}. Telefon ${company.phoneDisplay}, E-Mail ${company.email}, oder Sie kommen am ${company.street} in ${company.city} vorbei.`,
   },
 ];
 

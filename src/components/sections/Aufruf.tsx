@@ -18,10 +18,10 @@ export default function Aufruf() {
           Was haben Sie <span style={{ color: farben[0].ton }}>vor?</span>
         </h2>
         <p className="mt-6 max-w-[34rem] text-[1.1rem] leading-relaxed" style={{ color: BAND_LEISE }}>
-          Ein Anruf reicht meistens schon. Sagen Sie kurz, worum es geht.
+          Ob Fahrzeugbeschriftung, Berufsbekleidung oder Drucksachen – sprechen Sie uns an.
         </p>
         <p className="mt-4 text-[1.15rem] font-extrabold" style={{ color: BAND_AKZENT }}>
-          Den Rest klären wir zusammen.
+          Wir sind für Sie da.
         </p>
 
         {/* Gestrichelter S-Bogen nach unten, der genau in der Pfeilspitze

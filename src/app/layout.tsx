@@ -28,7 +28,7 @@ const schibsted = localFont({
 // SEO-Grundlagen: sprechender Titel mit lokalem Bezug, Beschreibung,
 // Open-Graph/Twitter-Karten und deutsche Sprache.
 const description =
-  "Ostseedesign am Rosseer Weg in Eckernförde: Fahrzeuge beschriften, Kleidung besticken, Schilder und Drucksachen. Den Betrieb gibt es seit über 30 Jahren.";
+  "Ostseedesign – Ihr Werbepartner in Eckernförde. Seit über 30 Jahren Werbetechnik und Textilveredelung: Beschriftungen aller Art, Stickereien, Transfers und Drucksachen.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.ostseedesign.de"),

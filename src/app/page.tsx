@@ -52,7 +52,7 @@ function localBusinessJsonLd() {
     "@type": "LocalBusiness",
     name: company.fullName,
     description:
-      "Fahrzeugbeschriftung, Schilder, Stickerei und Drucksachen. Werkstatt am Rosseer Weg in Eckernförde.",
+      "Werbetechnik, Textilveredelung und Drucksachen in Eckernförde – alles aus einer Hand.",
     telephone: company.phoneHref,
     faxNumber: company.faxDisplay,
     email: company.email,

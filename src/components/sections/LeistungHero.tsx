@@ -59,8 +59,8 @@ export default function LeistungHero({
             className="h-3 w-3 rounded-full"
             style={{ backgroundColor: hauptton }}
           />
-          Leistung · Farbe {String(index + 1).padStart(2, "0")} ·{" "}
-          {farben[index].name}
+          {/* Der Leitspruch der Leistung von der bisherigen Website. */}
+          {service.motto ?? service.title}
         </p>
 
         <h1 className="auftritt mt-4 text-[clamp(1.6rem,7.6vw,5.2rem)] font-black uppercase leading-[0.97] tracking-[-0.03em] [--verz:420ms]">

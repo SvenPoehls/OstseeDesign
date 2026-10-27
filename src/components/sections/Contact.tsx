@@ -32,8 +32,8 @@ export default function Contact() {
           <Etikett>Kontakt</Etikett>
           <h2 className="titel mt-6">So erreichen Sie uns</h2>
           <p className="mt-6 max-w-[32rem] text-[1.05rem] leading-relaxed" style={{ color: LEISE }}>
-            Rufen Sie am besten kurz an, bevor Sie herkommen – dann hat auch
-            jemand Zeit für Sie.
+            Wir sind für Sie da – telefonisch, per E-Mail oder persönlich bei
+            uns in {company.city}.
           </p>
 
           <ul className="mt-9 grid gap-3 sm:grid-cols-2">
@@ -120,9 +120,6 @@ export default function Contact() {
               </div>
             ))}
           </dl>
-          <p className="relative mt-6 border-t border-tinte/10 pt-6 text-[0.95rem] leading-relaxed" style={{ color: LEISE }}>
-            Parken direkt vor dem Haus, größere Fahrzeuge fahren auf den Hof.
-          </p>
         </div>
       </div>
     </section>

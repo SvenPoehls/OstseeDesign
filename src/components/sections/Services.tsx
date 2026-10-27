@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 import Link from "next/link";
 import Etikett from "@/components/ui/Etikett";
-import { KNOPF, KNOPF_SCHRIFT, LEISE, farben } from "@/lib/farben";
+import { AKZENT_TEXT, KNOPF, KNOPF_SCHRIFT, LEISE, farben } from "@/lib/farben";
 import { leistungsLink, services, textilShopUrl } from "@/lib/site";
 
 // Leistungen: oben Etikett und Überschrift, darunter vier Karten – je
@@ -29,9 +29,9 @@ export default function Services() {
         <div data-reveal className="max-w-[44rem]">
           <Etikett>Leistungen</Etikett>
           <h2 className="titel mt-6">
-            Vier Farben,{" "}
+            Unsere{" "}
             <span className="markiert" style={{ "--ton": `${farben[1].ton}66` } as CSSProperties}>
-              eine Werkstatt
+              Leistungen
             </span>
           </h2>
         </div>
@@ -67,6 +67,11 @@ export default function Services() {
                 <h3 className="relative mt-6 text-[1.35rem] font-black uppercase tracking-[-0.02em]">
                   {service.title}
                 </h3>
+                {service.motto && (
+                  <p className="relative mt-1.5 text-[0.78rem] font-bold uppercase tracking-[0.1em]" style={{ color: AKZENT_TEXT }}>
+                    {service.motto}
+                  </p>
+                )}
                 <p className="relative mt-3 text-[0.95rem] leading-relaxed" style={{ color: LEISE }}>
                   {service.teaser}
                 </p>
@@ -124,8 +129,8 @@ export default function Services() {
           className="mt-12 flex flex-col gap-6 rounded-kachel bg-white/60 p-6 sm:p-8 lg:flex-row lg:items-center lg:justify-between"
         >
           <p className="text-[1.15rem] font-semibold leading-snug">
-            Sie wissen noch nicht genau, was Sie brauchen?{" "}
-            <em className="font-extrabold not-italic">Wir sagen Ihnen, welche Technik passt.</em>
+            Mehrere Leistungen zusammen?{" "}
+            <em className="font-extrabold not-italic">Gemeinsam formen wir ein Paket.</em>
           </p>
           <div className="flex flex-wrap gap-3">
             <a

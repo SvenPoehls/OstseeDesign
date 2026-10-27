@@ -5,9 +5,10 @@ import { company, versprechen } from "@/lib/site";
 // Erstes farbiges Band der Startseite (im Vorbild der dunkle Block direkt
 // unter dem Kopfbereich). Zweispaltig:
 //
-//   links   Etikett, Überschrift mit eingefärbtem Wort, kurzer Text
-//   rechts  „Darauf können Sie sich verlassen": drei Zusagen aus dem Ablauf
-//           als große Zeilen mit Häkchen, darunter ein Schlusssatz in BAND_AKZENT
+//   links   „Ihr Werbepartner in Eckernförde", „Alles aus einer Hand!" und
+//           der Text dazu – wie auf der bisherigen Website
+//   rechts  „Darauf können Sie sich verlassen": drei Punkte (`versprechen` in
+//           site.ts) als große Zeilen mit Häkchen, darunter die Telefonnummer
 //
 // Auf dem Band werden Wörter direkt eingefärbt (Akzentfarbe), nicht
 // mit dem Marker hinterlegt – siehe `.markiert` in globals.css.
@@ -18,14 +19,13 @@ export default function Werkstatt() {
     <section className="abschnitt band" style={{ backgroundColor: BAND, color: BAND_SCHRIFT }}>
       <div className="seitenrand grid gap-12 lg:grid-cols-2 lg:gap-20">
         <div data-reveal>
-          <Etikett band>Seit über {company.yearsExperience} Jahren in {company.city}</Etikett>
+          <Etikett band>Ihr Werbepartner in {company.city}</Etikett>
           <h2 className="titel mt-6">
-            So <span style={{ color: farben[0].ton }}>arbeiten</span> wir
+            Alles aus <span style={{ color: farben[0].ton }}>einer Hand</span>
           </h2>
           <p className="mt-6 max-w-[34rem] text-[1.08rem] leading-relaxed" style={{ color: BAND_LEISE }}>
-            Gestickt, bedruckt, foliert oder gedruckt wird bei uns am{" "}
-            {company.street}. Drucksachen gestalten wir passend zu dem, was
-            schon am Auto und am Schild steht.
+            Gemeinsam formen wir ein Paket. Ob Fahrzeugbeschriftungen oder das
+            komplette Paket mit Drucksachen und Berufsbekleidung.
           </p>
         </div>
 
@@ -64,7 +64,10 @@ export default function Werkstatt() {
             ))}
           </ul>
           <p className="mt-7 text-[1.15rem] font-extrabold" style={{ color: BAND_AKZENT }}>
-            Produziert wird erst, wenn Sie zufrieden sind.
+            Rufen Sie uns an:{" "}
+            <a href={`tel:${company.phoneHref}`} className="whitespace-nowrap underline decoration-2 underline-offset-4">
+              {company.phoneDisplay}
+            </a>
           </p>
         </div>
       </div>

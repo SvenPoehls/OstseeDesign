@@ -52,8 +52,8 @@ Reihenfolge der Startseite:
 
 | Abschnitt | Vorbild | Inhalt |
 | --- | --- | --- |
-| Kopfbereich | Hero | links Schlagzeile mit Farbkreisen dahinter, Kennzahlen (30+ Jahre · 0 € fürs erste Gespräch · 1 fester Ansprechpartner), Knöpfe · rechts ein großes Foto (Platzhalter) und das dunkle Band „Jetzt kontaktieren" (statt Video) |
-| So arbeiten wir (Band) | „Move forward…" | drei Zusagen als große Zeilen, einfarbige Häkchen |
+| Kopfbereich | Hero | links Schlagzeile mit Farbkreisen dahinter, Kennzahlen (30+ Jahre Erfahrung · 100 % aus einer Hand · Mo–Do für Sie da), Knöpfe · rechts ein großes Foto (Platzhalter) und das dunkle Band „Jetzt kontaktieren" (statt Video) |
+| Alles aus einer Hand (Band) | „Move forward…" | „Ihr Werbepartner in Eckernförde", drei Punkte als große Zeilen mit einfarbigen Häkchen, darunter „Rufen Sie uns an" |
 | Leistungen | „Our Services" | vier Karten 01–04 als **Treppe**: jede ein Stück tiefer als die vorige |
 | Einblicke | „Favorite Work" | **drei Fotos**, verschieden groß, schräg und versetzt wie Abzüge auf dem Werktisch, mit Klebestreifen |
 | Kundenstimmen (Band) | „What our clients are saying" | Karussell mit Pfeilen, Punkten und Pause-Knopf – **zurzeit Platzhalter** |
@@ -62,6 +62,22 @@ Reihenfolge der Startseite:
 | Schlussaufruf (Band) | „Ready for the next chapter" | mittig, mit gestricheltem S-Bogen, der gerade in die Pfeilspitze läuft |
 | Kontakt | „Get in touch" | Kontaktwege, QR-Feld, Öffnungszeiten (statt Formular: ohne Server gäbe es niemanden, der es verschickt) |
 | Fußzeile (Band) | Footer | vier Spalten: Marke, Seiten, Kontakt, Öffnungszeiten |
+
+## Die Texte
+
+**Inhalte und Leistungen richten sich nach der bisherigen Website
+ostseedesign.de.** Von dort stammen die Reihenfolge (Werbetechnik,
+Textilveredelung, Drucksachen, Textilshop), die Leitsprüche („Zeigen Sie,
+was Sie können!", „Kleidung vereint in Arbeit & Freizeit!", „Mit Druck
+präsent!"), die Leistungsbeschreibungen, „Alles aus einer Hand!",
+„Gemeinsam formen wir ein Paket …", „Ihr Werbepartner in Eckernförde",
+„Seit über 30 Jahren …", „Wir sind für Sie da" sowie Kontakt und
+Öffnungszeiten.
+
+**Keine eigenen Zusagen erfinden.** Preise, kostenlose Beratung,
+Korrekturen, Lieferung, Montage, Fristen o. Ä. erst eintragen, wenn
+Ostseedesign sie bestätigt hat. Der Ablauf ist deshalb bewusst allgemein
+gehalten (siehe Kommentar bei `processSteps` in `site.ts`).
 
 ## Die Entscheidungen
 
@@ -192,8 +208,9 @@ Screenreader ausgeblendet.
    die `…_TEXT`-Fassungen aus `farben.ts` nehmen.
 5. **Animation sparsam.** Neue bewegte Elemente brauchen einen Grund;
    Dauerbewegung nur, wo sie nichts kostet.
-6. **Konkret schreiben.** „Stickerei, auch auf Jacken und Mützen" statt
-   „individuelle Lösungen für jeden Bedarf".
+6. **Konkret und belegt schreiben.** Nur Leistungen und Aussagen, die
+   Ostseedesign selbst macht (bisherige Website oder Bestätigung), keine
+   erfundenen Zusagen.
 
 ## Wo was steht
 

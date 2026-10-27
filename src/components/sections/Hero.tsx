@@ -14,8 +14,9 @@ import { company } from "@/lib/site";
 //           Stelle, an der im Vorbild das Video steht. Bewusst KEIN
 //           Hintergrundbild.
 //
-// Die Kennzahlen stammen aus site.ts (Jahre; „Das erste Gespräch kostet
-// nichts" und „Immer derselbe Ansprechpartner" aus dem Ablauf).
+// Die Kennzahlen geben nur wieder, was auch auf der bisherigen Website steht:
+// „seit über 30 Jahren", „Alles aus einer Hand!" und die Öffnungszeiten
+// (Montag bis Donnerstag, Freitag nach Vereinbarung).
 //
 // Text über den Kreisen benutzt LEISE_AUF_KREISEN – die Kreise machen den
 // Untergrund dort dunkler (siehe farben.ts).
@@ -25,9 +26,8 @@ import { company } from "@/lib/site";
 export default function Hero() {
   const kennzahlen = [
     { zahl: `${company.yearsExperience}+`, text: "Jahre Erfahrung" },
-    { zahl: "0 €", text: "fürs erste Gespräch" },
-    // ­ = weiches Trennzeichen: Auf schmalen Handys wird hier getrennt.
-    { zahl: "1", text: "fester Ansprech­partner" },
+    { zahl: "100 %", text: "aus einer Hand" },
+    { zahl: "Mo–Do", text: "für Sie da" },
   ];
 
   return (
@@ -77,8 +77,9 @@ export default function Hero() {
             className="auftritt mt-7 max-w-[34rem] text-[1.1rem] leading-relaxed [--verz:540ms]"
             style={{ color: LEISE_AUF_KREISEN }}
           >
-            Wir besticken und bedrucken Kleidung, beschriften Fahrzeuge und
-            machen Schilder. Alles in einer Werkstatt.
+            Seit über {company.yearsExperience} Jahren stehen wir für
+            Werbetechnik und Textilveredelung – dazu kommen Drucksachen. Alles
+            aus einer Hand.
           </p>
 
           {/* Kennzahlen, durch feine Linien getrennt */}
@@ -125,7 +126,7 @@ export default function Hero() {
       {/* ── rechts: Foto und „Jetzt kontaktieren" ───────────────────────── */}
       <div className="auftritt [--verz:600ms]">
         <Bild
-          note="Foto: die Werkstatt am Rosseer Weg"
+          note="Foto: Ostseedesign in Eckernförde"
           ton={farben[2].ton}
           className="aspect-[4/3] w-full lg:aspect-[1/1]"
         />

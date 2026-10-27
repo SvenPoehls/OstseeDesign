@@ -58,7 +58,7 @@ Reihenfolge der Startseite:
 | Einblicke | „Favorite Work" | **drei Fotos**, verschieden groß, schräg und versetzt wie Abzüge auf dem Werktisch, mit Klebestreifen |
 | Kundenstimmen (Band) | „What our clients are saying" | Karussell mit Pfeilen, Punkten und Pause-Knopf – **zurzeit Platzhalter** |
 | Ablauf | Screenshot 2 | unverändert: Faden mit Nummernkreisen und vier Karten |
-| Häufige Fragen | „FAQ" | **drei Fragen** in großen Kacheln mit Nummer; die erste ist beim Laden offen, es ist **immer nur eine offen**, und Auf- und Zuklappen gleiten weich (`FragenAufklappen.tsx`; ohne Skript übernimmt der gemeinsame `name` der `<details>`); Antworten nur aus Angaben in `site.ts` |
+| Häufige Fragen | „FAQ" | **drei Fragen** in großen Kacheln mit Nummer; die erste ist beim Laden offen, es ist **immer nur eine offen**, und Auf- und Zuklappen gleiten weich (`FragenAufklappen.tsx`; ohne Skript übernimmt der gemeinsame `name` der `<details>`); Antworten nur aus Angaben in `site.ts`. Die Frage nach der Erreichbarkeit zeigt Öffnungszeiten (je Wochentag eine Zeile, Zeit rechts mit gepunkteter Linie) und Kontaktwege als übersichtliche Liste |
 | Schlussaufruf (Band) | „Ready for the next chapter" | mittig, mit gestricheltem S-Bogen, der gerade in die Pfeilspitze läuft |
 | Kontakt | „Get in touch" | Kontaktwege, QR-Feld, Öffnungszeiten (statt Formular: ohne Server gäbe es niemanden, der es verschickt) |
 | Fußzeile (Band) | Footer | vier Spalten: Marke, Seiten, Kontakt, Öffnungszeiten |

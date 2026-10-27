@@ -33,6 +33,16 @@ export const openingHours: { days: string; time: string; byAppointment?: boolean
   { days: "Freitag", time: "nach Vereinbarung", byAppointment: true },
 ];
 
+// Dieselben Zeiten, aber je Wochentag eine Zeile (Montag bis Freitag in
+// richtiger Reihenfolge) – für Stellen, an denen die Zeiten als
+// übersichtliche Liste stehen sollen (z. B. bei den Häufigen Fragen).
+const WOCHE = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"];
+export const oeffnungszeitenProTag = openingHours
+  .flatMap((z) =>
+    z.days.split(", ").map((tag) => ({ tag, time: z.time, byAppointment: z.byAppointment }))
+  )
+  .sort((a, b) => WOCHE.indexOf(a.tag) - WOCHE.indexOf(b.tag));
+
 // Externer Textilshop – wird verlinkt, nicht integriert.
 export const textilShopUrl = "https://ostseetextilien.de/";
 
@@ -203,7 +213,9 @@ export const kundenstimmen: Kundenstimme[] = [
 // Bewusst nur drei, dafür groß. Die Antworten geben nur wieder, was auch auf
 // der bisherigen Website steht (Leistungen, „Alles aus einer Hand",
 // Öffnungszeiten, Kontakt). Weitere Fragen einfach unten anhängen.
-export const fragen: { frage: string; antwort: string }[] = [
+// `erreichbarkeit: true` → unter der Antwort stehen die Öffnungszeiten (je Tag
+// eine Zeile) und die Kontaktwege übersichtlich als Liste (siehe Fragen.tsx).
+export const fragen: { frage: string; antwort: string; erreichbarkeit?: boolean }[] = [
   {
     frage: "Was bieten Sie an?",
     antwort:
@@ -216,9 +228,8 @@ export const fragen: { frage: string; antwort: string }[] = [
   },
   {
     frage: "Wann und wie erreiche ich Sie?",
-    antwort: `${openingHours
-      .map((z) => `${z.days}: ${z.time}`)
-      .join(" · ")}. Telefon ${company.phoneDisplay}, E-Mail ${company.email}, oder Sie kommen am ${company.street} in ${company.city} vorbei.`,
+    antwort: "Wir sind für Sie da – zu diesen Zeiten und auf diesen Wegen:",
+    erreichbarkeit: true,
   },
 ];
 

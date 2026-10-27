@@ -1,7 +1,7 @@
 import Etikett from "@/components/ui/Etikett";
 import FragenAufklappen from "@/components/ui/FragenAufklappen";
 import { LEISE, SCHRIFT_AUF, farben } from "@/lib/farben";
-import { company, fragen } from "@/lib/site";
+import { company, fragen, oeffnungszeitenProTag } from "@/lib/site";
 
 // Häufige Fragen: links Etikett, Überschrift und der Hinweis aufs Telefon
 // (bleibt beim Scrollen stehen), rechts nur drei Fragen – dafür große
@@ -66,16 +66,81 @@ export default function Fragen() {
                   </span>
                 </summary>
                 <p
-                  className="max-w-[44rem] px-6 pb-8 text-[1.05rem] leading-relaxed sm:pb-10 sm:pl-[6.6rem] sm:pr-10 sm:text-[1.12rem]"
+                  className={`max-w-[44rem] px-6 text-[1.05rem] leading-relaxed sm:pl-[6.6rem] sm:pr-10 sm:text-[1.12rem] ${
+                    f.erreichbarkeit ? "pb-5" : "pb-8 sm:pb-10"
+                  }`}
                   style={{ color: LEISE }}
                 >
                   {f.antwort}
                 </p>
+                {f.erreichbarkeit && <Erreichbarkeit />}
               </details>
             );
           })}
         </div>
       </div>
     </section>
+  );
+}
+
+// Antwort auf „Wann und wie erreiche ich Sie?" – übersichtlich statt als
+// langer Satz:
+//   links   die Öffnungszeiten, je Wochentag eine Zeile, die Zeit rechts,
+//           dazwischen eine gepunktete Linie (wie auf der bisherigen Website)
+//   rechts  Telefon, E-Mail und Anschrift untereinander
+// Auf dem Handy steht beides untereinander.
+function Erreichbarkeit() {
+  const wege = [
+    { art: "Telefon", wert: company.phoneDisplay, href: `tel:${company.phoneHref}` },
+    { art: "E-Mail", wert: company.email, href: `mailto:${company.email}` },
+    { art: "Anschrift", wert: `${company.street}, ${company.zip} ${company.city}` },
+  ];
+  return (
+    <div className="grid gap-8 px-6 pb-9 sm:pb-10 sm:pl-[6.6rem] sm:pr-10 md:grid-cols-[1.15fr_0.85fr] md:gap-10">
+      <div>
+        <h3 className="text-[0.75rem] font-bold uppercase tracking-[0.14em]" style={{ color: LEISE }}>
+          Öffnungszeiten
+        </h3>
+        <dl className="mt-3">
+          {oeffnungszeitenProTag.map((z) => (
+            <div key={z.tag} className="flex items-baseline gap-3 py-1.5 text-[1rem]">
+              <dt className="shrink-0 font-semibold">{z.tag}</dt>
+              <span aria-hidden="true" className="min-w-4 flex-1 translate-y-[-0.3em] border-b-2 border-dotted border-[#0f1b2d]/20" />
+              <dd
+                className={`shrink-0 whitespace-nowrap ${z.byAppointment ? "" : "font-extrabold"}`}
+                style={z.byAppointment ? { color: LEISE } : undefined}
+              >
+                {z.time}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+      <div>
+        <h3 className="text-[0.75rem] font-bold uppercase tracking-[0.14em]" style={{ color: LEISE }}>
+          Kontakt
+        </h3>
+        <ul className="mt-3 space-y-3">
+          {wege.map((w) => (
+            <li key={w.art}>
+              <span className="block text-[0.8rem]" style={{ color: LEISE }}>
+                {w.art}
+              </span>
+              {w.href ? (
+                <a
+                  href={w.href}
+                  className="break-words text-[1rem] font-extrabold underline decoration-2 underline-offset-4"
+                  style={{ textDecorationColor: farben[0].ton }}
+                >
+                  {w.wert}
+                </a>
+              ) : (
+                <span className="text-[1rem] font-extrabold">{w.wert}</span>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
   );
 }

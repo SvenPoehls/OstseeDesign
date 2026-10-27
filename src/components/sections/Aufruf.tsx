@@ -1,26 +1,26 @@
 import Etikett from "@/components/ui/Etikett";
-import { APRICOT, CREME, CREME_LEISE, DUNKEL, TINTE, farben } from "@/lib/farben";
+import { BAND, BAND_AKZENT, BAND_LEISE, BAND_SCHRIFT, KNOPF, KNOPF_SCHRIFT, farben } from "@/lib/farben";
 import { company } from "@/lib/site";
 
-// Schlussaufruf: ein dunkler Abschnitt, alles mittig (im Vorbild „Ready for
+// Schlussaufruf: ein farbiges Band, alles mittig (im Vorbild „Ready for
 // the next chapter"). Unter dem Text schwingt eine gestrichelte Linie nach
 // unten zu den Knöpfen und weiter zum Kontaktbereich.
 //
 // BEWEGUNG: Text erscheint beim Scrollen, die Linie zeichnet sich von oben.
 export default function Aufruf() {
   return (
-    <section className="abschnitt dunkel" style={{ backgroundColor: DUNKEL, color: CREME }}>
+    <section className="abschnitt band" style={{ backgroundColor: BAND, color: BAND_SCHRIFT }}>
       <div data-reveal className="seitenrand flex flex-col items-center text-center">
-        <Etikett dunkel mitte>
+        <Etikett band mitte>
           Der nächste Schritt
         </Etikett>
         <h2 className="titel mt-6 max-w-[48rem]">
           Was haben Sie <span style={{ color: farben[0].ton }}>vor?</span>
         </h2>
-        <p className="mt-6 max-w-[34rem] text-[1.1rem] leading-relaxed" style={{ color: CREME_LEISE }}>
+        <p className="mt-6 max-w-[34rem] text-[1.1rem] leading-relaxed" style={{ color: BAND_LEISE }}>
           Ein Anruf reicht meistens schon. Sagen Sie kurz, worum es geht.
         </p>
-        <p className="mt-4 text-[1.15rem] font-extrabold" style={{ color: APRICOT }}>
+        <p className="mt-4 text-[1.15rem] font-extrabold" style={{ color: BAND_AKZENT }}>
           Den Rest klären wir zusammen.
         </p>
 
@@ -60,15 +60,15 @@ export default function Aufruf() {
         <div className="mt-5 flex flex-wrap justify-center gap-3">
           <a
             href={`tel:${company.phoneHref}`}
-            className="rounded-full bg-white px-7 py-4 text-[1rem] font-extrabold transition-transform duration-300 hover:-translate-y-0.5"
-            style={{ color: TINTE }}
+            className="rounded-full px-7 py-4 text-[1rem] font-extrabold transition-transform duration-300 hover:-translate-y-0.5"
+            style={{ backgroundColor: KNOPF, color: KNOPF_SCHRIFT }}
           >
             {company.phoneDisplay}
           </a>
           <a
             href={`mailto:${company.email}`}
             className="rounded-full px-7 py-4 text-[1rem] font-bold transition-transform duration-300 hover:-translate-y-0.5"
-            style={{ boxShadow: `inset 0 0 0 1.5px ${CREME_LEISE}80`, color: CREME }}
+            style={{ boxShadow: `inset 0 0 0 1.5px ${BAND_LEISE}80`, color: BAND_SCHRIFT }}
           >
             E-Mail schreiben
           </a>

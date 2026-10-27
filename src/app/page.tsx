@@ -10,16 +10,16 @@ import Contact from "@/components/sections/Contact";
 import Uebergang from "@/components/ui/Uebergang";
 import { company, services } from "@/lib/site";
 
-// STARTSEITE – Farben „Farbfächer", Aufbau nach dem Vorbild mediaquestweb.com
-// (Begründung: DESIGN.md).
+// STARTSEITE – Aufbau nach dem Vorbild mediaquestweb.com, Farben zurzeit
+// Platzhalter (Begründung: DESIGN.md, Farben: src/lib/farben.ts).
 //
 // Die Abschnitte laufen über die ganze Breite; helle (auf dem Verlauf von
-// Weiß zu Beige) und dunkelbraune wechseln sich ab. Gestrichelte Bögen
+// Weiß zu hellem Blaugrau) und farbige Bänder wechseln sich ab. Gestrichelte Bögen
 // (<Uebergang />) verbinden einige davon. Jeder Abschnitt setzt seinen
 // Seitenrand selbst, deshalb hat <main> hier keinen.
 //
-//   Kopfbereich · So arbeiten wir (dunkel) · Leistungen · Einblicke ·
-//   Kundenstimmen (dunkel) · Ablauf · Fragen · Schlussaufruf (dunkel) · Kontakt
+//   Kopfbereich · So arbeiten wir (Band) · Leistungen · Einblicke ·
+//   Kundenstimmen (Band) · Ablauf · Fragen · Schlussaufruf (Band) · Kontakt
 export default function StartseitePage() {
   return (
     <>

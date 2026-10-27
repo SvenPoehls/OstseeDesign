@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 import Bild from "@/components/ui/Bild";
-import { CREME, DUNKEL, KNOPF, KNOPF_SCHRIFT, LEISE_AUF_KREISEN, farben } from "@/lib/farben";
+import { BAND_SCHRIFT, BAND, KNOPF, KNOPF_SCHRIFT, LEISE_AUF_KREISEN, farben } from "@/lib/farben";
 import { company } from "@/lib/site";
 
 // Auftakt der Startseite, zweispaltig wie im Vorbild:
@@ -114,7 +114,7 @@ export default function Hero() {
             <a
               href={`tel:${company.phoneHref}`}
               className="inline-flex items-center gap-2 rounded-full bg-white/80 px-7 py-4 text-[0.92rem] font-bold uppercase tracking-[0.04em] backdrop-blur transition-transform duration-300 hover:-translate-y-0.5"
-              style={{ boxShadow: "inset 0 0 0 1.5px rgba(30,24,20,0.2)" }}
+              style={{ boxShadow: "inset 0 0 0 1.5px rgba(15,27,45,0.2)" }}
             >
               Anrufen
             </a>
@@ -132,8 +132,8 @@ export default function Hero() {
 
         <a
           href="#kontakt"
-          className="dunkel group mt-4 flex items-center gap-4 rounded-full py-2.5 pl-2.5 pr-6 transition-transform duration-300 hover:-translate-y-0.5"
-          style={{ backgroundColor: DUNKEL, color: CREME }}
+          className="group mt-4 flex items-center gap-4 rounded-full py-2.5 pl-2.5 pr-6 transition-transform duration-300 hover:-translate-y-0.5"
+          style={{ backgroundColor: BAND, color: BAND_SCHRIFT }}
         >
           <span
             aria-hidden="true"
@@ -141,11 +141,11 @@ export default function Hero() {
             style={{ backgroundColor: farben[0].ton }}
           >
             {/* Sprechblase */}
-            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="#1e1814" strokeWidth="2.2" strokeLinejoin="round">
+            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="#ffffff" strokeWidth="2.2" strokeLinejoin="round">
               <path d="M4.5 5.5h15v10h-8l-4.5 4v-4h-2.5Z" />
             </svg>
           </span>
-          <span aria-hidden="true" className="h-7 w-px bg-white/20" />
+          <span aria-hidden="true" className="h-7 w-px bg-tinte/15" />
           <span className="min-w-0 flex-1 text-[0.85rem] font-bold uppercase leading-snug tracking-[0.06em]">
             Jetzt kontaktieren
             <span className="block font-medium normal-case tracking-normal">

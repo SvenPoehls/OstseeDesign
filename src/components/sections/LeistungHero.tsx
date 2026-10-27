@@ -52,7 +52,7 @@ export default function LeistungHero({
         </Link>
 
         <p className="auftritt mt-8 flex items-center gap-2 text-[0.88rem] font-bold [--verz:300ms]">
-          {/* Die Farbe als Punkt, die Schrift dunkel – helle Farben wie Karamell
+          {/* Die Farbe als Punkt, die Schrift dunkel – helle Farben wie Hellblau
               wären als Schrift auf Weiß kaum zu lesen. */}
           <span
             aria-hidden="true"
@@ -97,7 +97,7 @@ export default function LeistungHero({
           <a
             href={`tel:${company.phoneHref}`}
             className="rounded-full bg-white/80 px-7 py-4 text-[0.92rem] font-bold uppercase tracking-[0.04em] backdrop-blur transition-transform duration-300 hover:-translate-y-0.5"
-            style={{ boxShadow: "inset 0 0 0 1.5px rgba(30,24,20,0.2)" }}
+            style={{ boxShadow: "inset 0 0 0 1.5px rgba(15,27,45,0.2)" }}
           >
             Anrufen
           </a>

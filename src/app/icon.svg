@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <!-- Favicon: drei Kreise aus den Werkstattfarben, die sich wie Druckfarben
-       überlagern (Karamell, Orange, Mokka). -->
-  <rect width="64" height="64" rx="14" fill="#faf8f5"/>
-  <circle cx="24" cy="26" r="15" fill="#d4a373" fill-opacity="0.9"/>
-  <circle cx="40" cy="26" r="15" fill="#ff7a30" fill-opacity="0.75" style="mix-blend-mode:multiply"/>
-  <circle cx="32" cy="40" r="15" fill="#8a5a3c" fill-opacity="0.75" style="mix-blend-mode:multiply"/>
+  <!-- Favicon: drei Kreise aus den Leistungsfarben, die sich wie Druckfarben
+       überlagern (Türkis, Blau, Hellblau). Farben sind Platzhalter. -->
+  <rect width="64" height="64" rx="14" fill="#f8fafc"/>
+  <circle cx="24" cy="26" r="15" fill="#2fa8a0" fill-opacity="0.85"/>
+  <circle cx="40" cy="26" r="15" fill="#2b6fd6" fill-opacity="0.75" style="mix-blend-mode:multiply"/>
+  <circle cx="32" cy="40" r="15" fill="#6fb2f2" fill-opacity="0.8" style="mix-blend-mode:multiply"/>
 </svg>

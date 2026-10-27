@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { APRICOT, CREME, CREME_LEISE, DUNKEL, farben } from "@/lib/farben";
+import { BAND_AKZENT, BAND_SCHRIFT, BAND_LEISE, BAND, farben } from "@/lib/farben";
 import { company, nav, openingHours, versprechen } from "@/lib/site";
 
-// Fußzeile, dunkel und mehrspaltig wie im Vorbild:
+// Fußzeile, auf dem farbigen Band und mehrspaltig wie im Vorbild:
 //
 //   1  Wortmarke, Unterzeile und vier Zusagen mit Häkchen
 //   2  Seiten (Startseite, die drei Leistungen, Textilshop, Kontakt)
@@ -12,14 +12,14 @@ import { company, nav, openingHours, versprechen } from "@/lib/site";
 // Darunter eine Zeile mit © und dem Rechtlichen, rechts die vier Farben.
 export default function Footer() {
   const year = 2026; // statisch – kein Client-Datum nötig
-  const link = "transition-colors hover:text-white";
+  const link = "transition-colors hover:text-tinte hover:underline";
   const spaltenTitel = "text-[0.78rem] font-bold uppercase tracking-[0.16em]";
 
   return (
-    <footer className="dunkel" style={{ backgroundColor: DUNKEL, color: CREME_LEISE }}>
+    <footer style={{ backgroundColor: BAND, color: BAND_LEISE }}>
       <div className="seitenrand grid gap-12 pb-12 pt-16 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.1fr] lg:gap-10 lg:pt-20">
         <div>
-          <Link href="/" className="inline-flex flex-col leading-none" style={{ color: CREME }}>
+          <Link href="/" className="inline-flex flex-col leading-none" style={{ color: BAND_SCHRIFT }}>
             <span className="text-[1.6rem] font-extrabold tracking-[-0.03em]">ostseedesign</span>
             <span className="mt-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.24em]">
               Werbung &amp; Textilien
@@ -31,7 +31,7 @@ export default function Footer() {
               (punkt) => (
                 <li key={punkt} className="flex items-center gap-2.5">
                   <span aria-hidden="true" className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full" style={{ backgroundColor: farben[0].ton }}>
-                    <svg viewBox="0 0 24 24" className="h-3 w-3" fill="none" stroke="#1e1814" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
+                    <svg viewBox="0 0 24 24" className="h-3 w-3" fill="none" stroke="#ffffff" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M5 12.5 10 17 19 7.5" />
                     </svg>
                   </span>
@@ -43,7 +43,7 @@ export default function Footer() {
         </div>
 
         <nav aria-label="Seiten">
-          <p className={spaltenTitel} style={{ color: APRICOT }}>
+          <p className={spaltenTitel} style={{ color: BAND_AKZENT }}>
             Seiten
           </p>
           <ul className="mt-5 space-y-2.5 text-[0.95rem]">
@@ -74,7 +74,7 @@ export default function Footer() {
         </nav>
 
         <div>
-          <p className={spaltenTitel} style={{ color: APRICOT }}>
+          <p className={spaltenTitel} style={{ color: BAND_AKZENT }}>
             Kontakt
           </p>
           <ul className="mt-5 space-y-2.5 text-[0.95rem]">
@@ -98,14 +98,14 @@ export default function Footer() {
         </div>
 
         <div>
-          <p className={spaltenTitel} style={{ color: APRICOT }}>
+          <p className={spaltenTitel} style={{ color: BAND_AKZENT }}>
             Öffnungszeiten
           </p>
           <dl className="mt-5 space-y-3 text-[0.92rem]">
             {openingHours.map((z) => (
               <div key={z.days}>
                 <dt>{z.days}</dt>
-                <dd className="font-bold" style={{ color: CREME }}>
+                <dd className="font-bold" style={{ color: BAND_SCHRIFT }}>
                   {z.time}
                 </dd>
               </div>
@@ -117,7 +117,7 @@ export default function Footer() {
       <div className="seitenrand">
         <div
           className="flex flex-col gap-4 border-t py-7 text-[0.85rem] sm:flex-row sm:items-center sm:justify-between"
-          style={{ borderColor: `${CREME_LEISE}33` }}
+          style={{ borderColor: `${BAND_LEISE}33` }}
         >
           <p>
             © {year} {company.fullName}

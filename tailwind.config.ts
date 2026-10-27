@@ -15,8 +15,8 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        tinte: "#1e1814", // Schriftfarbe
-        leise: "#463b33", // Nebentext (gleich LEISE in src/lib/farben.ts)
+        tinte: "#0f1b2d", // Schriftfarbe
+        leise: "#3b4a5e", // Nebentext (gleich LEISE in src/lib/farben.ts)
       },
       fontFamily: {
         // Schibsted Grotesk: freundliche, etwas rundliche Grotesk aus

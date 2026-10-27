@@ -1,27 +1,26 @@
-import { APRICOT, CREME_LEISE, ZINNOBER_TEXT, farben } from "@/lib/farben";
+import { BAND_AKZENT, BAND_LEISE, AKZENT_TEXT, farben } from "@/lib/farben";
 
 // Das kleine Etikett über jeder Abschnitts-Überschrift: Versalien mit weitem
-// Abstand, darunter eine feine Linie mit einem kurzen orangen Strich am
+// Abstand, darunter eine feine Linie mit einem kurzen Strich in der Akzentfarbe am
 // Anfang (wie im Vorbild „WHERE WE COME IN").
 //
-// `dunkel`  steht auf einem braunen Abschnitt → Schrift in hellem Apricot.
-//           Sonst → gebranntes Orange (ZINNOBER_TEXT), das auf hellem Grund
-//           genug Kontrast hat.
+// `band`    steht auf einem farbigen Band → Schrift in BAND_AKZENT.
+//           Sonst → AKZENT_TEXT. Beide sind dunkel genug für kleine Schrift.
 // `mitte`   zentriert (für den Schlussaufruf).
 export default function Etikett({
   children,
-  dunkel = false,
+  band = false,
   mitte = false,
 }: {
   children: React.ReactNode;
-  dunkel?: boolean;
+  band?: boolean;
   mitte?: boolean;
 }) {
   return (
     <div className={mitte ? "flex flex-col items-center" : ""}>
       <p
         className="text-[0.78rem] font-bold uppercase tracking-[0.18em]"
-        style={{ color: dunkel ? APRICOT : ZINNOBER_TEXT }}
+        style={{ color: band ? BAND_AKZENT : AKZENT_TEXT }}
       >
         {children}
       </p>
@@ -29,7 +28,7 @@ export default function Etikett({
         aria-hidden="true"
         className="relative mt-3 block h-px w-full max-w-[15rem]"
         style={{
-          backgroundColor: dunkel ? `${CREME_LEISE}40` : "rgba(30,24,20,0.18)",
+          backgroundColor: band ? `${BAND_LEISE}40` : "rgba(15,27,45,0.18)",
         }}
       >
         <span

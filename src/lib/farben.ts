@@ -1,60 +1,59 @@
 // ────────────────────────────────────────────────────────────────────────
-//  FARBEN DER SEITE
-//  Warme Palette: Grund ist der Verlauf von fast Weiß zu Sandbeige
-//  (globals.css), dazu Brauntöne und Orange als Kontrastfarbe.
-//  Bewusst KEIN Gelb, Blau oder Pink.
+//  FARBEN DER SEITE – ZURZEIT PLATZHALTER
+//  Die Website dient erst einmal zum Vorstellen. Die Farben sind ein heller,
+//  neutraler Blau-Vorschlag und sollen später durch die endgültigen Farben
+//  ersetzt werden.
 //
-//  Alles Farbige kommt von hier – wer die Seite umfärben will, ändert diese
-//  Datei (und die drei Werte oben in globals.css: --kopf, --papier,
-//  --papier-unten).
+//  UMFÄRBEN: Alles Farbige kommt aus dieser Datei, dazu drei Werte oben in
+//  src/app/globals.css (--kopf, --papier, --papier-unten) und die Farben im
+//  Favicon (src/app/icon.svg). Die Namen sind bewusst neutral (AKZENT, BAND …),
+//  damit sie zu jeder neuen Palette passen.
+//
+//  Bei neuen Farben den Kontrast prüfen: Schrift braucht 4,5 : 1, große
+//  Überschriften 3 : 1 (siehe DESIGN.md).
 // ────────────────────────────────────────────────────────────────────────
 
-// Die vier Leistungsfarben – alle warm: kräftiges Orange, Mokka, Karamell und
-// Rost. (Ein sehr dunkles Braun wurde verworfen: In hellen Flächen und
-// Kreisen wirkte es grau und kalt.) Reihenfolge = Reihenfolge der Leistungen
-// (Textilveredelung, Werbetechnik, Drucksachen, Textilshop).
+// Die vier Leistungsfarben. Reihenfolge = Reihenfolge der Leistungen
+// (Textilveredelung, Werbetechnik, Drucksachen, Textilshop). Die erste ist
+// zugleich die Akzentfarbe der Seite (Linien, Striche, Knöpfe).
 export const farben = [
-  { ton: "#ff7a30", name: "Orange" },
-  { ton: "#8a5a3c", name: "Mokka" },
-  { ton: "#d4a373", name: "Karamell" },
-  { ton: "#a3502e", name: "Rost" },
+  { ton: "#2b6fd6", name: "Blau" },
+  { ton: "#6fb2f2", name: "Hellblau" },
+  { ton: "#2fa8a0", name: "Türkis" },
+  { ton: "#5a64d6", name: "Indigo" },
 ] as const;
 
-export const TINTE = "#1e1814"; // Schriftfarbe: ein warmes Fast-Schwarz
-// Nebentext. Der Hintergrund wird nach unten hin sandbeige, und getönte
-// Kacheln darauf sind noch etwas dunkler – deshalb ein kräftiger Ton
-// (gemessen gegen den tatsächlichen Untergrund).
-export const LEISE = "#463b33";
+export const TINTE = "#0f1b2d"; // Schriftfarbe: ein tiefes Nachtblau
+// Nebentext, gemessen gegen den tatsächlichen Untergrund (Verlauf, Bänder,
+// getönte Kacheln).
+export const LEISE = "#3b4a5e";
 // Nebentext, der ÜBER den Farbkreisen steht (Kopfbereiche). Die Kreise machen
-// den Untergrund dort am dunkelsten – deshalb noch eine Stufe kräftiger.
-export const LEISE_AUF_KREISEN = "#3a302a";
-// Knöpfe: Orange mit dunkler Schrift. Weiß auf Orange hätte nur 2,5 : 1,
-// Tinte dagegen 7 : 1.
-export const KNOPF = "#ff7a30";
-export const KNOPF_SCHRIFT = TINTE;
-// Ruhige Grundfläche für Karten (Ablauf): ein Hauch dunkler als das Papier
-// und leicht durchscheinend.
-export const FLAECHE = "rgba(90, 66, 46, 0.07)";
+// den Untergrund dort dunkler – deshalb eine Stufe kräftiger.
+export const LEISE_AUF_KREISEN = "#2c394b";
+// Knöpfe: Blau mit weißer Schrift (4,8 : 1).
+export const KNOPF = "#2b6fd6";
+export const KNOPF_SCHRIFT = "#ffffff";
+// Ruhige Grundfläche für Karten (Ablauf): ein Hauch dunkler als der Grund.
+export const FLAECHE = "rgba(30, 60, 110, 0.06)";
 
-// Orange als kleine SCHRIFT auf hellem Grund (z. B. die Etiketten über den
-// Überschriften): ein gebranntes Orange-Braun. Das helle Orange selbst hat
-// auf Weiß nur 2,5 : 1, dieser Ton 7,5 : 1 (auf dem Beige unten 4,8 : 1).
-export const ZINNOBER_TEXT = "#8f3307";
+// Akzent als kleine SCHRIFT (z. B. die Etiketten über den Überschriften):
+// ein dunkleres Blau. Das helle Akzentblau reicht für kleine Schrift nicht.
+export const AKZENT_TEXT = "#1d4f9e";
 
-// ── BRAUNE ABSCHNITTE ────────────────────────────────────────────────────
-// Ein mittleres Braun (Milchkaffee-dunkel) – die kräftige Fortsetzung des
-// Verlaufs von Weiß zu Beige. Darauf steht cremeweiße Schrift.
-// Heller darf es nicht werden: Orange als Schmuckwort in den Überschriften
-// braucht mindestens 3 : 1 (jetzt 3,4 : 1).
-export const DUNKEL = "#5e4434"; // Grund der braunen Abschnitte, Kopf- und Fußzeile
-export const DUNKEL_KARTE = "#4e3829"; // Karten auf dem braunen Grund (etwas dunkler)
-export const CREME = "#f7f1e8"; // Schrift auf Braun (8 : 1)
-export const CREME_LEISE = "#e3d7c6"; // Nebentext auf Braun (6 : 1, auf Karten 6,9 : 1)
-// Kleine farbige Schrift auf Braun (Etiketten, Spaltentitel, Schlusssätze):
-// ein helles Apricot. Das kräftige Orange ist dafür zu dunkel (3,4 : 1).
-export const APRICOT = "#ffb48a";
+// ── BÄNDER ───────────────────────────────────────────────────────────────
+// Die farbigen Abschnitte über die ganze Breite („So arbeiten wir",
+// Kundenstimmen, Schlussaufruf) und die Fußzeile. Hell gehalten: ein
+// klares, helles Blau mit dunkler Schrift.
+export const BAND = "#cfe1f6"; // Grund der Bänder und der Fußzeile
+export const BAND_KARTE = "#f4f8fd"; // Karten auf einem Band
+export const BAND_SCHRIFT = TINTE; // Schrift auf einem Band
+export const BAND_LEISE = "#3b4a5e"; // Nebentext auf einem Band (6,4 : 1)
+// Kleine farbige Schrift auf einem Band (Etiketten, Spaltentitel,
+// Schlusssätze). Große Überschriften-Wörter dürfen das helle Akzentblau
+// nehmen (3,6 : 1).
+export const BAND_AKZENT = "#1d4f9e";
 
 // Schrift AUF den vier Farbflächen (z. B. die Nummern in den Kreisen): je
 // Farbe die besser lesbare.
-//   Orange: Tinte 7 · Mokka: Weiß 5,8 · Karamell: Tinte 7,9 · Rost: Weiß 5,6
-export const SCHRIFT_AUF = [TINTE, "#ffffff", TINTE, "#ffffff"] as const;
+//   Blau: Weiß 4,8 · Hellblau: Tinte 7,6 · Türkis: Tinte 5,9 · Indigo: Weiß 5
+export const SCHRIFT_AUF = ["#ffffff", TINTE, TINTE, "#ffffff"] as const;

@@ -2,20 +2,20 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { CREME, CREME_LEISE, KNOPF, KNOPF_SCHRIFT, TINTE, farben } from "@/lib/farben";
+import { BAND_SCHRIFT, BAND_LEISE, KNOPF, KNOPF_SCHRIFT, TINTE, farben } from "@/lib/farben";
 import { company, nav, unterseiten } from "@/lib/site";
 
 // Kopfzeile: eine durchgehende Leiste über die ganze Breite.
 //
 //   links    Wortmarke „ostseedesign" mit kleiner Unterzeile
 //   Mitte    die drei Leistungen und der Textilshop, in Großbuchstaben
-//   rechts   zwei runde Knöpfe: die Telefonnummer (cremefarben umrandet)
-//            und „Projekt anfragen" (Orange)
-//   unten    eine schmale orange Linie
+//   rechts   zwei runde Knöpfe: die Telefonnummer (umrandet) und
+//            „Projekt anfragen" (Akzentfarbe)
+//   unten    eine schmale Linie in der Akzentfarbe
 //
-// Die Seite, auf der man gerade ist, ist im Menü orange unterstrichen. Der
-// Grund der Leiste ist das Braun der dunklen Abschnitte (`--kopf` in
-// globals.css), die Schrift darauf cremeweiß.
+// Die Seite, auf der man gerade ist, ist im Menü in der Akzentfarbe
+// unterstrichen. Der Grund der Leiste ist ein fast deckendes Weiß (`--kopf`
+// in globals.css), die Schrift darauf dunkel.
 //
 // PLATZ: Menü, Wortmarke und beide Knöpfe passen erst ab 1280 px Breite
 // nebeneinander. Darunter rückt das Menü in die Reihe farbiger Marken unter
@@ -53,8 +53,8 @@ export default function Header() {
   return (
     <>
       <header
-        className="kopf-ein dunkel sticky top-0 z-40 backdrop-blur"
-        style={{ backgroundColor: "var(--kopf)", color: CREME }}
+        className="kopf-ein sticky top-0 z-40 backdrop-blur"
+        style={{ backgroundColor: "var(--kopf)", color: BAND_SCHRIFT }}
       >
         <div className="seitenrand flex h-[4.5rem] items-center justify-between gap-6 sm:h-20">
           {/* Wortmarke mit Unterzeile */}
@@ -66,7 +66,7 @@ export default function Header() {
             <span className="text-[1.45rem] font-extrabold tracking-[-0.03em] sm:text-[1.6rem]">
               ostseedesign
             </span>
-            <span className="mt-1.5 text-[0.6rem] font-semibold uppercase tracking-[0.24em]" style={{ color: CREME_LEISE }}>
+            <span className="mt-1.5 text-[0.6rem] font-semibold uppercase tracking-[0.24em]" style={{ color: BAND_LEISE }}>
               Werbung &amp; Textilien
             </span>
           </Link>
@@ -82,7 +82,7 @@ export default function Header() {
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[0.86rem] font-semibold uppercase tracking-[0.05em] text-[#e3d7c6] transition-colors hover:text-white"
+                  className="text-[0.86rem] font-semibold uppercase tracking-[0.05em] text-[#3b4a5e] transition-colors hover:text-tinte"
                 >
                   {item.label} ↗
                 </a>
@@ -91,12 +91,12 @@ export default function Header() {
                   key={item.label}
                   href={item.href}
                   aria-current={aktiv(item.href) ? "page" : undefined}
-                  className={`relative py-1 text-[0.86rem] font-semibold uppercase tracking-[0.05em] transition-colors hover:text-white ${
-                    aktiv(item.href) ? "text-white" : "text-[#e3d7c6]"
+                  className={`relative py-1 text-[0.86rem] font-semibold uppercase tracking-[0.05em] transition-colors hover:text-tinte ${
+                    aktiv(item.href) ? "text-tinte" : "text-[#3b4a5e]"
                   }`}
                 >
                   {item.label}
-                  {/* Aktive Seite: ein oranger Strich unter dem Wort. */}
+                  {/* Aktive Seite: ein Strich in der Akzentfarbe unter dem Wort. */}
                   {aktiv(item.href) && (
                     <span
                       aria-hidden="true"
@@ -113,7 +113,7 @@ export default function Header() {
             <a
               href={`tel:${company.phoneHref}`}
               className={`${knopf} hidden sm:inline-flex`}
-              style={{ boxShadow: `inset 0 0 0 1.5px ${CREME_LEISE}80`, color: CREME }}
+              style={{ boxShadow: `inset 0 0 0 1.5px ${BAND_LEISE}80`, color: BAND_SCHRIFT }}
             >
               {company.phoneDisplay}
             </a>
@@ -145,7 +145,7 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Die Linie unter der Leiste: schmal und orange. */}
+        {/* Die Linie unter der Leiste: schmal, in der Akzentfarbe. */}
         <div aria-hidden="true" className="h-[3px]" style={{ backgroundColor: farben[0].ton }} />
       </header>
 

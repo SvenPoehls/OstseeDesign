@@ -16,23 +16,21 @@
 
 :root {
   /* ── KOPFZEILE ──────────────────────────────────────────────────────────
-     Dasselbe Braun wie die braunen Abschnitte und die Fußzeile (DUNKEL in
-     src/lib/farben.ts), ganz leicht durchscheinend. Die Schrift darauf ist
-     cremeweiß – wer hier einen hellen Ton einsetzt, muss in Header.tsx
-     auch die Schriftfarben zurück auf dunkel stellen. */
-  --kopf: rgba(94, 68, 52, 0.97);
+     Fast deckendes Weiß, leicht durchscheinend, mit dunkler Schrift. Wer hier
+     einen dunklen Ton einsetzt, muss in Header.tsx auch die Schriftfarben
+     auf hell stellen.
+     FARBEN SIND ZURZEIT PLATZHALTER (siehe src/lib/farben.ts). */
+  --kopf: rgba(255, 255, 255, 0.88);
 
   /* Ein Bewegungsverlauf für alles: schnell los, weich aus. */
   --weich: cubic-bezier(0.2, 0.7, 0.2, 1);
 
   /* ── PAPIER ─────────────────────────────────────────────────────────────
-     Der Grund der Seite: ein Verlauf von fast Weiß (oben) zu warmem
-     Sandbeige (unten), dazu eine feine Körnung (siehe `.papier-verlauf`
-     unten). Die beiden Töne sind aus der Vorlage abgelesen. */
-  --papier: #faf8f5; /* oben: fast Weiß */
-  /* unten: Sandbeige. Ein Hauch heller als der Zielton #dbccb5, weil die
-     Körnung darüber noch etwas abdunkelt. */
-  --papier-unten: #dfd0b9;
+     Der Grund der Seite: ein Verlauf von fast Weiß (oben) zu einem sehr
+     hellen Blaugrau (unten), dazu eine feine Körnung (siehe
+     `.papier-verlauf` unten). Platzhalter wie alle Farben. */
+  --papier: #f8fafc; /* oben: fast Weiß */
+  --papier-unten: #e6eef7; /* unten: helles Blaugrau */
 }
 
 html {
@@ -42,25 +40,19 @@ html {
 
 body {
   background-color: var(--papier);
-  color: #1e1814;
+  color: #0f1b2d;
   -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: rgba(255, 122, 48, 0.3);
-  color: #1e1814;
+  background: rgba(43, 111, 214, 0.25);
+  color: #0f1b2d;
 }
 
-/* Tastatur-Fokus: auf hellem Grund ein gebranntes Orange, in den braunen
-   Bereichen (Klasse `dunkel`) helles Apricot – so ist der Rahmen überall
-   deutlich zu sehen. */
+/* Tastatur-Fokus: ein dunkles Blau, auf allen (hellen) Flächen gut zu sehen. */
 :focus-visible {
-  outline: 3px solid #8f3307;
+  outline: 3px solid #1d4f9e;
   outline-offset: 3px;
-}
-.dunkel :focus-visible,
-.dunkel:focus-visible {
-  outline-color: #ffb48a;
 }
 
 /*
@@ -228,18 +220,18 @@ body {
 
 /* ── PAPIER ──────────────────────────────────────────────────────────────── */
 /* `.papier` umschließt die ganze Seite (siehe layout.tsx). Darin liegt die
-   festsitzende Schicht `.papier-verlauf`: der Verlauf von hell nach beige
+   festsitzende Schicht `.papier-verlauf`: der Verlauf von hell nach getönt
    und darüber eine feine Körnung.
 
-   Die Schicht steht fest im Bildschirm (oben immer hell, unten immer beige)
+   Die Schicht steht fest im Bildschirm (oben immer hell, unten immer getönt)
    und liegt HINTER dem Inhalt (z-index 0, Inhalt darüber auf 1). Schrift und
    Farben bleiben dadurch unverfälscht, und beim Scrollen kostet sie nichts.
 
    VERLAUF ÄNDERN: Die Prozentzahlen sagen, wo welcher Ton erreicht ist.
-   Oben bleibt es bis 15 % hell, ab 66 % ist es ganz beige.
+   Oben bleibt es bis 15 % hell, ab 66 % ist es ganz getönt.
    LIEBER ÜBER DIE GANZE SEITENLÄNGE? Bei `.papier-verlauf` `position: fixed`
    durch `position: absolute` ersetzen – dann ist der Seitenanfang hell und
-   erst die Fußzeile beige. */
+   erst die Fußzeile getönt. */
 .papier {
   position: relative;
   isolation: isolate;
@@ -254,10 +246,12 @@ body {
     to bottom,
     var(--papier) 0%,
     var(--papier) 15%,
-    #f6f3ed 25%,
-    #f1ece2 35%,
-    #e9e0d1 50%,
-    #e4d7c3 60%,
+    /* Zwischentöne werden aus den beiden Farben oben gemischt – beim
+       Umfärben genügt es, --papier und --papier-unten zu ändern. */
+    color-mix(in srgb, var(--papier), var(--papier-unten) 20%) 25%,
+    color-mix(in srgb, var(--papier), var(--papier-unten) 40%) 35%,
+    color-mix(in srgb, var(--papier), var(--papier-unten) 70%) 50%,
+    color-mix(in srgb, var(--papier), var(--papier-unten) 90%) 60%,
     var(--papier-unten) 66%,
     var(--papier-unten) 100%
   );
@@ -291,7 +285,7 @@ body {
 
 /* ── ABSCHNITTE UND ÜBERSCHRIFTEN ────────────────────────────────────────── */
 /* Aufbau nach dem Vorbild mediaquestweb.com: Die Abschnitte laufen über die
-   ganze Breite, helle (auf dem Verlauf) und dunkelbraune wechseln sich ab.
+   ganze Breite, Abschnitte auf dem Verlauf und farbige Bänder wechseln sich ab.
    Überschriften stehen groß in Versalien, einzelne Wörter sind farbig
    hervorgehoben.
 
@@ -301,9 +295,10 @@ body {
    `.titel`         Überschrift eines Abschnitts (h2).
    `.markiert`      Hervorgehobenes Wort auf HELLEM Grund: Die Schrift bleibt
                     dunkel, dahinter liegt ein Strich in der Farbe (`--ton`) wie
-                    von einem Textmarker. Farbige Schrift wäre auf Weiß zu
-                    schwach (Orange 2,5 : 1). Auf DUNKLEM Grund wird das Wort
-                    stattdessen direkt eingefärbt (siehe farben.ts). */
+                    von einem Textmarker. So bleibt die Schrift mit jeder
+                    Markerfarbe gut lesbar. Auf den farbigen BÄNDERN wird das
+                    Wort stattdessen direkt in der Akzentfarbe eingefärbt (nur
+                    große Schrift, siehe farben.ts). */
 @layer components {
   .abschnitt {
     @apply py-20 sm:py-24 lg:py-32;
@@ -315,8 +310,8 @@ body {
     background-image: linear-gradient(
       to bottom,
       transparent 58%,
-      var(--ton, #d4a373) 58%,
-      var(--ton, #d4a373) 90%,
+      var(--ton, #6fb2f2) 58%,
+      var(--ton, #6fb2f2) 90%,
       transparent 90%
     );
     -webkit-box-decoration-break: clone;
@@ -434,7 +429,7 @@ body {
   }
   .legal-body h2::before {
     content: "";
-    @apply h-3 w-3 shrink-0 rounded-full bg-[#ff7a30];
+    @apply h-3 w-3 shrink-0 rounded-full bg-[#2b6fd6];
   }
   .legal-body h3 {
     @apply mt-7 text-base font-bold text-tinte;
@@ -446,7 +441,7 @@ body {
     @apply mt-3 max-w-reading list-disc space-y-1 pl-5 text-leise;
   }
   .legal-body a {
-    @apply font-semibold text-tinte underline decoration-[#ff7a30] decoration-2 underline-offset-4 hover:text-[#8f3307];
+    @apply font-semibold text-tinte underline decoration-[#2b6fd6] decoration-2 underline-offset-4 hover:text-[#1d4f9e];
   }
   .legal-body strong {
     @apply font-bold text-tinte;

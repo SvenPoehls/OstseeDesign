@@ -18,7 +18,7 @@ import { company, services, unterseiten } from "@/lib/site";
 //
 // Aufbau: Kopfbereich in der Leistungsfarbe · Bilder · „Das gehört dazu" ·
 // weitere Leistungen · Ablauf (derselbe wie auf der Startseite) ·
-// Schlussaufruf (dunkel) · Kontakt. Die oberen drei Teile teilen sich einen
+// Schlussaufruf (Band) · Kontakt. Die oberen drei Teile teilen sich einen
 // Seitenrand; Ablauf, Aufruf und Kontakt laufen wie auf der Startseite über
 // die ganze Breite und setzen ihren Rand selbst.
 

@@ -1,9 +1,10 @@
 import { farben } from "@/lib/farben";
 
 // Gestrichelte Übergangslinie zwischen zwei Abschnitten (wie im Vorbild der
-// orange gestrichelte Bogen). Sie wird ZWISCHEN zwei Abschnitte gesetzt und
-// liegt zur Hälfte im oberen, zur Hälfte im unteren – so verbindet sie zum
-// Beispiel einen braunen mit einem hellen Abschnitt. Am Ende zeigt eine
+// gestrichelte Bogen, hier in der Akzentfarbe). Sie wird ZWISCHEN zwei
+// Abschnitte gesetzt und liegt zur Hälfte im oberen, zur Hälfte im
+// unteren – so verbindet sie zum
+// Beispiel ein farbiges Band mit einem hellen Abschnitt. Am Ende zeigt eine
 // Pfeilspitze nach unten, zum nächsten Inhalt.
 //
 // `start`  "links": Die Linie beginnt links und endet rechts.

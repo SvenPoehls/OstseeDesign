@@ -2,10 +2,11 @@
 //  PAPIERGRUND
 // ───────────────────────────────────────────────────────────────────────
 //  Der Hintergrund der ganzen Seite: ein ruhiger Verlauf von fast Weiß
-//  (oben) zu warmem Sandbeige (unten), darüber eine feine Papierkörnung.
+//  (oben) zu hellem Blaugrau (unten), darüber eine feine Papierkörnung.
+//  Die Töne sind zurzeit Platzhalter.
 //
 //  Die Schicht steht fest im Bildschirm und liegt HINTER dem Inhalt: Oben
-//  ist es immer hell, unten immer beige, egal wie weit man scrollt. Durch
+//  ist es immer hell, unten immer etwas getönt, egal wie weit man scrollt. Durch
 //  die durchscheinende Kopfzeile und die Farbkacheln schimmert sie hindurch.
 //  Sie kostet beim Scrollen nichts.
 //

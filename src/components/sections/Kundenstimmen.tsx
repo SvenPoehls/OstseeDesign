@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Etikett from "@/components/ui/Etikett";
-import { APRICOT, CREME, CREME_LEISE, DUNKEL, DUNKEL_KARTE, farben } from "@/lib/farben";
+import { KNOPF, KNOPF_SCHRIFT, BAND_AKZENT, BAND_SCHRIFT, BAND_LEISE, BAND, BAND_KARTE, farben } from "@/lib/farben";
 import { kundenstimmen } from "@/lib/site";
 
 // „Was unsere Kunden sagen" – wie im Vorbild ein Karussell: immer eine
@@ -44,14 +44,14 @@ export default function Kundenstimmen() {
 
   return (
     <section
-      className="abschnitt dunkel"
-      style={{ backgroundColor: DUNKEL, color: CREME }}
+      className="abschnitt band"
+      style={{ backgroundColor: BAND, color: BAND_SCHRIFT }}
       aria-labelledby="stimmen-titel"
     >
       <div className="seitenrand">
         <div data-reveal className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <Etikett dunkel>Stimmen, die uns freuen</Etikett>
+            <Etikett band>Stimmen, die uns freuen</Etikett>
             <h2 id="stimmen-titel" className="titel mt-6">
               Was unsere <span style={{ color: farben[0].ton }}>Kunden</span>
               <br />
@@ -63,7 +63,7 @@ export default function Kundenstimmen() {
               type="button"
               onClick={() => gehe(aktiv - 1)}
               className={rundknopf}
-              style={{ backgroundColor: DUNKEL_KARTE }}
+              style={{ backgroundColor: BAND_KARTE }}
               aria-label="Vorherige Stimme"
             >
               <span aria-hidden="true">←</span>
@@ -72,7 +72,7 @@ export default function Kundenstimmen() {
               type="button"
               onClick={() => gehe(aktiv + 1)}
               className={rundknopf}
-              style={{ backgroundColor: farben[0].ton, color: "#1e1814" }}
+              style={{ backgroundColor: KNOPF, color: KNOPF_SCHRIFT }}
               aria-label="Nächste Stimme"
             >
               <span aria-hidden="true">→</span>
@@ -81,7 +81,7 @@ export default function Kundenstimmen() {
               type="button"
               onClick={() => setLaeuft((l) => !l)}
               className="rounded-full px-4 py-3 text-[0.78rem] font-bold uppercase tracking-[0.08em] transition-colors"
-              style={{ boxShadow: `inset 0 0 0 1.5px ${CREME_LEISE}66`, color: CREME_LEISE }}
+              style={{ boxShadow: `inset 0 0 0 1.5px ${BAND_LEISE}66`, color: BAND_LEISE }}
               aria-pressed={!laeuft}
             >
               {laeuft ? "Pause" : "Abspielen"}
@@ -114,7 +114,7 @@ export default function Kundenstimmen() {
                   className={`relative overflow-hidden rounded-kachel p-7 transition-[opacity,transform] duration-700 [grid-area:1/1] sm:p-12 ${
                     ist ? "opacity-100" : "pointer-events-none translate-x-6 opacity-0"
                   }`}
-                  style={{ backgroundColor: DUNKEL_KARTE }}
+                  style={{ backgroundColor: BAND_KARTE }}
                 >
                   <span
                     aria-hidden="true"
@@ -124,7 +124,7 @@ export default function Kundenstimmen() {
                   {stimme.platzhalter && (
                     <span
                       className="relative inline-block rounded-full px-3 py-1 text-[0.72rem] font-bold uppercase tracking-[0.1em]"
-                      style={{ boxShadow: `inset 0 0 0 1.5px ${APRICOT}`, color: APRICOT }}
+                      style={{ boxShadow: `inset 0 0 0 1.5px ${BAND_AKZENT}`, color: BAND_AKZENT }}
                     >
                       Platzhalter
                     </span>
@@ -147,7 +147,7 @@ export default function Kundenstimmen() {
                     />
                     <span className="text-[0.95rem]">
                       <span className="block font-bold">{stimme.name}</span>
-                      <span style={{ color: CREME_LEISE }}>{stimme.firma}</span>
+                      <span style={{ color: BAND_LEISE }}>{stimme.firma}</span>
                     </span>
                   </figcaption>
                 </figure>
@@ -170,7 +170,7 @@ export default function Kundenstimmen() {
                   className={`block h-2.5 rounded-full transition-[width,background-color] duration-300 ${
                     i === aktiv ? "w-8" : "w-2.5"
                   }`}
-                  style={{ backgroundColor: i === aktiv ? farben[0].ton : `${CREME_LEISE}66` }}
+                  style={{ backgroundColor: i === aktiv ? farben[0].ton : `${BAND_LEISE}66` }}
                 />
               </button>
             ))}

@@ -41,7 +41,7 @@ src/
 │   └── ui/               # Bild, Einblenden, Etikett, Uebergang (gestrichelte Linien)
 └── lib/
     ├── site.ts           # ZENTRALE INHALTE / FIRMENDATEN (Adresse, Zeiten …)
-    ├── farben.ts         # die vier Werkstattfarben
+    ├── farben.ts         # alle Farben (zurzeit Platzhalter: helles Blau)
     └── assets.ts         # Bildpfade (für GitHub Pages und eigene Domain)
 ```
 
@@ -49,8 +49,9 @@ src/
 
 - **Firmendaten, Öffnungszeiten, Leistungen, Ablauf, Kundenstimmen, Fragen:** `src/lib/site.ts`
   (aus der Liste der Leistungen entstehen auch Menü und Unterseiten)
-- **Farben:** `src/lib/farben.ts`
-- **Wie kräftig das Gelb der Kopfzeile ist:** `--kopf` oben in `src/app/globals.css`
+- **Farben (zurzeit Platzhalter):** `src/lib/farben.ts`, dazu `--kopf`,
+  `--papier`, `--papier-unten` oben in `src/app/globals.css` – Anleitung in
+  DESIGN.md, Abschnitt „Umfärben"
 - **Seitenbreite und Rundung der Kacheln:** `seite`, `kachel`, `bild` in `tailwind.config.ts`
 - **Bilder:** Aktuell Platzhalter mit Notiz, was darauf zu sehen sein soll
   (`components/ui/Bild.tsx`). Sie werden 1:1 durch echte Fotos ersetzt – das

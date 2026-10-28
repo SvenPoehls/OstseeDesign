@@ -3,8 +3,8 @@ import { farben } from "@/lib/farben";
 // Gestrichelte Übergangslinie zwischen zwei Abschnitten (wie im Vorbild der
 // gestrichelte Bogen, hier in der Akzentfarbe). Sie wird ZWISCHEN zwei
 // Abschnitte gesetzt und liegt zur Hälfte im oberen, zur Hälfte im
-// unteren – so verbindet sie zum
-// Beispiel ein farbiges Band mit einem hellen Abschnitt. Am Ende zeigt eine
+// unteren – so verbindet sie zum Beispiel ein farbiges Band mit einem
+// hellen Abschnitt. Am Ende zeigt eine
 // Pfeilspitze nach unten, zum nächsten Inhalt.
 //
 // `start`  "links": Die Linie beginnt links und endet rechts.
@@ -36,9 +36,11 @@ const FORMEN = {
     strich: "0.8844 0.7955", // Länge 1244 → 59 × Strich+Lücke + 1 Strich
   },
   2: {
-    linie: "M 40 70 C 260 150 470 175 640 120 C 760 80 800 20 730 30 C 660 42 700 150 880 170 C 1010 184 1120 140 1120 190 L 1120 210",
+    // Am Ende steigt die Linie noch einmal sanft an und rundet sich dann
+    // weich nach unten – kein harter Knick vor der Pfeilspitze.
+    linie: "M 40 70 C 260 150 470 175 640 120 C 760 80 800 20 730 30 C 660 42 700 150 880 170 C 980 181 1040 122 1088 124 C 1122 126 1120 160 1120 182 L 1120 210",
     spitze: "M 1100 190 L 1120 212 L 1140 190",
-    strich: "0.8117 0.7382", // Länge 1355 → 64 × Strich+Lücke + 1 Strich
+    strich: "0.7854 0.7179", // Länge 1401 → 66 × Strich+Lücke + 1 Strich
   },
 } as const;
 

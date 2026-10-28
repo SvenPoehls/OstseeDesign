@@ -55,6 +55,9 @@ export type Service = {
   motto?: string;
   teaser: string;
   points: string[];
+  // Längerer Text für die Unterseite (unter „Das gehört dazu"). Formuliert
+  // nach den Aussagen der bisherigen Website, ohne zusätzliche Zusagen.
+  beschreibung?: { titel: string; absaetze: string[] };
   icon: "signage" | "textile" | "print" | "shop";
   // Was auf die Fotos soll. Solange es keine echten Fotos gibt, steht das als
   // Notiz auf der Platzhalterfläche. Das erste Motiv ist das Hauptbild.
@@ -70,6 +73,13 @@ export const services: Service[] = [
     teaser:
       "Beschriftungen aller Art und auf nahezu jedem Medium: Fahrzeuge, Schilder, Fenster, Displays und mehr.",
     points: ["Fahrzeugbeschriftungen", "Schilder und Displays", "Fensterbeschriftungen"],
+    beschreibung: {
+      titel: "Werbung, die gesehen wird",
+      absaetze: [
+        "Ob Firmenfahrzeug, Schaufenster oder Schild an der Hauswand: Mit Werbetechnik zeigen Sie Ihr Unternehmen dort, wo Ihre Kundschaft unterwegs ist. Wir übernehmen Beschriftungen aller Art – auf nahezu jedem Medium, von Fahrzeugen über Schilder und Fenster bis zu Displays.",
+        "Dabei sehen wir Ihren Auftritt als Ganzes. Auf Wunsch passt die Beschriftung zu Ihren Drucksachen und zur Berufsbekleidung Ihres Teams. Gemeinsam formen wir ein Paket – alles aus einer Hand, von Ihrem Werbepartner in Eckernförde.",
+      ],
+    },
     icon: "signage",
     bilder: [
       "Beschriftetes Firmenfahrzeug",
@@ -84,6 +94,13 @@ export const services: Service[] = [
     teaser:
       "Individuelle und hochwertige Applikationen – mit verschiedenen Transfertechniken und Stickereien. Für Berufsbekleidung genauso wie für die Freizeit.",
     points: ["Stickereien", "Verschiedene Transfertechniken", "Individuelle Applikationen"],
+    beschreibung: {
+      titel: "Kleidung, die für Sie spricht",
+      absaetze: [
+        "Kleidung vereint Arbeit und Freizeit – und sie zeigt, wer Sie sind. Mit Stickereien, verschiedenen Transfertechniken und individuellen Applikationen machen wir aus Berufsbekleidung und Freizeitkleidung einen Teil Ihres Auftritts.",
+        "Welche Technik passt, hängt vom Motiv und vom Kleidungsstück ab. Sprechen Sie uns einfach an. Passende Textilien finden Sie auch in unserem Textilshop ostseetextilien.de.",
+      ],
+    },
     icon: "textile",
     bilder: [
       "Stickerei, Nahaufnahme",
@@ -97,6 +114,13 @@ export const services: Service[] = [
     motto: "Mit Druck präsent!",
     teaser: "Briefpapier, Visitenkarten, Stempel und vieles mehr.",
     points: ["Briefpapier", "Visitenkarten", "Stempel"],
+    beschreibung: {
+      titel: "Der Eindruck auf Papier",
+      absaetze: [
+        "Briefpapier, Visitenkarten, Stempel und vieles mehr: Drucksachen begleiten Ihr Unternehmen jeden Tag – im Briefkasten, auf dem Tresen und in der Hand Ihrer Kundschaft. Mit Druck präsent zu sein heißt, auch auf Papier einen guten Eindruck zu hinterlassen.",
+        "Zusammen mit Werbetechnik und Textilveredelung entsteht ein einheitlicher Auftritt. Gemeinsam formen wir ein Paket – alles aus einer Hand.",
+      ],
+    },
     icon: "print",
     bilder: ["Visitenkarten", "Briefpapier", "Stempel"],
   },

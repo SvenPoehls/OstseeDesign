@@ -4,7 +4,8 @@ import Etikett from "@/components/ui/Etikett";
 import { LEISE, farben } from "@/lib/farben";
 import { leistungsLink, services } from "@/lib/site";
 
-// Am Ende einer Leistungs-Unterseite: die anderen Leistungen als Karten, in
+// Am Ende einer Leistungs-Unterseite (nach dem Ablauf, direkt über dem
+// Schlussaufruf): die anderen Leistungen als Karten, in
 // ihren eigenen Farben. So kommt man von jeder Seite zu jeder anderen, ohne
 // ins Menü greifen zu müssen. Der Textilshop führt auf die externe Seite.
 //
@@ -15,7 +16,7 @@ export default function WeitereLeistungen({ aktuell }: { aktuell: string }) {
     .filter(({ service }) => service.id !== aktuell);
 
   return (
-    <section className="mt-16 sm:mt-24" aria-labelledby="weitere">
+    <section className="abschnitt seitenrand pt-0 sm:pt-0 lg:pt-0" aria-labelledby="weitere">
       <div data-reveal className="max-w-[44rem]">
         <Etikett>Leistungen</Etikett>
         <h2

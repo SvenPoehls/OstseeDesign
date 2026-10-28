@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import LeistungHero from "@/components/sections/LeistungHero";
 import LeistungDetails from "@/components/sections/LeistungDetails";
+import LeistungText from "@/components/sections/LeistungText";
 import WeitereLeistungen from "@/components/sections/WeitereLeistungen";
 import Process from "@/components/sections/Process";
 import Aufruf from "@/components/sections/Aufruf";
@@ -17,10 +18,10 @@ import { company, services, unterseiten } from "@/lib/site";
 // selbst. Texte, Punkte und Foto-Motive kommen ebenfalls von dort.
 //
 // Aufbau: Kopfbereich in der Leistungsfarbe · Bilder · „Das gehört dazu" ·
-// weitere Leistungen · Ablauf (derselbe wie auf der Startseite) ·
-// Schlussaufruf (Band) · Kontakt. Die oberen drei Teile teilen sich einen
-// Seitenrand; Ablauf, Aufruf und Kontakt laufen wie auf der Startseite über
-// die ganze Breite und setzen ihren Rand selbst.
+// Beschreibungstext (LeistungText) · Ablauf (derselbe wie auf der
+// Startseite) · weitere Leistungen · Schlussaufruf (Band) · Kontakt.
+// Die oberen vier Teile teilen sich einen Seitenrand; die übrigen setzen
+// ihren Rand selbst.
 
 // Der Export ist statisch: Es dürfen nur die Adressen aufgerufen werden, die
 // beim Bauen erzeugt wurden. Alles andere ergibt die 404-Seite.
@@ -75,9 +76,10 @@ export default async function LeistungPage({ params }: Props) {
         <div className="seitenrand">
           <LeistungHero service={service} index={index} />
           <LeistungDetails service={service} index={index} />
-          <WeitereLeistungen aktuell={service.id} />
+          <LeistungText service={service} index={index} />
         </div>
         <Process />
+        <WeitereLeistungen aktuell={service.id} />
         <Aufruf />
         <Contact />
       </main>

@@ -10,8 +10,13 @@ import { services, unterseiten } from "@/lib/site";
 // Streifen Klebeband in der Leistungsfarbe. Je Leistung ihr erstes Foto-Motiv
 // aus site.ts. Solange es keine echten Fotos gibt, stehen dort Platzhalter.
 //
-// Jedes Foto führt auf die Unterseite seiner Leistung. Beim Überfahren richtet
-// es sich gerade und hebt sich leicht.
+// Jedes Foto führt auf die Unterseite seiner Leistung.
+//
+// BEIM ÜBERFAHREN BEWEGT SICH NICHTS: Die Karten bleiben ruhig schräg liegen.
+// (Früher richteten sie sich gerade – während dieser Drehung zeichnet der
+// Browser die schräge Schrift ständig neu, und kleine Teile wie i-Punkte
+// sprangen sichtbar.) Stattdessen wird der Schatten kräftiger, das Motiv
+// unterstrichen und der Pfeil blau.
 //
 // ANORDNUNG je Foto (`LAGE`): Spaltenbreite auf großen Bildschirmen,
 // Seitenverhältnis, Versatz nach unten und Drehung. Auf dem Handy stehen die
@@ -58,7 +63,7 @@ export default function Einblicke() {
               >
                 <Link
                   href={`/${service.id}`}
-                  className={`group relative block ${lage.drehung} rounded-kachel bg-white p-3 pb-5 shadow-[0_18px_40px_-18px_rgba(42,32,25,0.45)] transition-transform duration-500 hover:-translate-y-1 hover:rotate-0`}
+                  className={`group relative block ${lage.drehung} rounded-kachel bg-white p-3 pb-5 shadow-[0_18px_40px_-18px_rgba(15,27,45,0.4)] transition-shadow duration-300 hover:shadow-[0_26px_50px_-18px_rgba(15,27,45,0.55)]`}
                 >
                   {/* Klebeband oben in der Mitte */}
                   <span
@@ -69,7 +74,7 @@ export default function Einblicke() {
                   <span className={`relative block ${lage.form} overflow-hidden rounded-bild`}>
                     <span
                       aria-hidden="true"
-                      className="absolute inset-0 transition-transform duration-500 group-hover:scale-105"
+                      className="absolute inset-0"
                       style={platzhalterFlaeche(ton)}
                     />
                   </span>
@@ -82,8 +87,14 @@ export default function Einblicke() {
                       {service.title}
                     </span>
                     <span className="mt-1.5 flex items-baseline justify-between gap-3 text-[1.05rem] font-extrabold leading-snug tracking-[-0.01em]">
-                      {motiv}
-                      <span aria-hidden="true" className="shrink-0 transition-transform duration-300 group-hover:translate-x-1">
+                      <span className="decoration-2 underline-offset-4 group-hover:underline" style={{ textDecorationColor: ton }}>
+                        {motiv}
+                      </span>
+                      <span
+                        aria-hidden="true"
+                        className="shrink-0 transition-colors duration-300 group-hover:text-[var(--akzent)]"
+                        style={{ "--akzent": farben[0].ton } as CSSProperties}
+                      >
                         →
                       </span>
                     </span>

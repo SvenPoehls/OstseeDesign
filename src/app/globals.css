@@ -398,13 +398,13 @@ body {
   }
 }
 
-/* ── SCHRÄGE KARTEN (Einblicke) ─────────────────────────────────────────── */
-/* Die Karten drehen sich beim Überfahren gerade. Damit die Schrift dabei
-   nicht springt, behandelt der Browser jede Karte dauerhaft als eigene,
-   ruhende Ebene: Inhalt und Schrift werden einmal gezeichnet und drehen sich
-   als Ganzes. (Sonst zeichnet er die Schrift am Ende der Bewegung neu, und
-   kleine Teile wie i-Punkte verrutschen sichtbar.) */
-.schief-karte {
+/* ── KARTEN MIT SCHRÄGEM FOTO (Einblicke) ────────────────────────────────── */
+/* Karte (gerade, mit Schrift) und Foto (schräg) sind dauerhaft eigene,
+   ruhende Ebenen. So zeichnet der Browser am Ende einer Bewegung nichts neu,
+   und nichts springt. Die Schrift selbst wird nie gedreht und bleibt
+   dadurch gestochen scharf. */
+.ruhige-karte,
+.schiefes-foto {
   will-change: transform;
   backface-visibility: hidden;
 }

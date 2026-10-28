@@ -399,52 +399,38 @@ body {
 }
 
 /* ── SCHRÄGE KARTEN (Einblicke) ─────────────────────────────────────────── */
-/* Die ganze Karte liegt schräg und dreht sich beim Überfahren gerade – als
-   EIN Block, Foto und Schrift drehen fest mit.
+/* Jede Karte liegt FEST schräg (Winkel als `--schraeg` aus Einblicke.tsx)
+   und bleibt so – sie dreht und hebt sich nie.
 
-   WARUM SO UMSTÄNDLICH? Dreht man mit `transform` + `transition`, macht der
-   Browser aus der Karte während der Bewegung ein Bild und dreht dieses Bild.
-   Am Ende zeichnet er die Schrift wieder als echte Schrift – bei diesem
-   Umschalten springen i-Punkte. Hält man die Karte dauerhaft als Bild
-   (`will-change`), springt nichts mehr, aber das schräg gedrehte Bild wird
-   weichgezeichnet: Die Schrift ist in Ruhe unscharf.
+   WARUM? Sobald sich eine schräge Karte bewegt, macht der Browser daraus für
+   die Bewegung ein Bild; gedrehte Bilder werden weichgezeichnet, und beim
+   Zurückschalten auf echte Schrift springen i-Punkte. Eine Karte, die still
+   liegt, zeichnet der Browser dagegen als echte, scharfe Schrift direkt im
+   schrägen Winkel. Deshalb hier bewusst KEIN `will-change`, kein Drehen und
+   kein Heben.
 
-   DIE LÖSUNG: Bewegt werden nicht `transform` selbst, sondern die zwei Werte
-   `--dreh` (Winkel) und `--heben` (Weg nach oben). Diese Werte zählt der
-   Browser Bild für Bild weiter und zeichnet die Karte dabei jedes Mal neu –
-   als echte Schrift im jeweiligen Winkel. Es gibt kein Umschalten zwischen
-   Bild und Schrift: in Ruhe scharf, in Bewegung ruhig, am Ende kein Sprung.
-   Dasselbe gilt für das Heranzoomen des Fotos (`--zoom`).
-
-   Die Schräglage jeder Karte kommt als `--schraeg` aus Einblicke.tsx. */
-@property --dreh {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 0deg;
-}
-@property --heben {
-  syntax: "<length>";
-  inherits: false;
-  initial-value: 0px;
-}
+   BEIM ÜBERFAHREN (oder mit der Tastatur angewählt):
+   • ein Rahmen in der Leistungsfarbe (`--ton`) und ein tieferer Schatten,
+   • das Foto zoomt ein wenig heran – nur das Foto, innerhalb seines Rahmens;
+     dafür wird der Wert `--zoom` weitergezählt und das Foto Bild für Bild
+     neu gezeichnet, damit auch dabei keine Ebene entsteht, die die Schrift
+     daneben unscharf machen könnte,
+   • das Motiv wird unterstrichen, der Pfeil wird blau (Einblicke.tsx). */
 @property --zoom {
   syntax: "<number>";
   inherits: false;
   initial-value: 1;
 }
 .schief-karte {
-  --dreh: var(--schraeg, 0deg);
-  --heben: 0px;
-  transform: translateY(var(--heben)) rotate(var(--dreh));
-  transition:
-    --dreh 0.5s var(--weich),
-    --heben 0.5s var(--weich),
-    box-shadow 0.5s var(--weich);
+  transform: rotate(var(--schraeg, 0deg));
+  box-shadow: 0 18px 40px -18px rgba(15, 27, 45, 0.4);
+  transition: box-shadow 0.35s var(--weich);
 }
 .schief-karte:hover,
 .schief-karte:focus-visible {
-  --dreh: 0deg;
-  --heben: -0.25rem;
+  box-shadow:
+    0 0 0 3px var(--ton, #2b6fd6),
+    0 26px 50px -18px rgba(15, 27, 45, 0.55);
 }
 .schief-foto {
   --zoom: 1;
@@ -453,7 +439,7 @@ body {
 }
 .schief-karte:hover .schief-foto,
 .schief-karte:focus-visible .schief-foto {
-  --zoom: 1.05;
+  --zoom: 1.06;
 }
 
 /* ── FRAGEN (Aufklapp-Liste) ─────────────────────────────────────────────── */

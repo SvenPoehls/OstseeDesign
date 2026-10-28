@@ -12,12 +12,12 @@ import { services, unterseiten } from "@/lib/site";
 //
 // Jedes Foto führt auf die Unterseite seiner Leistung.
 //
-// BEIM ÜBERFAHREN richtet sich die Karte gerade, hebt sich leicht, das Foto
-// zoomt ein wenig, das Motiv wird unterstrichen und der Pfeil blau.
-//
-// SCHRIFT BLEIBT SCHARF UND RUHIG: Drehen, Heben und Zoomen steuern die
-// Klassen `schief-karte` und `schief-foto` in globals.css – dort steht, warum
-// das nicht mit gewöhnlichen Tailwind-Klassen (rotate-…, hover:…) geht.
+// Die Karten liegen FEST schräg und bewegen sich nie – so bleibt die Schrift
+// scharf. BEIM ÜBERFAHREN bekommt die Karte einen Rahmen in ihrer Farbe und
+// einen tieferen Schatten, das Foto zoomt ein wenig, das Motiv wird
+// unterstrichen und der Pfeil blau. Gesteuert über die Klassen `schief-karte`
+// und `schief-foto` in globals.css – dort steht auch, warum die Karte sich
+// nicht mehr drehen darf.
 //
 // ANORDNUNG je Foto (`LAGE`): Spaltenbreite auf großen Bildschirmen,
 // Seitenverhältnis, Versatz nach unten und Schräglage. Auf dem Handy stehen die
@@ -64,8 +64,8 @@ export default function Einblicke() {
               >
                 <Link
                   href={`/${service.id}`}
-                  className="schief-karte group relative block rounded-kachel bg-white p-3 pb-5 shadow-[0_18px_40px_-18px_rgba(15,27,45,0.4)] hover:shadow-[0_26px_50px_-18px_rgba(15,27,45,0.55)]"
-                  style={{ "--schraeg": lage.schraeg } as CSSProperties}
+                  className="schief-karte group relative block rounded-kachel bg-white p-3 pb-5"
+                  style={{ "--schraeg": lage.schraeg, "--ton": ton } as CSSProperties}
                 >
                   {/* Klebeband oben in der Mitte */}
                   <span

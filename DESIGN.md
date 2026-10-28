@@ -55,7 +55,7 @@ Reihenfolge der Startseite:
 | Kopfbereich | Hero | links Schlagzeile mit Farbkreisen dahinter, Kennzahlen (30+ Jahre Erfahrung · 100 % aus einer Hand · Mo–Do für Sie da), Knöpfe · rechts ein großes Foto (Platzhalter) und das dunkle Band „Jetzt kontaktieren" (statt Video) |
 | Alles aus einer Hand (Band) | „Move forward…" | „Ihr Werbepartner in Eckernförde", drei Punkte als große Zeilen mit einfarbigen Häkchen, darunter „Rufen Sie uns an" |
 | Leistungen | „Our Services" | vier Karten 01–04 als **Treppe**: jede ein Stück tiefer als die vorige |
-| Einblicke | „Favorite Work" | **drei Karten**, verschieden groß und versetzt; auf jeder liegt ein schräges Foto mit Klebestreifen, die Beschriftung darunter steht gerade |
+| Einblicke | „Favorite Work" | **drei Fotos**, verschieden groß, schräg und versetzt wie Abzüge auf dem Werktisch, mit Klebestreifen |
 | Kundenstimmen (Band) | „What our clients are saying" | Karussell mit Pfeilen, Punkten und Pause-Knopf – **zurzeit Platzhalter** |
 | Ablauf | Screenshot 2 | unverändert: Faden mit Nummernkreisen und vier Karten |
 | Häufige Fragen | „FAQ" | **drei Fragen** in großen Kacheln mit Nummer; die erste ist beim Laden offen, es ist **immer nur eine offen**, und Auf- und Zuklappen gleiten weich (`FragenAufklappen.tsx`; ohne Skript übernimmt der gemeinsame `name` der `<details>`); Antworten nur aus Angaben in `site.ts`. Die Frage nach der Erreichbarkeit zeigt Öffnungszeiten (je Wochentag eine Zeile, Zeit rechts mit gepunkteter Linie) und Kontaktwege als übersichtliche Liste |
@@ -124,7 +124,7 @@ Alles steht in `src/app/globals.css` (Abschnitt „ANIMATIONEN"):
 | **Linien** | Die gestrichelten Bögen zeichnen sich beim Hinscrollen von ihrem Anfang her. Jede endet mit einem Strich genau in der Pfeilspitze (`pathLength` + berechnete Strichlängen, siehe `Uebergang.tsx`). |
 | **Fragen** | Auf- und Zuklappen gleiten (0,4 s); öffnet man eine Frage, klappt die offene gleichzeitig zu. |
 | **Kundenstimmen** | Wechseln alle 7 Sekunden; Pause-Knopf, hält bei Maus oder Tastatur darauf an, läuft bei „Bewegung reduzieren" gar nicht. |
-| **Hover** | Karten und Knöpfe heben sich leicht, Eckkreise wachsen. In „Einblicke" stehen die Karten mit der Schrift gerade (schräge Schrift wird nie ganz sauber), nur das Foto liegt schräg; beim Überfahren hebt sich die Karte und das Foto dreht sich gerade (`.ruhige-karte`, `.schiefes-foto` in globals.css). |
+| **Hover** | Karten und Knöpfe heben sich leicht, Eckkreise wachsen. In „Einblicke" liegen die ganzen Karten schräg und drehen sich beim Überfahren als ein Block gerade; die Schrift dreht fest mit und wird nicht neu berechnet (`.schief-karte` in globals.css). |
 
 **Wie ein Element zum Einblenden kommt:** `data-reveal` ans Element schreiben
 (optional `data-art="faden"`, `"pop"` oder `"linie"`, und eine Verzögerung mit

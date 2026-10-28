@@ -22,6 +22,10 @@ import { company, services, unterseiten } from "@/lib/site";
 // Startseite) · weitere Leistungen · Schlussaufruf (Band) · Kontakt.
 // Die oberen vier Teile teilen sich einen Seitenrand; die übrigen setzen
 // ihren Rand selbst.
+//
+// HANDY UND TABLET: nur ein Bild, und der Beschreibungstext rückt vor „Das
+// gehört dazu". Dafür ist der gemeinsame Rahmen unterhalb von `lg` eine
+// Spalte (flex), in der LeistungDetails/LeistungText per `order-…` umsortieren.
 
 // Der Export ist statisch: Es dürfen nur die Adressen aufgerufen werden, die
 // beim Bauen erzeugt wurden. Alles andere ergibt die 404-Seite.
@@ -73,7 +77,7 @@ export default async function LeistungPage({ params }: Props) {
   return (
     <>
       <main id="hauptinhalt">
-        <div className="seitenrand">
+        <div className="seitenrand flex flex-col lg:block">
           <LeistungHero service={service} index={index} />
           <LeistungDetails service={service} index={index} />
           <LeistungText service={service} index={index} />

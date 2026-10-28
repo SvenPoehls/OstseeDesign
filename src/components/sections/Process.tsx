@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import Etikett from "@/components/ui/Etikett";
+import SchritteStapel from "@/components/ui/SchritteStapel";
 import { FLAECHE, KNOPF, KNOPF_SCHRIFT, LEISE, SCHRIFT_AUF, farben } from "@/lib/farben";
 import { processSteps } from "@/lib/site";
 
@@ -9,9 +10,14 @@ import { processSteps } from "@/lib/site";
 // BEWEGUNG: Wenn man hierher scrollt, zeichnet sich der Faden von links nach
 // rechts, die Nummernkreise poppen nacheinander auf und die Karten darunter
 // schieben sich hinterher herein. Alles gestaffelt – Schritt 1 zuerst.
+//
+// AUF DEM HANDY (unter `md`) stehen die Schritte stattdessen als Stapel
+// Karteikarten, die man zur Seite wegwischt (SchritteStapel.tsx). Die Liste
+// unten ist dort ausgeblendet, der Stapel ab `md` – es ist immer nur eins
+// von beiden zu sehen und für Screenreader vorhanden.
 export default function Process() {
   return (
-    <section id="ablauf" className="abschnitt scroll-mt-28">
+    <section id="ablauf" className="abschnitt scroll-mt-28 overflow-x-clip">
       <div className="seitenrand">
         <div data-reveal className="max-w-[44rem]">
           <Etikett>Ablauf</Etikett>
@@ -23,7 +29,11 @@ export default function Process() {
           </h2>
         </div>
 
-        <ol className="relative mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div data-reveal className="mt-10 [--verz:120ms] md:hidden">
+          <SchritteStapel />
+        </div>
+
+        <ol className="relative mt-10 hidden gap-5 md:grid md:grid-cols-2 lg:grid-cols-4">
           {/* Der Faden, der die Punkte verbindet. */}
           <span
             aria-hidden="true"

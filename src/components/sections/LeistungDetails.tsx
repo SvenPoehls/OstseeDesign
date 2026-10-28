@@ -5,8 +5,13 @@ import { SCHRIFT_AUF, farben } from "@/lib/farben";
 import type { Service } from "@/lib/site";
 
 // Unter dem Kopfbereich einer Leistungs-Unterseite:
-//   1. drei Foto-Platzhalter (ein großes, zwei kleine) in der Leistungsfarbe
+//   1. drei Foto-Platzhalter (ein großes, zwei kleine) in der Leistungsfarbe –
+//      auf Handy und Tablet nur das große, damit man schnell zum Text kommt
 //   2. „Das gehört dazu": die Punkte der Leistung als drei Karten
+//
+// REIHENFOLGE AUF HANDY UND TABLET: Dort steht der Beschreibungstext
+// (LeistungText) direkt unter dem Bild und „Das gehört dazu" erst danach –
+// geregelt über `order-…` hier und in LeistungText.tsx (siehe page.tsx).
 //
 // Beides nutzt nur Inhalte aus `site.ts` (Motive und Punkte). Sind echte
 // Fotos da, wird jedes <Bild …/> durch ein <img> ersetzt (siehe Bild.tsx).
@@ -42,14 +47,14 @@ export default function LeistungDetails({
               note={note}
               ton={farben[(index + i + 1) % farben.length].ton}
               reveal
-              className={`h-52 lg:h-auto ${i === 0 ? "[--verz:120ms]" : "[--verz:240ms]"}`}
+              className={`hidden lg:block lg:h-auto ${i === 0 ? "[--verz:120ms]" : "[--verz:240ms]"}`}
             />
           ) : null
         )}
       </section>
 
       {/* ── Das gehört dazu ────────────────────────────────────────────── */}
-      <section className="mt-16 sm:mt-24" aria-labelledby="dazu">
+      <section className="order-2 mt-16 sm:mt-24" aria-labelledby="dazu">
         <div data-reveal className="max-w-[44rem]">
           <Etikett>{service.title}</Etikett>
           <h2

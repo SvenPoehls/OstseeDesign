@@ -3,8 +3,9 @@ import Etikett from "@/components/ui/Etikett";
 import { LEISE, farben } from "@/lib/farben";
 import { company, type Service } from "@/lib/site";
 
-// Beschreibungstext einer Leistungs-Unterseite – steht unter „Das gehört
-// dazu". Zweispaltig: links Etikett und Überschrift (ein Wort mit Marker in
+// Beschreibungstext einer Leistungs-Unterseite – steht auf großen Bildschirmen
+// unter „Das gehört dazu", auf Handy und Tablet eine Stufe höher, direkt unter
+// dem Bild (`order-1`, siehe page.tsx). Zweispaltig: links Etikett und Überschrift (ein Wort mit Marker in
 // der Leistungsfarbe), rechts der Text, der erste Absatz etwas größer. Darunter
 // der Hinweis aufs Telefon.
 //
@@ -21,7 +22,7 @@ export default function LeistungText({ service, index }: { service: Service; ind
   const letztes = woerter.pop();
 
   return (
-    <section className="mt-16 grid gap-8 sm:mt-24 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16" aria-labelledby="ueber">
+    <section className="order-1 mt-16 grid gap-8 sm:mt-24 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16" aria-labelledby="ueber">
       <div data-reveal>
         <Etikett>Über {service.title}</Etikett>
         <h2 id="ueber" className="titel mt-6">

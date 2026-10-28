@@ -57,7 +57,7 @@ Reihenfolge der Startseite:
 | Leistungen | „Our Services" | vier Karten 01–04 als **Treppe**: jede ein Stück tiefer als die vorige |
 | Einblicke | „Favorite Work" | **drei Fotos**, verschieden groß, schräg und versetzt wie Abzüge auf dem Werktisch, mit Klebestreifen |
 | Kundenstimmen (Band) | „What our clients are saying" | Karussell mit Pfeilen, Punkten und Pause-Knopf – **zurzeit Platzhalter** |
-| Ablauf | Screenshot 2 | unverändert: Faden mit Nummernkreisen und vier Karten |
+| Ablauf | Screenshot 2 | Faden mit Nummernkreisen und vier Karten; **auf dem Handy** (unter `md`) ein Stapel Karteikarten, die man zur Seite wegwischt (`SchritteStapel.tsx`), mit Pfeilen und Punkten darunter |
 | Häufige Fragen | „FAQ" | **drei Fragen** in großen Kacheln mit Nummer; die erste ist beim Laden offen, es ist **immer nur eine offen**, und Auf- und Zuklappen gleiten weich (`FragenAufklappen.tsx`; ohne Skript übernimmt der gemeinsame `name` der `<details>`); Antworten nur aus Angaben in `site.ts`. Die Frage nach der Erreichbarkeit zeigt Öffnungszeiten (je Wochentag eine Zeile, Zeit rechts mit gepunkteter Linie) und Kontaktwege als übersichtliche Liste |
 | Schlussaufruf (Band) | „Ready for the next chapter" | mittig, mit gestricheltem S-Bogen, der gerade in die Pfeilspitze läuft |
 | Kontakt | „Get in touch" | Kontaktwege, QR-Feld, Öffnungszeiten (statt Formular: ohne Server gäbe es niemanden, der es verschickt) |
@@ -103,7 +103,9 @@ der Karte der Startseite, im Menü (Unterstrich, Handy-Marke) und im
 Kopfbereich ihrer Seite. Aufbau: Kopfbereich mit Farbkreisen · drei
 Foto-Platzhalter · „Das gehört dazu" · Beschreibungstext (`beschreibung` in
 `site.ts`, Baustein `LeistungText.tsx`) · Ablauf · weitere Leistungen ·
-Schlussaufruf (Band) · Kontakt.
+Schlussaufruf (Band) · Kontakt. Auf Handy und Tablet (unter `lg`) steht nur
+**ein** Foto-Platzhalter, und der Beschreibungstext kommt direkt danach, vor
+„Das gehört dazu".
 
 **Neue Leistung hinzufügen:** in `src/lib/site.ts` einen Eintrag in
 `services` ergänzen (und in `src/lib/farben.ts` eine Farbe). Seite, Menüpunkt

@@ -398,6 +398,17 @@ body {
   }
 }
 
+/* ── SCHRÄGE KARTEN (Einblicke) ─────────────────────────────────────────── */
+/* Die Karten drehen sich beim Überfahren gerade. Damit die Schrift dabei
+   nicht springt, behandelt der Browser jede Karte dauerhaft als eigene,
+   ruhende Ebene: Inhalt und Schrift werden einmal gezeichnet und drehen sich
+   als Ganzes. (Sonst zeichnet er die Schrift am Ende der Bewegung neu, und
+   kleine Teile wie i-Punkte verrutschen sichtbar.) */
+.schief-karte {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
 /* ── FRAGEN (Aufklapp-Liste) ─────────────────────────────────────────────── */
 /* Native <details>: funktioniert ohne Skript und mit Tastatur. Das Dreieck
    des Browsers wird durch ein rundes Plus ersetzt, das sich beim Öffnen zum

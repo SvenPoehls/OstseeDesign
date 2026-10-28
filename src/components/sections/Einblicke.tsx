@@ -12,11 +12,15 @@ import { services, unterseiten } from "@/lib/site";
 //
 // Jedes Foto führt auf die Unterseite seiner Leistung.
 //
-// BEIM ÜBERFAHREN BEWEGT SICH NICHTS: Die Karten bleiben ruhig schräg liegen.
-// (Früher richteten sie sich gerade – während dieser Drehung zeichnet der
-// Browser die schräge Schrift ständig neu, und kleine Teile wie i-Punkte
-// sprangen sichtbar.) Stattdessen wird der Schatten kräftiger, das Motiv
-// unterstrichen und der Pfeil blau.
+// BEIM ÜBERFAHREN richtet sich die Karte gerade, hebt sich leicht, das Foto
+// zoomt ein wenig, das Motiv wird unterstrichen und der Pfeil blau.
+//
+// SCHRIFT BLEIBT RUHIG: Ohne Gegenmaßnahme dreht der Browser die Karte
+// während der Bewegung als Bild und zeichnet am Ende die schräge Schrift neu
+// als Text – bei diesem Umschalten sprangen kleine Teile wie i-Punkte. Die
+// Klasse `schief-karte` (globals.css) lässt die Karte dauerhaft als ruhendes
+// Bild behandeln: Die Schrift wird einmal gezeichnet und dreht sich als
+// Ganzes mit, ohne Umschalten.
 //
 // ANORDNUNG je Foto (`LAGE`): Spaltenbreite auf großen Bildschirmen,
 // Seitenverhältnis, Versatz nach unten und Drehung. Auf dem Handy stehen die
@@ -63,7 +67,7 @@ export default function Einblicke() {
               >
                 <Link
                   href={`/${service.id}`}
-                  className={`group relative block ${lage.drehung} rounded-kachel bg-white p-3 pb-5 shadow-[0_18px_40px_-18px_rgba(15,27,45,0.4)] transition-shadow duration-300 hover:shadow-[0_26px_50px_-18px_rgba(15,27,45,0.55)]`}
+                  className={`schief-karte group relative block ${lage.drehung} rounded-kachel bg-white p-3 pb-5 shadow-[0_18px_40px_-18px_rgba(15,27,45,0.4)] transition-[transform,box-shadow] duration-500 hover:-translate-y-1 hover:rotate-0 hover:shadow-[0_26px_50px_-18px_rgba(15,27,45,0.55)]`}
                 >
                   {/* Klebeband oben in der Mitte */}
                   <span
@@ -74,7 +78,7 @@ export default function Einblicke() {
                   <span className={`relative block ${lage.form} overflow-hidden rounded-bild`}>
                     <span
                       aria-hidden="true"
-                      className="absolute inset-0"
+                      className="absolute inset-0 transition-transform duration-500 group-hover:scale-105"
                       style={platzhalterFlaeche(ton)}
                     />
                   </span>

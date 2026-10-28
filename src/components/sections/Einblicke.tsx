@@ -15,25 +15,21 @@ import { services, unterseiten } from "@/lib/site";
 // BEIM ÜBERFAHREN richtet sich die Karte gerade, hebt sich leicht, das Foto
 // zoomt ein wenig, das Motiv wird unterstrichen und der Pfeil blau.
 //
-// SCHRIFT BLEIBT RUHIG: Ohne Gegenmaßnahme dreht der Browser die Karte
-// während der Bewegung als Bild und zeichnet am Ende die schräge Schrift neu
-// als Text – bei diesem Umschalten sprangen kleine Teile wie i-Punkte. Die
-// Klasse `schief-karte` (globals.css) lässt die Karte dauerhaft als ruhendes
-// Bild behandeln: Die Schrift wird einmal gezeichnet und dreht sich als
-// Ganzes mit, ohne Umschalten. Außerdem wird sie dort ohne Runden auf ganze
-// Bildpunkte gezeichnet, damit auch im Ruhezustand kein i-Punkt verrutscht.
+// SCHRIFT BLEIBT SCHARF UND RUHIG: Drehen, Heben und Zoomen steuern die
+// Klassen `schief-karte` und `schief-foto` in globals.css – dort steht, warum
+// das nicht mit gewöhnlichen Tailwind-Klassen (rotate-…, hover:…) geht.
 //
 // ANORDNUNG je Foto (`LAGE`): Spaltenbreite auf großen Bildschirmen,
-// Seitenverhältnis, Versatz nach unten und Drehung. Auf dem Handy stehen die
+// Seitenverhältnis, Versatz nach unten und Schräglage. Auf dem Handy stehen die
 // drei untereinander, abwechselnd nach links und rechts gerückt.
 //
 // ECHTE FOTOS: In der Kachel das <span …platzhalterFlaeche…/> durch ein
 //   <img src={asset("/datei.jpg")} alt="…" className="absolute inset-0 h-full w-full object-cover" />
 // ersetzen (asset kommt aus @/lib/assets).
 const LAGE = [
-  { spalte: "lg:col-span-5", form: "aspect-[4/5]", versatz: "", drehung: "-rotate-2", seite: "mr-6 sm:mr-24 lg:mr-0" },
-  { spalte: "lg:col-span-4", form: "aspect-square", versatz: "lg:mt-28", drehung: "rotate-3", seite: "ml-6 sm:ml-24 lg:ml-0" },
-  { spalte: "lg:col-span-3", form: "aspect-[3/4]", versatz: "lg:mt-10", drehung: "-rotate-1", seite: "mr-10 sm:mr-32 lg:mr-0" },
+  { spalte: "lg:col-span-5", form: "aspect-[4/5]", versatz: "", schraeg: "-2deg", seite: "mr-6 sm:mr-24 lg:mr-0" },
+  { spalte: "lg:col-span-4", form: "aspect-square", versatz: "lg:mt-28", schraeg: "3deg", seite: "ml-6 sm:ml-24 lg:ml-0" },
+  { spalte: "lg:col-span-3", form: "aspect-[3/4]", versatz: "lg:mt-10", schraeg: "-1deg", seite: "mr-10 sm:mr-32 lg:mr-0" },
 ];
 
 export default function Einblicke() {
@@ -68,7 +64,8 @@ export default function Einblicke() {
               >
                 <Link
                   href={`/${service.id}`}
-                  className={`schief-karte group relative block ${lage.drehung} rounded-kachel bg-white p-3 pb-5 shadow-[0_18px_40px_-18px_rgba(15,27,45,0.4)] transition-[transform,box-shadow] duration-500 hover:-translate-y-1 hover:rotate-0 hover:shadow-[0_26px_50px_-18px_rgba(15,27,45,0.55)]`}
+                  className="schief-karte group relative block rounded-kachel bg-white p-3 pb-5 shadow-[0_18px_40px_-18px_rgba(15,27,45,0.4)] hover:shadow-[0_26px_50px_-18px_rgba(15,27,45,0.55)]"
+                  style={{ "--schraeg": lage.schraeg } as CSSProperties}
                 >
                   {/* Klebeband oben in der Mitte */}
                   <span
@@ -79,7 +76,7 @@ export default function Einblicke() {
                   <span className={`relative block ${lage.form} overflow-hidden rounded-bild`}>
                     <span
                       aria-hidden="true"
-                      className="absolute inset-0 transition-transform duration-500 group-hover:scale-105"
+                      className="schief-foto absolute inset-0"
                       style={platzhalterFlaeche(ton)}
                     />
                   </span>

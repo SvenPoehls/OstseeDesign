@@ -124,7 +124,7 @@ Alles steht in `src/app/globals.css` (Abschnitt „ANIMATIONEN"):
 | **Linien** | Die gestrichelten Bögen zeichnen sich beim Hinscrollen von ihrem Anfang her. Jede endet mit einem Strich genau in der Pfeilspitze (`pathLength` + berechnete Strichlängen, siehe `Uebergang.tsx`). |
 | **Fragen** | Auf- und Zuklappen gleiten (0,4 s); öffnet man eine Frage, klappt die offene gleichzeitig zu. |
 | **Kundenstimmen** | Wechseln alle 7 Sekunden; Pause-Knopf, hält bei Maus oder Tastatur darauf an, läuft bei „Bewegung reduzieren" gar nicht. |
-| **Hover** | Karten und Knöpfe heben sich leicht, Eckkreise wachsen. In „Einblicke" liegen die ganzen Karten schräg und drehen sich beim Überfahren als ein Block gerade; die Schrift dreht fest mit und wird nicht neu berechnet (`.schief-karte` in globals.css). |
+| **Hover** | Karten und Knöpfe heben sich leicht, Eckkreise wachsen. In „Einblicke" liegen die ganzen Karten schräg und drehen sich beim Überfahren als ein Block gerade; bewegt werden dabei nur die Werte `--dreh`/`--heben`, damit die Schrift in jedem Moment als echte Schrift gezeichnet wird – in Ruhe scharf, ohne Springen (`.schief-karte` in globals.css). |
 
 **Wie ein Element zum Einblenden kommt:** `data-reveal` ans Element schreiben
 (optional `data-art="faden"`, `"pop"` oder `"linie"`, und eine Verzögerung mit

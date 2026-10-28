@@ -400,19 +400,60 @@ body {
 
 /* ── SCHRÄGE KARTEN (Einblicke) ─────────────────────────────────────────── */
 /* Die ganze Karte liegt schräg und dreht sich beim Überfahren gerade – als
-   EIN Block, die Schrift dreht fest mit:
-   • `will-change` + `backface-visibility`: Der Browser behandelt jede Karte
-     dauerhaft als eigene, ruhende Ebene. Inhalt und Schrift werden einmal
-     gezeichnet und drehen sich als Ganzes; am Ende der Bewegung wird nichts
-     neu berechnet, nichts springt.
-   • `text-rendering: geometricPrecision`: Die Schrift wird exakt nach ihrer
-     Form gezeichnet, ohne einzelne Teile (z. B. den i-Punkt) auf ganze
-     Bildpunkte zu runden. Gerade dieses Runden lässt bei schräger Schrift
-     den i-Punkt leicht verrutschen. */
+   EIN Block, Foto und Schrift drehen fest mit.
+
+   WARUM SO UMSTÄNDLICH? Dreht man mit `transform` + `transition`, macht der
+   Browser aus der Karte während der Bewegung ein Bild und dreht dieses Bild.
+   Am Ende zeichnet er die Schrift wieder als echte Schrift – bei diesem
+   Umschalten springen i-Punkte. Hält man die Karte dauerhaft als Bild
+   (`will-change`), springt nichts mehr, aber das schräg gedrehte Bild wird
+   weichgezeichnet: Die Schrift ist in Ruhe unscharf.
+
+   DIE LÖSUNG: Bewegt werden nicht `transform` selbst, sondern die zwei Werte
+   `--dreh` (Winkel) und `--heben` (Weg nach oben). Diese Werte zählt der
+   Browser Bild für Bild weiter und zeichnet die Karte dabei jedes Mal neu –
+   als echte Schrift im jeweiligen Winkel. Es gibt kein Umschalten zwischen
+   Bild und Schrift: in Ruhe scharf, in Bewegung ruhig, am Ende kein Sprung.
+   Dasselbe gilt für das Heranzoomen des Fotos (`--zoom`).
+
+   Die Schräglage jeder Karte kommt als `--schraeg` aus Einblicke.tsx. */
+@property --dreh {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --heben {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+@property --zoom {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 1;
+}
 .schief-karte {
-  will-change: transform;
-  backface-visibility: hidden;
-  text-rendering: geometricPrecision;
+  --dreh: var(--schraeg, 0deg);
+  --heben: 0px;
+  transform: translateY(var(--heben)) rotate(var(--dreh));
+  transition:
+    --dreh 0.5s var(--weich),
+    --heben 0.5s var(--weich),
+    box-shadow 0.5s var(--weich);
+}
+.schief-karte:hover,
+.schief-karte:focus-visible {
+  --dreh: 0deg;
+  --heben: -0.25rem;
+}
+.schief-foto {
+  --zoom: 1;
+  transform: scale(var(--zoom));
+  transition: --zoom 0.5s var(--weich);
+}
+.schief-karte:hover .schief-foto,
+.schief-karte:focus-visible .schief-foto {
+  --zoom: 1.05;
 }
 
 /* ── FRAGEN (Aufklapp-Liste) ─────────────────────────────────────────────── */

@@ -236,7 +236,7 @@ export const kundenstimmen: Kundenstimme[] = [
 // ── Häufige Fragen ───────────────────────────────────────────────────────
 // Bewusst nur drei, dafür groß. Die Antworten versprechen nichts, was nicht
 // auch auf der bisherigen Website steht (Leistungen, Öffnungszeiten, Kontakt);
-// die Anfrage-Frage beschreibt nur, was man zum ersten Gespräch mitbringt. Weitere Fragen einfach unten anhängen.
+// die Kleidungs-Frage verweist nur auf den eigenen Textilshop. Weitere Fragen einfach unten anhängen.
 // `erreichbarkeit: true` → unter der Antwort stehen die Öffnungszeiten (je Tag
 // eine Zeile) und die Kontaktwege übersichtlich als Liste (siehe Fragen.tsx).
 export const fragen: { frage: string; antwort: string; erreichbarkeit?: boolean }[] = [
@@ -246,9 +246,9 @@ export const fragen: { frage: string; antwort: string; erreichbarkeit?: boolean 
       "Werbetechnik – Beschriftungen aller Art, zum Beispiel für Fahrzeuge, Schilder, Fenster und Displays. Textilveredelung – Stickereien, verschiedene Transfertechniken und individuelle Applikationen. Drucksachen – Briefpapier, Visitenkarten, Stempel und vieles mehr. Dazu kommt unser Textilshop ostseetextilien.de.",
   },
   {
-    frage: "Was brauche ich für eine Anfrage?",
+    frage: "Woher bekomme ich die passende Kleidung?",
     antwort:
-      "Erzählen Sie uns einfach, was Sie vorhaben – zum Beispiel, was beschriftet, bestickt oder gedruckt werden soll und wie viele Stück Sie ungefähr brauchen. Haben Sie schon ein Logo oder eine Vorlage, schicken Sie sie gern per E-Mail mit oder bringen Sie sie vorbei. Alles Weitere besprechen wir gemeinsam.",
+      "Passende Textilien für Arbeit und Freizeit finden Sie in unserem Textilshop ostseetextilien.de. Welche Veredelung zu Ihrem Motiv und Kleidungsstück passt – Stickerei, Transfer oder Applikation –, besprechen wir gern persönlich mit Ihnen.",
   },
   {
     frage: "Wann und wie erreiche ich Sie?",

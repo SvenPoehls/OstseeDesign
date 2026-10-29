@@ -12,7 +12,8 @@ import { processSteps } from "@/lib/site";
 // schieben sich hinterher herein. Alles gestaffelt – Schritt 1 zuerst.
 //
 // AUF DEM HANDY (unter `md`) stehen die Schritte stattdessen als Stapel
-// Karteikarten, die man zur Seite wegwischt (SchritteStapel.tsx). Die Liste
+// Karteikarten, die sich beim Scrollen nacheinander wegwischen
+// (SchritteStapel.tsx). Die Liste
 // unten ist dort ausgeblendet, der Stapel ab `md` – es ist immer nur eins
 // von beiden zu sehen und für Screenreader vorhanden.
 export default function Process() {

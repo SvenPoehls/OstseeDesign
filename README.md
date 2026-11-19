@@ -82,3 +82,16 @@ Textilshop ist als externer Link eingebunden. Kundenstimmen gibt es noch nicht
   funktionieren über `<details>`.
 - Das Live-Bearbeiten-Panel (`public/__editor/`) ist ein reines
   Entwicklungswerkzeug, steht in `.gitignore` und wird nur in `npm run dev` geladen.
+
+## Bildnachweis
+
+Die Werkstatt-Fotos (Einblicke und Unterseiten, Zuordnung in `src/lib/fotos.ts`)
+stammen von Unsplash und stehen unter der
+[Unsplash-Lizenz](https://unsplash.com/license) (kostenlos, auch kommerziell):
+
+- Folie auf Fahrzeug: Andre Tan, https://unsplash.com/photos/8MXNZCgAah0
+- Stickmaschine: Levi Gatimu, https://unsplash.com/photos/GGeg6Bn2ILE
+- Visitenkarten: Julian Tong, https://unsplash.com/photos/6nEQKmu0tFo
+
+Die Visitenkarten zeigen Fantasienamen aus dem Foto; bei Bedarf durch ein eigenes
+Foto ersetzen. Die Fotos sind Platzhalter für eigene Aufnahmen aus der Werkstatt.

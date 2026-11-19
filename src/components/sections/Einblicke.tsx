@@ -1,10 +1,11 @@
-import { FotoPlatzhalter } from "@/components/ui/Elemente";
+import { MotivFoto } from "@/components/ui/Elemente";
 import { services } from "@/lib/site";
 
 // EINBLICKE – drei Fotos aus der Werkstatt, verschieden groß und gestaffelt.
-// Noch Platzhalter: Die Beschriftung sagt, welches Motiv hineinkommt.
+// Die Fotos kommen aus lib/fotos.ts; die Beschriftung nennt das Motiv und
+// bleibt vorerst als Platzhaltertext stehen.
 export default function Einblicke() {
-  const motive = [services[0].bilder[0], services[1].bilder[1], services[2].bilder[0]];
+  const motive = [services[0].bilder[0], services[1].bilder[0], services[2].bilder[0]];
   return (
     <section className="section surface" id="einblicke" data-edit-id="einblicke" aria-labelledby="einblicke-titel">
       <div className="wrap">
@@ -12,7 +13,7 @@ export default function Einblicke() {
         <div className="einblicke" data-edit-id="einblicke-liste">
           {motive.map((m, i) => (
             <figure key={m} data-edit-id={`einblick-${i + 1}`}>
-              <FotoPlatzhalter>{m}</FotoPlatzhalter>
+              <MotivFoto motiv={m} />
               <figcaption>Platzhalter: {m}</figcaption>
             </figure>
           ))}

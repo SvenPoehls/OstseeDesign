@@ -312,4 +312,8 @@ html{scrollbar-color:var(--color-sea) var(--color-bg);accent-color:var(--color-p
 }
 
 /* Foto des Geschäfts rechts im Kopfbereich (Hochformat-Ausschnitt mit Schild und Tür) */
-.ph-foto{display:block;width:100%;aspect-ratio:2/3;max-height:calc(100svh - var(--hs) - 200px);object-fit:cover;object-position:13% 50%;border-radius:var(--radius-image);background:var(--color-surface)}
+.ph-foto{display:block;width:100%;height:auto;aspect-ratio:2/3;max-height:calc(100svh - var(--hs) - 200px);object-fit:cover;object-position:13% 50%;border-radius:var(--radius-image);background:var(--color-surface)}
+
+/* Fotos der Werkstatt-Motive: füllen dieselbe Fläche wie die Platzhalter */
+.foto-bild{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:var(--radius-image);background:#dbe8f6}
+.einblicke figure:first-child .foto-bild{aspect-ratio:1/1}

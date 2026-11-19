@@ -1,4 +1,6 @@
 import type { ReactNode } from "react";
+import { asset } from "@/lib/assets";
+import { fotos } from "@/lib/fotos";
 
 // Kleine Bausteine, die an mehreren Stellen vorkommen.
 
@@ -19,6 +21,25 @@ export function Welle({ bg, fill }: { bg: string; fill: string }) {
         />
       </svg>
     </div>
+  );
+}
+
+// Foto zu einem Motiv: das echte Bild, wenn eines in lib/fotos.ts steht, sonst
+// die Platzhalterfläche. Das Bild füllt dieselbe Fläche wie der Platzhalter.
+export function MotivFoto({ motiv }: { motiv: string }) {
+  const f = fotos[motiv];
+  if (!f) return <FotoPlatzhalter>{motiv}</FotoPlatzhalter>;
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      className="foto-bild"
+      src={asset(f.src)}
+      width={f.width}
+      height={f.height}
+      alt={f.alt}
+      loading="lazy"
+      style={{ objectPosition: f.position }}
+    />
   );
 }
 

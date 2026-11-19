@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { FotoPlatzhalter, Welle } from "@/components/ui/Elemente";
+import { MotivFoto, Welle } from "@/components/ui/Elemente";
 import Blasen from "@/components/ui/Blasen";
 import Process from "@/components/sections/Process";
 import Kontakt from "@/components/sections/Kontakt";
@@ -101,7 +101,7 @@ export default async function LeistungPage({ params }: Props) {
             <div className="einblicke">
               {service.bilder.map((b, i) => (
                 <figure key={b} data-edit-id={`seite-foto-${i + 1}`}>
-                  <FotoPlatzhalter>{b}</FotoPlatzhalter>
+                  <MotivFoto motiv={b} />
                   <figcaption>Platzhalter: {b}</figcaption>
                 </figure>
               ))}

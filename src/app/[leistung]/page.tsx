@@ -1,34 +1,21 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
-import LeistungHero from "@/components/sections/LeistungHero";
-import LeistungDetails from "@/components/sections/LeistungDetails";
-import LeistungText from "@/components/sections/LeistungText";
-import WeitereLeistungen from "@/components/sections/WeitereLeistungen";
+import { FotoPlatzhalter, Welle } from "@/components/ui/Elemente";
 import Process from "@/components/sections/Process";
-import Aufruf from "@/components/sections/Aufruf";
-import Contact from "@/components/sections/Contact";
-import { company, services, unterseiten } from "@/lib/site";
+import Kontakt from "@/components/sections/Kontakt";
+import { company, leistungsLink, services, unterseiten } from "@/lib/site";
 
 // UNTERSEITE EINER LEISTUNG – eine Vorlage für alle drei
-// (/textilveredelung, /werbetechnik, /drucksachen).
+// (/werbetechnik, /textilveredelung, /drucksachen).
 //
 // Welche Seiten es gibt, ergibt sich aus `services` in src/lib/site.ts: Jede
 // Leistung ohne externen Link bekommt eine Unterseite unter ihrer `id`.
-// Neue Leistung dort eintragen → Seite, Menüpunkt und Karte entstehen von
-// selbst. Texte, Punkte und Foto-Motive kommen ebenfalls von dort.
 //
-// Aufbau: Kopfbereich in der Leistungsfarbe · Bilder · „Das gehört dazu" ·
-// Beschreibungstext (LeistungText) · Ablauf (derselbe wie auf der
-// Startseite) · weitere Leistungen · Schlussaufruf (Band) · Kontakt.
-// Die oberen vier Teile teilen sich einen Seitenrand; die übrigen setzen
-// ihren Rand selbst.
-//
-// HANDY UND TABLET: nur ein Bild, und der Beschreibungstext rückt vor „Das
-// gehört dazu". Dafür ist der gemeinsame Rahmen unterhalb von `lg` eine
-// Spalte (flex), in der LeistungDetails/LeistungText per `order-…` umsortieren.
+// Aufbau: Kopf unter Wasser (tiefes Blau) · „Das gehört dazu" mit Text ·
+// Fotos (Platzhalter) · weitere Leistungen · Ablauf · Kontakt.
 
-// Der Export ist statisch: Es dürfen nur die Adressen aufgerufen werden, die
-// beim Bauen erzeugt wurden. Alles andere ergibt die 404-Seite.
+// Statischer Export: Es dürfen nur die beim Bauen erzeugten Adressen aufgerufen werden.
 export const dynamicParams = false;
 
 export function generateStaticParams() {
@@ -42,8 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const service = unterseiten.find((s) => s.id === leistung);
   if (!service) return {};
 
-  // `canonical` muss je Seite gesetzt werden – der Wert aus layout.tsx („/")
-  // würde sonst jede Unterseite als Kopie der Startseite ausweisen.
+  // `canonical` je Seite setzen, sonst würde jede Unterseite als Kopie der Startseite gelten.
   const adresse = `/${service.id}/`;
   return {
     title: service.title,
@@ -57,11 +43,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: service.title,
       description: service.teaser,
     },
-    twitter: {
-      card: "summary_large_image",
-      title: service.title,
-      description: service.teaser,
-    },
+    twitter: { card: "summary_large_image", title: service.title, description: service.teaser },
   };
 }
 
@@ -70,41 +52,84 @@ export default async function LeistungPage({ params }: Props) {
   const service = unterseiten.find((s) => s.id === leistung);
   if (!service) notFound();
 
-  // Platz in `services` = Platz in `farben`: So trägt die Seite dieselbe Farbe
-  // wie ihre Karte auf der Startseite und ihre Marke im Menü.
-  const index = services.findIndex((s) => s.id === service.id);
+  const weitere = services.filter((s) => s.id !== service.id);
 
   return (
     <>
       <main id="hauptinhalt">
-        <div className="seitenrand flex flex-col lg:block">
-          <LeistungHero service={service} index={index} />
-          <LeistungDetails service={service} index={index} />
-          <LeistungText service={service} index={index} />
-        </div>
+        <section className="deep" data-edit-id="seite-kopf" aria-labelledby="seite-titel">
+          <div className="wrap kopf">
+            <Link className="zurueck" href="/">← Zur Startseite</Link>
+            <h1 id="seite-titel" data-edit-id="seite-title">{service.title}</h1>
+            {service.motto && <p className="motto" data-edit-id="seite-motto">{service.motto}</p>}
+            <p className="lead" data-edit-id="seite-teaser">{service.teaser}</p>
+            <div className="aktionen">
+              <Link className="btn primary" href="/#kontakt">Projekt besprechen</Link>
+              <a className="btn" href={`tel:${company.phoneHref}`}>{company.phoneDisplay}</a>
+            </div>
+          </div>
+        </section>
+        <Welle bg="var(--color-deep)" fill="var(--color-bg)" />
+
+        <section className="section" data-edit-id="seite-inhalt">
+          <div className="wrap zweispaltig">
+            <div>
+              <p className="eyebrow">Das gehört dazu</p>
+              <ul className="punkte" data-edit-id="seite-punkte">
+                {service.points.map((p) => (
+                  <li key={p}>{p}</li>
+                ))}
+              </ul>
+            </div>
+            {service.beschreibung && (
+              <div className="text" data-edit-id="seite-text">
+                <h2 className="h2">{service.beschreibung.titel}</h2>
+                <div style={{ marginTop: 24 }}>
+                  {service.beschreibung.absaetze.map((a) => (
+                    <p key={a}>{a}</p>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
+
+        <section className="section surface" data-edit-id="seite-fotos" aria-label="Fotos">
+          <div className="wrap">
+            <div className="einblicke">
+              {service.bilder.map((b, i) => (
+                <figure key={b} data-edit-id={`seite-foto-${i + 1}`}>
+                  <FotoPlatzhalter>{b}</FotoPlatzhalter>
+                  <figcaption>Platzhalter: {b}</figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section" data-edit-id="seite-weitere" aria-labelledby="weitere-titel">
+          <div className="wrap">
+            <p className="eyebrow">Weitere Leistungen</p>
+            <h2 className="h2" id="weitere-titel">Alles aus einer Hand</h2>
+            <div className="weitere">
+              {weitere.map((s) =>
+                s.external ? (
+                  <a key={s.id} className="btn" href={leistungsLink(s)} target="_blank" rel="noopener noreferrer">
+                    {s.title}&nbsp;↗
+                  </a>
+                ) : (
+                  <Link key={s.id} className="btn" href={leistungsLink(s)}>
+                    {s.title}
+                  </Link>
+                )
+              )}
+            </div>
+          </div>
+        </section>
+
         <Process />
-        <WeitereLeistungen aktuell={service.id} />
-        <Aufruf />
-        <Contact />
+        <Kontakt />
       </main>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Service",
-            name: service.title,
-            description: service.teaser,
-            areaServed: company.region,
-            provider: {
-              "@type": "LocalBusiness",
-              name: company.fullName,
-              telephone: company.phoneHref,
-              url: "https://www.ostseedesign.de",
-            },
-          }),
-        }}
-      />
     </>
   );
 }

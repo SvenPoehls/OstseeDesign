@@ -1,141 +1,17 @@
 import Link from "next/link";
-import { BAND_AKZENT, BAND_SCHRIFT, BAND_LEISE, BAND, farben } from "@/lib/farben";
-import { company, nav, openingHours } from "@/lib/site";
+import { company } from "@/lib/site";
 
-// Fußzeile, auf dem farbigen Band und mehrspaltig wie im Vorbild:
-//
-//   1  Wortmarke, Unterzeile und drei Punkte mit Häkchen
-//   2  Seiten (Startseite, die drei Leistungen, Textilshop, Kontakt)
-//   3  Kontakt (Telefon, Fax, E-Mail, Anschrift)
-//   4  Öffnungszeiten (im Vorbild steht hier der Newsletter)
-//
-// Darunter eine Zeile mit © und dem Rechtlichen, rechts die vier Farben.
 export default function Footer() {
-  const year = 2026; // statisch – kein Client-Datum nötig
-  const link = "transition-colors hover:text-tinte hover:underline";
-  const spaltenTitel = "text-[0.78rem] font-bold uppercase tracking-[0.16em]";
-
   return (
-    <footer style={{ backgroundColor: BAND, color: BAND_LEISE }}>
-      <div className="seitenrand grid gap-12 pb-12 pt-16 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.1fr] lg:gap-10 lg:pt-20">
-        <div>
-          <Link href="/" className="inline-flex flex-col leading-none" style={{ color: BAND_SCHRIFT }}>
-            <span className="text-[1.6rem] font-extrabold tracking-[-0.03em]">ostseedesign</span>
-            <span className="mt-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.24em]">
-              Werbung &amp; Textilien
-            </span>
-          </Link>
-          <p className="mt-5 max-w-[22rem] text-[0.92rem] leading-relaxed">{company.claim}.</p>
-          <ul className="mt-6 space-y-2.5 text-[0.9rem]">
-            {[`Ihr Werbepartner in ${company.city}`, `Seit über ${company.yearsExperience} Jahren`, "Alles aus einer Hand"].map(
-              (punkt) => (
-                <li key={punkt} className="flex items-center gap-2.5">
-                  <span aria-hidden="true" className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full" style={{ backgroundColor: farben[0].ton }}>
-                    <svg viewBox="0 0 24 24" className="h-3 w-3" fill="none" stroke="#ffffff" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M5 12.5 10 17 19 7.5" />
-                    </svg>
-                  </span>
-                  {punkt}
-                </li>
-              )
-            )}
-          </ul>
-        </div>
-
-        <nav aria-label="Seiten">
-          <p className={spaltenTitel} style={{ color: BAND_AKZENT }}>
-            Seiten
-          </p>
-          <ul className="mt-5 space-y-2.5 text-[0.95rem]">
-            <li>
-              <Link href="/" className={link}>
-                Startseite
-              </Link>
-            </li>
-            {nav.map((n) => (
-              <li key={n.label}>
-                {n.external ? (
-                  <a href={n.href} target="_blank" rel="noopener noreferrer" className={link}>
-                    {n.label} ↗
-                  </a>
-                ) : (
-                  <Link href={n.href} className={link}>
-                    {n.label}
-                  </Link>
-                )}
-              </li>
-            ))}
-            <li>
-              <Link href="/#kontakt" className={link}>
-                Kontakt
-              </Link>
-            </li>
-          </ul>
-        </nav>
-
-        <div>
-          <p className={spaltenTitel} style={{ color: BAND_AKZENT }}>
-            Kontakt
-          </p>
-          <ul className="mt-5 space-y-2.5 text-[0.95rem]">
-            <li>
-              <a href={`tel:${company.phoneHref}`} className={link}>
-                {company.phoneDisplay}
-              </a>
-            </li>
-            <li>Fax {company.faxDisplay}</li>
-            <li>
-              <a href={`mailto:${company.email}`} className={`${link} break-all`}>
-                {company.email}
-              </a>
-            </li>
-            <li>
-              {company.street}
-              <br />
-              {company.zip} {company.city}
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <p className={spaltenTitel} style={{ color: BAND_AKZENT }}>
-            Öffnungszeiten
-          </p>
-          <dl className="mt-5 space-y-3 text-[0.92rem]">
-            {openingHours.map((z) => (
-              <div key={z.days}>
-                <dt>{z.days}</dt>
-                <dd className="font-bold" style={{ color: BAND_SCHRIFT }}>
-                  {z.time}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-      </div>
-
-      <div className="seitenrand">
-        <div
-          className="flex flex-col gap-4 border-t py-7 text-[0.85rem] sm:flex-row sm:items-center sm:justify-between"
-          style={{ borderColor: `${BAND_LEISE}33` }}
-        >
-          <p>
-            © {year} {company.fullName}
-          </p>
-          <nav aria-label="Rechtliches" className="flex flex-wrap items-center gap-x-6 gap-y-2">
-            <Link href="/impressum" className={link}>
-              Impressum
-            </Link>
-            <Link href="/datenschutz" className={link}>
-              Datenschutz
-            </Link>
-            <span aria-hidden="true" className="flex gap-1.5">
-              {farben.map((f) => (
-                <span key={f.ton} className="h-2 w-8 rounded-full" style={{ backgroundColor: f.ton }} />
-              ))}
-            </span>
-          </nav>
-        </div>
+    <footer className="deeper" data-edit-id="footer">
+      <div className="wrap fuss">
+        <p data-edit-id="footer-copyright">
+          © {new Date().getFullYear()} {company.fullName}
+        </p>
+        <ul>
+          <li><Link href="/impressum/">Impressum</Link></li>
+          <li><Link href="/datenschutz/">Datenschutz</Link></li>
+        </ul>
       </div>
     </footer>
   );

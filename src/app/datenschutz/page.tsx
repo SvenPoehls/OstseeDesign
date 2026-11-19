@@ -12,7 +12,8 @@ export const metadata: Metadata = {
 // Datenschutzerklärung (DSGVO). Bewusst auf die tatsächliche, datensparsame
 // Umsetzung dieser Website zugeschnitten: keine Cookies für Tracking/Marketing,
 // keine Analyse-Dienste, keine Karten-Einbindung, keine externen Schriften
-// (Schibsted Grotesk wird beim Bauen mit ausgeliefert, geprüft im fertigen Build).
+// (Cormorant Garamond und Hanken Grotesk liegen als Dateien im Projekt und werden
+// mit der Seite ausgeliefert, geprüft im fertigen Build).
 //
 // WICHTIG BEI EINEM UMZUG: Der Abschnitt „Hosting" nennt GitHub Pages als
 // Anbieter. Zieht die Seite auf einen anderen Server um (z. B. eigenes

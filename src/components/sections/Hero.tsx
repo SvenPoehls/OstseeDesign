@@ -1,162 +1,140 @@
 import type { CSSProperties } from "react";
-import Bild from "@/components/ui/Bild";
-import { BAND_SCHRIFT, BAND, KNOPF, KNOPF_SCHRIFT, LEISE_AUF_KREISEN, farben } from "@/lib/farben";
+import { asset } from "@/lib/assets";
 import { company } from "@/lib/site";
 
-// Auftakt der Startseite, zweispaltig wie im Vorbild:
+// KOPFBEREICH – Leuchtturm im Meer.
 //
-//   links   Unterzeile, große Schlagzeile in Versalien (drei Wörter mit
-//           Farbmarker), Text, drei Kennzahlen, zwei Knöpfe. Hinter der
-//           Schlagzeile liegen drei Farbkreise, die sich mischen wie
-//           Druckfarben auf Papier.
-//   rechts  ein großes Foto (zurzeit Platzhalter), darunter ein dunkles Band
-//           „Jetzt kontaktieren", das zum Kontaktbereich führt – an der
-//           Stelle, an der im Vorbild das Video steht. Bewusst KEIN
-//           Hintergrundbild.
+// Der Leuchtturm ist ein freigestelltes Bild (public/img/leuchtturm.webp) und
+// steht leicht unscharf im Hintergrund. Die Überschrift sitzt so, dass ihre
+// drei Zeilen auf den weißen Streifen des Turms liegen (Geometrie über die
+// CSS-Variablen --w, --b und --s in globals.css; die Mitten der Streifen
+// liegen bei 335, 530 und 725 von 1024 Bildpixeln). Wer das Bild austauscht,
+// muss diese Werte neu bestimmen.
 //
-// Die Kennzahlen geben nur wieder, was auch auf der bisherigen Website steht:
-// „seit über 30 Jahren", „Alles aus einer Hand!" und die Öffnungszeiten
-// (Montag bis Donnerstag, Freitag nach Vereinbarung).
-//
-// Text über den Kreisen benutzt LEISE_AUF_KREISEN – die Kreise machen den
-// Untergrund dort dunkler (siehe farben.ts).
-//
-// BEWEGUNG: Die Kreise wachsen auf und treiben, Text, Knöpfe und Foto
-// schieben sich nacheinander herein.
+// Das Meer ist reines SVG/CSS (kein Bild): Himmelsfarben im Wasser, feiner
+// Wellenglanz und verteilte Lichtpunkte. Es endet unten im nächsten Abschnitt.
+
+const funken = Array.from({ length: 46 }, (_, k) => ({
+  x: (k * 311) % 1440,
+  y: 24 + ((k * 97) % 250),
+  rx: 8 + ((k * 13) % 30),
+  o: (0.28 + ((k * 7) % 5) * 0.08).toFixed(2),
+}));
+
+const moewen: { x: number; y: number; s: number; r: number }[] = [
+  { x: 700, y: 60, s: 1.0, r: 6 },
+  { x: 50, y: 540, s: 0.65, r: -8 },
+  { x: 640, y: 600, s: 0.5, r: 4 },
+];
+
 export default function Hero() {
-  const kennzahlen = [
-    { zahl: `${company.yearsExperience}+`, text: "Jahre Erfahrung" },
-    { zahl: "100 %", text: "aus einer Hand" },
-    { zahl: "Mo–Do", text: "für Sie da" },
-  ];
+  const style = { "--img": `url(${asset("/img/leuchtturm.webp")})` } as CSSProperties;
 
   return (
-    <section className="seitenrand grid items-center gap-12 pb-20 pt-10 sm:pb-24 sm:pt-14 lg:grid-cols-[1.12fr_0.88fr] lg:gap-16 lg:pb-32 lg:pt-20">
-      {/* ── links: Text, dahinter die Farbkreise ────────────────────────── */}
-      <div className="relative">
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-          <span
-            className="kreis absolute -left-10 top-6 h-56 w-56 rounded-full opacity-70 mix-blend-multiply [--dauer:19s] [--dx:1.2rem] [--dy:1.6rem] [--verz:0ms] sm:-left-16 sm:h-80 sm:w-80"
-            style={{ backgroundColor: `${farben[2].ton}66` }}
-          />
-          <span
-            className="kreis absolute left-28 top-28 h-52 w-52 rounded-full opacity-70 mix-blend-multiply [--dauer:23s] [--dx:-1.6rem] [--dy:1rem] [--verz:180ms] sm:left-56 sm:top-24 sm:h-72 sm:w-72"
-            style={{ backgroundColor: `${farben[0].ton}4d` }}
-          />
-          <span
-            className="kreis absolute -top-6 left-[45%] hidden h-80 w-80 rounded-full opacity-60 mix-blend-multiply [--dauer:27s] [--dx:1.4rem] [--dy:-1.2rem] [--verz:360ms] md:block"
-            style={{ backgroundColor: `${farben[1].ton}40` }}
-          />
-        </div>
+    <section className="hero" style={style} data-edit-id="hero" aria-labelledby="hero-titel">
+      {/* Filter für die gewellte Spiegelung des Turms */}
+      <svg width="0" height="0" style={{ position: "absolute" }} aria-hidden="true" focusable="false">
+        <filter id="hero-ripple" x="-10%" y="-10%" width="120%" height="120%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.004 0.07" numOctaves="2" seed="3" result="t" />
+          <feDisplacementMap in="SourceGraphic" in2="t" scale="18" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+      </svg>
 
-        <div className="relative">
-          <p
-            className="auftritt text-[1.02rem] font-semibold [--verz:250ms]"
-            style={{ color: LEISE_AUF_KREISEN }}
-          >
-            {company.claim}
-          </p>
-
-          <h1 className="auftritt mt-3 text-[clamp(2.35rem,5.6vw,4.9rem)] font-black uppercase leading-[0.97] tracking-[-0.03em] [--verz:400ms]">
-            Ihr Logo aufs{" "}
-            <span className="markiert" style={{ "--ton": `${farben[2].ton}b3` } as CSSProperties}>
-              Shirt
-            </span>
-            , aufs{" "}
-            <span className="markiert" style={{ "--ton": `${farben[0].ton}99` } as CSSProperties}>
-              Auto
-            </span>{" "}
-            oder an die{" "}
-            <span className="markiert" style={{ "--ton": `${farben[1].ton}66` } as CSSProperties}>
-              Wand
-            </span>
-            .
-          </h1>
-
-          <p
-            className="auftritt mt-7 max-w-[34rem] text-[1.1rem] leading-relaxed [--verz:540ms]"
-            style={{ color: LEISE_AUF_KREISEN }}
-          >
-            Seit über {company.yearsExperience} Jahren stehen wir für
-            Werbetechnik und Textilveredelung – dazu kommen Drucksachen. Alles
-            aus einer Hand.
-          </p>
-
-          {/* Kennzahlen, durch feine Linien getrennt */}
-          <dl className="auftritt mt-9 grid max-w-[40rem] grid-cols-3 border-y border-tinte/15 [--verz:640ms]">
-            {kennzahlen.map((k, i) => (
-              <div
-                key={k.text}
-                className={`flex flex-col-reverse justify-end py-4 ${
-                  i > 0 ? "border-l border-tinte/15 pl-4 sm:pl-6" : "pr-4"
-                }`}
-              >
-                <dt
-                  className="mt-1.5 text-[0.66rem] font-semibold uppercase leading-snug tracking-[0.06em] sm:text-[0.7rem] sm:tracking-[0.08em]"
-                  style={{ color: LEISE_AUF_KREISEN }}
-                >
-                  {k.text}
-                </dt>
-                <dd className="text-[clamp(1.7rem,3.4vw,2.4rem)] font-black leading-none tracking-[-0.03em]">
-                  {k.zahl}
-                </dd>
-              </div>
-            ))}
-          </dl>
-
-          <div className="auftritt mt-9 flex flex-wrap items-center gap-3 [--verz:760ms]">
-            <a
-              href="#kontakt"
-              className="inline-flex items-center gap-2 rounded-full px-7 py-4 text-[0.92rem] font-bold uppercase tracking-[0.04em] transition-transform duration-300 hover:-translate-y-0.5"
-              style={{ backgroundColor: KNOPF, color: KNOPF_SCHRIFT }}
-            >
-              <span aria-hidden="true">↓</span> Projekt besprechen
-            </a>
-            <a
-              href={`tel:${company.phoneHref}`}
-              className="inline-flex items-center gap-2 rounded-full bg-white/80 px-7 py-4 text-[0.92rem] font-bold uppercase tracking-[0.04em] backdrop-blur transition-transform duration-300 hover:-translate-y-0.5"
-              style={{ boxShadow: "inset 0 0 0 1.5px rgba(15,27,45,0.2)" }}
-            >
-              Anrufen
-            </a>
-          </div>
-        </div>
+      {/* Meer */}
+      <div className="sea" aria-hidden="true">
+        <svg viewBox="0 0 1440 300" preserveAspectRatio="none" focusable="false">
+          <defs>
+            <filter id="hero-seab" x="-10%" y="-30%" width="120%" height="160%">
+              <feGaussianBlur stdDeviation="20" />
+            </filter>
+            <filter id="hero-spec" x="0" y="0" width="100%" height="100%">
+              <feTurbulence type="fractalNoise" baseFrequency=".006 .09" numOctaves="3" seed="11" result="n" />
+              <feSpecularLighting in="n" surfaceScale="5" specularConstant=".8" specularExponent="24" lightingColor="#eaf4ff" result="s">
+                <feDistantLight azimuth="270" elevation="30" />
+              </feSpecularLighting>
+              <feColorMatrix in="s" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 .45 0" />
+            </filter>
+            <filter id="hero-gl" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="1.4 .6" />
+            </filter>
+          </defs>
+          <g filter="url(#hero-seab)">
+            <rect x="-200" y="-100" width="1840" height="140" fill="#cfe4f8" />
+            <rect x="-200" y="30" width="1840" height="90" fill="#b4d1f0" />
+            <rect x="-200" y="110" width="1840" height="90" fill="#93b8e6" />
+            <rect x="-200" y="190" width="1840" height="300" fill="#7aa5dc" />
+          </g>
+          {/* Wellenglanz und Lichtpunkte blenden nach unten aus, damit das Meer
+              ohne sichtbare Kante in den Abschnitt darunter übergeht. */}
+          <linearGradient id="hero-unten" x1="0" y1="0" x2="0" y2="1">
+            <stop offset=".72" stopColor="#fff" />
+            <stop offset="1" stopColor="#000" />
+          </linearGradient>
+          <mask id="hero-fade"><rect width="1440" height="300" fill="url(#hero-unten)" /></mask>
+          <g mask="url(#hero-fade)">
+            <rect width="1440" height="300" filter="url(#hero-spec)" />
+            <g filter="url(#hero-gl)">
+              {funken.map((f, i) => (
+                <ellipse key={i} cx={f.x} cy={f.y} rx={f.rx} ry="2" fill="#f2f8ff" opacity={f.o} />
+              ))}
+            </g>
+          </g>
+        </svg>
       </div>
 
-      {/* ── rechts: Foto und „Jetzt kontaktieren" ───────────────────────── */}
-      <div className="auftritt [--verz:600ms]">
-        <Bild
-          note="Foto: Ostseedesign in Eckernförde"
-          ton={farben[2].ton}
-          className="aspect-[4/3] w-full lg:aspect-[1/1]"
-        />
+      {/* Spiegelung des Turms, Wasserlinie am Felsfuß */}
+      <div className="refl" aria-hidden="true"><div className="rimg" /></div>
+      <div className="surf" aria-hidden="true" />
 
-        <a
-          href="#kontakt"
-          className="group mt-4 flex items-center gap-4 rounded-full py-2.5 pl-2.5 pr-6 transition-transform duration-300 hover:-translate-y-0.5"
-          style={{ backgroundColor: BAND, color: BAND_SCHRIFT }}
-        >
-          <span
-            aria-hidden="true"
-            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full"
-            style={{ backgroundColor: farben[0].ton }}
-          >
-            {/* Sprechblase */}
-            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="#ffffff" strokeWidth="2.2" strokeLinejoin="round">
-              <path d="M4.5 5.5h15v10h-8l-4.5 4v-4h-2.5Z" />
-            </svg>
-          </span>
-          <span aria-hidden="true" className="h-7 w-px bg-tinte/15" />
-          <span className="min-w-0 flex-1 text-[0.85rem] font-bold uppercase leading-snug tracking-[0.06em]">
-            Jetzt kontaktieren
-            <span className="block font-medium normal-case tracking-normal">
-              Anruf, E-Mail oder vorbeikommen
-            </span>
-          </span>
-          <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">
-            →
-          </span>
-        </a>
+      {/* Leuchtturm (Foto, freigestellt) und Möwen */}
+      <div
+        className="motif tower"
+        role="img"
+        aria-label="Leuchtturm mit blauen Streifen auf einem Felsen an der Ostsee"
+        data-edit-id="hero-image"
+      />
+      <svg className="motif gulls" viewBox="0 0 800 840" aria-hidden="true" focusable="false">
+        <defs>
+          <filter id="hero-moewe" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="6" />
+          </filter>
+        </defs>
+        <g filter="url(#hero-moewe)">
+          {moewen.map((m, i) => (
+            <g key={i} transform={`translate(${m.x} ${m.y}) rotate(${m.r}) scale(${m.s})`} opacity=".72">
+              <path d="M0 0C18-26 52-30 84-8 56-14 30-4 0 8-30-4-56-14-84-8-52-30-18-26 0 0Z" fill="#1c2a3a" />
+            </g>
+          ))}
+        </g>
+      </svg>
+
+      {/* Bild rechts (Platzhalter, bis ein echtes Foto aus der Werkstatt da ist) */}
+      <figure className="ph" data-edit-id="hero-side-image">
+        <div className="ph-img" role="img" aria-label="Platzhalter für ein Projektfoto">
+          <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+            <rect x="6" y="10" width="36" height="28" rx="2" fill="none" stroke="currentColor" strokeWidth="2" />
+            <circle cx="17" cy="20" r="4" fill="currentColor" />
+            <path d="M8 36l11-11 8 8 5-5 8 8" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
+          </svg>
+          <span>Projektfoto</span>
+        </div>
+        <figcaption data-edit-id="hero-side-caption">Platzhalter: Foto aus unserer Werkstatt</figcaption>
+      </figure>
+
+      <div className="statement" data-edit-id="hero-copy">
+        <h1 id="hero-titel" aria-label="Ihr Logo aufs Shirt, aufs Auto oder an die Wand." data-edit-id="hero-title">
+          <span className="l1" aria-hidden="true">Ihr Logo aufs Shirt,</span>
+          <span className="l2" aria-hidden="true">aufs Auto</span>
+          <span className="l3" aria-hidden="true">oder an die Wand.</span>
+        </h1>
+      </div>
+
+      <div className="hero-foot" data-edit-id="hero-foot">
+        <p data-edit-id="hero-text">
+          Seit über {company.yearsExperience} Jahren Werbetechnik und Textilveredelung in {company.city}. Dazu
+          Drucksachen. Alles aus einer Hand.
+        </p>
+        <a className="tlink" href="#kontakt" data-edit-id="hero-cta">Projekt besprechen</a>
       </div>
     </section>
   );

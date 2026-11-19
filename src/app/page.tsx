@@ -1,41 +1,25 @@
 import Hero from "@/components/sections/Hero";
-import Werkstatt from "@/components/sections/Werkstatt";
-import Services from "@/components/sections/Services";
-import Einblicke from "@/components/sections/Einblicke";
-import Kundenstimmen from "@/components/sections/Kundenstimmen";
+import Leistungen from "@/components/sections/Leistungen";
 import Process from "@/components/sections/Process";
+import Einblicke from "@/components/sections/Einblicke";
 import Fragen from "@/components/sections/Fragen";
-import Aufruf from "@/components/sections/Aufruf";
-import Contact from "@/components/sections/Contact";
-import Uebergang from "@/components/ui/Uebergang";
+import Kontakt from "@/components/sections/Kontakt";
 import { company, services } from "@/lib/site";
 
-// STARTSEITE – Aufbau nach dem Vorbild mediaquestweb.com, Farben zurzeit
-// Platzhalter (Begründung: DESIGN.md, Farben: src/lib/farben.ts).
+// STARTSEITE – „Leuchtturm im Meer" (Begründung und Stellschrauben: DESIGN.md).
 //
-// Die Abschnitte laufen über die ganze Breite; helle (auf dem Verlauf von
-// Weiß zu hellem Blaugrau) und farbige Bänder wechseln sich ab. Gestrichelte Bögen
-// (<Uebergang />) verbinden einige davon. Jeder Abschnitt setzt seinen
-// Seitenrand selbst, deshalb hat <main> hier keinen.
-//
-//   Kopfbereich · So arbeiten wir (Band) · Leistungen · Einblicke ·
-//   Kundenstimmen (Band) · Ablauf · Fragen · Schlussaufruf (Band) · Kontakt
+//   Kopfbereich (weiß, Meer) · Leistungen (unter Wasser) · Ablauf ·
+//   Einblicke · Fragen · Kontakt (Meeresgrund)
 export default function StartseitePage() {
   return (
     <>
       <main id="hauptinhalt">
         <Hero />
-        <Werkstatt />
-        <Uebergang start="links" />
-        <Services />
-        <Einblicke />
-        <Uebergang start="rechts" />
-        <Kundenstimmen />
-        <Uebergang start="links" form={2} />
+        <Leistungen />
         <Process />
+        <Einblicke />
         <Fragen />
-        <Aufruf />
-        <Contact />
+        <Kontakt />
       </main>
       <script
         type="application/ld+json"

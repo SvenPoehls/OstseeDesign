@@ -310,3 +310,6 @@ html{scrollbar-color:var(--color-sea) var(--color-bg);accent-color:var(--color-p
   .strahl.rechts{opacity:.14}
   .blasen{display:none}
 }
+
+/* Foto des Geschäfts rechts im Kopfbereich (Hochformat-Ausschnitt mit Schild und Tür) */
+.ph-foto{display:block;width:100%;aspect-ratio:2/3;max-height:calc(100svh - var(--hs) - 200px);object-fit:cover;object-position:13% 50%;border-radius:var(--radius-image);background:var(--color-surface)}

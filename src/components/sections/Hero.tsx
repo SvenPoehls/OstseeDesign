@@ -130,15 +130,15 @@ export default function Hero() {
 
       {/* Bild rechts (Platzhalter, bis ein echtes Foto aus der Werkstatt da ist) */}
       <figure className="ph" data-edit-id="hero-side-image">
-        <div className="ph-img" role="img" aria-label="Platzhalter für ein Projektfoto">
-          <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
-            <rect x="6" y="10" width="36" height="28" rx="2" fill="none" stroke="currentColor" strokeWidth="2" />
-            <circle cx="17" cy="20" r="4" fill="currentColor" />
-            <path d="M8 36l11-11 8 8 5-5 8 8" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
-          </svg>
-          <span>Projektfoto</span>
-        </div>
-        <figcaption data-edit-id="hero-side-caption">Platzhalter: Foto aus unserer Werkstatt</figcaption>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          className="ph-foto"
+          src={asset("/img/werkstatt.webp")}
+          width={1360}
+          height={764}
+          alt="Das Ostseedesign-Geschäft am Rosseer Weg in Eckernförde mit Leuchtschild und Glastür"
+        />
+        <figcaption data-edit-id="hero-side-caption">Unser Geschäft am Rosseer Weg in {company.city}</figcaption>
       </figure>
 
       <div className="statement" data-edit-id="hero-copy">

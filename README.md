@@ -63,7 +63,8 @@ public/img/leuchtturm.webp   # freigestellter Leuchtturm im Kopfbereich
 In `impressum/page.tsx` und `datenschutz/page.tsx` stehen rechtlich relevante
 Hinweise in den Kommentaren am Dateikopf (u. a. Handwerkskammer-Angaben,
 Hosting-Anbieter bei einem Umzug). Diese vor Veröffentlichung klären.
-Der Kopfbereich nutzt ein KI-generiertes Leuchtturm-Bild; die Nutzungsrechte
+Der Kopfbereich nutzt ein KI-generiertes Leuchtturm-Bild und ein bearbeitetes Foto des
+Geschäfts (neuer Himmel); die Nutzungsrechte beider Bilder
 müssen vor dem Livegang geklärt werden.
 
 ## Umfang

@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import Bewegung from "@/components/ui/Bewegung";
+import Kopfzeile from "@/components/ui/Kopfzeile";
 import { company } from "@/lib/site";
 
 // Schriften: Cormorant Garamond und Hanken Grotesk liegen als Dateien im
@@ -61,6 +62,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
         <Footer />
         <Bewegung />
+        <Kopfzeile />
 
         {/* EDITOR-PANEL START (nur Entwicklung; fliegt beim Finalisieren raus) */}
         {process.env.NODE_ENV === "development" && (

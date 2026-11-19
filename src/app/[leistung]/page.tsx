@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MotivFoto, Welle } from "@/components/ui/Elemente";
 import Blasen from "@/components/ui/Blasen";
+import Karussell from "@/components/ui/Karussell";
 import Process from "@/components/sections/Process";
 import Kontakt from "@/components/sections/Kontakt";
 import { company, leistungsLink, services, unterseiten } from "@/lib/site";
@@ -98,14 +99,14 @@ export default async function LeistungPage({ params }: Props) {
 
         <section className="section surface" data-edit-id="seite-fotos" aria-label="Fotos">
           <div className="wrap">
-            <div className="einblicke">
+            <Karussell label={`Fotos zu ${service.title}`}>
               {service.bilder.map((b, i) => (
                 <figure key={b} data-edit-id={`seite-foto-${i + 1}`}>
                   <MotivFoto motiv={b} />
                   <figcaption>Platzhalter: {b}</figcaption>
                 </figure>
               ))}
-            </div>
+            </Karussell>
           </div>
         </section>
 

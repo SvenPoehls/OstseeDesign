@@ -1,4 +1,5 @@
 import { MotivFoto } from "@/components/ui/Elemente";
+import Karussell from "@/components/ui/Karussell";
 import { services } from "@/lib/site";
 
 // EINBLICKE – drei Fotos aus der Werkstatt, verschieden groß und gestaffelt.
@@ -10,14 +11,14 @@ export default function Einblicke() {
     <section className="section surface" id="einblicke" data-edit-id="einblicke" aria-labelledby="einblicke-titel">
       <div className="wrap">
         <h2 className="h2" id="einblicke-titel" data-edit-id="einblicke-title">Aus unserer Werkstatt</h2>
-        <div className="einblicke" data-edit-id="einblicke-liste">
+        <Karussell editId="einblicke-liste" label="Fotos aus unserer Werkstatt">
           {motive.map((m, i) => (
             <figure key={m} data-edit-id={`einblick-${i + 1}`}>
               <MotivFoto motiv={m} />
               <figcaption>Platzhalter: {m}</figcaption>
             </figure>
           ))}
-        </div>
+        </Karussell>
       </div>
     </section>
   );

@@ -317,3 +317,69 @@ html{scrollbar-color:var(--color-sea) var(--color-bg);accent-color:var(--color-p
 /* Fotos der Werkstatt-Motive: füllen dieselbe Fläche wie die Platzhalter */
 .foto-bild{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:var(--radius-image);background:#dbe8f6}
 .einblicke figure:first-child .foto-bild{aspect-ratio:1/1}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   MOBIL (Handy). Alles hier gilt nur auf schmalen Bildschirmen.
+   Kopfzeile geht mit, Hero mittig, Ablauf legt sich Schritt für Schritt
+   übereinander, Werkstatt-Fotos als Karussell mit Punkten.
+   ────────────────────────────────────────────────────────────────────────── */
+.karussell-punkte{display:none}
+.burger{display:none}
+
+@media (max-width:760px){
+  :root{--header-h:96px}
+  html{scroll-padding-top:84px}
+
+  /* Kopfzeile: bleibt oben, blendet beim Runterscrollen aus, beim Hochscrollen ein */
+  .site-header{position:sticky;top:0;z-index:60;transition:transform .35s var(--ease),border-color .3s;border-bottom:1px solid transparent}
+  .site-header[data-versteckt]{transform:translateY(-100%)}
+  .site-header[data-gescrollt]{border-bottom-color:var(--color-border)}
+  .site-header .wrap{min-height:var(--header-h);padding-top:18px;padding-bottom:14px}
+  .logo b{font-size:2.15rem;letter-spacing:.055em}
+  .logo small{font-size:.72rem;letter-spacing:.22em;margin-top:7px}
+
+  /* Menü hinter drei Strichen, die sich beim Öffnen zum Kreuz drehen */
+  .menu>summary{width:48px;height:48px;padding:0;justify-content:center;top:calc(var(--header-h)/2 - 24px);right:calc(var(--container-padding) - 12px)}
+  .menu>summary::after{display:none}
+  .burger{display:grid;gap:6px;width:26px}
+  .burger i{display:block;height:2px;border-radius:2px;background:currentColor;transform-origin:center;transition:transform .3s var(--ease),opacity .2s}
+  .menu[open] .burger i:nth-child(1){transform:translateY(8px) rotate(45deg)}
+  .menu[open] .burger i:nth-child(2){opacity:0}
+  .menu[open] .burger i:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+  .menu .nav{padding:6px 0 18px;gap:0;align-items:stretch}
+  .menu .nav a{font-family:var(--font-heading);font-size:1.5rem;padding:13px 0;border-top:1px solid var(--color-border);min-height:52px}
+  .menu .nav .tel{font-family:var(--font-body);font-size:1.05rem}
+  .menu .nav .tel::before{display:none}
+}
+
+/* Hero auf dem Handy: Überschrift mittig, Komposition höher */
+@media (max-width:899px){
+  .hero{min-height:calc(var(--w)*1.05 + var(--b) + 40px)}
+  .statement{text-align:center}
+  .statement .l1,.statement .l2,.statement .l3{padding-left:0}
+}
+@media (max-width:899px) and (prefers-reduced-motion:no-preference){
+  /* das Meer driftet ganz langsam, damit das kleine Bild lebendig bleibt */
+  .sea svg{width:110%;max-width:none;animation:meer-treiben 20s ease-in-out infinite alternate}
+}
+@keyframes meer-treiben{from{transform:translateX(-9%)}to{transform:translateX(0)}}
+
+@media (max-width:759px){
+  /* Ablauf: die Schritte legen sich beim Scrollen von unten übereinander */
+  .ablauf{display:block;margin-top:26px}
+  .schritt{position:sticky;top:calc(76px + var(--i)*16px);margin:0 0 7svh;padding:22px 20px 26px;min-height:min(56svh,380px);background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-card);box-shadow:0 -10px 24px -12px rgba(15,26,46,.18);animation:none}
+  .schritt:last-child{margin-bottom:0}
+
+  /* Werkstatt-Fotos: Karussell, das nächste Bild lugt am Rand hervor */
+  .einblicke{display:flex;gap:14px;align-items:flex-start;overflow-x:auto;scroll-snap-type:x mandatory;margin-left:calc(var(--container-padding)*-1);margin-right:calc(var(--container-padding)*-1);padding:0 var(--container-padding);scroll-padding-left:var(--container-padding);scrollbar-width:none;overscroll-behavior-x:contain}
+  .einblicke::-webkit-scrollbar{display:none}
+  .einblicke figure{flex:0 0 78%;scroll-snap-align:start;margin-top:0 !important;animation:none}
+  .einblicke figure:first-child .foto-bild,.einblicke figure:first-child .foto{aspect-ratio:4/5}
+  .karussell-punkte{display:flex;justify-content:center;gap:2px;margin-top:14px}
+  .punkt{width:28px;height:28px;border:0;background:none;padding:0;cursor:pointer;display:grid;place-items:center}
+  .punkt i{display:block;width:8px;height:8px;border-radius:99px;background:#9bb4d4;transition:width .3s var(--ease),background .3s}
+  .punkt[aria-current="true"] i{width:24px;background:var(--color-primary)}
+}
+@media (prefers-reduced-motion:reduce){
+  .site-header,.burger i,.punkt i{transition:none}
+}

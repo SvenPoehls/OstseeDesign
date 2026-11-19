@@ -2,7 +2,9 @@ import Link from "next/link";
 import { company, nav } from "@/lib/site";
 
 // Kopfzeile: Wortmarke links, Leistungen und Telefon rechts. Auf dem Handy
-// klappt das Menü über <details> auf, ohne JavaScript.
+// klappt das Menü hinter einem Drei-Striche-Symbol über <details> auf; die
+// Kopfzeile geht dort mit und blendet sich beim Runterscrollen aus
+// (components/ui/Kopfzeile.tsx).
 function Links() {
   return (
     <>
@@ -36,7 +38,14 @@ export default function Header() {
           <Links />
         </nav>
         <details className="menu">
-          <summary>Menü</summary>
+          <summary aria-label="Menü">
+            <span className="sr-only">Menü</span>
+            <span className="burger" aria-hidden="true">
+              <i />
+              <i />
+              <i />
+            </span>
+          </summary>
           <nav className="nav" aria-label="Hauptnavigation mobil">
             <Links />
           </nav>

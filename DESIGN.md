@@ -63,3 +63,14 @@ sichtbar und lesbar.
   der Lichtschein bleibt als leises, ruhendes Leuchten.
 - Bewusst nicht: Parallax, Schwebe-Effekte auf Karten, ein gleicher Einblend-Effekt
   für jeden Abschnitt.
+
+## Handy
+
+- **Kopfzeile:** Wortmarke größer, Menü hinter drei Strichen (werden beim Öffnen zum
+  Kreuz). Die Kopfzeile geht mit, blendet sich beim Runterscrollen aus und beim
+  Hochscrollen sofort wieder ein (`components/ui/Kopfzeile.tsx`).
+- **Kopfbereich:** Überschrift mittig, die Komposition sitzt höher.
+- **Ablauf:** Die vier Schritte bleiben oben stehen und legen sich beim Scrollen
+  nacheinander von unten übereinander (reines CSS, `position: sticky`).
+- **Werkstatt-Fotos:** Karussell mit Wischen, das nächste Bild lugt am Rand hervor,
+  Punkte zeigen die Position (`components/ui/Karussell.tsx`).

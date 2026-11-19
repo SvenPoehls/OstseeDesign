@@ -21,17 +21,20 @@ const funken = Array.from({ length: 46 }, (_, k) => ({
   o: (0.28 + ((k * 7) % 5) * 0.08).toFixed(2),
 }));
 
-const moewen: { x: number; y: number; s: number; r: number }[] = [
-  { x: 700, y: 60, s: 1.0, r: 6 },
-  { x: 50, y: 540, s: 0.65, r: -8 },
-  { x: 640, y: 600, s: 0.5, r: 4 },
+// Möwen: Platz im Bild (x, y, Größe s, Neigung r) und Bewegung. `t` ist die
+// Dauer eines Flügelschlags in Sekunden (langsam, 3,6 bis 5), `d` die Dauer
+// des Dahintreibens, `dx`/`dy` dessen Weite in Bildpunkten, `v` die Verzögerung.
+const moewen = [
+  { x: 700, y: 60, s: 1.0, r: 6, t: 4.2, d: 26, dx: -70, dy: 12, v: 0 },
+  { x: 50, y: 540, s: 0.65, r: -8, t: 3.6, d: 22, dx: 60, dy: -10, v: -6 },
+  { x: 640, y: 600, s: 0.5, r: 4, t: 5, d: 30, dx: -50, dy: 8, v: -12 },
 ];
 
 export default function Hero() {
   const style = { "--img": `url(${asset("/img/leuchtturm.webp")})` } as CSSProperties;
 
   return (
-    <section className="hero" style={style} data-edit-id="hero" aria-labelledby="hero-titel">
+    <section className="hero" style={style} data-edit-id="hero" data-bewegung aria-labelledby="hero-titel">
       {/* Filter für die gewellte Spiegelung des Turms */}
       <svg width="0" height="0" style={{ position: "absolute" }} aria-hidden="true" focusable="false">
         <filter id="hero-ripple" x="-10%" y="-10%" width="120%" height="120%">
@@ -86,6 +89,20 @@ export default function Hero() {
       <div className="refl" aria-hidden="true"><div className="rimg" /></div>
       <div className="surf" aria-hidden="true" />
 
+      {/* Lichtschein der Laterne: wechselt ganz leise von einer Seite zur anderen */}
+      {["rechts", "links"].map((seite) => (
+        <svg
+          key={seite}
+          className={`strahl ${seite}`}
+          viewBox="0 0 100 20"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <polygon points="0,8.6 100,4 100,16 0,11.4" fill="#fff0b8" />
+        </svg>
+      ))}
+
       {/* Leuchtturm (Foto, freigestellt) und Möwen */}
       <div
         className="motif tower"
@@ -94,18 +111,21 @@ export default function Hero() {
         data-edit-id="hero-image"
       />
       <svg className="motif gulls" viewBox="0 0 800 840" aria-hidden="true" focusable="false">
-        <defs>
-          <filter id="hero-moewe" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur stdDeviation="6" />
-          </filter>
-        </defs>
-        <g filter="url(#hero-moewe)">
-          {moewen.map((m, i) => (
-            <g key={i} transform={`translate(${m.x} ${m.y}) rotate(${m.r}) scale(${m.s})`} opacity=".72">
-              <path d="M0 0C18-26 52-30 84-8 56-14 30-4 0 8-30-4-56-14-84-8-52-30-18-26 0 0Z" fill="#1c2a3a" />
+        {moewen.map((m, i) => (
+          <g key={i} transform={`translate(${m.x} ${m.y}) rotate(${m.r}) scale(${m.s})`} opacity=".72">
+            <g
+              className="treiben"
+              style={{ "--d": `${m.d}s`, "--dx": `${m.dx}px`, "--dy": `${m.dy}px`, "--v": `${m.v}s` } as CSSProperties}
+            >
+              <g className="fluegel links" style={{ "--t": `${m.t}s`, "--v": `${m.v}s` } as CSSProperties}>
+                <path d="M0 0C-18-26-52-30-84-8-56-14-30-4 0 8Z" fill="#1c2a3a" />
+              </g>
+              <g className="fluegel rechts" style={{ "--t": `${m.t}s`, "--v": `${m.v}s` } as CSSProperties}>
+                <path d="M0 0C18-26 52-30 84-8 56-14 30-4 0 8Z" fill="#1c2a3a" />
+              </g>
             </g>
-          ))}
-        </g>
+          </g>
+        ))}
       </svg>
 
       {/* Bild rechts (Platzhalter, bis ein echtes Foto aus der Werkstatt da ist) */}

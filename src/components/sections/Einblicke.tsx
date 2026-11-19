@@ -8,8 +8,7 @@ export default function Einblicke() {
   return (
     <section className="section surface" id="einblicke" data-edit-id="einblicke" aria-labelledby="einblicke-titel">
       <div className="wrap">
-        <p className="eyebrow">Aus unserer Werkstatt</p>
-        <h2 className="h2" id="einblicke-titel" data-edit-id="einblicke-title">Einblicke in unsere Arbeit</h2>
+        <h2 className="h2" id="einblicke-titel" data-edit-id="einblicke-title">Aus unserer Werkstatt</h2>
         <div className="einblicke" data-edit-id="einblicke-liste">
           {motive.map((m, i) => (
             <figure key={m} data-edit-id={`einblick-${i + 1}`}>

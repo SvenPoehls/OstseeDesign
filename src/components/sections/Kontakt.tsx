@@ -12,7 +12,6 @@ export default function Kontakt() {
         <div className="wrap section">
           <div className="kontakt-grid">
             <div>
-              <p className="eyebrow">Kontakt</p>
               <h2 className="h2" id="kontakt-titel" data-edit-id="kontakt-title" style={{ color: "#fff" }}>
                 So erreichen Sie uns
               </h2>

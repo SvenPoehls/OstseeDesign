@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FotoPlatzhalter, Welle } from "@/components/ui/Elemente";
+import Blasen from "@/components/ui/Blasen";
 import Process from "@/components/sections/Process";
 import Kontakt from "@/components/sections/Kontakt";
 import { company, leistungsLink, services, unterseiten } from "@/lib/site";
@@ -57,7 +58,8 @@ export default async function LeistungPage({ params }: Props) {
   return (
     <>
       <main id="hauptinhalt">
-        <section className="deep" data-edit-id="seite-kopf" aria-labelledby="seite-titel">
+        <section className="deep" data-edit-id="seite-kopf" data-bewegung aria-labelledby="seite-titel">
+          <Blasen />
           <div className="wrap kopf">
             <Link className="zurueck" href="/">← Zur Startseite</Link>
             <h1 id="seite-titel" data-edit-id="seite-title">{service.title}</h1>
@@ -74,7 +76,7 @@ export default async function LeistungPage({ params }: Props) {
         <section className="section" data-edit-id="seite-inhalt">
           <div className="wrap zweispaltig">
             <div>
-              <p className="eyebrow">Das gehört dazu</p>
+              <h2 className="h3-gross">Das gehört dazu</h2>
               <ul className="punkte" data-edit-id="seite-punkte">
                 {service.points.map((p) => (
                   <li key={p}>{p}</li>
@@ -109,8 +111,7 @@ export default async function LeistungPage({ params }: Props) {
 
         <section className="section" data-edit-id="seite-weitere" aria-labelledby="weitere-titel">
           <div className="wrap">
-            <p className="eyebrow">Weitere Leistungen</p>
-            <h2 className="h2" id="weitere-titel">Alles aus einer Hand</h2>
+            <h2 className="h2" id="weitere-titel">Weitere Leistungen</h2>
             <div className="weitere">
               {weitere.map((s) =>
                 s.external ? (

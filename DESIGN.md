@@ -43,3 +43,23 @@ diese Werte gekoppelt.
 
 Kein Hintergrundbild im Kopfbereich außer dem Turm, keine Karten mit Schatten,
 kein Karussell, kein Cookie-Banner (es gibt keine Cookies).
+
+## Bewegung
+
+Die Seite lebt wie ein Hafen bei ruhigem Wetter. Nur `transform`, `opacity` und
+beim Laden einmal ein Weichzeichner werden bewegt; ohne CSS-Animation bleibt alles
+sichtbar und lesbar.
+
+- **Kopfbereich (die eine inszenierte Stelle):** Der Turm tritt aus dem Dunst, die
+  Überschrift setzt zeilenweise ein, die Möwen schlagen langsam mit den Flügeln und
+  treiben dahin, ein sehr leiser Lichtschein wechselt von einer Seite zur anderen.
+- **Unter Wasser:** wenige Luftblasen steigen sehr langsam auf (`components/ui/Blasen.tsx`).
+- **Beim Scrollen:** Leistungen, Ablaufschritte und Einblicke erscheinen einmal weich
+  (nur in Browsern mit `animation-timeline`, sonst sofort sichtbar). Die Linie über
+  jeder Leistung wird gezogen.
+- **Anhalten:** Dauerbewegungen stehen still, solange ihr Bereich nicht im Bild ist
+  (`components/ui/Bewegung.tsx`).
+- **Bewegung reduzieren:** Möwen und Blasen stehen bzw. entfallen, der Einsatz entfällt,
+  der Lichtschein bleibt als leises, ruhendes Leuchten.
+- Bewusst nicht: Parallax, Schwebe-Effekte auf Karten, ein gleicher Einblend-Effekt
+  für jeden Abschnitt.

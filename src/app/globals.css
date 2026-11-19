@@ -128,7 +128,6 @@ ul{margin:0;padding:0;list-style:none}
 .deep{position:relative;background:var(--color-deep);color:#fff;isolation:isolate;overflow:hidden}
 .deep h2,.deep h3,.deeper h2,.deeper h3{color:#fff}
 .deep-top{position:absolute;left:0;right:0;top:-1px;width:100%;height:clamp(160px,28vh,300px);z-index:-1}
-.rays{position:absolute;inset:0;width:100%;height:100%;z-index:-1;opacity:.1}
 .deep-in{padding-top:calc(var(--section-padding) + 30px);padding-bottom:var(--section-padding)}
 .h2-big{font-size:calc(clamp(2.2rem,5vw,3.8rem)*var(--heading-scale));max-width:14em}
 .versprechen{display:grid;gap:0;margin-top:clamp(28px,4vw,48px)}
@@ -151,7 +150,7 @@ ul{margin:0;padding:0;list-style:none}
 
 /* ── Abschnitte an der Luft ──────────────────────────────────────────────── */
 .section{padding-top:var(--section-padding);padding-bottom:var(--section-padding)}
-.eyebrow{font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;font-weight:500;margin:0 0 18px;padding-top:14px;border-top:1px solid currentColor;display:inline-block;min-width:105px}
+.h3-gross{font-size:1.9rem;font-weight:500;margin:0}
 .h2{font-size:calc(clamp(2.1rem,4.4vw,3.4rem)*var(--heading-scale));max-width:16em}
 .lead{font-size:1.15rem;max-width:36em;margin-top:18px}
 
@@ -234,3 +233,80 @@ ul{margin:0;padding:0;list-style:none}
 .legal-body ul{list-style:disc;padding-left:1.3em;display:grid;gap:6px;margin:10px 0}
 .legal-body a{color:var(--color-primary);text-underline-offset:4px}
 .legal-body strong{font-weight:600}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   BEWEGUNG
+   Gedanke: Die Seite lebt wie ein Hafen bei ruhigem Wetter. Der Kopfbereich ist
+   die eine inszenierte Stelle (Turm tritt aus dem Dunst, Überschrift setzt
+   zeilenweise ein, Möwen schlagen langsam, der Lichtschein wechselt leise die
+   Seite). Unter Wasser steigen wenige Blasen. Der Rest erscheint nur beim
+   Scrollen, ohne Kette von Effekten. Bewegt werden nur transform, opacity und
+   (einmalig beim Laden) ein Weichzeichner. Alles läuft aus einem sichtbaren
+   Grundzustand, ohne CSS-Animation bleibt die Seite vollständig lesbar.
+   ────────────────────────────────────────────────────────────────────────── */
+:root{--ease:cubic-bezier(.16,1,.3,1)}
+
+/* Browseroberflächen aus der Palette */
+html{scrollbar-color:var(--color-sea) var(--color-bg);accent-color:var(--color-primary)}
+
+/* Dauerbewegungen halten an, solange ihr Bereich nicht im Bild ist (Bewegung.tsx) */
+[data-pause] *,[data-pause] *::before,[data-pause] *::after{animation-play-state:paused !important}
+
+@media (prefers-reduced-motion:no-preference){
+  /* Einsatz im Kopfbereich */
+  .motif.tower{animation:aus-dem-dunst 1.8s var(--ease) both}
+  .statement h1 span{animation:zeile-auf .9s var(--ease) both}
+  .statement .l1{animation-delay:.45s}.statement .l2{animation-delay:.6s}.statement .l3{animation-delay:.75s}
+  .hero-foot{animation:einblenden 1s ease .9s both}
+  .motif.gulls{animation:einblenden 2s ease 1.2s both}
+  .ph{animation:einblenden 1.2s ease 1s both}
+
+  /* Möwen: langsamer Flügelschlag, dazu Dahintreiben */
+  .fluegel{transform-box:fill-box;will-change:transform}
+  .fluegel.links{transform-origin:100% 55%;animation:schlag-links var(--t,4s) ease-in-out var(--v,0s) infinite}
+  .fluegel.rechts{transform-origin:0 55%;animation:schlag-rechts var(--t,4s) ease-in-out var(--v,0s) infinite}
+  .treiben{animation:treiben var(--d,24s) ease-in-out var(--v,0s) infinite}
+
+  /* Lichtschein der Laterne: wechselt von rechts nach links, ganz leise */
+  .strahl{animation:leuchten 16s ease-in-out infinite}
+  .strahl.links{animation-delay:-8s}
+
+  /* Luftblasen */
+  .blase{animation:aufsteigen var(--d,22s) linear var(--v,0s) infinite}
+
+  /* Abschnitte erscheinen beim Scrollen (wo der Browser es kann, sonst sofort sichtbar) */
+  @supports (animation-timeline:view()){
+    .leistung,.schritt,.einblicke figure{animation:erscheinen linear both;animation-timeline:view();animation-range:entry 0% entry 55%}
+    .leistung::before{animation:linie-zieht linear both;animation-timeline:view();animation-range:entry 0% entry 70%}
+  }
+  /* Antworten klappen weich auf */
+  .fragen details[open] .antwort{animation:einblenden .35s var(--ease) both}
+}
+
+/* Linie über jeder Leistung wird beim Erscheinen gezogen */
+.leistung{position:relative;border-top:0}
+.leistung::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:rgba(255,255,255,.45);transform-origin:0 50%}
+
+.motif.gulls{filter:blur(3px)}
+.blasen{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:-1;container-type:size}
+.blase{position:absolute;bottom:-24px;border:1.5px solid rgba(255,255,255,.55);border-radius:50%;background:rgba(255,255,255,.07);opacity:0}
+.strahl{position:absolute;left:calc(var(--x) - .032*var(--w));bottom:calc(var(--b) + .8715*var(--w));width:calc(var(--w)*.95);height:calc(var(--w)*.2);margin-bottom:calc(var(--w)*-.1);overflow:visible;filter:blur(16px);opacity:0;z-index:-2;pointer-events:none;transform-origin:0 50%}
+.strahl.links{transform:scaleX(-1)}
+
+@keyframes aus-dem-dunst{from{opacity:0;filter:blur(14px)}to{opacity:1;filter:blur(3.5px)}}
+@keyframes zeile-auf{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes einblenden{from{opacity:0}to{opacity:1}}
+@keyframes erscheinen{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes linie-zieht{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes schlag-links{0%,100%{transform:rotate(11deg)}50%{transform:rotate(-17deg)}}
+@keyframes schlag-rechts{0%,100%{transform:rotate(-11deg)}50%{transform:rotate(17deg)}}
+@keyframes treiben{0%,100%{transform:translate(0,0)}50%{transform:translate(var(--dx,40px),var(--dy,8px))}}
+@keyframes leuchten{0%,100%{opacity:0;scale:.5 1}30%{opacity:.24;scale:1 1}55%{opacity:.18;scale:1.05 1}75%{opacity:0;scale:1.1 1}}
+@keyframes aufsteigen{0%{opacity:0;transform:translate(0,0)}8%{opacity:.7}50%{transform:translate(var(--s,10px),-55cqh)}92%{opacity:.35}100%{opacity:0;transform:translate(0,-110cqh)}}
+
+/* Wer Bewegung reduziert: Lichtschein steht leise still, Blasen entfallen,
+   Möwen stehen. Der Einsatz oben entfällt ganz (nichts versteckt sich). */
+@media (prefers-reduced-motion:reduce){
+  .strahl.rechts{opacity:.14}
+  .blasen{display:none}
+}

@@ -7,8 +7,7 @@ export default function Fragen() {
   return (
     <section className="section" id="fragen" data-edit-id="fragen" aria-labelledby="fragen-titel">
       <div className="wrap">
-        <p className="eyebrow">Häufige Fragen</p>
-        <h2 className="h2" id="fragen-titel" data-edit-id="fragen-title">Was Sie wissen möchten</h2>
+        <h2 className="h2" id="fragen-titel" data-edit-id="fragen-title">Häufige Fragen</h2>
         <div className="fragen" data-edit-id="fragen-liste">
           {fragen.map((f, i) => (
             <details key={f.frage} data-edit-id={`frage-${i + 1}`}>
